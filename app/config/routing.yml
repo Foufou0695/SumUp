@@ -1,0 +1,3 @@
+su_main:
+    resource: "@SUMainBundle/Resources/config/routing.yml"
+    prefix:   /

@@ -1,0 +1,3 @@
+su_main_homepage:
+    path:     /
+    defaults: { _controller: SUMainBundle:Default:index }
