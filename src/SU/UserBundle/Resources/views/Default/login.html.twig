@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>SumUp</title>
+	<meta name="theme-color" content="#711d2a">
+	<link rel="icon" href="{{ asset('img/design/logo-icon-min.png') }}">
+
+	<!-- CSS  -->
+	{% block stylesheet %}
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+	
+	<link href="{{ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
+	{% endblock %}
+</head>
+<body style="background-color: #e7e7e7;">
+
+	<div class="container animated fadeIn">
+	
+		<div class="row" style="margin-bottom: 0px;">
+		
+			<div id="picture" class="col s6 m2 l2 offset-s3 offset-m5 offset-l5" style="z-index: 999; position: relative;">
+				<img src="{{ asset('img/design/logo-m-min.png') }}" class="responsive-img"></img>
+			</div>
+			
+			<div id="main" class="card col s12 m8 l6 offset-m2 offset-l3" style="border: 1px solid #711d2a; z-index: 9; padding-bottom: 10px;">
+				<form id="login_form">
+					<h4 id="title_connexion_form" class="center-align col s10 offset-s1 animated divider-new" style="height: 3rem; animation-delay: 0s;">Connexion</h4>
+					<div class="input-field col l6 offset-l3 s12 animated" style="animation-delay: 0.2s;">
+						<i class="material-icons prefix">account_circle</i>
+						<input id="username" placeholder="Thomas887" type="text" class="validate" name="username">
+						<label for="username">Login</label>
+					</div>
+					<div class="input-field col l6 offset-l3 s12 animated" style="animation-delay: 0.4s;">
+						<i class="material-icons prefix">lock_outline</i>
+						<input id="password" placeholder="*******" type="password" class="validate">
+						<label for="password">Mot de passe</label>
+					</div>
+					<div class="col s12 center-align animated" style="margin-bottom: 20px; animation-delay: 0.6s;">
+						<button id="send_credentials" class="btn btn-large btn-footer waves-effect waves-light link-hover cardinal-button" type="submit"><i class="fa fa-sign-in left"></i>Se connecter</button>
+					</div>
+					<div class="col s12 center-align">
+						<em>Pas encore de compte ? <a class="deep-red-text link-hover">C'est par ici</a><em>
+					</div>
+				</form>
+			</div>
+
+		</div>
+		
+		<div class="row center-align">
+			<h4><em>Faites vos comptes simplement!</em></h4>
+		</div>
+	
+	</div>
+
+	{% block javascript %}
+	<!--  Scripts-->
+	<script src="{{ asset('js/jquery-2.2.2.js') }}"></script>
+	<script src="{{ asset('js/materialize.js') }}"></script>
+	<script src="{{ asset('js/scroll-to.js') }}"></script>
+	<script>
+		function logo_resize () {
+			if ($(window).width() <= 600) {
+				$('#logo_navbar').height('56px')
+			} else {
+				$('#logo_navbar').height('64px')
+			}
+		}
+		
+		function replace_main() {
+			var picture_height = $('#picture').height();
+			$('#picture').css({'margin-bottom': - picture_height/2});
+			$('#main').css({'padding-top': picture_height/2 - 20});
+		}
+		
+		$(document).ready(function () {
+			$('.dropdown-button').dropdown({
+			  inDuration: 300,
+			  outDuration: 225,
+			  constrain_width: true,
+			  hover: true,
+			  belowOrigin: true
+			});
+			
+			replace_main();
+			logo_resize();
+			
+			$(window).resize(function () {
+				replace_main();
+				logo_resize();
+			});
+		});
+	</script>
+	{% endblock %}
+  </body>
+</html>

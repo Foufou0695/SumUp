@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>SumUp</title>
+	<meta name="theme-color" content="#711d2a">
+	<link rel="icon" href="{{ asset('img/design/logo-icon-min.png') }}">
+
+	<!-- CSS  -->
+	{% block stylesheet %}
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+	
+	<link href="{{ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
+	{% endblock %}
+</head>
+<body>
+
+	<!-- Navigation -->
+	<div class="navbar-fixed" id="navbar_wrapper">
+		<nav class="cardinal">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 64px;"></img></a>
+				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">
+					{% block accounts %}
+					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-gears left hide-on-small-only"></i></a></li>
+					<li><a class="waves-effect waves-light link-hover active-account">Compte Courant <i class="fa fa-gears left hide-on-small-only"></i></a></li>
+					{% endblock %}
+				</ul>
+				<ul class="left small-only">
+					<li id="param_link" class="active"><a class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>
+					<li><a class="dropdown-button" data-activates="drop_accounts"><span class="hide-on-small-only">Mes comptes <i class="fa fa-chevron-down left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-chevron-down fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
+				</ul>
+				<ul class="right" id="navbar_right">
+					<li id="disconnect_link"><a class="waves-effect waves-light"><span class="hide-on-small-only">Se déconnecter <i class="fa fa-sign-out right"></i></span><span class="hide-on-med-and-up"><i class="fa fa-sign-out fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- /.Navigation -->
+	
+	{% block body %}
+	{% endblock %}
+
+	<!-- Footer -->
+	<footer class="page-footer z-depth-2" id="footer_wrapper">
+		<div class="row">
+			<div class="col l6 m6 s12 center-align">
+				<h5 id="titre_footer" class="white-text animated fadeIn" style="animation-delay: 0s; animation-duration: 2s; opacity: 0;">Contactez-nous sur les réseaux sociaux :</h5>
+				</br>
+				<a href="https://www.facebook.com/" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="facebook" target="_blank" style="background-color: #4264aa;"><i class="fa fa-facebook left"></i>Facebook</a>
+				<a href="https://www.linkedin.com/" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="linkedin" target="_blank" style="background-color: #d96f15;"><i class="fa fa-envelope left"></i>Mail</a>
+				</br></br>
+			</div>
+			<div class="col l6 m6 s12 center-align">
+				<h5 id="titre_footer" class="white-text animated fadeIn" style="animation-delay: 0s; animation-duration: 2s; opacity: 0;">Dépôt GitHub & Documentation :</h5>
+				</br>
+				
+				<a href="https://github.com/Foufou0695/SumUp" class="btn-large btn-footer waves-effect waves-light animated fadeIn grey" id="github" target="_blank"><i class="fa fa-github left white-text"></i>GitHub</a>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				<div id="copyright_footer" class="center-align animated fadeIn">
+					© 2016 Copyright <a class="white-text" href="http://"> SumUp </a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- /.Footer -->
+
+
+	{% block javascript %}
+	<!--  Scripts-->
+	<script src="{{ asset('js/jquery-2.2.2.js') }}"></script>
+	<script src="{{ asset('js/materialize.js') }}"></script>
+	<script src="{{ asset('js/scroll-to.js') }}"></script>
+	<script>
+		function logo_resize () {
+			if ($(window).width() <= 600) {
+				$('#logo_navbar').height('56px')
+			} else {
+				$('#logo_navbar').height('64px')
+			}
+		}
+		$(document).ready(function () {
+			$('.dropdown-button').dropdown({
+			  inDuration: 300,
+			  outDuration: 225,
+			  constrain_width: true,
+			  hover: true,
+			  belowOrigin: true
+			});
+			
+			logo_resize();
+			
+			$(window).resize(function () {
+				logo_resize();
+			});
+		});
+	</script>
+	{% endblock %}
+  </body>
+</html>

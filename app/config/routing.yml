@@ -1,3 +1,7 @@
+su_user:
+    resource: "@SUUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 su_main:
     resource: "@SUMainBundle/Resources/config/routing.yml"
     prefix:   /

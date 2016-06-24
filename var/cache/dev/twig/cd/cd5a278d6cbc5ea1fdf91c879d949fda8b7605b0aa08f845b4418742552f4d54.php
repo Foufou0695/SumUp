@@ -7,22 +7,25 @@ class __TwigTemplate_8d259180e691af4939c5a406696630c768eb123019c1f7d4de64f82363d
     {
         parent::__construct($env);
 
-        $this->parent = false;
-
+        // line 1
+        $this->parent = $this->loadTemplate("SUMainBundle::layout.html.twig", "SUMainBundle:Default:index.html.twig", 1);
         $this->blocks = array(
         );
     }
 
+    protected function doGetParent(array $context)
+    {
+        return "SUMainBundle::layout.html.twig";
+    }
+
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f4bd7d7ec95f34ffce17ac83cf962d915bd6c621fb6e722cc8052ba836ec410c = $this->env->getExtension("native_profiler");
-        $__internal_f4bd7d7ec95f34ffce17ac83cf962d915bd6c621fb6e722cc8052ba836ec410c->enter($__internal_f4bd7d7ec95f34ffce17ac83cf962d915bd6c621fb6e722cc8052ba836ec410c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUMainBundle:Default:index.html.twig"));
+        $__internal_e2fe9c4fa8885cfdce56a90cb5d6db327d3f6bb5bfeeedd3c7233b658a2d4ba1 = $this->env->getExtension("native_profiler");
+        $__internal_e2fe9c4fa8885cfdce56a90cb5d6db327d3f6bb5bfeeedd3c7233b658a2d4ba1->enter($__internal_e2fe9c4fa8885cfdce56a90cb5d6db327d3f6bb5bfeeedd3c7233b658a2d4ba1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUMainBundle:Default:index.html.twig"));
 
-        // line 1
-        echo "Hello World!
-";
+        $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_f4bd7d7ec95f34ffce17ac83cf962d915bd6c621fb6e722cc8052ba836ec410c->leave($__internal_f4bd7d7ec95f34ffce17ac83cf962d915bd6c621fb6e722cc8052ba836ec410c_prof);
+        $__internal_e2fe9c4fa8885cfdce56a90cb5d6db327d3f6bb5bfeeedd3c7233b658a2d4ba1->leave($__internal_e2fe9c4fa8885cfdce56a90cb5d6db327d3f6bb5bfeeedd3c7233b658a2d4ba1_prof);
 
     }
 
@@ -31,10 +34,14 @@ class __TwigTemplate_8d259180e691af4939c5a406696630c768eb123019c1f7d4de64f82363d
         return "SUMainBundle:Default:index.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  22 => 1,);
+        return array (  11 => 1,);
     }
 }
-/* Hello World!*/
-/* */
+/* {% extends 'SUMainBundle::layout.html.twig' %}*/
