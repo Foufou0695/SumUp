@@ -36,7 +36,7 @@ class __TwigTemplate_a007f6d1acf954e48600b2c251c5cc192900bf0b3f64571c8d426123895
         $this->displayBlock('stylesheet', $context, $blocks);
         // line 20
         echo "</head>
-<body style=\"background-color: #e7e7e7;\">
+<body>
 
 \t<div class=\"container animated fadeIn\">
 \t
@@ -201,7 +201,7 @@ class __TwigTemplate_a007f6d1acf954e48600b2c251c5cc192900bf0b3f64571c8d426123895
 /* 	<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>*/
 /* 	{% endblock %}*/
 /* </head>*/
-/* <body style="background-color: #e7e7e7;">*/
+/* <body>*/
 /* */
 /* 	<div class="container animated fadeIn">*/
 /* 	*/

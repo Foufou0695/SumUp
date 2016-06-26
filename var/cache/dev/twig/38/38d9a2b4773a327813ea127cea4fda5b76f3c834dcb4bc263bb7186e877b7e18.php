@@ -22,23 +22,23 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_407e7712b3e6b70f34bd27a06fc34fb7195733ccd872175ed9eadc9dcfacdf9d = $this->env->getExtension("native_profiler");
-        $__internal_407e7712b3e6b70f34bd27a06fc34fb7195733ccd872175ed9eadc9dcfacdf9d->enter($__internal_407e7712b3e6b70f34bd27a06fc34fb7195733ccd872175ed9eadc9dcfacdf9d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUAccountBundle:Account:index.html.twig"));
+        $__internal_0ecd8e32eacbf72164c357033680c7a7641b8b81121145ecbf430abbc04f1e39 = $this->env->getExtension("native_profiler");
+        $__internal_0ecd8e32eacbf72164c357033680c7a7641b8b81121145ecbf430abbc04f1e39->enter($__internal_0ecd8e32eacbf72164c357033680c7a7641b8b81121145ecbf430abbc04f1e39_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUAccountBundle:Account:index.html.twig"));
 
         // line 3
         $context["menu_selected"] = "";
         // line 1
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_407e7712b3e6b70f34bd27a06fc34fb7195733ccd872175ed9eadc9dcfacdf9d->leave($__internal_407e7712b3e6b70f34bd27a06fc34fb7195733ccd872175ed9eadc9dcfacdf9d_prof);
+        $__internal_0ecd8e32eacbf72164c357033680c7a7641b8b81121145ecbf430abbc04f1e39->leave($__internal_0ecd8e32eacbf72164c357033680c7a7641b8b81121145ecbf430abbc04f1e39_prof);
 
     }
 
     // line 5
     public function block_body($context, array $blocks = array())
     {
-        $__internal_ad6429a7ff1f740e750dd68028696084b55891911c1026751024954e517a884d = $this->env->getExtension("native_profiler");
-        $__internal_ad6429a7ff1f740e750dd68028696084b55891911c1026751024954e517a884d->enter($__internal_ad6429a7ff1f740e750dd68028696084b55891911c1026751024954e517a884d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_5281a0c54367c6bca0dd90456b462357e7fce8d72ff4ceba87c23d1c4e909e48 = $this->env->getExtension("native_profiler");
+        $__internal_5281a0c54367c6bca0dd90456b462357e7fce8d72ff4ceba87c23d1c4e909e48->enter($__internal_5281a0c54367c6bca0dd90456b462357e7fce8d72ff4ceba87c23d1c4e909e48_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
         echo "
@@ -57,29 +57,30 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t<section id=\"export_header\" class=\"kj-grey\" style=\"border-radius: 2px;\">
 \t\t\t\t\t<div class=\"row\" style=\"margin-bottom: 0px;\">
 \t\t\t\t\t\t<div class=\"col s12 white-text\">
-\t\t\t\t\t\t\t<h5 class=\"col s12\"><i class=\"fa fa-table left\"></i>Récapitulatif</h5>
+\t\t\t\t\t\t\t<h5 class=\"col s12\"><i class=\"fa fa-table left hide-on-small-only\"></i>Récapitulatif</h5>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
 \t\t\t\t</section>
 \t\t\t\t<section id=\"export_body\" class=\"col s12\">
 \t\t\t\t\t<div class=\"col s12 center-align\" style=\"padding-bottom: 20px;\">
 \t\t\t\t\t\t<div class=\"row center-align\">
-\t\t\t\t\t\t\t<h2 style=\"font-size: 3rem;\"><i class=\"fa fa-chevron-left left link-hover\"></i><i class=\"fa fa-book\"></i> Compte courant - 06/16<i class=\"fa fa-chevron-right right link-hover\"></i></h2>
+\t\t\t\t\t\t\t<h2 style=\"font-size: 3rem;\"><i class=\"fa fa-book hide-on-small-only\"></i> Compte courant</h2>
+\t\t\t\t\t\t\t<span class=\"col s8 offset-s2\"><h5 class=\"col s12 m4 l4 offset-m4 offset-l4 hide-on-med-and-down\"><i class=\"fa fa-chevron-left left link-hover\"></i>06/16<i class=\"fa fa-chevron-right right link-hover\"></i></h5></span>
+\t\t\t\t\t\t\t<h5 class=\"col s12 m4 l4 offset-m4 offset-l4 hide-on-large-only\"><i class=\"fa fa-chevron-left left link-hover\"></i>06/16<i class=\"fa fa-chevron-right right link-hover\"></i></h5>
 \t\t\t\t\t\t</div>
-\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-history left\"></i>Etat du compte le 01/06/16</h2>
+\t\t\t\t\t\t<br>
+\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-history left hide-on-small-only\"></i>Etat du compte le 01/06/16</h2>
 \t\t\t\t\t\t<table class=\"striped highlight centered\">
-\t\t\t\t\t\t\t<thead>
+\t\t\t\t\t\t\t<tbody>
 \t\t\t\t\t\t\t\t<tr>
-\t\t\t\t\t\t\t\t\t<th></th>
-\t\t\t\t\t\t\t\t\t<th>Total</th>
-\t\t\t\t\t\t\t\t\t<th></th>
-\t\t\t\t\t\t\t\t\t<th>4 000 923 €</th>
+\t\t\t\t\t\t\t\t\t<td><b>Total</b></td>
+\t\t\t\t\t\t\t\t\t<td><b>4 000 923 €</b></td>
 \t\t\t\t\t\t\t\t</tr>
-\t\t\t\t\t\t\t</thead>
+\t\t\t\t\t\t\t</tbody>
 \t\t\t\t\t\t</table>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-list-ul left\"></i>Opérations depuis le 01/06/16</h2>
-\t\t\t\t\t\t<table class=\"striped highlight centered\">
+\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-list-ul left hide-on-small-only\"></i>Opérations depuis le 01/06/16</h2>
+\t\t\t\t\t\t<table class=\"striped highlight centered responsive-table\">
 \t\t\t\t\t\t\t<thead>
 \t\t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t\t<th>Type</th>
@@ -150,8 +151,8 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t\t\t\t</tbody>
 \t\t\t\t\t\t</table>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-hourglass-2 left\"></i>Opérations en attente</h2>
-\t\t\t\t\t\t<table class=\"striped highlight centered\">
+\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-hourglass-2 left hide-on-small-only\"></i>Opérations en attente</h2>
+\t\t\t\t\t\t<table class=\"striped highlight centered responsive-table\">
 \t\t\t\t\t\t\t<thead>
 \t\t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t\t<th>Type</th>
@@ -193,7 +194,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t\t\t\t</tbody>
 \t\t\t\t\t\t</table>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-area-chart left\"></i>Synthèse</h2>
+\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-area-chart left hide-on-small-only\"></i>Synthèse</h2>
 \t\t\t\t\t\t<div class=\"col s12 l6\">
 \t\t\t\t\t\t\t<p>Synthèse des dépenses</p>
 \t\t\t\t\t\t\t<br>
@@ -229,7 +230,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t<section id=\"operation_header\" class=\"kj-grey\" style=\"border-radius: 2px;\">
 \t\t\t\t\t<div class=\"row\" style=\"margin-bottom: 0px;\">
 \t\t\t\t\t\t<div class=\"col s12 white-text\">
-\t\t\t\t\t\t\t<h5 class=\"col s12\"><i class=\"fa fa-terminal left\"></i>Opérations</h5>
+\t\t\t\t\t\t\t<h5 class=\"col s12\"><i class=\"fa fa-terminal left hide-on-small-only\"></i>Opérations</h5>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
 \t\t\t\t</section>
@@ -259,18 +260,18 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t<section id=\"export_header\" class=\"kj-grey\" style=\"border-radius: 2px;\">
 \t\t\t\t\t<div class=\"row\" style=\"margin-bottom: 0px;\">
 \t\t\t\t\t\t<div class=\"col s12 white-text\">
-\t\t\t\t\t\t\t<h5 class=\"col s12\"><i class=\"fa fa-upload left\"></i>Exporter</h5>
+\t\t\t\t\t\t\t<h5 class=\"col s12\"><i class=\"fa fa-upload left hide-on-small-only\"></i>Exporter</h5>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
 \t\t\t\t</section>
 \t\t\t\t<section id=\"export_body\" class=\"col s12\">
 \t\t\t\t\t<div class=\"col s12 center-align\" style=\"padding-bottom: 20px;\">
-\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-file-pdf-o left\"></i>Exporter les opérations en cours</h2>
+\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-file-pdf-o left hide-on-small-only\"></i>Exporter les opérations en cours</h2>
 \t\t\t\t\t\t<p class=\"left-align\">Vous pouvez exporter les tableaux et graphes de l'onglet \"Récapitulatif\" au format pdf. A la fin de chaque mois, tous les tableaux sont automatiquement sauvegardés sous ce format (voir l'historique ci-dessous).</p>
 \t\t\t\t\t\t<a class=\"btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button\" style=\"animation-delay: 0.2s;\"><i class=\"fa fa-file-pdf-o left\"></i>SumUp - Livret A - Comptes de 06/16.pdf</a>
 \t\t\t\t\t\t<br>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-history left\"></i>Historique de votre comtpe</h2>
+\t\t\t\t\t\t<h2 class=\"divider-new-right\"><i class=\"fa fa-history left hide-on-small-only\"></i>Historique de votre comtpe</h2>
 \t\t\t\t\t\t<p class=\"left-align\">Voici le récapitulatif de vos comptes depuis votre inscription sur le site.</p>
 \t\t\t\t\t\t<div class=\"col s12 m10 l8 offset-m1 offset-l2\">
 \t\t\t\t\t\t\t<table>
@@ -305,26 +306,26 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 
 ";
         
-        $__internal_ad6429a7ff1f740e750dd68028696084b55891911c1026751024954e517a884d->leave($__internal_ad6429a7ff1f740e750dd68028696084b55891911c1026751024954e517a884d_prof);
+        $__internal_5281a0c54367c6bca0dd90456b462357e7fce8d72ff4ceba87c23d1c4e909e48->leave($__internal_5281a0c54367c6bca0dd90456b462357e7fce8d72ff4ceba87c23d1c4e909e48_prof);
 
     }
 
-    // line 270
+    // line 271
     public function block_javascript($context, array $blocks = array())
     {
-        $__internal_ebf0178ca170a50c8abdcf274241e1a725cc5ad940f1b0d1d6e5169f884eba7b = $this->env->getExtension("native_profiler");
-        $__internal_ebf0178ca170a50c8abdcf274241e1a725cc5ad940f1b0d1d6e5169f884eba7b->enter($__internal_ebf0178ca170a50c8abdcf274241e1a725cc5ad940f1b0d1d6e5169f884eba7b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
+        $__internal_fa270b2ff578261b0e724d3e299bf4db94047ffe71ee86eb4fd81bdcf251970b = $this->env->getExtension("native_profiler");
+        $__internal_fa270b2ff578261b0e724d3e299bf4db94047ffe71ee86eb4fd81bdcf251970b->enter($__internal_fa270b2ff578261b0e724d3e299bf4db94047ffe71ee86eb4fd81bdcf251970b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
 
-        // line 271
+        // line 272
         echo "\t";
         $this->displayParentBlock("javascript", $context, $blocks);
         echo "
 \t<script src=\"";
-        // line 272
+        // line 273
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/jquery.flot.js"), "html", null, true);
         echo "\"></script>
 \t<script src=\"";
-        // line 273
+        // line 274
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/jquery.flot.pie.js"), "html", null, true);
         echo "\"></script>
 \t<script>
@@ -557,7 +558,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t</script>
 ";
         
-        $__internal_ebf0178ca170a50c8abdcf274241e1a725cc5ad940f1b0d1d6e5169f884eba7b->leave($__internal_ebf0178ca170a50c8abdcf274241e1a725cc5ad940f1b0d1d6e5169f884eba7b_prof);
+        $__internal_fa270b2ff578261b0e724d3e299bf4db94047ffe71ee86eb4fd81bdcf251970b->leave($__internal_fa270b2ff578261b0e724d3e299bf4db94047ffe71ee86eb4fd81bdcf251970b_prof);
 
     }
 
@@ -573,7 +574,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 
     public function getDebugInfo()
     {
-        return array (  328 => 273,  324 => 272,  319 => 271,  313 => 270,  44 => 6,  38 => 5,  31 => 1,  29 => 3,  11 => 1,);
+        return array (  329 => 274,  325 => 273,  320 => 272,  314 => 271,  44 => 6,  38 => 5,  31 => 1,  29 => 3,  11 => 1,);
     }
 }
 /* {% extends 'SUMainBundle::layout.html.twig' %}*/
@@ -597,29 +598,30 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 				<section id="export_header" class="kj-grey" style="border-radius: 2px;">*/
 /* 					<div class="row" style="margin-bottom: 0px;">*/
 /* 						<div class="col s12 white-text">*/
-/* 							<h5 class="col s12"><i class="fa fa-table left"></i>Récapitulatif</h5>*/
+/* 							<h5 class="col s12"><i class="fa fa-table left hide-on-small-only"></i>Récapitulatif</h5>*/
 /* 						</div>*/
 /* 					</div>*/
 /* 				</section>*/
 /* 				<section id="export_body" class="col s12">*/
 /* 					<div class="col s12 center-align" style="padding-bottom: 20px;">*/
 /* 						<div class="row center-align">*/
-/* 							<h2 style="font-size: 3rem;"><i class="fa fa-chevron-left left link-hover"></i><i class="fa fa-book"></i> Compte courant - 06/16<i class="fa fa-chevron-right right link-hover"></i></h2>*/
+/* 							<h2 style="font-size: 3rem;"><i class="fa fa-book hide-on-small-only"></i> Compte courant</h2>*/
+/* 							<span class="col s8 offset-s2"><h5 class="col s12 m4 l4 offset-m4 offset-l4 hide-on-med-and-down"><i class="fa fa-chevron-left left link-hover"></i>06/16<i class="fa fa-chevron-right right link-hover"></i></h5></span>*/
+/* 							<h5 class="col s12 m4 l4 offset-m4 offset-l4 hide-on-large-only"><i class="fa fa-chevron-left left link-hover"></i>06/16<i class="fa fa-chevron-right right link-hover"></i></h5>*/
 /* 						</div>*/
-/* 						<h2 class="divider-new-right"><i class="fa fa-history left"></i>Etat du compte le 01/06/16</h2>*/
+/* 						<br>*/
+/* 						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Etat du compte le 01/06/16</h2>*/
 /* 						<table class="striped highlight centered">*/
-/* 							<thead>*/
+/* 							<tbody>*/
 /* 								<tr>*/
-/* 									<th></th>*/
-/* 									<th>Total</th>*/
-/* 									<th></th>*/
-/* 									<th>4 000 923 €</th>*/
+/* 									<td><b>Total</b></td>*/
+/* 									<td><b>4 000 923 €</b></td>*/
 /* 								</tr>*/
-/* 							</thead>*/
+/* 							</tbody>*/
 /* 						</table>*/
 /* 						<br>*/
-/* 						<h2 class="divider-new-right"><i class="fa fa-list-ul left"></i>Opérations depuis le 01/06/16</h2>*/
-/* 						<table class="striped highlight centered">*/
+/* 						<h2 class="divider-new-right"><i class="fa fa-list-ul left hide-on-small-only"></i>Opérations depuis le 01/06/16</h2>*/
+/* 						<table class="striped highlight centered responsive-table">*/
 /* 							<thead>*/
 /* 								<tr>*/
 /* 									<th>Type</th>*/
@@ -690,8 +692,8 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 							</tbody>*/
 /* 						</table>*/
 /* 						<br>*/
-/* 						<h2 class="divider-new-right"><i class="fa fa-hourglass-2 left"></i>Opérations en attente</h2>*/
-/* 						<table class="striped highlight centered">*/
+/* 						<h2 class="divider-new-right"><i class="fa fa-hourglass-2 left hide-on-small-only"></i>Opérations en attente</h2>*/
+/* 						<table class="striped highlight centered responsive-table">*/
 /* 							<thead>*/
 /* 								<tr>*/
 /* 									<th>Type</th>*/
@@ -733,7 +735,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 							</tbody>*/
 /* 						</table>*/
 /* 						<br>*/
-/* 						<h2 class="divider-new-right"><i class="fa fa-area-chart left"></i>Synthèse</h2>*/
+/* 						<h2 class="divider-new-right"><i class="fa fa-area-chart left hide-on-small-only"></i>Synthèse</h2>*/
 /* 						<div class="col s12 l6">*/
 /* 							<p>Synthèse des dépenses</p>*/
 /* 							<br>*/
@@ -769,7 +771,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 				<section id="operation_header" class="kj-grey" style="border-radius: 2px;">*/
 /* 					<div class="row" style="margin-bottom: 0px;">*/
 /* 						<div class="col s12 white-text">*/
-/* 							<h5 class="col s12"><i class="fa fa-terminal left"></i>Opérations</h5>*/
+/* 							<h5 class="col s12"><i class="fa fa-terminal left hide-on-small-only"></i>Opérations</h5>*/
 /* 						</div>*/
 /* 					</div>*/
 /* 				</section>*/
@@ -799,18 +801,18 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 				<section id="export_header" class="kj-grey" style="border-radius: 2px;">*/
 /* 					<div class="row" style="margin-bottom: 0px;">*/
 /* 						<div class="col s12 white-text">*/
-/* 							<h5 class="col s12"><i class="fa fa-upload left"></i>Exporter</h5>*/
+/* 							<h5 class="col s12"><i class="fa fa-upload left hide-on-small-only"></i>Exporter</h5>*/
 /* 						</div>*/
 /* 					</div>*/
 /* 				</section>*/
 /* 				<section id="export_body" class="col s12">*/
 /* 					<div class="col s12 center-align" style="padding-bottom: 20px;">*/
-/* 						<h2 class="divider-new-right"><i class="fa fa-file-pdf-o left"></i>Exporter les opérations en cours</h2>*/
+/* 						<h2 class="divider-new-right"><i class="fa fa-file-pdf-o left hide-on-small-only"></i>Exporter les opérations en cours</h2>*/
 /* 						<p class="left-align">Vous pouvez exporter les tableaux et graphes de l'onglet "Récapitulatif" au format pdf. A la fin de chaque mois, tous les tableaux sont automatiquement sauvegardés sous ce format (voir l'historique ci-dessous).</p>*/
 /* 						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - Livret A - Comptes de 06/16.pdf</a>*/
 /* 						<br>*/
 /* 						<br>*/
-/* 						<h2 class="divider-new-right"><i class="fa fa-history left"></i>Historique de votre comtpe</h2>*/
+/* 						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Historique de votre comtpe</h2>*/
 /* 						<p class="left-align">Voici le récapitulatif de vos comptes depuis votre inscription sur le site.</p>*/
 /* 						<div class="col s12 m10 l8 offset-m1 offset-l2">*/
 /* 							<table>*/
