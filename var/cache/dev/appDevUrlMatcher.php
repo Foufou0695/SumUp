@@ -100,9 +100,14 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // su_user_homepage
+        // su_account_homepage
+        if ($pathinfo === '/home') {
+            return array (  '_controller' => 'SU\\AccountBundle\\Controller\\AccountController::indexAction',  '_route' => 'su_account_homepage',);
+        }
+
+        // su_user_login
         if ($pathinfo === '/login') {
-            return array (  '_controller' => 'SU\\UserBundle\\Controller\\DefaultController::loginPageAction',  '_route' => 'su_user_homepage',);
+            return array (  '_controller' => 'SU\\UserBundle\\Controller\\DefaultController::loginPageAction',  '_route' => 'su_user_login',);
         }
 
         // su_main_homepage

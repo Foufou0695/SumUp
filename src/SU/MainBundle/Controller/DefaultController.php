@@ -8,6 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('SUMainBundle:Default:index.html.twig');
+		if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+			return $this->redirectToRoute('su_account_homepage');
+		} else {
+			return $this->redirectToRoute('su_user_login');
+		}
     }
 }

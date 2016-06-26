@@ -1,0 +1,502 @@
+{% extends 'SUMainBundle::layout.html.twig' %}
+
+{% set menu_selected = '' %}
+
+{% block body %}
+
+<ul class="tabs" style="overflow: hidden;">
+	<li id="recap_tab_button" class="tab col s3"><a class="truncate" href="#recap"><i class="fa fa-table"></i><span class="hide-on-small-only"> Récapitulatif</span></a></li>
+	<li id="operation_tab_button" class="tab col s3"><a class="truncate active" href="#operation"><i class="fa fa-terminal"></i><span class="hide-on-small-only"> Opérations</span></a></li>
+	<li id="export_tab_button" class="tab col s3"><a class="truncate" href="#export"><i class="fa fa-upload"></i><span class="hide-on-small-only"> Exporter</span></a></li>
+</ul>
+
+<div class="container" style="margin-top: 20px;">
+	<div class="row" style="display: block;">
+	
+		<div id="recap" class="col s12">
+			
+			<div class="col l10 offset-l1 m12 s12 card" style="padding: 0px; border: 1px solid #75828E; min-height: 60%;">
+				<section id="export_header" class="kj-grey" style="border-radius: 2px;">
+					<div class="row" style="margin-bottom: 0px;">
+						<div class="col s12 white-text">
+							<h5 class="col s12"><i class="fa fa-table left"></i>Récapitulatif</h5>
+						</div>
+					</div>
+				</section>
+				<section id="export_body" class="col s12">
+					<div class="col s12 center-align" style="padding-bottom: 20px;">
+						<div class="row center-align">
+							<h2 style="font-size: 3rem;"><i class="fa fa-chevron-left left link-hover"></i><i class="fa fa-book"></i> Compte courant - 06/16<i class="fa fa-chevron-right right link-hover"></i></h2>
+						</div>
+						<h2 class="divider-new-right"><i class="fa fa-history left"></i>Etat du compte le 01/06/16</h2>
+						<table class="striped highlight centered">
+							<thead>
+								<tr>
+									<th></th>
+									<th>Total</th>
+									<th></th>
+									<th>4 000 923 €</th>
+								</tr>
+							</thead>
+						</table>
+						<br>
+						<h2 class="divider-new-right"><i class="fa fa-list-ul left"></i>Opérations depuis le 01/06/16</h2>
+						<table class="striped highlight centered">
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Catégorie</th>
+									<th>Date</th>
+									<th>Montant</th>
+									<th>Edition</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr class="ligne">
+									<td class="type_option">Carte banquaire</td>
+									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr class="ligne">
+									<td class="type_option">Chèque</td>
+									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr class="ligne">
+									<td class="type_option">Virement</td>
+									<td class="category_option"><span>Loyer</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr class="ligne">
+									<td class="type_option">Carte banquaire</td>
+									<td class="category_option"><span>Vêtements</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr class="monthly-operation ligne">
+									<td class="type_option">Carte banquaire</td>
+									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr class="ligne">
+									<td class="type_option">Carte banquaire</td>
+									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><b>Total des opérations</b></td>
+									<td></td>
+									<td><b>400 000 €</b></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><b>Total en banque (au 26/06/16)</b></td>
+									<td></td>
+									<td><b>3 609 223 €</b></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<h2 class="divider-new-right"><i class="fa fa-hourglass-2 left"></i>Opérations en attente</h2>
+						<table class="striped highlight centered">
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Catégorie</th>
+									<th>Aura lieu le</th>
+									<th>Montant</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr class="ligne">
+									<td class="type_option">Carte banquaire</td>
+									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr class="ligne">
+									<td class="type_option">Carte banquaire</td>
+									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+									<td class="date_option">07/06/16</td>
+									<td class="montant_option"><span>-140</span><span> €</span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><b>Total des opérations</b></td>
+									<td></td>
+									<td><b>100 000 €</b></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><b>Total après opérations en attente</b></td>
+									<td></td>
+									<td><b>3 500 223 €</b></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<h2 class="divider-new-right"><i class="fa fa-area-chart left"></i>Synthèse</h2>
+						<div class="col s12 l6">
+							<p>Synthèse des dépenses</p>
+							<br>
+							<div id="placeholder_wrapper_depenses" class="row">
+								<div id="placeholder_depenses" style="height: 300px; width: 300px;"></div>
+							</div>
+						</div>
+						<div class="col s12 l6">
+							<p>Synthèse des entrées d'argent</p>
+							<br>
+							<div id="placeholder_wrapper_entrees" class="row">
+								<div id="placeholder_entrees" style="height: 300px; width: 300px;"></div>
+							</div>
+						</div>
+						<div class="col s12">
+							<br>
+							<br>
+							<p>Evolution de votre compte banquaire pendant le mois.</p>
+							<br>
+							<div id="placeholder_wrapper_account" class="row">
+								<div id="placeholder_account" style="height: 300px; width: 300px;"></div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			
+		</div>
+		
+		<div id="operation" class="col s12">
+		
+			<div class="col l10 offset-l1 m12 s12 card" style="padding: 0px; border: 1px solid #75828E; min-height: 60%;">
+				<section id="operation_header" class="kj-grey" style="border-radius: 2px;">
+					<div class="row" style="margin-bottom: 0px;">
+						<div class="col s12 white-text">
+							<h5 class="col s12"><i class="fa fa-terminal left"></i>Opérations</h5>
+						</div>
+					</div>
+				</section>
+				<section id="operation_body" class="col s12">
+					<div class="col s12 center-align" style="padding-bottom: 20px;">
+						<br>
+						<span><em>Que voulez-vous faire ?</em></span>
+						<br>
+						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.2s;"><i class="fa fa-refresh left"></i>Opération immédiate</a>
+						<br>
+						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.4s;"><i class="fa fa-hourglass-2 left"></i>Opération différée</a>
+						<br>
+						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.6s;"><i class="fa fa-calendar left"></i>Opération mensuelle</a>
+						<br>
+						<br>
+						<br>
+						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black;"><big><i class="fa fa-warning"></i> Aide :</big> <em>Les trois boutons vous permettent d'ajouter une nouvelle entrée à vos comptes (entrée ou sortie d'argent).<br>La seule différence entre les 3 boutons est l'effet qu'aura la nouvelle entrée sur le compte (immédiat, différé ou mensuel).</em></div>
+					</div>
+				</section>
+			</div>
+			
+		</div>
+		
+		<div id="export" class="col s12">
+		
+			<div class="col l10 offset-l1 m12 s12 card" style="padding: 0px; border: 1px solid #75828E; min-height: 60%;">
+				<section id="export_header" class="kj-grey" style="border-radius: 2px;">
+					<div class="row" style="margin-bottom: 0px;">
+						<div class="col s12 white-text">
+							<h5 class="col s12"><i class="fa fa-upload left"></i>Exporter</h5>
+						</div>
+					</div>
+				</section>
+				<section id="export_body" class="col s12">
+					<div class="col s12 center-align" style="padding-bottom: 20px;">
+						<h2 class="divider-new-right"><i class="fa fa-file-pdf-o left"></i>Exporter les opérations en cours</h2>
+						<p class="left-align">Vous pouvez exporter les tableaux et graphes de l'onglet "Récapitulatif" au format pdf. A la fin de chaque mois, tous les tableaux sont automatiquement sauvegardés sous ce format (voir l'historique ci-dessous).</p>
+						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - Livret A - Comptes de 06/16.pdf</a>
+						<br>
+						<br>
+						<h2 class="divider-new-right"><i class="fa fa-history left"></i>Historique de votre comtpe</h2>
+						<p class="left-align">Voici le récapitulatif de vos comptes depuis votre inscription sur le site.</p>
+						<div class="col s12 m10 l8 offset-m1 offset-l2">
+							<table>
+								<thead>
+									<tr>
+										<th data-field="id">Nom</th>
+										<th data-field="name">Lien de téléchargement</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>SumUp - Livret A - Comptes de 05/16</td>
+										<td><a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button truncate" style="animation-delay: 0.2s;"><i class="fa fa-download hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-download left"></i>Télécharger</span></a></td>
+									</tr>
+									<tr>
+										<td>SumUp - Livret A - Comptes de 04/16</td>
+										<td><a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button truncate" style="animation-delay: 0.4s;"><i class="fa fa-download hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-download left"></i>Télécharger</span></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<br>
+					</div>
+				</section>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	<script src="{{ asset('js/jquery.flot.js') }}"></script>
+	<script src="{{ asset('js/jquery.flot.pie.js') }}"></script>
+	<script>
+	var data = [],
+		series = Math.floor(Math.random() * 6) + 3;
+
+	for (var i = 0; i < series; i++) {
+		data[i] = {
+			label: "Series" + (i + 1),
+			data: Math.floor(Math.random() * 100) + 1
+		}
+	}
+	
+	var sin = [],
+		cos = [];
+
+	for (var i = 0; i < 14; i += 0.5) {
+		cos.push([i+1, Math.cos(i)]);
+	}
+	
+	function labelFormatter(label, series) {
+		return "<div style='font-size:1rem; text-align:center; padding:2px; color: black;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+	}
+	
+	function plot_graph() {
+		var available_width = $('#placeholder_wrapper_depenses').width();
+		$('#placeholder_depenses').width(available_width);
+		$.plot('#placeholder_depenses', data, {
+			series: {
+				pie: {
+					show: true,
+					radius: 1,
+					innerRadius: 0.5,
+					label: {
+						show: true,
+						radius: 3/4,
+						formatter: labelFormatter,
+						background: {
+							opacity: 0.5,
+							color: '#FFF'
+						}
+					}
+				}
+			},
+			legend: {
+				show: false
+			}
+		});
+		
+		var available_width = $('#placeholder_wrapper_entrees').width();
+		$('#placeholder_entrees').width(available_width);
+		$.plot('#placeholder_entrees', data, {
+			series: {
+				pie: {
+					show: true,
+					radius: 1,
+					innerRadius: 0.5,
+					label: {
+						show: true,
+						radius: 3/4,
+						formatter: labelFormatter,
+						background: {
+							opacity: 0.5,
+							color: '#FFF'
+						}
+					}
+				}
+			},
+			legend: {
+				show: false
+			}
+		});
+
+		var available_width = $('#placeholder_wrapper_account').width();
+		$('#placeholder_account').width(available_width);
+		var plot = $.plot("#placeholder_account", [
+			{ data: cos, label: "cos(x)"}
+		], {
+			series: {
+				lines: {
+					show: true
+				},
+				points: {
+					show: true
+				}
+			},
+			grid: {
+				hoverable: true,
+				clickable: true
+			},
+			yaxis: {
+				min: -1.2,
+				max: 1.2
+			},
+			legend: {
+				show: false
+			}
+		});
+		
+		$("<div id='tooltip'></div>").css({
+			position: "absolute",
+			display: "none",
+			border: "1px solid #fdd",
+			padding: "2px",
+			"background-color": "#fee",
+			opacity: 0.80
+		}).appendTo("body");
+		
+		$("#placeholder_account").bind("plothover", function (event, pos, item) {
+			if (item) {
+				var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+
+				$("#tooltip").html(y + " €")
+					.css({top: item.pageY+5, left: item.pageX+5})
+					.fadeIn(200);
+			} else {
+				$("#tooltip").hide();
+			}
+		});
+	}
+	
+	function set_lignes() {
+		$('.fa-pencil').off('click');
+		$('.fa-pencil').click(function() {
+			set_lignes_aux($(this).parent().parent().parent().parent().parent());
+		});
+		
+		$('.ligne').off('dblclick');
+		$('.ligne').dblclick(function() {
+			set_lignes_aux($(this));
+		});
+	}
+	
+	function set_lignes_aux(ligne) {
+		
+		if ($('.green-edition-text').size() >= 1) {
+			$('.green-edition-text').parent().find('.delete-hover').trigger('click');
+		}
+		
+		var type_option = '<select class="browser-default"><option value="" disabled selected>Type de paiement</option><option value="Carte banquaire">Carte banquaire</option><option value="Chèque">Chèque</option><option value="Virement">Virement</option></select>';
+		var category_option = '<select class="browser-default"><option value="" disabled selected>Catégorie</option><option value="Course">Course</option><option value="Loyer">Loyer</option><option value="Vêtements">Vêtements</option><option value="Transports">Transports</option></select>';
+		var date_option = '<input type="date" class="datepicker center-align">';
+		var montant_option = '<input type="number" class="center-align">';
+		var edition_option = '<span class="edition"><big><big><i class="fa fa-check link-hover green-edition-text"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>';
+		
+		var type = ligne.find('.type_option').html();
+		var category = ligne.find('.category_option').children().first().html();
+		var category_sav = ligne.find('.category_option').html();
+		var datepicker_val = ligne.find('.date_option').html();
+		var montant = ligne.find('.montant_option').children().first().html();
+		var montant_sav = ligne.find('.montant_option').html();
+		
+		ligne.find('.type_option').html(type_option);
+		ligne.find('.type_option select').val(type);
+		
+		ligne.find('.category_option').html(category_option);
+		ligne.find('.category_option select').val(category);
+		
+		ligne.find('.date_option').html(date_option);
+		
+		ligne.find('.montant_option').html(montant_option);
+		ligne.find('.montant_option input').val(montant);
+		
+		ligne.find('.edition_option').html(edition_option);
+		
+		
+		var input = $('.datepicker').pickadate({
+			labelMonthNext: 'Mois suivant',
+			labelMonthPrev: 'Mois précédent',
+			labelMonthSelect: 'Choisissez un mois',
+			labelYearSelect: 'Choisissez une année',
+			monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
+			monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
+			weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+			weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+			weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+			today: 'Ajd',
+			clear: 'Effacer',
+			close: 'Fermer'
+		});
+		picker = input.pickadate('picker');
+		
+		picker.set('select', new Date( datepicker_val.replace( /(\d{1})\/(\d{2})\/(\d{2})/, "$2/$1/$3") ));
+		
+		ligne.addClass('edited-ligne');
+		
+		ligne.find('.delete-hover').click(function() {
+			ligne.find('.type_option').html(type);
+			ligne.find('.category_option').html(category_sav);
+			ligne.find('.date_option').html(datepicker_val);
+			ligne.find('.montant_option').html(montant_sav);
+			ligne.find('.edition_option').html('<span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>');
+			
+			$('.tooltipped').tooltip({delay: 50});
+			
+			ligne.removeClass('edited-ligne');
+			
+			set_lignes();
+		});
+	}
+	
+	$(document).ready(function () {
+		
+		$('#recap_tab_button').click(function () {
+			setTimeout(function () {
+				plot_graph()
+				
+				$(window).resize(function () {
+					plot_graph();
+				});
+				
+				$('.ligne').on({
+					mouseenter: function() {
+						$(this).children().last().children().addClass('edition-active');
+					},
+					mouseover: function() {
+						$(this).children().last().children().addClass('edition-active');
+					},
+					mouseleave: function() {
+						$(this).children().last().children().removeClass('edition-active');
+					}
+				});
+			}, 500);
+		});
+		
+		set_lignes();
+		
+	});
+	</script>
+{% endblock %}

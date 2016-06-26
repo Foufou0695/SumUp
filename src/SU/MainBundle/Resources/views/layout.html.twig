@@ -27,13 +27,13 @@
 				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 64px;"></img></a>
 				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">
 					{% block accounts %}
-					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-gears left hide-on-small-only"></i></a></li>
-					<li><a class="waves-effect waves-light link-hover active-account">Compte Courant <i class="fa fa-gears left hide-on-small-only"></i></a></li>
+					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-book left hide-on-small-only"></i></a></li>
+					<li><a class="waves-effect waves-light link-hover active-account">Compte Courant <i class="fa fa-book left hide-on-small-only"></i></a></li>
 					{% endblock %}
 				</ul>
 				<ul class="left small-only">
-					<li id="param_link" class="active"><a class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>
-					<li><a class="dropdown-button" data-activates="drop_accounts"><span class="hide-on-small-only">Mes comptes <i class="fa fa-chevron-down left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-chevron-down fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
+					<li id="param_link" {% if menu_selected == 'param' %}class="active" {% endif %} ><a class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>
+					<li {% if menu_selected == 'my_accounts' %} class="active" {% endif %} ><a class="dropdown-button" data-activates="drop_accounts"><span class="hide-on-small-only">Mes comptes <i class="fa fa-chevron-down left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-chevron-down fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
 				</ul>
 				<ul class="right" id="navbar_right">
 					<li id="disconnect_link"><a class="waves-effect waves-light"><span class="hide-on-small-only">Se déconnecter <i class="fa fa-sign-out right"></i></span><span class="hide-on-med-and-up"><i class="fa fa-sign-out fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
@@ -43,8 +43,10 @@
 	</div>
 	<!-- /.Navigation -->
 	
-	{% block body %}
-	{% endblock %}
+	<div id="main_wrapper">
+		{% block body %}
+		{% endblock %}
+	</div>
 
 	<!-- Footer -->
 	<footer class="page-footer z-depth-2" id="footer_wrapper">
@@ -52,8 +54,8 @@
 			<div class="col l6 m6 s12 center-align">
 				<h5 id="titre_footer" class="white-text animated fadeIn" style="animation-delay: 0s; animation-duration: 2s; opacity: 0;">Contactez-nous sur les réseaux sociaux :</h5>
 				</br>
-				<a href="https://www.facebook.com/" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="facebook" target="_blank" style="background-color: #4264aa;"><i class="fa fa-facebook left"></i>Facebook</a>
-				<a href="https://www.linkedin.com/" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="linkedin" target="_blank" style="background-color: #d96f15;"><i class="fa fa-envelope left"></i>Mail</a>
+				<a href="https://www.facebook.com/guillaume.fournier.3760" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="facebook" target="_blank" style="background-color: #4264aa;"><i class="fa fa-facebook left"></i>Facebook</a>
+				<a href="mailto: guillaumefournier0695@orange.fr" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="linkedin" target="_blank" style="background-color: #d96f15;"><i class="fa fa-envelope left"></i>Mail</a>
 				</br></br>
 			</div>
 			<div class="col l6 m6 s12 center-align">
@@ -79,6 +81,7 @@
 	<script src="{{ asset('js/jquery-2.2.2.js') }}"></script>
 	<script src="{{ asset('js/materialize.js') }}"></script>
 	<script src="{{ asset('js/scroll-to.js') }}"></script>
+	{% endblock %}
 	<script>
 		function logo_resize () {
 			if ($(window).width() <= 600) {
@@ -86,6 +89,9 @@
 			} else {
 				$('#logo_navbar').height('64px')
 			}
+		}
+		function body_min_size() {
+			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 105});
 		}
 		$(document).ready(function () {
 			$('.dropdown-button').dropdown({
@@ -97,12 +103,13 @@
 			});
 			
 			logo_resize();
+			body_min_size();
 			
 			$(window).resize(function () {
 				logo_resize();
+				body_min_size();
 			});
 		});
 	</script>
-	{% endblock %}
   </body>
 </html>

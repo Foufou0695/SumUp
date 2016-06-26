@@ -19,8 +19,8 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_4012bda22bb51f038d1edfdef914ff9c5dd06145cf921b40b801ed398a5f51d4 = $this->env->getExtension("native_profiler");
-        $__internal_4012bda22bb51f038d1edfdef914ff9c5dd06145cf921b40b801ed398a5f51d4->enter($__internal_4012bda22bb51f038d1edfdef914ff9c5dd06145cf921b40b801ed398a5f51d4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUMainBundle::layout.html.twig"));
+        $__internal_f355f58ae19967dd561266322f3fdca3d77aee160728b69f81d8bd1e0d1c9730 = $this->env->getExtension("native_profiler");
+        $__internal_f355f58ae19967dd561266322f3fdca3d77aee160728b69f81d8bd1e0d1c9730->enter($__internal_f355f58ae19967dd561266322f3fdca3d77aee160728b69f81d8bd1e0d1c9730_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUMainBundle::layout.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -58,8 +58,18 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
         // line 33
         echo "\t\t\t\t</ul>
 \t\t\t\t<ul class=\"left small-only\">
-\t\t\t\t\t<li id=\"param_link\" class=\"active\"><a class=\"waves-effect waves-light link-hover\"><span class=\"hide-on-small-only\">Paramètres <i class=\"fa fa-edit left\"></i></span><span class=\"hide-on-med-and-up\"><i class=\"fa fa-edit fa-2x\" style=\"padding-top: 10px;\"></i></span></a></li>
-\t\t\t\t\t<li><a class=\"dropdown-button\" data-activates=\"drop_accounts\"><span class=\"hide-on-small-only\">Mes comptes <i class=\"fa fa-chevron-down left\"></i></span><span class=\"hide-on-med-and-up\"><i class=\"fa fa-chevron-down fa-2x\" style=\"padding-top: 10px;\"></i></span></a></a></li>
+\t\t\t\t\t<li id=\"param_link\" ";
+        // line 35
+        if (((isset($context["menu_selected"]) ? $context["menu_selected"] : $this->getContext($context, "menu_selected")) == "param")) {
+            echo "class=\"active\" ";
+        }
+        echo " ><a class=\"waves-effect waves-light link-hover\"><span class=\"hide-on-small-only\">Paramètres <i class=\"fa fa-edit left\"></i></span><span class=\"hide-on-med-and-up\"><i class=\"fa fa-edit fa-2x\" style=\"padding-top: 10px;\"></i></span></a></li>
+\t\t\t\t\t<li ";
+        // line 36
+        if (((isset($context["menu_selected"]) ? $context["menu_selected"] : $this->getContext($context, "menu_selected")) == "my_accounts")) {
+            echo " class=\"active\" ";
+        }
+        echo " ><a class=\"dropdown-button\" data-activates=\"drop_accounts\"><span class=\"hide-on-small-only\">Mes comptes <i class=\"fa fa-chevron-down left\"></i></span><span class=\"hide-on-med-and-up\"><i class=\"fa fa-chevron-down fa-2x\" style=\"padding-top: 10px;\"></i></span></a></a></li>
 \t\t\t\t</ul>
 \t\t\t\t<ul class=\"right\" id=\"navbar_right\">
 \t\t\t\t\t<li id=\"disconnect_link\"><a class=\"waves-effect waves-light\"><span class=\"hide-on-small-only\">Se déconnecter <i class=\"fa fa-sign-out right\"></i></span><span class=\"hide-on-med-and-up\"><i class=\"fa fa-sign-out fa-2x\" style=\"padding-top: 10px;\"></i></span></a></a></li>
@@ -69,19 +79,21 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 \t</div>
 \t<!-- /.Navigation -->
 \t
-\t";
-        // line 46
+\t<div id=\"main_wrapper\">
+\t\t";
+        // line 47
         $this->displayBlock('body', $context, $blocks);
-        // line 48
-        echo "
+        // line 49
+        echo "\t</div>
+
 \t<!-- Footer -->
 \t<footer class=\"page-footer z-depth-2\" id=\"footer_wrapper\">
 \t\t<div class=\"row\">
 \t\t\t<div class=\"col l6 m6 s12 center-align\">
 \t\t\t\t<h5 id=\"titre_footer\" class=\"white-text animated fadeIn\" style=\"animation-delay: 0s; animation-duration: 2s; opacity: 0;\">Contactez-nous sur les réseaux sociaux :</h5>
 \t\t\t\t</br>
-\t\t\t\t<a href=\"https://www.facebook.com/\" class=\"btn-large btn-footer waves-effect waves-light animated fadeIn\" id=\"facebook\" target=\"_blank\" style=\"background-color: #4264aa;\"><i class=\"fa fa-facebook left\"></i>Facebook</a>
-\t\t\t\t<a href=\"https://www.linkedin.com/\" class=\"btn-large btn-footer waves-effect waves-light animated fadeIn\" id=\"linkedin\" target=\"_blank\" style=\"background-color: #d96f15;\"><i class=\"fa fa-envelope left\"></i>Mail</a>
+\t\t\t\t<a href=\"https://www.facebook.com/guillaume.fournier.3760\" class=\"btn-large btn-footer waves-effect waves-light animated fadeIn\" id=\"facebook\" target=\"_blank\" style=\"background-color: #4264aa;\"><i class=\"fa fa-facebook left\"></i>Facebook</a>
+\t\t\t\t<a href=\"mailto: guillaumefournier0695@orange.fr\" class=\"btn-large btn-footer waves-effect waves-light animated fadeIn\" id=\"linkedin\" target=\"_blank\" style=\"background-color: #d96f15;\"><i class=\"fa fa-envelope left\"></i>Mail</a>
 \t\t\t\t</br></br>
 \t\t\t</div>
 \t\t\t<div class=\"col l6 m6 s12 center-align\">
@@ -103,21 +115,50 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 
 
 \t";
-        // line 77
+        // line 79
         $this->displayBlock('javascript', $context, $blocks);
-        // line 107
-        echo "  </body>
+        // line 85
+        echo "\t<script>
+\t\tfunction logo_resize () {
+\t\t\tif (\$(window).width() <= 600) {
+\t\t\t\t\$('#logo_navbar').height('56px')
+\t\t\t} else {
+\t\t\t\t\$('#logo_navbar').height('64px')
+\t\t\t}
+\t\t}
+\t\tfunction body_min_size() {
+\t\t\t\$('#main_wrapper').css({'min-height': \$(window).height() - \$('#footer_wrapper').height() - 105});
+\t\t}
+\t\t\$(document).ready(function () {
+\t\t\t\$('.dropdown-button').dropdown({
+\t\t\t  inDuration: 300,
+\t\t\t  outDuration: 225,
+\t\t\t  constrain_width: true,
+\t\t\t  hover: true,
+\t\t\t  belowOrigin: true
+\t\t\t});
+\t\t\t
+\t\t\tlogo_resize();
+\t\t\tbody_min_size();
+\t\t\t
+\t\t\t\$(window).resize(function () {
+\t\t\t\tlogo_resize();
+\t\t\t\tbody_min_size();
+\t\t\t});
+\t\t});
+\t</script>
+  </body>
 </html>";
         
-        $__internal_4012bda22bb51f038d1edfdef914ff9c5dd06145cf921b40b801ed398a5f51d4->leave($__internal_4012bda22bb51f038d1edfdef914ff9c5dd06145cf921b40b801ed398a5f51d4_prof);
+        $__internal_f355f58ae19967dd561266322f3fdca3d77aee160728b69f81d8bd1e0d1c9730->leave($__internal_f355f58ae19967dd561266322f3fdca3d77aee160728b69f81d8bd1e0d1c9730_prof);
 
     }
 
     // line 11
     public function block_stylesheet($context, array $blocks = array())
     {
-        $__internal_25c26a0ea499ab1afb940b8be9acbccede9a9d80149a952924ba5453ecb4abd6 = $this->env->getExtension("native_profiler");
-        $__internal_25c26a0ea499ab1afb940b8be9acbccede9a9d80149a952924ba5453ecb4abd6->enter($__internal_25c26a0ea499ab1afb940b8be9acbccede9a9d80149a952924ba5453ecb4abd6_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
+        $__internal_bbbf5aa6e20aeefc981220197e32d021ed4e038e403bff3456c32d4c140a681b = $this->env->getExtension("native_profiler");
+        $__internal_bbbf5aa6e20aeefc981220197e32d021ed4e038e403bff3456c32d4c140a681b->enter($__internal_bbbf5aa6e20aeefc981220197e32d021ed4e038e403bff3456c32d4c140a681b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
 
         // line 12
         echo "\t<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
@@ -141,85 +182,61 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
         echo "\" type=\"text/css\" rel=\"stylesheet\"/>
 \t";
         
-        $__internal_25c26a0ea499ab1afb940b8be9acbccede9a9d80149a952924ba5453ecb4abd6->leave($__internal_25c26a0ea499ab1afb940b8be9acbccede9a9d80149a952924ba5453ecb4abd6_prof);
+        $__internal_bbbf5aa6e20aeefc981220197e32d021ed4e038e403bff3456c32d4c140a681b->leave($__internal_bbbf5aa6e20aeefc981220197e32d021ed4e038e403bff3456c32d4c140a681b_prof);
 
     }
 
     // line 29
     public function block_accounts($context, array $blocks = array())
     {
-        $__internal_2bd83e9ef94e0b494144b5917f4252dc4bd51a285c947e37268a0e390ccdc987 = $this->env->getExtension("native_profiler");
-        $__internal_2bd83e9ef94e0b494144b5917f4252dc4bd51a285c947e37268a0e390ccdc987->enter($__internal_2bd83e9ef94e0b494144b5917f4252dc4bd51a285c947e37268a0e390ccdc987_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "accounts"));
+        $__internal_671cfc2f40fcc4c3afcdda3d23441940e8aa19733db84dd81d3fdeec769ef69f = $this->env->getExtension("native_profiler");
+        $__internal_671cfc2f40fcc4c3afcdda3d23441940e8aa19733db84dd81d3fdeec769ef69f->enter($__internal_671cfc2f40fcc4c3afcdda3d23441940e8aa19733db84dd81d3fdeec769ef69f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "accounts"));
 
         // line 30
-        echo "\t\t\t\t\t<li><a class=\"waves-effect waves-light link-hover\">Livret A <i class=\"fa fa-gears left hide-on-small-only\"></i></a></li>
-\t\t\t\t\t<li><a class=\"waves-effect waves-light link-hover active-account\">Compte Courant <i class=\"fa fa-gears left hide-on-small-only\"></i></a></li>
+        echo "\t\t\t\t\t<li><a class=\"waves-effect waves-light link-hover\">Livret A <i class=\"fa fa-book left hide-on-small-only\"></i></a></li>
+\t\t\t\t\t<li><a class=\"waves-effect waves-light link-hover active-account\">Compte Courant <i class=\"fa fa-book left hide-on-small-only\"></i></a></li>
 \t\t\t\t\t";
         
-        $__internal_2bd83e9ef94e0b494144b5917f4252dc4bd51a285c947e37268a0e390ccdc987->leave($__internal_2bd83e9ef94e0b494144b5917f4252dc4bd51a285c947e37268a0e390ccdc987_prof);
+        $__internal_671cfc2f40fcc4c3afcdda3d23441940e8aa19733db84dd81d3fdeec769ef69f->leave($__internal_671cfc2f40fcc4c3afcdda3d23441940e8aa19733db84dd81d3fdeec769ef69f_prof);
 
     }
 
-    // line 46
+    // line 47
     public function block_body($context, array $blocks = array())
     {
-        $__internal_7e9d2cc05836a4bed7164a4deed75a134eee048b17be0affd919fd7fc01d3d15 = $this->env->getExtension("native_profiler");
-        $__internal_7e9d2cc05836a4bed7164a4deed75a134eee048b17be0affd919fd7fc01d3d15->enter($__internal_7e9d2cc05836a4bed7164a4deed75a134eee048b17be0affd919fd7fc01d3d15_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_f89d2699b3b396d03b9796b6601a8f6110addd4dfd01310b3a463d0e4a16481c = $this->env->getExtension("native_profiler");
+        $__internal_f89d2699b3b396d03b9796b6601a8f6110addd4dfd01310b3a463d0e4a16481c->enter($__internal_f89d2699b3b396d03b9796b6601a8f6110addd4dfd01310b3a463d0e4a16481c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 47
-        echo "\t";
+        // line 48
+        echo "\t\t";
         
-        $__internal_7e9d2cc05836a4bed7164a4deed75a134eee048b17be0affd919fd7fc01d3d15->leave($__internal_7e9d2cc05836a4bed7164a4deed75a134eee048b17be0affd919fd7fc01d3d15_prof);
+        $__internal_f89d2699b3b396d03b9796b6601a8f6110addd4dfd01310b3a463d0e4a16481c->leave($__internal_f89d2699b3b396d03b9796b6601a8f6110addd4dfd01310b3a463d0e4a16481c_prof);
 
     }
 
-    // line 77
+    // line 79
     public function block_javascript($context, array $blocks = array())
     {
-        $__internal_b1cc8df5684e66e3a29e42a7c53ccf88d67035e8ea17a6373894cfa84bd4f775 = $this->env->getExtension("native_profiler");
-        $__internal_b1cc8df5684e66e3a29e42a7c53ccf88d67035e8ea17a6373894cfa84bd4f775->enter($__internal_b1cc8df5684e66e3a29e42a7c53ccf88d67035e8ea17a6373894cfa84bd4f775_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
+        $__internal_10211d6224b630d84fc518c9589c57e34150e29c9a5b02cb48ce769f2121b6eb = $this->env->getExtension("native_profiler");
+        $__internal_10211d6224b630d84fc518c9589c57e34150e29c9a5b02cb48ce769f2121b6eb->enter($__internal_10211d6224b630d84fc518c9589c57e34150e29c9a5b02cb48ce769f2121b6eb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
 
-        // line 78
+        // line 80
         echo "\t<!--  Scripts-->
 \t<script src=\"";
-        // line 79
+        // line 81
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/jquery-2.2.2.js"), "html", null, true);
         echo "\"></script>
 \t<script src=\"";
-        // line 80
+        // line 82
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/materialize.js"), "html", null, true);
         echo "\"></script>
 \t<script src=\"";
-        // line 81
+        // line 83
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/scroll-to.js"), "html", null, true);
         echo "\"></script>
-\t<script>
-\t\tfunction logo_resize () {
-\t\t\tif (\$(window).width() <= 600) {
-\t\t\t\t\$('#logo_navbar').height('56px')
-\t\t\t} else {
-\t\t\t\t\$('#logo_navbar').height('64px')
-\t\t\t}
-\t\t}
-\t\t\$(document).ready(function () {
-\t\t\t\$('.dropdown-button').dropdown({
-\t\t\t  inDuration: 300,
-\t\t\t  outDuration: 225,
-\t\t\t  constrain_width: true,
-\t\t\t  hover: true,
-\t\t\t  belowOrigin: true
-\t\t\t});
-\t\t\t
-\t\t\tlogo_resize();
-\t\t\t
-\t\t\t\$(window).resize(function () {
-\t\t\t\tlogo_resize();
-\t\t\t});
-\t\t});
-\t</script>
 \t";
         
-        $__internal_b1cc8df5684e66e3a29e42a7c53ccf88d67035e8ea17a6373894cfa84bd4f775->leave($__internal_b1cc8df5684e66e3a29e42a7c53ccf88d67035e8ea17a6373894cfa84bd4f775_prof);
+        $__internal_10211d6224b630d84fc518c9589c57e34150e29c9a5b02cb48ce769f2121b6eb->leave($__internal_10211d6224b630d84fc518c9589c57e34150e29c9a5b02cb48ce769f2121b6eb_prof);
 
     }
 
@@ -235,7 +252,7 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 
     public function getDebugInfo()
     {
-        return array (  194 => 81,  190 => 80,  186 => 79,  183 => 78,  177 => 77,  170 => 47,  164 => 46,  155 => 30,  149 => 29,  140 => 18,  136 => 17,  132 => 16,  128 => 15,  123 => 12,  117 => 11,  109 => 107,  107 => 77,  76 => 48,  74 => 46,  59 => 33,  57 => 29,  52 => 27,  43 => 20,  41 => 11,  35 => 8,  26 => 1,);
+        return array (  235 => 83,  231 => 82,  227 => 81,  224 => 80,  218 => 79,  211 => 48,  205 => 47,  196 => 30,  190 => 29,  181 => 18,  177 => 17,  173 => 16,  169 => 15,  164 => 12,  158 => 11,  121 => 85,  119 => 79,  87 => 49,  85 => 47,  69 => 36,  63 => 35,  59 => 33,  57 => 29,  52 => 27,  43 => 20,  41 => 11,  35 => 8,  26 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -267,13 +284,13 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 64px;"></img></a>*/
 /* 				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">*/
 /* 					{% block accounts %}*/
-/* 					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-gears left hide-on-small-only"></i></a></li>*/
-/* 					<li><a class="waves-effect waves-light link-hover active-account">Compte Courant <i class="fa fa-gears left hide-on-small-only"></i></a></li>*/
+/* 					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-book left hide-on-small-only"></i></a></li>*/
+/* 					<li><a class="waves-effect waves-light link-hover active-account">Compte Courant <i class="fa fa-book left hide-on-small-only"></i></a></li>*/
 /* 					{% endblock %}*/
 /* 				</ul>*/
 /* 				<ul class="left small-only">*/
-/* 					<li id="param_link" class="active"><a class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>*/
-/* 					<li><a class="dropdown-button" data-activates="drop_accounts"><span class="hide-on-small-only">Mes comptes <i class="fa fa-chevron-down left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-chevron-down fa-2x" style="padding-top: 10px;"></i></span></a></a></li>*/
+/* 					<li id="param_link" {% if menu_selected == 'param' %}class="active" {% endif %} ><a class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>*/
+/* 					<li {% if menu_selected == 'my_accounts' %} class="active" {% endif %} ><a class="dropdown-button" data-activates="drop_accounts"><span class="hide-on-small-only">Mes comptes <i class="fa fa-chevron-down left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-chevron-down fa-2x" style="padding-top: 10px;"></i></span></a></a></li>*/
 /* 				</ul>*/
 /* 				<ul class="right" id="navbar_right">*/
 /* 					<li id="disconnect_link"><a class="waves-effect waves-light"><span class="hide-on-small-only">Se déconnecter <i class="fa fa-sign-out right"></i></span><span class="hide-on-med-and-up"><i class="fa fa-sign-out fa-2x" style="padding-top: 10px;"></i></span></a></a></li>*/
@@ -283,8 +300,10 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 	</div>*/
 /* 	<!-- /.Navigation -->*/
 /* 	*/
-/* 	{% block body %}*/
-/* 	{% endblock %}*/
+/* 	<div id="main_wrapper">*/
+/* 		{% block body %}*/
+/* 		{% endblock %}*/
+/* 	</div>*/
 /* */
 /* 	<!-- Footer -->*/
 /* 	<footer class="page-footer z-depth-2" id="footer_wrapper">*/
@@ -292,8 +311,8 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 			<div class="col l6 m6 s12 center-align">*/
 /* 				<h5 id="titre_footer" class="white-text animated fadeIn" style="animation-delay: 0s; animation-duration: 2s; opacity: 0;">Contactez-nous sur les réseaux sociaux :</h5>*/
 /* 				</br>*/
-/* 				<a href="https://www.facebook.com/" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="facebook" target="_blank" style="background-color: #4264aa;"><i class="fa fa-facebook left"></i>Facebook</a>*/
-/* 				<a href="https://www.linkedin.com/" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="linkedin" target="_blank" style="background-color: #d96f15;"><i class="fa fa-envelope left"></i>Mail</a>*/
+/* 				<a href="https://www.facebook.com/guillaume.fournier.3760" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="facebook" target="_blank" style="background-color: #4264aa;"><i class="fa fa-facebook left"></i>Facebook</a>*/
+/* 				<a href="mailto: guillaumefournier0695@orange.fr" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="linkedin" target="_blank" style="background-color: #d96f15;"><i class="fa fa-envelope left"></i>Mail</a>*/
 /* 				</br></br>*/
 /* 			</div>*/
 /* 			<div class="col l6 m6 s12 center-align">*/
@@ -319,6 +338,7 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 	<script src="{{ asset('js/jquery-2.2.2.js') }}"></script>*/
 /* 	<script src="{{ asset('js/materialize.js') }}"></script>*/
 /* 	<script src="{{ asset('js/scroll-to.js') }}"></script>*/
+/* 	{% endblock %}*/
 /* 	<script>*/
 /* 		function logo_resize () {*/
 /* 			if ($(window).width() <= 600) {*/
@@ -326,6 +346,9 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 			} else {*/
 /* 				$('#logo_navbar').height('64px')*/
 /* 			}*/
+/* 		}*/
+/* 		function body_min_size() {*/
+/* 			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 105});*/
 /* 		}*/
 /* 		$(document).ready(function () {*/
 /* 			$('.dropdown-button').dropdown({*/
@@ -337,12 +360,13 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 			});*/
 /* 			*/
 /* 			logo_resize();*/
+/* 			body_min_size();*/
 /* 			*/
 /* 			$(window).resize(function () {*/
 /* 				logo_resize();*/
+/* 				body_min_size();*/
 /* 			});*/
 /* 		});*/
 /* 	</script>*/
-/* 	{% endblock %}*/
 /*   </body>*/
 /* </html>*/

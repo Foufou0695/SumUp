@@ -1,0 +1,3 @@
+su_account_homepage:
+    path:     /home
+    defaults: { _controller: SUAccountBundle:Account:index }

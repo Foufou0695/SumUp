@@ -2953,7 +2953,7 @@ table.highlight > tbody > tr {
 }
 
 table.highlight > tbody > tr:hover {
-  background-color: #f2f2f2;
+  background-color: #ffdee3;
 }
 
 table.centered thead tr th, table.centered tbody tr td {
@@ -10994,7 +10994,7 @@ select {
 
 .picker__date-display {
   text-align: center;
-  background-color: #477B9C;
+  background-color: #711d2a;
   color: #fff;
   padding-bottom: 15px;
   font-weight: 300;
@@ -11008,7 +11008,7 @@ select {
 }
 
 .picker__weekday-display {
-  background-color: #1f897f;
+  background-color: #983f4d;
   padding: 10px;
   font-weight: 200;
   letter-spacing: .5;

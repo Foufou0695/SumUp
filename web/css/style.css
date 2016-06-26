@@ -1,5 +1,6 @@
 body {
 	color: #711d2a;
+	background-color: #e7e7e7;
 }
 
 .asphalt {
@@ -42,18 +43,19 @@ body {
 	background-color: #983f4d;
 }
 
+.green-edition-text {
+	color: #71bd74 !important;
+}
+
+.green-edition-text:hover {
+	color: #4CAF50 !important;
+}
+
 .link-hover {
 	cursor: pointer;
 }
 
-.btn-footer {
-	padding-top: 5px;
-	margin-top: 10px;
-	margin-right: 5px;
-	margin-left: 5px;
-}
-
-.btn-injection {
+.btn-footer, .btn-body {
 	padding-top: 5px;
 	margin-top: 10px;
 	margin-right: 5px;
@@ -87,7 +89,7 @@ body {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	font-size: 2.5em;
+	font-size: 1.64rem;
 	font-weight: 300;
 }
 
@@ -128,7 +130,7 @@ body {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	font-size: 2.5em;
+	font-size: 1.64rem;
 	font-weight: 300;
 }
 
@@ -146,6 +148,35 @@ body {
 	background: white;
 	flex: 1;
 	margin: 0 0 0 .45em;
+}
+
+.monthly-operation {
+	background-color: #e4f2ff !important;
+}
+
+.monthly-operation:hover {
+	background-color: #ffdee3 !important;
+}
+
+.edition {
+	transition: all .25s ease;
+	opacity: 0;
+}
+
+.edition-active {
+	opacity: 1 !important;
+}
+
+.delete-hover:hover, .edit-hover:hover {
+	color: #711d2a;
+}
+
+.ligne {
+	transition: background-color .25s ease;
+}
+
+.edited-ligne {
+	background-color: #b7f2b7 !important;
 }
 
 /* Scrollbar */

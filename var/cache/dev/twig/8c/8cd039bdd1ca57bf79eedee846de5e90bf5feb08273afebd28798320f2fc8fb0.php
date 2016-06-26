@@ -17,8 +17,8 @@ class __TwigTemplate_d6dc66872de242a94f3c604a053cf9c62abe1451d2672fb862631869d4e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_fffd387ab0a27412c6406ddfac42af917d781b33f7d16e55fa3d2577601c4563 = $this->env->getExtension("native_profiler");
-        $__internal_fffd387ab0a27412c6406ddfac42af917d781b33f7d16e55fa3d2577601c4563->enter($__internal_fffd387ab0a27412c6406ddfac42af917d781b33f7d16e55fa3d2577601c4563_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUUserBundle:Default:login.html.twig"));
+        $__internal_fd06788800e194c3b410d22cd9667dc445040c6958654d1ff9b84b53b4604338 = $this->env->getExtension("native_profiler");
+        $__internal_fd06788800e194c3b410d22cd9667dc445040c6958654d1ff9b84b53b4604338->enter($__internal_fd06788800e194c3b410d22cd9667dc445040c6958654d1ff9b84b53b4604338_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUUserBundle:Default:login.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -39,7 +39,7 @@ class __TwigTemplate_d6dc66872de242a94f3c604a053cf9c62abe1451d2672fb862631869d4e
         $this->displayBlock('stylesheet', $context, $blocks);
         // line 20
         echo "</head>
-<body style=\"background-color: #e7e7e7;\">
+<body>
 
 \t<div class=\"container animated fadeIn\">
 \t
@@ -89,15 +89,15 @@ class __TwigTemplate_d6dc66872de242a94f3c604a053cf9c62abe1451d2672fb862631869d4e
         echo "  </body>
 </html>";
         
-        $__internal_fffd387ab0a27412c6406ddfac42af917d781b33f7d16e55fa3d2577601c4563->leave($__internal_fffd387ab0a27412c6406ddfac42af917d781b33f7d16e55fa3d2577601c4563_prof);
+        $__internal_fd06788800e194c3b410d22cd9667dc445040c6958654d1ff9b84b53b4604338->leave($__internal_fd06788800e194c3b410d22cd9667dc445040c6958654d1ff9b84b53b4604338_prof);
 
     }
 
     // line 11
     public function block_stylesheet($context, array $blocks = array())
     {
-        $__internal_26dabdfcf5f76f47818c935bb3e6610a0ec3e7c19c4a1dcb48a6360e341b0e6c = $this->env->getExtension("native_profiler");
-        $__internal_26dabdfcf5f76f47818c935bb3e6610a0ec3e7c19c4a1dcb48a6360e341b0e6c->enter($__internal_26dabdfcf5f76f47818c935bb3e6610a0ec3e7c19c4a1dcb48a6360e341b0e6c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
+        $__internal_a4dca2053fd316682b7b833342a29215a585617c4aea4853e8ad38dd2ecc1c61 = $this->env->getExtension("native_profiler");
+        $__internal_a4dca2053fd316682b7b833342a29215a585617c4aea4853e8ad38dd2ecc1c61->enter($__internal_a4dca2053fd316682b7b833342a29215a585617c4aea4853e8ad38dd2ecc1c61_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
 
         // line 12
         echo "\t<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
@@ -121,15 +121,15 @@ class __TwigTemplate_d6dc66872de242a94f3c604a053cf9c62abe1451d2672fb862631869d4e
         echo "\" type=\"text/css\" rel=\"stylesheet\"/>
 \t";
         
-        $__internal_26dabdfcf5f76f47818c935bb3e6610a0ec3e7c19c4a1dcb48a6360e341b0e6c->leave($__internal_26dabdfcf5f76f47818c935bb3e6610a0ec3e7c19c4a1dcb48a6360e341b0e6c_prof);
+        $__internal_a4dca2053fd316682b7b833342a29215a585617c4aea4853e8ad38dd2ecc1c61->leave($__internal_a4dca2053fd316682b7b833342a29215a585617c4aea4853e8ad38dd2ecc1c61_prof);
 
     }
 
     // line 61
     public function block_javascript($context, array $blocks = array())
     {
-        $__internal_49de3bbc75d2d3c34caa381e9ef9d2330b4df869d3a256b2290103fc72f34783 = $this->env->getExtension("native_profiler");
-        $__internal_49de3bbc75d2d3c34caa381e9ef9d2330b4df869d3a256b2290103fc72f34783->enter($__internal_49de3bbc75d2d3c34caa381e9ef9d2330b4df869d3a256b2290103fc72f34783_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
+        $__internal_771f36b3be5e6c80741fec74acebf9a20e0701adce3a615c9d77d53e4e7377fb = $this->env->getExtension("native_profiler");
+        $__internal_771f36b3be5e6c80741fec74acebf9a20e0701adce3a615c9d77d53e4e7377fb->enter($__internal_771f36b3be5e6c80741fec74acebf9a20e0701adce3a615c9d77d53e4e7377fb_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
 
         // line 62
         echo "\t<!--  Scripts-->
@@ -180,7 +180,7 @@ class __TwigTemplate_d6dc66872de242a94f3c604a053cf9c62abe1451d2672fb862631869d4e
 \t</script>
 \t";
         
-        $__internal_49de3bbc75d2d3c34caa381e9ef9d2330b4df869d3a256b2290103fc72f34783->leave($__internal_49de3bbc75d2d3c34caa381e9ef9d2330b4df869d3a256b2290103fc72f34783_prof);
+        $__internal_771f36b3be5e6c80741fec74acebf9a20e0701adce3a615c9d77d53e4e7377fb->leave($__internal_771f36b3be5e6c80741fec74acebf9a20e0701adce3a615c9d77d53e4e7377fb_prof);
 
     }
 
@@ -219,7 +219,7 @@ class __TwigTemplate_d6dc66872de242a94f3c604a053cf9c62abe1451d2672fb862631869d4e
 /* 	<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>*/
 /* 	{% endblock %}*/
 /* </head>*/
-/* <body style="background-color: #e7e7e7;">*/
+/* <body>*/
 /* */
 /* 	<div class="container animated fadeIn">*/
 /* 	*/
