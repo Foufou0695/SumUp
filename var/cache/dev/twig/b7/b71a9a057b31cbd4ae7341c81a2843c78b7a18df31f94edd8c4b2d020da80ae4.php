@@ -19,8 +19,8 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_608a3ecf3be9fed87949326c1d75088f32a9c57703fceea989f2d717028ed449 = $this->env->getExtension("native_profiler");
-        $__internal_608a3ecf3be9fed87949326c1d75088f32a9c57703fceea989f2d717028ed449->enter($__internal_608a3ecf3be9fed87949326c1d75088f32a9c57703fceea989f2d717028ed449_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUMainBundle::layout.html.twig"));
+        $__internal_eaa0d7940d4fdf84874a6c57245ffd7a0902cb3483da13398fed8b324cdd8eb9 = $this->env->getExtension("native_profiler");
+        $__internal_eaa0d7940d4fdf84874a6c57245ffd7a0902cb3483da13398fed8b324cdd8eb9->enter($__internal_eaa0d7940d4fdf84874a6c57245ffd7a0902cb3483da13398fed8b324cdd8eb9_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUMainBundle::layout.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -50,7 +50,7 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 \t\t\t\t<a href=\"#\" class=\"brand-logo center\"><img id=\"logo_navbar\" src=\"";
         // line 27
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("img/design/logo-icon-min.png"), "html", null, true);
-        echo "\" class=\"responsive-img\" style=\"height: 64px;\"></img></a>
+        echo "\" class=\"responsive-img\" style=\"height: 50px;\"></img></a>
 \t\t\t\t<ul id=\"drop_accounts\" class=\"dropdown-content z-depth-3\" style=\"border: 1px solid #711d2a;\">
 \t\t\t\t\t";
         // line 29
@@ -121,13 +121,13 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
         echo "\t<script>
 \t\tfunction logo_resize () {
 \t\t\tif (\$(window).width() <= 600) {
-\t\t\t\t\$('#logo_navbar').height('56px')
+\t\t\t\t\$('#logo_navbar').height('50px')
 \t\t\t} else {
-\t\t\t\t\$('#logo_navbar').height('64px')
+\t\t\t\t\$('#logo_navbar').height('50px')
 \t\t\t}
 \t\t}
 \t\tfunction body_min_size() {
-\t\t\t\$('#main_wrapper').css({'min-height': \$(window).height() - \$('#footer_wrapper').height() - 105});
+\t\t\t\$('#main_wrapper').css({'min-height': \$(window).height() - \$('#footer_wrapper').height() - 91});
 \t\t}
 \t\t\$(document).ready(function () {
 \t\t\t\$('.dropdown-button').dropdown({
@@ -150,15 +150,15 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
   </body>
 </html>";
         
-        $__internal_608a3ecf3be9fed87949326c1d75088f32a9c57703fceea989f2d717028ed449->leave($__internal_608a3ecf3be9fed87949326c1d75088f32a9c57703fceea989f2d717028ed449_prof);
+        $__internal_eaa0d7940d4fdf84874a6c57245ffd7a0902cb3483da13398fed8b324cdd8eb9->leave($__internal_eaa0d7940d4fdf84874a6c57245ffd7a0902cb3483da13398fed8b324cdd8eb9_prof);
 
     }
 
     // line 11
     public function block_stylesheet($context, array $blocks = array())
     {
-        $__internal_57c5d5536e4d52ed1bbc8bfdf49de9f299b34f67d6a2dd24df711fb15d70972f = $this->env->getExtension("native_profiler");
-        $__internal_57c5d5536e4d52ed1bbc8bfdf49de9f299b34f67d6a2dd24df711fb15d70972f->enter($__internal_57c5d5536e4d52ed1bbc8bfdf49de9f299b34f67d6a2dd24df711fb15d70972f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
+        $__internal_ddf3405f1e65ae18ceb758545d35a07ef37154ffec40b1312b0b882dfbd26ff1 = $this->env->getExtension("native_profiler");
+        $__internal_ddf3405f1e65ae18ceb758545d35a07ef37154ffec40b1312b0b882dfbd26ff1->enter($__internal_ddf3405f1e65ae18ceb758545d35a07ef37154ffec40b1312b0b882dfbd26ff1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
 
         // line 12
         echo "\t<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
@@ -182,43 +182,43 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
         echo "\" type=\"text/css\" rel=\"stylesheet\"/>
 \t";
         
-        $__internal_57c5d5536e4d52ed1bbc8bfdf49de9f299b34f67d6a2dd24df711fb15d70972f->leave($__internal_57c5d5536e4d52ed1bbc8bfdf49de9f299b34f67d6a2dd24df711fb15d70972f_prof);
+        $__internal_ddf3405f1e65ae18ceb758545d35a07ef37154ffec40b1312b0b882dfbd26ff1->leave($__internal_ddf3405f1e65ae18ceb758545d35a07ef37154ffec40b1312b0b882dfbd26ff1_prof);
 
     }
 
     // line 29
     public function block_accounts($context, array $blocks = array())
     {
-        $__internal_e51db8497518b6ab6a5d520b1227afe1c37e16efc84255c6ee219e2c38295a64 = $this->env->getExtension("native_profiler");
-        $__internal_e51db8497518b6ab6a5d520b1227afe1c37e16efc84255c6ee219e2c38295a64->enter($__internal_e51db8497518b6ab6a5d520b1227afe1c37e16efc84255c6ee219e2c38295a64_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "accounts"));
+        $__internal_1658631b2113cc4f7564ee47a330d70f1ed6eee630796681ffeb1f32d504b025 = $this->env->getExtension("native_profiler");
+        $__internal_1658631b2113cc4f7564ee47a330d70f1ed6eee630796681ffeb1f32d504b025->enter($__internal_1658631b2113cc4f7564ee47a330d70f1ed6eee630796681ffeb1f32d504b025_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "accounts"));
 
         // line 30
         echo "\t\t\t\t\t<li><a class=\"waves-effect waves-light link-hover\">Livret A <i class=\"fa fa-book left hide-on-small-only\"></i></a></li>
 \t\t\t\t\t<li><a class=\"waves-effect waves-light link-hover active-account\">Compte Courant <i class=\"fa fa-book left hide-on-small-only\"></i></a></li>
 \t\t\t\t\t";
         
-        $__internal_e51db8497518b6ab6a5d520b1227afe1c37e16efc84255c6ee219e2c38295a64->leave($__internal_e51db8497518b6ab6a5d520b1227afe1c37e16efc84255c6ee219e2c38295a64_prof);
+        $__internal_1658631b2113cc4f7564ee47a330d70f1ed6eee630796681ffeb1f32d504b025->leave($__internal_1658631b2113cc4f7564ee47a330d70f1ed6eee630796681ffeb1f32d504b025_prof);
 
     }
 
     // line 47
     public function block_body($context, array $blocks = array())
     {
-        $__internal_511f4cf04c8e93bc1182d9ca4250734938f6f3861e7b3fc4063cd68775313174 = $this->env->getExtension("native_profiler");
-        $__internal_511f4cf04c8e93bc1182d9ca4250734938f6f3861e7b3fc4063cd68775313174->enter($__internal_511f4cf04c8e93bc1182d9ca4250734938f6f3861e7b3fc4063cd68775313174_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_2ea3d65e421238f3dc4629df2da023a595162b11f91e78330a89a62f4f4c718a = $this->env->getExtension("native_profiler");
+        $__internal_2ea3d65e421238f3dc4629df2da023a595162b11f91e78330a89a62f4f4c718a->enter($__internal_2ea3d65e421238f3dc4629df2da023a595162b11f91e78330a89a62f4f4c718a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 48
         echo "\t\t";
         
-        $__internal_511f4cf04c8e93bc1182d9ca4250734938f6f3861e7b3fc4063cd68775313174->leave($__internal_511f4cf04c8e93bc1182d9ca4250734938f6f3861e7b3fc4063cd68775313174_prof);
+        $__internal_2ea3d65e421238f3dc4629df2da023a595162b11f91e78330a89a62f4f4c718a->leave($__internal_2ea3d65e421238f3dc4629df2da023a595162b11f91e78330a89a62f4f4c718a_prof);
 
     }
 
     // line 79
     public function block_javascript($context, array $blocks = array())
     {
-        $__internal_efaca666cefb70aed04fd3784fcb2e2ab054a385ee0b0ea8603825d79c87cdff = $this->env->getExtension("native_profiler");
-        $__internal_efaca666cefb70aed04fd3784fcb2e2ab054a385ee0b0ea8603825d79c87cdff->enter($__internal_efaca666cefb70aed04fd3784fcb2e2ab054a385ee0b0ea8603825d79c87cdff_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
+        $__internal_3c8bc215a49dd84af4928a0200a02bfa43512f39b88cd940fee4c4e7103564b6 = $this->env->getExtension("native_profiler");
+        $__internal_3c8bc215a49dd84af4928a0200a02bfa43512f39b88cd940fee4c4e7103564b6->enter($__internal_3c8bc215a49dd84af4928a0200a02bfa43512f39b88cd940fee4c4e7103564b6_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
 
         // line 80
         echo "\t<!--  Scripts-->
@@ -236,7 +236,7 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
         echo "\"></script>
 \t";
         
-        $__internal_efaca666cefb70aed04fd3784fcb2e2ab054a385ee0b0ea8603825d79c87cdff->leave($__internal_efaca666cefb70aed04fd3784fcb2e2ab054a385ee0b0ea8603825d79c87cdff_prof);
+        $__internal_3c8bc215a49dd84af4928a0200a02bfa43512f39b88cd940fee4c4e7103564b6->leave($__internal_3c8bc215a49dd84af4928a0200a02bfa43512f39b88cd940fee4c4e7103564b6_prof);
 
     }
 
@@ -281,7 +281,7 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 	<div class="navbar-fixed" id="navbar_wrapper">*/
 /* 		<nav class="cardinal">*/
 /* 			<div class="nav-wrapper">*/
-/* 				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 64px;"></img></a>*/
+/* 				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>*/
 /* 				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">*/
 /* 					{% block accounts %}*/
 /* 					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-book left hide-on-small-only"></i></a></li>*/
@@ -342,13 +342,13 @@ class __TwigTemplate_275f49117c953e4e5f6935ff957d0c4ea79731109b2f235d44f1afcb128
 /* 	<script>*/
 /* 		function logo_resize () {*/
 /* 			if ($(window).width() <= 600) {*/
-/* 				$('#logo_navbar').height('56px')*/
+/* 				$('#logo_navbar').height('50px')*/
 /* 			} else {*/
-/* 				$('#logo_navbar').height('64px')*/
+/* 				$('#logo_navbar').height('50px')*/
 /* 			}*/
 /* 		}*/
 /* 		function body_min_size() {*/
-/* 			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 105});*/
+/* 			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 91});*/
 /* 		}*/
 /* 		$(document).ready(function () {*/
 /* 			$('.dropdown-button').dropdown({*/

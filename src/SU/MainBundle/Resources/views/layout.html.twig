@@ -24,7 +24,7 @@
 	<div class="navbar-fixed" id="navbar_wrapper">
 		<nav class="cardinal">
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 64px;"></img></a>
+				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
 				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">
 					{% block accounts %}
 					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-book left hide-on-small-only"></i></a></li>
@@ -85,13 +85,13 @@
 	<script>
 		function logo_resize () {
 			if ($(window).width() <= 600) {
-				$('#logo_navbar').height('56px')
+				$('#logo_navbar').height('50px')
 			} else {
-				$('#logo_navbar').height('64px')
+				$('#logo_navbar').height('50px')
 			}
 		}
 		function body_min_size() {
-			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 105});
+			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 91});
 		}
 		$(document).ready(function () {
 			$('.dropdown-button').dropdown({
