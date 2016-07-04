@@ -105,9 +105,47 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'SU\\AccountBundle\\Controller\\AccountController::indexAction',  '_route' => 'su_account_homepage',);
         }
 
+        if (0 === strpos($pathinfo, '/m')) {
+            // su_account_mobile_immediate
+            if ($pathinfo === '/mimmediate') {
+                return array (  '_controller' => 'SU\\AccountBundle\\Controller\\AccountController::mimmediateAction',  '_route' => 'su_account_mobile_immediate',);
+            }
+
+            // su_account_mobile_differed
+            if ($pathinfo === '/mdiffered') {
+                return array (  '_controller' => 'SU\\AccountBundle\\Controller\\AccountController::mdifferedAction',  '_route' => 'su_account_mobile_differed',);
+            }
+
+            // su_account_mobile_systematic
+            if ($pathinfo === '/msystematic') {
+                return array (  '_controller' => 'SU\\AccountBundle\\Controller\\AccountController::msystematicAction',  '_route' => 'su_account_mobile_systematic',);
+            }
+
+            // su_account_mobile_account
+            if ($pathinfo === '/maccount') {
+                return array (  '_controller' => 'SU\\AccountBundle\\Controller\\AccountController::maccountAction',  '_route' => 'su_account_mobile_account',);
+            }
+
+        }
+
+        // su_account_new_account
+        if ($pathinfo === '/newAccount') {
+            return array (  '_controller' => 'SU\\AccountBundle\\Controller\\AccountController::newAccountAction',  '_route' => 'su_account_new_account',);
+        }
+
         // su_user_login
         if ($pathinfo === '/login') {
-            return array (  '_controller' => 'SU\\UserBundle\\Controller\\DefaultController::loginPageAction',  '_route' => 'su_user_login',);
+            return array (  '_controller' => 'SU\\UserBundle\\Controller\\UserController::loginPageAction',  '_route' => 'su_user_login',);
+        }
+
+        // su_user_register
+        if ($pathinfo === '/register') {
+            return array (  '_controller' => 'SU\\UserBundle\\Controller\\UserController::registerAction',  '_route' => 'su_user_register',);
+        }
+
+        // su_user_param
+        if ($pathinfo === '/param') {
+            return array (  '_controller' => 'SU\\UserBundle\\Controller\\UserController::paramAction',  '_route' => 'su_user_param',);
         }
 
         // su_main_homepage
@@ -116,7 +154,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->redirect($pathinfo.'/', 'su_main_homepage');
             }
 
-            return array (  '_controller' => 'SU\\MainBundle\\Controller\\DefaultController::indexAction',  '_route' => 'su_main_homepage',);
+            return array (  '_controller' => 'SUMainBundle:Default:index',  '_route' => 'su_main_homepage',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

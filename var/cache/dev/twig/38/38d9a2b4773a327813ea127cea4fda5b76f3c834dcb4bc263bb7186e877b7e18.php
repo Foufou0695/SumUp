@@ -22,23 +22,23 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_ff1f13aaab34b08152f0fcef3dfcc81f1b7eb669ba81f98a240db94b043ad5dc = $this->env->getExtension("native_profiler");
-        $__internal_ff1f13aaab34b08152f0fcef3dfcc81f1b7eb669ba81f98a240db94b043ad5dc->enter($__internal_ff1f13aaab34b08152f0fcef3dfcc81f1b7eb669ba81f98a240db94b043ad5dc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUAccountBundle:Account:index.html.twig"));
+        $__internal_5c9f9df4b6256e0abd42669b36afa04844e0e2aa438bf7f9b885bb43d35228d2 = $this->env->getExtension("native_profiler");
+        $__internal_5c9f9df4b6256e0abd42669b36afa04844e0e2aa438bf7f9b885bb43d35228d2->enter($__internal_5c9f9df4b6256e0abd42669b36afa04844e0e2aa438bf7f9b885bb43d35228d2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUAccountBundle:Account:index.html.twig"));
 
         // line 3
-        $context["menu_selected"] = "";
+        $context["menu_selected"] = "home";
         // line 1
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_ff1f13aaab34b08152f0fcef3dfcc81f1b7eb669ba81f98a240db94b043ad5dc->leave($__internal_ff1f13aaab34b08152f0fcef3dfcc81f1b7eb669ba81f98a240db94b043ad5dc_prof);
+        $__internal_5c9f9df4b6256e0abd42669b36afa04844e0e2aa438bf7f9b885bb43d35228d2->leave($__internal_5c9f9df4b6256e0abd42669b36afa04844e0e2aa438bf7f9b885bb43d35228d2_prof);
 
     }
 
     // line 5
     public function block_body($context, array $blocks = array())
     {
-        $__internal_d01bb886143a6e636f8406313b6fedfce8e3cb80ea77daf68652a0b8eaebd668 = $this->env->getExtension("native_profiler");
-        $__internal_d01bb886143a6e636f8406313b6fedfce8e3cb80ea77daf68652a0b8eaebd668->enter($__internal_d01bb886143a6e636f8406313b6fedfce8e3cb80ea77daf68652a0b8eaebd668_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_120e51c7af47411429bccaa0a00ff74c0a80a41acf70c41492e7a28217277832 = $this->env->getExtension("native_profiler");
+        $__internal_120e51c7af47411429bccaa0a00ff74c0a80a41acf70c41492e7a28217277832->enter($__internal_120e51c7af47411429bccaa0a00ff74c0a80a41acf70c41492e7a28217277832_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
         echo "
@@ -97,42 +97,42 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Course</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr class=\"ligne\">
 \t\t\t\t\t\t\t\t\t<td class=\"type_option\">Chèque</td>
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Course</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr class=\"ligne\">
 \t\t\t\t\t\t\t\t\t<td class=\"type_option\">Virement</td>
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Loyer</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr class=\"ligne\">
 \t\t\t\t\t\t\t\t\t<td class=\"type_option\">Carte banquaire</td>
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Vêtements</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr class=\"ligne monthly-operation\">
 \t\t\t\t\t\t\t\t\t<td class=\"type_option\">Carte banquaire</td>
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Course</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr class=\"ligne\">
 \t\t\t\t\t\t\t\t\t<td class=\"type_option\">Carte banquaire</td>
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Course</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t\t<td></td>
@@ -168,14 +168,14 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Course</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr class=\"ligne\">
 \t\t\t\t\t\t\t\t\t<td class=\"type_option\">Carte banquaire</td>
 \t\t\t\t\t\t\t\t\t<td class=\"category_option\"><span>Course</span> <i class=\"fa fa-info-circle tooltipped link-hover\" data-position=\"bottom\" data-delay=\"50\" data-tooltip=\"Plein chez Carrefour\"></i></td>
 \t\t\t\t\t\t\t\t\t<td class=\"date_option\">07/06/16</td>
 \t\t\t\t\t\t\t\t\t<td class=\"montant_option\"><span>-140</span><span> €</span></td>
-\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span></td>
+\t\t\t\t\t\t\t\t\t<td class=\"edition_option\" style=\"color: #be5f6e;\"><span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover suppression-icon\" style=\"margin-left: 15px;\"></i></big></big></span></td>
 \t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t\t<td></td>
@@ -239,15 +239,15 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t\t\t\t<br>
 \t\t\t\t\t\t<span><em>Que voulez-vous faire ?</em></span>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<a class=\"btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button\" style=\"animation-delay: 0.2s;\"><i class=\"fa fa-refresh left\"></i>Opération immédiate</a>
+\t\t\t\t\t\t<a id=\"immediate_operation_button\" class=\"btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button\" style=\"animation-delay: 0.2s;\"><i class=\"fa fa-refresh left\"></i>Opération immédiate</a>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<a class=\"btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button\" style=\"animation-delay: 0.4s;\"><i class=\"fa fa-hourglass-2 left\"></i>Opération différée</a>
+\t\t\t\t\t\t<a id=\"differed_operation_button\" class=\"btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button\" style=\"animation-delay: 0.4s;\"><i class=\"fa fa-hourglass-2 left\"></i>Opération différée</a>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<a class=\"btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button\" style=\"animation-delay: 0.6s;\"><i class=\"fa fa-calendar left\"></i>Opération mensuelle</a>
+\t\t\t\t\t\t<a id=\"systematic_operation_button\" class=\"btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button\" style=\"animation-delay: 0.6s;\"><i class=\"fa fa-calendar left\"></i>Opération mensuelle</a>
 \t\t\t\t\t\t<br>
 \t\t\t\t\t\t<br>
 \t\t\t\t\t\t<br>
-\t\t\t\t\t\t<div style=\"background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black;\"><big><i class=\"fa fa-warning\"></i> Aide :</big> <em>Les trois boutons vous permettent d'ajouter une nouvelle entrée à vos comptes (entrée ou sortie d'argent).<br>La seule différence entre les 3 boutons est l'effet qu'aura la nouvelle entrée sur le compte (immédiat, différé ou mensuel).</em></div>
+\t\t\t\t\t\t<div style=\"background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0\"><b><big><i class=\"fa fa-warning\"></i> Aide :</big></b> Les trois boutons vous permettent d'ajouter une nouvelle entrée à vos comptes (entrée ou sortie d'argent).<br>La seule différence entre les 3 boutons est l'effet qu'aura la nouvelle entrée sur le compte (immédiat, différé ou mensuel).</div>
 \t\t\t\t\t</div>
 \t\t\t\t</section>
 \t\t\t</div>
@@ -304,28 +304,232 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t</div>
 </div>
 
+<!-- Modal Immediate operation -->
+<div id=\"immediate_operation_modal\" class=\"modal modal-fixed-footer\">
+\t<div class=\"modal-content\" style=\"overflow: hidden;\">
+\t\t<section id=\"immediate_operation_top\">
+\t\t\t<div class=\"col s12\" style=\"border-bottom: 1px solid #ddd; padding: 0px;\">
+\t\t\t\t<h5 style=\"margin-top: 0;\"><i class=\"fa fa-refresh left\"></i>Ajouter une opération immédiate</h5>
+\t\t\t</div>
+\t\t</section>
+\t\t<section id=\"immediate_operation_content\" style=\"height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto;padding-top: 10px; padding-bottom: 20px;\">
+\t\t\t<div class=\"row\" style=\"margin-bottom: 0px;\">
+\t\t\t\tUne opération immédiate est une opération qui aura un effet immédiat sur l'état de votre compte: la somme d'argent est ajoutée / retirée dès la validation de la transaction, votre compte est directement mis à jour. En cas d'erreur, vous pourrez modifier l'opération dans l'onglet récapitulatif.
+\t\t\t<br><br>
+\t\t\t<form class=\"col s12\">
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<label>Type d'opération</label>
+\t\t\t\t\t\t<select class=\"browser-default\">
+\t\t\t\t\t\t\t<option value=\"\" disabled selected>Choisissez le moyen de paiement</option>
+\t\t\t\t\t\t\t<option value=\"credit-card\">Carte banquaire</option>
+\t\t\t\t\t\t\t<option value=\"check\">Chèque</option>
+\t\t\t\t\t\t\t<option value=\"transfert\">Virement</option>
+\t\t\t\t\t\t</select>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<label>Catégorie</label>
+\t\t\t\t\t\t<select class=\"browser-default\">
+\t\t\t\t\t\t\t<option value=\"\" disabled selected>Choisissez la catégorie de l'opération</option>
+\t\t\t\t\t\t\t<option value=\"Courses\">Courses</option>
+\t\t\t\t\t\t\t<option value=\"Loyer\">Loyer</option>
+\t\t\t\t\t\t\t<option value=\"Vêtements\">Vêtements</option>
+\t\t\t\t\t\t\t<option value=\"Transports\">Transports</option>
+\t\t\t\t\t\t</select>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">euro_symbol</i>
+\t\t\t\t\t\t<input placeholder=\"0\" id=\"1\" type=\"number\" class=\"validate\">
+\t\t\t\t\t\t<label for=\"1\">Montant de l'opération</label>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">date_range</i>
+\t\t\t\t\t\t<input placeholder=\"cliquer pour choisir\" id=\"2\" class=\"datepicker\" type=\"number\">
+\t\t\t\t\t\t<label for=\"2\">Date de l'opération</label>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">mode_edit</i>
+\t\t\t\t\t\t<input placeholder=\"Détails de l'opération (facultatif)\" id=\"3\" type=\"text\" class=\"validate\">
+\t\t\t\t\t\t<label for=\"3\">Description</label>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t</form>
+\t\t\t</div>
+\t\t</section>
+\t</div>
+\t<div id=\"immediate_operation_modal_footer\" class=\"modal-footer\">
+\t\t<a id=\"add_immediate_operation\" href=\"#\" class=\"btn modal-action waves-effect waves-light green animated disabled\" style=\"margin-right: 20px;\"><i class=\"fa fa-check left\"></i>Ajouter</a>
+\t\t<a id=\"return_from_immediate_operation\" href=\"#\" class=\"btn waves-effect waves-light left modal-close cardinal-button\" style=\"margin-left: 20px;\"><i class=\"fa fa-angle-left left\"></i>Retour</a>
+\t</div>
+</div>
+<!-- /.Modal Immediate operation -->
+
+<!-- Modal Differed operation -->
+<div id=\"differed_operation_modal\" class=\"modal modal-fixed-footer\">
+\t<div class=\"modal-content\" style=\"overflow: hidden;\">
+\t\t<section id=\"differed_operation_top\">
+\t\t\t<div class=\"col s12\" style=\"border-bottom: 1px solid #ddd; padding: 0px;\">
+\t\t\t\t<h5 style=\"margin-top: 0;\"><i class=\"fa fa-hourglass-2 left\"></i>Ajouter une opération différée</h5>
+\t\t\t</div>
+\t\t</section>
+\t\t<section id=\"differed_operation_content\" style=\"height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;\">
+\t\t\t<div class=\"row\" style=\"margin-bottom: 0px;\">
+\t\t\t\tUne opération différée est une opération dont l'effet sur le compte n'aura lieu qu'à la date demandée. Avant cette date, l'opération sera rangée dans les opérations en attente.
+\t\t\t<br><br>
+\t\t\t<form class=\"col s12\">
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<label>Type d'opération</label>
+\t\t\t\t\t\t<select class=\"browser-default\">
+\t\t\t\t\t\t\t<option value=\"\" disabled selected>Choisissez le moyen de paiement</option>
+\t\t\t\t\t\t\t<option value=\"credit-card\">Carte banquaire</option>
+\t\t\t\t\t\t\t<option value=\"check\">Chèque</option>
+\t\t\t\t\t\t\t<option value=\"transfert\">Virement</option>
+\t\t\t\t\t\t</select>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<label>Catégorie</label>
+\t\t\t\t\t\t<select class=\"browser-default\">
+\t\t\t\t\t\t\t<option value=\"\" disabled selected>Choisissez la catégorie de l'opération</option>
+\t\t\t\t\t\t\t<option value=\"Courses\">Courses</option>
+\t\t\t\t\t\t\t<option value=\"Loyer\">Loyer</option>
+\t\t\t\t\t\t\t<option value=\"Vêtements\">Vêtements</option>
+\t\t\t\t\t\t\t<option value=\"Transports\">Transports</option>
+\t\t\t\t\t\t</select>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">euro_symbol</i>
+\t\t\t\t\t\t<input placeholder=\"0\" id=\"4\" type=\"number\" class=\"validate montant_field\">
+\t\t\t\t\t\t<label for=\"4\">Montant de l'opération</label>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">date_range</i>
+\t\t\t\t\t\t<input placeholder=\"cliquer pour choisir\" id=\"5\" class=\"datepicker\" type=\"number\">
+\t\t\t\t\t\t<label for=\"5\">Date de l'opération</label>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">mode_edit</i>
+\t\t\t\t\t\t<input placeholder=\"Détails de l'opération (facultatif)\" id=\"6\" class=\"description_field validate\" type=\"text\">
+\t\t\t\t\t\t<label for=\"6\">Description</label>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t</form>
+\t\t\t</div>
+\t\t</section>
+\t</div>
+\t<div id=\"differed_operation_modal_footer\" class=\"modal-footer\">
+\t\t<a id=\"add_differed_operation\" href=\"#\" class=\"btn modal-action waves-effect waves-light green animated disabled\" style=\"margin-right: 20px;\"><i class=\"fa fa-check left\"></i>Ajouter</a>
+\t\t<a id=\"return_from_differed_operation\" href=\"#\" class=\"btn waves-effect waves-light left modal-close cardinal-button\" style=\"margin-left: 20px;\"><i class=\"fa fa-angle-left left\"></i>Retour</a>
+\t</div>
+</div>
+<!-- /.Modal Differed operation -->
+
+<!-- Modal Systematic operation -->
+<div id=\"systematic_operation_modal\" class=\"modal modal-fixed-footer\">
+\t<div class=\"modal-content\" style=\"overflow: hidden;\">
+\t\t<section id=\"systematic_operation_top\">
+\t\t\t<div class=\"col s12\" style=\"border-bottom: 1px solid #ddd; padding: 0px;\">
+\t\t\t\t<h5 style=\"margin-top: 0;\"><i class=\"fa fa-calendar left\"></i>Ajouter une opération mensuelle</h5>
+\t\t\t</div>
+\t\t</section>
+\t\t<section id=\"systematic_operation_content\" style=\"height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;\">
+\t\t\t<div class=\"row\" style=\"margin-bottom: 0px;\">
+\t\t\t\tUne opération mensuel vous permet d'automatiser la sortie ou l'entrée de montants fixes sur votre compte (ex: loyer, ... ). L'opération sera effectuée tous les mois à partir de la date donnée.
+\t\t\t<br><br>
+\t\t\t<form class=\"col s12\">
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<label>Type d'opération</label>
+\t\t\t\t\t\t<select class=\"browser-default\">
+\t\t\t\t\t\t\t<option value=\"\" disabled selected>Choisissez le moyen de paiement</option>
+\t\t\t\t\t\t\t<option value=\"credit-card\">Carte banquaire</option>
+\t\t\t\t\t\t\t<option value=\"check\">Chèque</option>
+\t\t\t\t\t\t\t<option value=\"transfert\">Virement</option>
+\t\t\t\t\t\t</select>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<label>Catégorie</label>
+\t\t\t\t\t\t<select class=\"browser-default\">
+\t\t\t\t\t\t\t<option value=\"\" disabled selected>Choisissez la catégorie de l'opération</option>
+\t\t\t\t\t\t\t<option value=\"Courses\">Courses</option>
+\t\t\t\t\t\t\t<option value=\"Loyer\">Loyer</option>
+\t\t\t\t\t\t\t<option value=\"Vêtements\">Vêtements</option>
+\t\t\t\t\t\t\t<option value=\"Transports\">Transports</option>
+\t\t\t\t\t\t</select>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t\t<div class=\"row\">
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">euro_symbol</i>
+\t\t\t\t\t\t<input placeholder=\"0\" id=\"7\" type=\"number\" class=\"validate montant_field\">
+\t\t\t\t\t\t<label for=\"7\">Montant de l'opération</label>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">date_range</i>
+\t\t\t\t\t\t<input placeholder=\"cliquer pour choisir\" id=\"8\" class=\"datepicker\" type=\"number\">
+\t\t\t\t\t\t<label for=\"8\">Date de l'opération</label>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"input-field col s12 m10 l6 offset-m1 offset-l3\">
+\t\t\t\t\t\t<i class=\"material-icons prefix\">mode_edit</i>
+\t\t\t\t\t\t<input placeholder=\"Détails de l'opération (facultatif)\" id=\"9\" class=\"description_field validate\" type=\"text\">
+\t\t\t\t\t\t<label for=\"9\">Description</label>
+\t\t\t\t\t</div>
+\t\t\t\t</div>
+\t\t\t</form>
+\t\t\t</div>
+\t\t</section>
+\t</div>
+\t<div id=\"systematic_operation_modal_footer\" class=\"modal-footer\">
+\t\t<a id=\"add_systematic_operation\" href=\"#\" class=\"btn modal-action waves-effect waves-light green animated disabled\" style=\"margin-right: 20px;\"><i class=\"fa fa-check left\"></i>Ajouter</a>
+\t\t<a id=\"return_from_systematic_operation\" href=\"#\" class=\"btn waves-effect waves-light left modal-close cardinal-button\" style=\"margin-left: 20px;\"><i class=\"fa fa-angle-left left\"></i>Retour</a>
+\t</div>
+</div>
+<!-- /.Modal Systematic operation -->
+
+<!-- Modal Confirmation -->
+<div id=\"suppression_modal\" class=\"modal modal-fixed-footer\" style=\"height: 250px; width: 400px;\">
+\t<div class=\"modal-content\" style=\"overflow-x: hidden;\">
+\t\t<section id=\"suppression_modal_top\">
+\t\t\t<div class=\"col s12\" style=\"border-bottom: 1px solid #ddd; padding: 0px;\">
+\t\t\t\t<h5 style=\"margin-top: 0;\"><i class=\"fa fa-times\"></i> Suppression</h5>
+\t\t\t</div>
+\t\t</section>
+\t\t<section id=\"suppression_modal_content\" class=\"row center-align animated\" style=\"margin-bottom: 0px; overflow-x: hidden; margin-top: 20px;\">Êtes-vous sûr(e) ?</section>
+\t\t
+\t</div>
+\t<div id=\"suppression_modal_footer\" class=\"modal-footer\">
+\t\t<a id=\"suppression_modal_cancel\" href=\"#\" class=\"btn modal-action modal-close waves-effect waves-light grey\" style=\"margin-right: 20px;\"><i class=\"fa fa-times left\"></i>Annuler</a>
+\t\t<a id=\"suppression_modal_confirm\" href=\"#\" class=\"btn modal-action modal-close waves-effect waves-light green\" style=\"margin-right: 20px;\"><i class=\"fa fa-check left\"></i>OK</a>
+\t</div>
+</div>
+<!-- /.Modal Confirmation -->
+
 ";
         
-        $__internal_d01bb886143a6e636f8406313b6fedfce8e3cb80ea77daf68652a0b8eaebd668->leave($__internal_d01bb886143a6e636f8406313b6fedfce8e3cb80ea77daf68652a0b8eaebd668_prof);
+        $__internal_120e51c7af47411429bccaa0a00ff74c0a80a41acf70c41492e7a28217277832->leave($__internal_120e51c7af47411429bccaa0a00ff74c0a80a41acf70c41492e7a28217277832_prof);
 
     }
 
-    // line 271
+    // line 475
     public function block_javascript($context, array $blocks = array())
     {
-        $__internal_8911e43c0a86a5620d0ebb11cf9593cce4cd719ca119dd3a98202a7da140737d = $this->env->getExtension("native_profiler");
-        $__internal_8911e43c0a86a5620d0ebb11cf9593cce4cd719ca119dd3a98202a7da140737d->enter($__internal_8911e43c0a86a5620d0ebb11cf9593cce4cd719ca119dd3a98202a7da140737d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
+        $__internal_2b7a3eb8d9ae0f5dc6f33ccc46273b76bedb86e7720d29cbcae4f882e2f77e25 = $this->env->getExtension("native_profiler");
+        $__internal_2b7a3eb8d9ae0f5dc6f33ccc46273b76bedb86e7720d29cbcae4f882e2f77e25->enter($__internal_2b7a3eb8d9ae0f5dc6f33ccc46273b76bedb86e7720d29cbcae4f882e2f77e25_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
 
-        // line 272
+        // line 476
         echo "\t";
         $this->displayParentBlock("javascript", $context, $blocks);
         echo "
 \t<script src=\"";
-        // line 273
+        // line 477
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/jquery.flot.js"), "html", null, true);
         echo "\"></script>
 \t<script src=\"";
-        // line 274
+        // line 478
         echo twig_escape_filter($this->env, $this->env->getExtension('asset')->getAssetUrl("js/jquery.flot.pie.js"), "html", null, true);
         echo "\"></script>
 \t<script>
@@ -458,6 +662,25 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\$('.ligne').dblclick(function() {
 \t\t\tset_lignes_aux(\$(this));
 \t\t});
+\t\t
+\t\t\$('.suppression-icon').click(function() {
+\t\t\t\$('#suppression_modal').openModal({
+\t\t\t\tdismissible: true,
+\t\t\t\topacity: 0.5,
+\t\t\t\tin_duration: 250,
+\t\t\t\tout_duration: 250,
+\t\t\t\tcomplete: clean_overlay
+\t\t\t});
+\t\t\t
+\t\t\t\$('#suppression_modal_confirm').off('click');
+\t\t\t\$('#suppression_modal_confirm').click(function() {
+\t\t\t\t\$('#suppression_modal_cancel').trigger('click');
+\t\t\t\tMaterialize.toast('Opération supprimée', 4000);
+\t\t\t\tsetTimeout(function() {
+\t\t\t\t\tMaterialize.toast('Mise à jour ...', 4000);
+\t\t\t\t}, 500);
+\t\t\t})
+\t\t});
 \t}
 \t
 \tfunction set_lignes_aux(ligne) {
@@ -470,7 +693,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\tvar category_option = '<select class=\"browser-default\"><option value=\"\" disabled selected>Catégorie</option><option value=\"Course\">Course</option><option value=\"Loyer\">Loyer</option><option value=\"Vêtements\">Vêtements</option><option value=\"Transports\">Transports</option></select>';
 \t\tvar date_option = '<input type=\"date\" class=\"datepicker center-align\">';
 \t\tvar montant_option = '<input type=\"number\" class=\"center-align\">';
-\t\tvar edition_option = '<span class=\"edition\"><big><big><i class=\"fa fa-check link-hover green-edition-text\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span>';
+\t\tvar edition_option = '<span class=\"edition\"><big><big><i class=\"fa fa-check link-hover green-edition-text modification-validation\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span>';
 \t\t
 \t\tvar type = ligne.find('.type_option').html();
 \t\tvar category = ligne.find('.category_option').children().first().html();
@@ -478,6 +701,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\tvar datepicker_val = ligne.find('.date_option').html();
 \t\tvar montant = ligne.find('.montant_option').children().first().html();
 \t\tvar montant_sav = ligne.find('.montant_option').html();
+\t\tvar edition_sav = ligne.find('.edition_option').html();
 \t\t
 \t\tligne.find('.type_option').html(type_option);
 \t\tligne.find('.type_option select').val(type);
@@ -518,7 +742,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\tligne.find('.category_option').html(category_sav);
 \t\t\tligne.find('.date_option').html(datepicker_val);
 \t\t\tligne.find('.montant_option').html(montant_sav);
-\t\t\tligne.find('.edition_option').html('<span class=\"edition\"><big><big><i class=\"fa fa-pencil link-hover edit-hover\"></i><i class=\"fa fa-times link-hover delete-hover\" style=\"margin-left: 15px;\"></i></big></big></span>');
+\t\t\tligne.find('.edition_option').html(edition_sav);
 \t\t\t
 \t\t\t\$('.tooltipped').tooltip({delay: 50});
 \t\t\t
@@ -526,9 +750,121 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t\t
 \t\t\tset_lignes();
 \t\t});
+\t\t
+\t\tligne.find('.modification-validation').click(function() {
+\t\t\tligne.find('.delete-hover').trigger('click');
+\t\t\tMaterialize.toast('Opération modifiée', 4000);
+\t\t\tsetTimeout(function() {
+\t\t\t\tMaterialize.toast('Mise à jour ...', 4000);
+\t\t\t}, 500);
+\t\t});
 \t}
 \t
 \t\$(document).ready(function () {
+\t\t
+\t\t//Boutons ajout opération ----------------------------------------------------------
+\t\t\$('#immediate_operation_button').click(function() {
+\t\t\tif (\$(window).width() >= 992) {
+\t\t\t\t\$('#immediate_operation_modal').openModal({
+\t\t\t\t\tdismissible: true,
+\t\t\t\t\topacity: 0.5,
+\t\t\t\t\tin_duration: 250,
+\t\t\t\t\tout_duration: 250,
+\t\t\t\t\tcomplete: clean_overlay
+\t\t\t\t});
+\t\t\t\t
+\t\t\t\tvar input = \$('.datepicker').pickadate({
+\t\t\t\t\tlabelMonthNext: 'Mois suivant',
+\t\t\t\t\tlabelMonthPrev: 'Mois précédent',
+\t\t\t\t\tlabelMonthSelect: 'Choisissez un mois',
+\t\t\t\t\tlabelYearSelect: 'Choisissez une année',
+\t\t\t\t\tmonthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
+\t\t\t\t\tmonthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
+\t\t\t\t\tweekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+\t\t\t\t\tweekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+\t\t\t\t\tweekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+\t\t\t\t\ttoday: 'Ajd',
+\t\t\t\t\tclear: 'Effacer',
+\t\t\t\t\tclose: 'Fermer'
+\t\t\t\t});
+\t\t\t\tpicker = input.pickadate('picker');
+\t\t\t\t
+\t\t\t\tpicker.set('select', new Date());
+\t\t\t} else {
+\t\t\t\t\$(location).attr('href',\"";
+        // line 738
+        echo $this->env->getExtension('routing')->getPath("su_account_mobile_immediate");
+        echo "\");
+\t\t\t}
+\t\t});
+\t\t
+\t\t\$('#differed_operation_button').click(function() {
+\t\t\tif (\$(window).width() >= 992) {
+\t\t\t\t\$('#differed_operation_modal').openModal({
+\t\t\t\t\tdismissible: true,
+\t\t\t\t\topacity: 0.5,
+\t\t\t\t\tin_duration: 250,
+\t\t\t\t\tout_duration: 250,
+\t\t\t\t\tcomplete: clean_overlay
+\t\t\t\t});
+\t\t\t\t
+\t\t\t\t
+\t\t\t\tvar input = \$('.datepicker').pickadate({
+\t\t\t\t\tlabelMonthNext: 'Mois suivant',
+\t\t\t\t\tlabelMonthPrev: 'Mois précédent',
+\t\t\t\t\tlabelMonthSelect: 'Choisissez un mois',
+\t\t\t\t\tlabelYearSelect: 'Choisissez une année',
+\t\t\t\t\tmonthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
+\t\t\t\t\tmonthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
+\t\t\t\t\tweekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+\t\t\t\t\tweekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+\t\t\t\t\tweekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+\t\t\t\t\ttoday: 'Ajd',
+\t\t\t\t\tclear: 'Effacer',
+\t\t\t\t\tclose: 'Fermer'
+\t\t\t\t});
+\t\t\t\tpicker = input.pickadate('picker');
+\t\t\t} else {
+\t\t\t\t\$(location).attr('href',\"";
+        // line 769
+        echo $this->env->getExtension('routing')->getPath("su_account_mobile_differed");
+        echo "\");
+\t\t\t}
+\t\t});
+\t\t
+\t\t\$('#systematic_operation_button').click(function() {
+\t\t\tif (\$(window).width() >= 992) {
+\t\t\t\t\$('#systematic_operation_modal').openModal({
+\t\t\t\t\tdismissible: true,
+\t\t\t\t\topacity: 0.5,
+\t\t\t\t\tin_duration: 250,
+\t\t\t\t\tout_duration: 250,
+\t\t\t\t\tcomplete: clean_overlay
+\t\t\t\t});
+\t\t\t\t
+\t\t\t\tvar input = \$('.datepicker').pickadate({
+\t\t\t\t\tlabelMonthNext: 'Mois suivant',
+\t\t\t\t\tlabelMonthPrev: 'Mois précédent',
+\t\t\t\t\tlabelMonthSelect: 'Choisissez un mois',
+\t\t\t\t\tlabelYearSelect: 'Choisissez une année',
+\t\t\t\t\tmonthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
+\t\t\t\t\tmonthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
+\t\t\t\t\tweekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+\t\t\t\t\tweekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+\t\t\t\t\tweekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+\t\t\t\t\ttoday: 'Ajd',
+\t\t\t\t\tclear: 'Effacer',
+\t\t\t\t\tclose: 'Fermer'
+\t\t\t\t});
+\t\t\t\tpicker = input.pickadate('picker');
+\t\t\t} else {
+\t\t\t\t\$(location).attr('href',\"";
+        // line 799
+        echo $this->env->getExtension('routing')->getPath("su_account_mobile_systematic");
+        echo "\");
+\t\t\t}
+\t\t});
+\t\t//----------------------------------------------------------------------------------
 \t\t
 \t\t\$('#recap_tab_button').click(function () {
 \t\t\tsetTimeout(function () {
@@ -553,12 +889,11 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 \t\t});
 \t\t
 \t\tset_lignes();
-\t\t
 \t});
 \t</script>
 ";
         
-        $__internal_8911e43c0a86a5620d0ebb11cf9593cce4cd719ca119dd3a98202a7da140737d->leave($__internal_8911e43c0a86a5620d0ebb11cf9593cce4cd719ca119dd3a98202a7da140737d_prof);
+        $__internal_2b7a3eb8d9ae0f5dc6f33ccc46273b76bedb86e7720d29cbcae4f882e2f77e25->leave($__internal_2b7a3eb8d9ae0f5dc6f33ccc46273b76bedb86e7720d29cbcae4f882e2f77e25_prof);
 
     }
 
@@ -574,12 +909,12 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 
     public function getDebugInfo()
     {
-        return array (  329 => 274,  325 => 273,  320 => 272,  314 => 271,  44 => 6,  38 => 5,  31 => 1,  29 => 3,  11 => 1,);
+        return array (  863 => 799,  830 => 769,  796 => 738,  533 => 478,  529 => 477,  524 => 476,  518 => 475,  44 => 6,  38 => 5,  31 => 1,  29 => 3,  11 => 1,);
     }
 }
 /* {% extends 'SUMainBundle::layout.html.twig' %}*/
 /* */
-/* {% set menu_selected = '' %}*/
+/* {% set menu_selected = 'home' %}*/
 /* */
 /* {% block body %}*/
 /* */
@@ -638,42 +973,42 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr class="ligne">*/
 /* 									<td class="type_option">Chèque</td>*/
 /* 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr class="ligne">*/
 /* 									<td class="type_option">Virement</td>*/
 /* 									<td class="category_option"><span>Loyer</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr class="ligne">*/
 /* 									<td class="type_option">Carte banquaire</td>*/
 /* 									<td class="category_option"><span>Vêtements</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr class="ligne monthly-operation">*/
 /* 									<td class="type_option">Carte banquaire</td>*/
 /* 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr class="ligne">*/
 /* 									<td class="type_option">Carte banquaire</td>*/
 /* 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr>*/
 /* 									<td></td>*/
@@ -709,14 +1044,14 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr class="ligne">*/
 /* 									<td class="type_option">Carte banquaire</td>*/
 /* 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>*/
 /* 									<td class="date_option">07/06/16</td>*/
 /* 									<td class="montant_option"><span>-140</span><span> €</span></td>*/
-/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span></td>*/
+/* 									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>*/
 /* 								</tr>*/
 /* 								<tr>*/
 /* 									<td></td>*/
@@ -780,15 +1115,15 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 						<br>*/
 /* 						<span><em>Que voulez-vous faire ?</em></span>*/
 /* 						<br>*/
-/* 						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.2s;"><i class="fa fa-refresh left"></i>Opération immédiate</a>*/
+/* 						<a id="immediate_operation_button" class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.2s;"><i class="fa fa-refresh left"></i>Opération immédiate</a>*/
 /* 						<br>*/
-/* 						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.4s;"><i class="fa fa-hourglass-2 left"></i>Opération différée</a>*/
+/* 						<a id="differed_operation_button" class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.4s;"><i class="fa fa-hourglass-2 left"></i>Opération différée</a>*/
 /* 						<br>*/
-/* 						<a class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.6s;"><i class="fa fa-calendar left"></i>Opération mensuelle</a>*/
+/* 						<a id="systematic_operation_button" class="btn-large btn-body waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.6s;"><i class="fa fa-calendar left"></i>Opération mensuelle</a>*/
 /* 						<br>*/
 /* 						<br>*/
 /* 						<br>*/
-/* 						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black;"><big><i class="fa fa-warning"></i> Aide :</big> <em>Les trois boutons vous permettent d'ajouter une nouvelle entrée à vos comptes (entrée ou sortie d'argent).<br>La seule différence entre les 3 boutons est l'effet qu'aura la nouvelle entrée sur le compte (immédiat, différé ou mensuel).</em></div>*/
+/* 						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Les trois boutons vous permettent d'ajouter une nouvelle entrée à vos comptes (entrée ou sortie d'argent).<br>La seule différence entre les 3 boutons est l'effet qu'aura la nouvelle entrée sur le compte (immédiat, différé ou mensuel).</div>*/
 /* 					</div>*/
 /* 				</section>*/
 /* 			</div>*/
@@ -844,6 +1179,210 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 		*/
 /* 	</div>*/
 /* </div>*/
+/* */
+/* <!-- Modal Immediate operation -->*/
+/* <div id="immediate_operation_modal" class="modal modal-fixed-footer">*/
+/* 	<div class="modal-content" style="overflow: hidden;">*/
+/* 		<section id="immediate_operation_top">*/
+/* 			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">*/
+/* 				<h5 style="margin-top: 0;"><i class="fa fa-refresh left"></i>Ajouter une opération immédiate</h5>*/
+/* 			</div>*/
+/* 		</section>*/
+/* 		<section id="immediate_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto;padding-top: 10px; padding-bottom: 20px;">*/
+/* 			<div class="row" style="margin-bottom: 0px;">*/
+/* 				Une opération immédiate est une opération qui aura un effet immédiat sur l'état de votre compte: la somme d'argent est ajoutée / retirée dès la validation de la transaction, votre compte est directement mis à jour. En cas d'erreur, vous pourrez modifier l'opération dans l'onglet récapitulatif.*/
+/* 			<br><br>*/
+/* 			<form class="col s12">*/
+/* 				<div class="row">*/
+/* 					<div class="col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<label>Type d'opération</label>*/
+/* 						<select class="browser-default">*/
+/* 							<option value="" disabled selected>Choisissez le moyen de paiement</option>*/
+/* 							<option value="credit-card">Carte banquaire</option>*/
+/* 							<option value="check">Chèque</option>*/
+/* 							<option value="transfert">Virement</option>*/
+/* 						</select>*/
+/* 					</div>*/
+/* 					<div class="col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<label>Catégorie</label>*/
+/* 						<select class="browser-default">*/
+/* 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>*/
+/* 							<option value="Courses">Courses</option>*/
+/* 							<option value="Loyer">Loyer</option>*/
+/* 							<option value="Vêtements">Vêtements</option>*/
+/* 							<option value="Transports">Transports</option>*/
+/* 						</select>*/
+/* 					</div>*/
+/* 				</div>*/
+/* 				<div class="row">*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">euro_symbol</i>*/
+/* 						<input placeholder="0" id="1" type="number" class="validate">*/
+/* 						<label for="1">Montant de l'opération</label>*/
+/* 					</div>*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">date_range</i>*/
+/* 						<input placeholder="cliquer pour choisir" id="2" class="datepicker" type="number">*/
+/* 						<label for="2">Date de l'opération</label>*/
+/* 					</div>*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">mode_edit</i>*/
+/* 						<input placeholder="Détails de l'opération (facultatif)" id="3" type="text" class="validate">*/
+/* 						<label for="3">Description</label>*/
+/* 					</div>*/
+/* 				</div>*/
+/* 			</form>*/
+/* 			</div>*/
+/* 		</section>*/
+/* 	</div>*/
+/* 	<div id="immediate_operation_modal_footer" class="modal-footer">*/
+/* 		<a id="add_immediate_operation" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>*/
+/* 		<a id="return_from_immediate_operation" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>*/
+/* 	</div>*/
+/* </div>*/
+/* <!-- /.Modal Immediate operation -->*/
+/* */
+/* <!-- Modal Differed operation -->*/
+/* <div id="differed_operation_modal" class="modal modal-fixed-footer">*/
+/* 	<div class="modal-content" style="overflow: hidden;">*/
+/* 		<section id="differed_operation_top">*/
+/* 			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">*/
+/* 				<h5 style="margin-top: 0;"><i class="fa fa-hourglass-2 left"></i>Ajouter une opération différée</h5>*/
+/* 			</div>*/
+/* 		</section>*/
+/* 		<section id="differed_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">*/
+/* 			<div class="row" style="margin-bottom: 0px;">*/
+/* 				Une opération différée est une opération dont l'effet sur le compte n'aura lieu qu'à la date demandée. Avant cette date, l'opération sera rangée dans les opérations en attente.*/
+/* 			<br><br>*/
+/* 			<form class="col s12">*/
+/* 				<div class="row">*/
+/* 					<div class="col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<label>Type d'opération</label>*/
+/* 						<select class="browser-default">*/
+/* 							<option value="" disabled selected>Choisissez le moyen de paiement</option>*/
+/* 							<option value="credit-card">Carte banquaire</option>*/
+/* 							<option value="check">Chèque</option>*/
+/* 							<option value="transfert">Virement</option>*/
+/* 						</select>*/
+/* 					</div>*/
+/* 					<div class="col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<label>Catégorie</label>*/
+/* 						<select class="browser-default">*/
+/* 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>*/
+/* 							<option value="Courses">Courses</option>*/
+/* 							<option value="Loyer">Loyer</option>*/
+/* 							<option value="Vêtements">Vêtements</option>*/
+/* 							<option value="Transports">Transports</option>*/
+/* 						</select>*/
+/* 					</div>*/
+/* 				</div>*/
+/* 				<div class="row">*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">euro_symbol</i>*/
+/* 						<input placeholder="0" id="4" type="number" class="validate montant_field">*/
+/* 						<label for="4">Montant de l'opération</label>*/
+/* 					</div>*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">date_range</i>*/
+/* 						<input placeholder="cliquer pour choisir" id="5" class="datepicker" type="number">*/
+/* 						<label for="5">Date de l'opération</label>*/
+/* 					</div>*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">mode_edit</i>*/
+/* 						<input placeholder="Détails de l'opération (facultatif)" id="6" class="description_field validate" type="text">*/
+/* 						<label for="6">Description</label>*/
+/* 					</div>*/
+/* 				</div>*/
+/* 			</form>*/
+/* 			</div>*/
+/* 		</section>*/
+/* 	</div>*/
+/* 	<div id="differed_operation_modal_footer" class="modal-footer">*/
+/* 		<a id="add_differed_operation" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>*/
+/* 		<a id="return_from_differed_operation" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>*/
+/* 	</div>*/
+/* </div>*/
+/* <!-- /.Modal Differed operation -->*/
+/* */
+/* <!-- Modal Systematic operation -->*/
+/* <div id="systematic_operation_modal" class="modal modal-fixed-footer">*/
+/* 	<div class="modal-content" style="overflow: hidden;">*/
+/* 		<section id="systematic_operation_top">*/
+/* 			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">*/
+/* 				<h5 style="margin-top: 0;"><i class="fa fa-calendar left"></i>Ajouter une opération mensuelle</h5>*/
+/* 			</div>*/
+/* 		</section>*/
+/* 		<section id="systematic_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">*/
+/* 			<div class="row" style="margin-bottom: 0px;">*/
+/* 				Une opération mensuel vous permet d'automatiser la sortie ou l'entrée de montants fixes sur votre compte (ex: loyer, ... ). L'opération sera effectuée tous les mois à partir de la date donnée.*/
+/* 			<br><br>*/
+/* 			<form class="col s12">*/
+/* 				<div class="row">*/
+/* 					<div class="col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<label>Type d'opération</label>*/
+/* 						<select class="browser-default">*/
+/* 							<option value="" disabled selected>Choisissez le moyen de paiement</option>*/
+/* 							<option value="credit-card">Carte banquaire</option>*/
+/* 							<option value="check">Chèque</option>*/
+/* 							<option value="transfert">Virement</option>*/
+/* 						</select>*/
+/* 					</div>*/
+/* 					<div class="col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<label>Catégorie</label>*/
+/* 						<select class="browser-default">*/
+/* 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>*/
+/* 							<option value="Courses">Courses</option>*/
+/* 							<option value="Loyer">Loyer</option>*/
+/* 							<option value="Vêtements">Vêtements</option>*/
+/* 							<option value="Transports">Transports</option>*/
+/* 						</select>*/
+/* 					</div>*/
+/* 				</div>*/
+/* 				<div class="row">*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">euro_symbol</i>*/
+/* 						<input placeholder="0" id="7" type="number" class="validate montant_field">*/
+/* 						<label for="7">Montant de l'opération</label>*/
+/* 					</div>*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">date_range</i>*/
+/* 						<input placeholder="cliquer pour choisir" id="8" class="datepicker" type="number">*/
+/* 						<label for="8">Date de l'opération</label>*/
+/* 					</div>*/
+/* 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">*/
+/* 						<i class="material-icons prefix">mode_edit</i>*/
+/* 						<input placeholder="Détails de l'opération (facultatif)" id="9" class="description_field validate" type="text">*/
+/* 						<label for="9">Description</label>*/
+/* 					</div>*/
+/* 				</div>*/
+/* 			</form>*/
+/* 			</div>*/
+/* 		</section>*/
+/* 	</div>*/
+/* 	<div id="systematic_operation_modal_footer" class="modal-footer">*/
+/* 		<a id="add_systematic_operation" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>*/
+/* 		<a id="return_from_systematic_operation" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>*/
+/* 	</div>*/
+/* </div>*/
+/* <!-- /.Modal Systematic operation -->*/
+/* */
+/* <!-- Modal Confirmation -->*/
+/* <div id="suppression_modal" class="modal modal-fixed-footer" style="height: 250px; width: 400px;">*/
+/* 	<div class="modal-content" style="overflow-x: hidden;">*/
+/* 		<section id="suppression_modal_top">*/
+/* 			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">*/
+/* 				<h5 style="margin-top: 0;"><i class="fa fa-times"></i> Suppression</h5>*/
+/* 			</div>*/
+/* 		</section>*/
+/* 		<section id="suppression_modal_content" class="row center-align animated" style="margin-bottom: 0px; overflow-x: hidden; margin-top: 20px;">Êtes-vous sûr(e) ?</section>*/
+/* 		*/
+/* 	</div>*/
+/* 	<div id="suppression_modal_footer" class="modal-footer">*/
+/* 		<a id="suppression_modal_cancel" href="#" class="btn modal-action modal-close waves-effect waves-light grey" style="margin-right: 20px;"><i class="fa fa-times left"></i>Annuler</a>*/
+/* 		<a id="suppression_modal_confirm" href="#" class="btn modal-action modal-close waves-effect waves-light green" style="margin-right: 20px;"><i class="fa fa-check left"></i>OK</a>*/
+/* 	</div>*/
+/* </div>*/
+/* <!-- /.Modal Confirmation -->*/
 /* */
 /* {% endblock %}*/
 /* */
@@ -981,6 +1520,25 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 		$('.ligne').dblclick(function() {*/
 /* 			set_lignes_aux($(this));*/
 /* 		});*/
+/* 		*/
+/* 		$('.suppression-icon').click(function() {*/
+/* 			$('#suppression_modal').openModal({*/
+/* 				dismissible: true,*/
+/* 				opacity: 0.5,*/
+/* 				in_duration: 250,*/
+/* 				out_duration: 250,*/
+/* 				complete: clean_overlay*/
+/* 			});*/
+/* 			*/
+/* 			$('#suppression_modal_confirm').off('click');*/
+/* 			$('#suppression_modal_confirm').click(function() {*/
+/* 				$('#suppression_modal_cancel').trigger('click');*/
+/* 				Materialize.toast('Opération supprimée', 4000);*/
+/* 				setTimeout(function() {*/
+/* 					Materialize.toast('Mise à jour ...', 4000);*/
+/* 				}, 500);*/
+/* 			})*/
+/* 		});*/
 /* 	}*/
 /* 	*/
 /* 	function set_lignes_aux(ligne) {*/
@@ -993,7 +1551,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 		var category_option = '<select class="browser-default"><option value="" disabled selected>Catégorie</option><option value="Course">Course</option><option value="Loyer">Loyer</option><option value="Vêtements">Vêtements</option><option value="Transports">Transports</option></select>';*/
 /* 		var date_option = '<input type="date" class="datepicker center-align">';*/
 /* 		var montant_option = '<input type="number" class="center-align">';*/
-/* 		var edition_option = '<span class="edition"><big><big><i class="fa fa-check link-hover green-edition-text"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>';*/
+/* 		var edition_option = '<span class="edition"><big><big><i class="fa fa-check link-hover green-edition-text modification-validation"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>';*/
 /* 		*/
 /* 		var type = ligne.find('.type_option').html();*/
 /* 		var category = ligne.find('.category_option').children().first().html();*/
@@ -1001,6 +1559,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 		var datepicker_val = ligne.find('.date_option').html();*/
 /* 		var montant = ligne.find('.montant_option').children().first().html();*/
 /* 		var montant_sav = ligne.find('.montant_option').html();*/
+/* 		var edition_sav = ligne.find('.edition_option').html();*/
 /* 		*/
 /* 		ligne.find('.type_option').html(type_option);*/
 /* 		ligne.find('.type_option select').val(type);*/
@@ -1041,7 +1600,7 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 			ligne.find('.category_option').html(category_sav);*/
 /* 			ligne.find('.date_option').html(datepicker_val);*/
 /* 			ligne.find('.montant_option').html(montant_sav);*/
-/* 			ligne.find('.edition_option').html('<span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>');*/
+/* 			ligne.find('.edition_option').html(edition_sav);*/
 /* 			*/
 /* 			$('.tooltipped').tooltip({delay: 50});*/
 /* 			*/
@@ -1049,9 +1608,112 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 			*/
 /* 			set_lignes();*/
 /* 		});*/
+/* 		*/
+/* 		ligne.find('.modification-validation').click(function() {*/
+/* 			ligne.find('.delete-hover').trigger('click');*/
+/* 			Materialize.toast('Opération modifiée', 4000);*/
+/* 			setTimeout(function() {*/
+/* 				Materialize.toast('Mise à jour ...', 4000);*/
+/* 			}, 500);*/
+/* 		});*/
 /* 	}*/
 /* 	*/
 /* 	$(document).ready(function () {*/
+/* 		*/
+/* 		//Boutons ajout opération ----------------------------------------------------------*/
+/* 		$('#immediate_operation_button').click(function() {*/
+/* 			if ($(window).width() >= 992) {*/
+/* 				$('#immediate_operation_modal').openModal({*/
+/* 					dismissible: true,*/
+/* 					opacity: 0.5,*/
+/* 					in_duration: 250,*/
+/* 					out_duration: 250,*/
+/* 					complete: clean_overlay*/
+/* 				});*/
+/* 				*/
+/* 				var input = $('.datepicker').pickadate({*/
+/* 					labelMonthNext: 'Mois suivant',*/
+/* 					labelMonthPrev: 'Mois précédent',*/
+/* 					labelMonthSelect: 'Choisissez un mois',*/
+/* 					labelYearSelect: 'Choisissez une année',*/
+/* 					monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],*/
+/* 					monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],*/
+/* 					weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],*/
+/* 					weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],*/
+/* 					weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],*/
+/* 					today: 'Ajd',*/
+/* 					clear: 'Effacer',*/
+/* 					close: 'Fermer'*/
+/* 				});*/
+/* 				picker = input.pickadate('picker');*/
+/* 				*/
+/* 				picker.set('select', new Date());*/
+/* 			} else {*/
+/* 				$(location).attr('href',"{{ path('su_account_mobile_immediate') }}");*/
+/* 			}*/
+/* 		});*/
+/* 		*/
+/* 		$('#differed_operation_button').click(function() {*/
+/* 			if ($(window).width() >= 992) {*/
+/* 				$('#differed_operation_modal').openModal({*/
+/* 					dismissible: true,*/
+/* 					opacity: 0.5,*/
+/* 					in_duration: 250,*/
+/* 					out_duration: 250,*/
+/* 					complete: clean_overlay*/
+/* 				});*/
+/* 				*/
+/* 				*/
+/* 				var input = $('.datepicker').pickadate({*/
+/* 					labelMonthNext: 'Mois suivant',*/
+/* 					labelMonthPrev: 'Mois précédent',*/
+/* 					labelMonthSelect: 'Choisissez un mois',*/
+/* 					labelYearSelect: 'Choisissez une année',*/
+/* 					monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],*/
+/* 					monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],*/
+/* 					weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],*/
+/* 					weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],*/
+/* 					weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],*/
+/* 					today: 'Ajd',*/
+/* 					clear: 'Effacer',*/
+/* 					close: 'Fermer'*/
+/* 				});*/
+/* 				picker = input.pickadate('picker');*/
+/* 			} else {*/
+/* 				$(location).attr('href',"{{ path('su_account_mobile_differed') }}");*/
+/* 			}*/
+/* 		});*/
+/* 		*/
+/* 		$('#systematic_operation_button').click(function() {*/
+/* 			if ($(window).width() >= 992) {*/
+/* 				$('#systematic_operation_modal').openModal({*/
+/* 					dismissible: true,*/
+/* 					opacity: 0.5,*/
+/* 					in_duration: 250,*/
+/* 					out_duration: 250,*/
+/* 					complete: clean_overlay*/
+/* 				});*/
+/* 				*/
+/* 				var input = $('.datepicker').pickadate({*/
+/* 					labelMonthNext: 'Mois suivant',*/
+/* 					labelMonthPrev: 'Mois précédent',*/
+/* 					labelMonthSelect: 'Choisissez un mois',*/
+/* 					labelYearSelect: 'Choisissez une année',*/
+/* 					monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],*/
+/* 					monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],*/
+/* 					weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],*/
+/* 					weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],*/
+/* 					weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],*/
+/* 					today: 'Ajd',*/
+/* 					clear: 'Effacer',*/
+/* 					close: 'Fermer'*/
+/* 				});*/
+/* 				picker = input.pickadate('picker');*/
+/* 			} else {*/
+/* 				$(location).attr('href',"{{ path('su_account_mobile_systematic') }}");*/
+/* 			}*/
+/* 		});*/
+/* 		//----------------------------------------------------------------------------------*/
 /* 		*/
 /* 		$('#recap_tab_button').click(function () {*/
 /* 			setTimeout(function () {*/
@@ -1076,7 +1738,6 @@ class __TwigTemplate_a1ec5834d62bcd74e0c9d7f6477ff6ea20d2b17da84ad2ccee1241b95d8
 /* 		});*/
 /* 		*/
 /* 		set_lignes();*/
-/* 		*/
 /* 	});*/
 /* 	</script>*/
 /* {% endblock %}*/

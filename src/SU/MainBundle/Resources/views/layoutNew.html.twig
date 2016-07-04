@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>SumUp</title>
+	<meta name="theme-color" content="#711d2a">
+	<link rel="icon" href="{{ asset('img/design/logo-icon-min.png') }}">
+
+	<!-- CSS  -->
+	{% block stylesheet %}
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+	
+	<link href="{{ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
+	{% endblock %}
+</head>
+<body>
+
+	<!-- Navigation -->
+	<div class="navbar-fixed" id="navbar_wrapper">
+		<nav class="cardinal">
+			<div class="nav-wrapper">
+				<a class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
+				<ul class="right" id="navbar_right">
+					<li id="disconnect_link"><a class="waves-effect waves-light"><span class="hide-on-small-only">Se déconnecter <i class="fa fa-sign-out right"></i></span><span class="hide-on-med-and-up"><i class="fa fa-sign-out fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- /.Navigation -->
+	
+	<div id="main_wrapper">
+		{% block body %}
+		{% endblock %}
+	</div>
+
+	<!-- Footer -->
+	<footer class="page-footer z-depth-2" id="footer_wrapper">
+		<div class="row">
+			<div class="col l6 m6 s12 center-align">
+				<h5 id="titre_footer" class="white-text animated fadeIn" style="animation-delay: 0s; animation-duration: 2s; opacity: 0;">Contactez-nous sur les réseaux sociaux :</h5>
+				</br>
+				<a href="https://www.facebook.com/guillaume.fournier.3760" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="facebook" target="_blank" style="background-color: #4264aa;"><i class="fa fa-facebook left"></i>Facebook</a>
+				<a href="mailto: guillaumefournier0695@orange.fr" class="btn-large btn-footer waves-effect waves-light animated fadeIn" id="linkedin" target="_blank" style="background-color: #d96f15;"><i class="fa fa-envelope left"></i>Mail</a>
+				</br></br>
+			</div>
+			<div class="col l6 m6 s12 center-align">
+				<h5 id="titre_footer" class="white-text animated fadeIn" style="animation-delay: 0s; animation-duration: 2s; opacity: 0;">Dépôt GitHub & Documentation :</h5>
+				</br>
+				
+				<a href="https://github.com/Foufou0695/SumUp" class="btn-large btn-footer waves-effect waves-light animated fadeIn grey" id="github" target="_blank"><i class="fa fa-github left white-text"></i>GitHub</a>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				<div id="copyright_footer" class="center-align animated fadeIn">
+					© 2016 Copyright <a class="white-text" href="http://"> SumUp </a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- /.Footer -->
+	
+	<!-- Modal New Account -->
+	<div id="new_account_modal" class="modal modal-fixed-footer">
+		<div class="modal-content" style="overflow: hidden;">
+			<section id="new_account_top">
+				<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">
+					<h5 style="margin-top: 0;"><i class="fa fa-book left"></i>Ajouter un compte</h5>
+				</div>
+			</section>
+			<section id="new_account_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto;padding-top: 10px; padding-bottom: 20px;">
+				<div class="row" style="margin-bottom: 0px;">
+					Pour commencer remplisser les informations nécessaires à la création d'un nouveau compte bancaire. Votre compte utilisateur peut être lié à autant de comptes bancaires que vous le souhaitez.
+					<br>
+					<b><big><i class="fa fa-warning"></i> Attention:</big></b> le montant de départ donné doit être celui du niveau de votre compte avant la première opération que vous allez enregistrer sur le site. C'est à partir de ce premier montant que tout sera calculé.
+					<br><br>
+					<form class="col s12">
+						<div class="row">
+							<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+								<i class="material-icons prefix">mode_edit</i>
+								<input placeholder="Livret A" id="6" class="description_field validate" type="text">
+								<label for="6">Nom du compte</label>
+							</div>
+							<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+								<i class="material-icons prefix">euro_symbol</i>
+								<input placeholder="0" id="4" type="number" class="validate montant_field">
+								<label for="4">Montant de départ du compte</label>
+							</div>
+						<div class="row">
+							<div class="col s12 m10 l6 offset-m1 offset-l3">
+								<label>Type de compte</label>
+								<select class="browser-default">
+									<option value="" disabled selected>Type de compte</option>
+									<option value="credit-card">Principal (compte par défaut)</option>
+									<option value="credit-card">Secondaire</option>
+								</select>
+							</div>
+						</div>
+						
+						</div>
+					</form>
+				</div>
+			</section>
+		</div>
+		<div id="new_account_footer" class="modal-footer">
+			<a id="add_new_account" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>
+			<a id="return_from_new_account" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
+		</div>
+	</div>
+	<!-- /.Modal New Account -->
+
+
+	{% block javascript %}
+	<!--  Scripts-->
+	<script src="{{ asset('js/jquery-2.2.2.js') }}"></script>
+	<script src="{{ asset('js/materialize.js') }}"></script>
+	<script src="{{ asset('js/scroll-to.js') }}"></script>
+	{% endblock %}
+	<script>
+		function logo_resize () {
+			if ($(window).width() <= 600) {
+				$('#logo_navbar').height('50px')
+			} else {
+				$('#logo_navbar').height('50px')
+			}
+		}
+		function body_min_size() {
+			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 91});
+		}
+		//Fonction pour supprimer le fond grisé si quelqu'un clic 2 fois rapidement sur un bouton de modal
+		function clean_overlay() {
+			//La fonction est lancée tout de suite après le click donc, on compte le nombre de lean-overlay; s'il y en a plus qu'un
+			//ceux en trop ne seront pas supprimés donc on intervient, sinon on laisse les choses se faire.
+			while ($('.lean-overlay').length >= 2) {
+				$('.lean-overlay').first().remove();
+			}
+		}
+		$(document).ready(function () {
+			$('.dropdown-button').dropdown({
+			  inDuration: 300,
+			  outDuration: 225,
+			  constrain_width: true,
+			  hover: true,
+			  belowOrigin: true
+			});
+			
+			logo_resize();
+			body_min_size();
+			
+			$(window).resize(function () {
+				logo_resize();
+				body_min_size();
+			});
+		});
+	</script>
+  </body>
+</html>

@@ -24,18 +24,20 @@
 	<div class="navbar-fixed" id="navbar_wrapper">
 		<nav class="cardinal">
 			<div class="nav-wrapper">
-				<a href="#" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
+				<a href="{{ path('su_account_homepage') }}" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
 				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">
 					{% block accounts %}
 					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-book left hide-on-small-only"></i></a></li>
 					<li><a class="waves-effect waves-light link-hover active-account">Compte Courant <i class="fa fa-book left hide-on-small-only"></i></a></li>
 					{% endblock %}
+					<li><a href="{{ path('su_user_param') }}" class="waves-effect waves-light link-hover">Nouveau <i class="fa fa-plus left"></i></a></li>
 				</ul>
 				<ul class="left small-only">
-					<li id="param_link" {% if menu_selected == 'param' %}class="active" {% endif %} ><a class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>
-					<li {% if menu_selected == 'my_accounts' %} class="active" {% endif %} ><a class="dropdown-button" data-activates="drop_accounts"><span class="hide-on-small-only">Mes comptes <i class="fa fa-chevron-down left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-chevron-down fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
+					<li id="home_link" {% if menu_selected == 'home' %}class="active" {% endif %} ><a href="{{ path('su_account_homepage') }}" class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Accueil <i class="fa fa-home left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-home fa-2x" style="padding-top: 10px;"></i></span></a></li>
+					<li id="param_link" {% if menu_selected == 'param' %}class="active" {% endif %} ><a href="{{ path('su_user_param') }}" class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>					
 				</ul>
 				<ul class="right" id="navbar_right">
+					<li {% if menu_selected == 'my_accounts' %} class="active" {% endif %} ><a class="dropdown-button" data-activates="drop_accounts"><span class="hide-on-small-only">Mes comptes <i class="fa fa-chevron-down right"></i></span><span class="hide-on-med-and-up"><i class="fa fa-chevron-down fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
 					<li id="disconnect_link"><a class="waves-effect waves-light"><span class="hide-on-small-only">Se déconnecter <i class="fa fa-sign-out right"></i></span><span class="hide-on-med-and-up"><i class="fa fa-sign-out fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
 				</ul>
 			</div>
@@ -74,6 +76,55 @@
 		</div>
 	</footer>
 	<!-- /.Footer -->
+	
+	<!-- Modal New Account -->
+	<div id="new_account_modal" class="modal modal-fixed-footer">
+		<div class="modal-content" style="overflow: hidden;">
+			<section id="new_account_top">
+				<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">
+					<h5 style="margin-top: 0;"><i class="fa fa-book left"></i>Ajouter un compte</h5>
+				</div>
+			</section>
+			<section id="new_account_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto;padding-top: 10px; padding-bottom: 20px;">
+				<div class="row" style="margin-bottom: 0px;">
+					Pour commencer remplisser les informations nécessaires à la création d'un nouveau compte bancaire. Votre compte utilisateur peut être lié à autant de comptes bancaires que vous le souhaitez.
+					<br>
+					<b><big><i class="fa fa-warning"></i> Attention:</big></b> le montant de départ donné doit être celui du niveau de votre compte avant la première opération que vous allez enregistrer sur le site. C'est à partir de ce premier montant que tout sera calculé.
+					<br><br>
+					<form class="col s12">
+						<div class="row">
+							<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+								<i class="material-icons prefix">mode_edit</i>
+								<input placeholder="Livret A" id="6" class="description_field validate" type="text">
+								<label for="6">Nom du compte</label>
+							</div>
+							<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+								<i class="material-icons prefix">euro_symbol</i>
+								<input placeholder="0" id="4" type="number" class="validate montant_field">
+								<label for="4">Montant de départ du compte</label>
+							</div>
+						<div class="row">
+							<div class="col s12 m10 l6 offset-m1 offset-l3">
+								<label>Type de compte</label>
+								<select class="browser-default">
+									<option value="" disabled selected>Type de compte</option>
+									<option value="credit-card">Principal (compte par défaut)</option>
+									<option value="credit-card">Secondaire</option>
+								</select>
+							</div>
+						</div>
+						
+						</div>
+					</form>
+				</div>
+			</section>
+		</div>
+		<div id="new_account_footer" class="modal-footer">
+			<a id="add_new_account" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>
+			<a id="return_from_new_account" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
+		</div>
+	</div>
+	<!-- /.Modal New Account -->
 
 
 	{% block javascript %}
@@ -92,6 +143,14 @@
 		}
 		function body_min_size() {
 			$('#main_wrapper').css({'min-height': $(window).height() - $('#footer_wrapper').height() - 91});
+		}
+		//Fonction pour supprimer le fond grisé si quelqu'un clic 2 fois rapidement sur un bouton de modal
+		function clean_overlay() {
+			//La fonction est lancée tout de suite après le click donc, on compte le nombre de lean-overlay; s'il y en a plus qu'un
+			//ceux en trop ne seront pas supprimés donc on intervient, sinon on laisse les choses se faire.
+			while ($('.lean-overlay').length >= 2) {
+				$('.lean-overlay').first().remove();
+			}
 		}
 		$(document).ready(function () {
 			$('.dropdown-button').dropdown({

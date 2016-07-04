@@ -1,0 +1,70 @@
+{% extends 'SUMainBundle::layoutNew.html.twig' %}
+
+{% set menu_selected = '' %}
+
+{% block body %}
+
+<div style="background-color: white; padding:20px; margin-top: 21px;">
+	<div class="modal-content" style="overflow: hidden;">
+		<section id="new_account_top">
+			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">
+				<h5 style="margin-top: 0;"><i class="fa fa-book left"></i>Ajouter un compte</h5>
+			</div>
+		</section>
+		<section id="new_account_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto;padding-top: 10px; padding-bottom: 20px;">
+			<div class="row" style="margin-bottom: 0px;">
+				Pour commencer remplisser les informations nécessaires à la création d'un nouveau compte bancaire. Votre compte utilisateur peut être lié à autant de comptes bancaires que vous le souhaitez.
+				<br>
+				<b><big><i class="fa fa-warning"></i> Attention:</big></b> le montant de départ donné doit être celui du niveau de votre compte avant la première opération que vous allez enregistrer sur le site. C'est à partir de ce premier montant que tout sera calculé.
+				<br><br>
+				<form class="col s12">
+					<div class="row">
+						<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+							<i class="material-icons prefix">mode_edit</i>
+							<input placeholder="Livret A" id="6" class="description_field validate" type="text">
+							<label for="6">Nom du compte</label>
+						</div>
+						<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+							<i class="material-icons prefix">euro_symbol</i>
+							<input placeholder="0" id="4" type="number" class="validate montant_field">
+							<label for="4">Montant de départ du compte</label>
+						</div>
+					<div class="row">
+						<div class="col s12 m10 l6 offset-m1 offset-l3">
+							<label>Type de compte</label>
+							<select class="browser-default">
+								<option value="" disabled selected>Type de compte</option>
+								<option value="credit-card">Principal (compte par défaut)</option>
+								<option value="credit-card">Secondaire</option>
+							</select>
+						</div>
+					</div>
+					
+					</div>
+				</form>
+			</div>
+			
+			<a id="add_new_account" class="btn modal-action waves-effect waves-light green animated disabled right" style="margin-right: 20px;"><i class="fa fa-check left"></i>OK</a>
+		
+		</section>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	
+	<script>
+	$(document).ready(function() {
+		
+		$('#ok').click(function() {
+			$(location).attr('href', "{{ path('su_account_homepage') }}" );
+		});
+		
+		$('#return').click(function() {
+			$(location).attr('href', "{{ path('su_account_homepage') }}" );
+		});
+	});
+	</script>
+{% endblock %}

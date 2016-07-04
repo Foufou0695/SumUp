@@ -1,3 +1,11 @@
 su_user_login:
     path:     /login
-    defaults: { _controller: SUUserBundle:Default:loginPage }
+    defaults: { _controller: SUUserBundle:User:loginPage }
+
+su_user_register:
+    path:     /register
+    defaults: { _controller: SUUserBundle:User:register }
+
+su_user_param:
+    path:     /param
+    defaults: { _controller: SUUserBundle:User:param }

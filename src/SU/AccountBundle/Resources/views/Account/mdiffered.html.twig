@@ -1,0 +1,68 @@
+{% extends 'SUMainBundle::layout.html.twig' %}
+
+{% set menu_selected = '' %}
+
+{% block body %}
+
+<div style="background-color: white; padding:20px; margin-top: 21px;">
+	<div class="modal-content" style="overflow: hidden;">
+		<section id="differed_operation_top">
+			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">
+				<h5 style="margin-top: 0;"><i class="fa fa-hourglass-2 left"></i>Ajouter une opération différée</h5>
+			</div>
+		</section>
+		<section id="differed_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">
+			<div class="row" style="margin-bottom: 0px;">
+				Une opération différée est une opération dont l'effet sur le compte n'aura lieu qu'à la date demandée. Avant cette date, l'opération sera rangée dans les opérations en attente.
+			<br><br>
+			<form class="col s12">
+				<div class="row">
+					<div class="col s12 m10 l6 offset-m1 offset-l3">
+						<label>Type d'opération</label>
+						<select class="browser-default">
+							<option value="" disabled selected>Choisissez le moyen de paiement</option>
+							<option value="credit-card">Carte banquaire</option>
+							<option value="check">Chèque</option>
+							<option value="transfert">Virement</option>
+						</select>
+					</div>
+					<div class="col s12 m10 l6 offset-m1 offset-l3">
+						<label>Catégorie</label>
+						<select class="browser-default">
+							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>
+							<option value="Courses">Courses</option>
+							<option value="Loyer">Loyer</option>
+							<option value="Vêtements">Vêtements</option>
+							<option value="Transports">Transports</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+						<i class="material-icons prefix">euro_symbol</i>
+						<input placeholder="0" id="4" type="number" class="validate montant_field">
+						<label for="4">Montant de l'opération</label>
+					</div>
+					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+						<i class="material-icons prefix">date_range</i>
+						<input placeholder="Date de l'opération" id="2" class="datepicker" type="date">
+					</div>
+					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+						<i class="material-icons prefix">mode_edit</i>
+						<input placeholder="Détails de l'opération (facultatif)" id="6" class="description_field validate" type="text">
+						<label for="6">Description</label>
+					</div>
+				</div>
+			</form>
+			</div>
+			<a id="ok" href="{{ path('su_account_homepage') }}" class="btn modal-action waves-effect waves-light right green animated disabled"><i class="fa fa-check left"></i>OK</a>
+			<a id="return" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-right: 5px;"><i class="fa fa-angle-left left"></i>Retour</a>
+		</section>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+{% endblock %}

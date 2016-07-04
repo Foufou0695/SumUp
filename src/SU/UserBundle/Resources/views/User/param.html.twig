@@ -1,0 +1,292 @@
+{% extends 'SUMainBundle::layout.html.twig' %}
+
+{% set menu_selected = 'param' %}
+
+{% block body %}
+<div class="row">
+	<div class="col l8 offset-l2 m10 offset-m1 s12" style="margin-top: 10px;">
+		<div class="col s12 card" style="padding: 0px; border: 1px solid #75828E;">
+			<section id="history_header" class="kj-grey" style="border-radius: 2px;">
+				<div class="row" style="margin-bottom: 0px;">
+					<div class="col s12 white-text">
+						<h5 class="col s12"><i class="fa fa-gears left"></i>Paramètres</span>
+						</h5>
+					</div>
+				</div>
+			</section>
+			<section class="col s12" style="padding: 30px;">
+				<div id="param_info" class="row">
+					<div class="col s12 m8 verticalcenter">
+						<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-info-circle"></i> Informations</small></h5>
+						<p class="saisie center-align">
+							<span><b><big>Guillaume Fournier</big></b></span>
+							</br>
+							Nombre de comptes : <span></span>
+							</br>
+							<i class="fa fa-calendar"></i> Dernière connexion : <span></span>
+							</br>
+							<i class="fa fa-envelope"></i> Email : <span></span>
+						</p>
+					</div>
+					<div class="col s8 offset-s2 m3 offset-m1 l3 offset-l1">
+						<img id="param_img" src="{{ asset('img/design/logo-min.png') }}" class="responsive-img"></img>
+					</div>
+				</div>
+				<div class="col s12">
+					<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-book"></i> Vos comptes</small></h5>
+					<p class="saisie">
+						Dans cette section vous pouvez gérer vos comptes, en ajouter de nouveaux ou en supprimer.
+						</br>
+					</p>
+					<table class="striped highlight centered">
+						<thead>
+							<tr>
+								<th>Nom du compte</th>
+								<th>Type</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr class="ligne">
+								<td>Livret A</td>
+								<td>
+									<select class="browser-default">
+										<option value="" disabled>Type de compte</option>
+										<option value="Principal">Principal</option>
+										<option value="Secondaire" selected>Secondaire</option>
+									</select>
+								</td>
+								<td>
+									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+								</td>
+							</tr>
+							<tr class="ligne">
+								<td>Compte courant</td>
+								<td>
+									<select class="browser-default">
+										<option value="" disabled>Type de compte</option>
+										<option value="Principal" selected>Principal</option>
+										<option value="Secondaire" class="active">Secondaire</option>
+									</select>
+								</td>
+								<td>
+									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div class="center-align">
+						<a id="new_account_button" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Nouveau compte</a>
+					</div>
+				</div>
+				<div class="col s12">
+					<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-list-ul"></i> Catégories</small></h5>
+					<p class="saisie">
+						Les catégories vous permettent de grouper vos dépenses ou vos sources de revenues pour les ajouter plus facilement et avoir des graphes de synthèse plus clairs. Vous pouvez ajouter autant de catégories que vous le voulez. Les catégories peuvent être utilisées avec tous vos comptes.
+						</br>
+					</p>
+					<table class="striped highlight centered">
+						<thead>
+							<tr>
+								<th>Catégorie</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr class="ligne">
+								<td>Courses</td>
+								<td>
+									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+								</td>
+							</tr>
+							<tr class="ligne">
+								<td>Loyer</td>
+								<td>
+									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+								</td>
+							</tr>
+							<tr class="ligne">
+								<td>Vêtements</td>
+								<td>
+									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+								</td>
+							</tr>
+							<tr class="ligne">
+								<td>Transports</td>
+								<td>
+									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+					<div class="center-align">
+						<a id="add_new_category" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Nouvelle catégorie</a>
+					</div>
+				</div>
+				<div class="col s12">
+					<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-gears"></i> Paramètres utilisateur</small></h5>
+					<p class="saisie">
+						<form id="user_update_form">
+							<div class="input-field col s12 l6 offset-l3">
+								<input placeholder="Thomas" id="first_name" type="text" class="">
+								<label for="first_name">Prénom</label>
+							</div>
+							<div class="input-field col s12 l6 offset-l3">
+								<input placeholder="Dupont" id="last_name" type="text" class="">
+								<label for="last_name">Nom</label>
+							</div>
+							<div class="input-field col s12 l6 offset-l3">
+								<input placeholder="****" id="pass1" type="password" class="">
+								<label for="pass1">Mot de passe</label>
+							</div>
+							<div class="input-field col s12 l6 offset-l3">
+								<input placeholder="****" id="pass2" type="password" class="">
+								<label for="pass2">Mot de passe (confirmation)</label>
+							</div>
+							<div class="input-field col s12 l6 offset-l3">
+								<input placeholder="thomas@dupont.fr" id="mail1" type="email" class="">
+								<label for="mail1">Adresse mail:</label>
+							</div>
+							<div class="input-field col s12 l6 offset-l3">
+								<input placeholder="thomas@dupont.fr" id="mail2" type="email" class="">
+								<label for="mail2">Adresse mail (confirmation):</label>
+							</div>
+							<div class="col s12 center-align">
+								<button id="send_user_update" type="submit" class="btn-large btn-body waves-effect waves-light link-hover cardinal-button"><i class="fa fa-send left"></i>Envoyer</button>
+							</div>
+						</form>
+					</p>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	<script>
+		function param_init() {
+			if ($(window).width() >= 960) {
+				if (!$('#param_info').children().hasClass('verticalcenter')) {
+					$('#param_info').children().addClass('verticalcenter');
+				}
+				$('#param_info').height($('#param_img').height());
+			} else {
+				$('#param_info').children().removeClass('verticalcenter');
+			}
+		}
+		function becomesValid(elem) {
+			if (!elem.hasClass("valid")) {
+				elem.removeClass("invalid").addClass("valid");
+			} else {
+				elem.removeClass("invalid");
+			}
+		}
+		function becomesInvalid(elem) {
+			if (!elem.hasClass("invalid")) {
+				elem.removeClass("valid").addClass("invalid");
+			} else {
+				elem.removeClass("valid");
+			}
+		}
+		$(document).ready(function() {
+			param_init();
+			
+			//Vérification & envoie du formulaire utilisateur ------------------------------------------
+			$('#first_name, #last_name, #mail1').keyup(function () {
+				var valeur = $(this).val();
+				if ((valeur != "") && (valeur.length >= 3)) {
+					becomesValid($(this));
+				} else {
+					becomesInvalid($(this));
+				}
+			});
+			
+			$('#pass1').keyup(function () {
+				var valeur = $(this).val();
+				if ((valeur != "") && (valeur.length >= 6)) {
+					becomesValid($(this));
+				} else {
+					becomesInvalid($(this));
+				}
+			});
+			
+			$('#pass2').keyup(function () {
+				var pass1 = $('#pass1').val();
+				var pass2 = $(this).val();
+				if ((pass1 == pass2) && (pass1.length >= 6)) {
+					becomesValid($(this));
+				} else {
+					becomesInvalid($(this));
+				}
+			});
+			
+			$('#mail2').keyup(function () {
+				var mail1 = $('#mail1').val();
+				var mail2 = $(this).val();
+				if (mail1 == mail2) {
+					becomesValid($(this));
+				} else {
+					becomesInvalid($(this));
+				}
+			});
+			
+			$('#user_update_form').submit(function (e) {
+				e.preventDefault();
+				var firstName = $('#first_name').val();
+				var lastName = $('#last_name').val();
+				var pass1 = $('#pass1').val();
+				var pass2 = $('#pass2').val();
+				var mail1 = $('#mail1').val();
+				var mail2 = $('#mail2').val();
+				if ((firstName != "") && (lastName != "") && (pass1 == pass2) && (pass1 != "") && (mail1 == mail2) && (mail1 != "")) {
+					$('#send_user_update').addClass('disabled');
+					$.post(
+						'php.php',
+						{
+							firstName: firstName,
+							lastName: lastName,
+							pass: pass1,
+							mail: mail1
+						},
+						function (rep) {
+							$('#send_user_update').removeClass('disabled');
+							if (rep.message == "user_updated") {
+								Materialize.toast("Votre compte a été mis à jour", 5000);
+							} else {
+								Materialize.toast("Ooops, le formulaire n'a pas été accepté ... êtes vous sûr(e) de l'adresse mail?", 6000);
+								console.log(rep);
+							}
+						}
+					);
+				} else {
+					Materialize.toast("Formulaire non valide", 5000);
+				}
+			});
+			//------------------------------------------------------------------------------
+			
+			$('#new_account_button').click(function() {
+				if ($(window).width() >= 992) {
+					$('#new_account_modal').openModal({
+						dismissible: true,
+						opacity: 0.5,
+						in_duration: 250,
+						out_duration: 250,
+						complete: clean_overlay
+					});
+				} else {
+					$(location).attr('href',"{{ path('su_account_mobile_account') }}");
+				}
+			});
+			
+			$(window).resize(function () {
+				param_init();
+			});
+		});
+	</script>
+{% endblock %}
