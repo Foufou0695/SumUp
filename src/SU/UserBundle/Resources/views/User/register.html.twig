@@ -87,21 +87,6 @@
 			$('#main').css({'padding-top': picture_height/2 - 20});
 		}
 		
-		function becomesValid(elem) {
-			if (!elem.hasClass("valid")) {
-				elem.removeClass("invalid").addClass("valid");
-			} else {
-				elem.removeClass("invalid");
-			}
-		}
-		function becomesInvalid(elem) {
-			if (!elem.hasClass("invalid")) {
-				elem.removeClass("valid").addClass("invalid");
-			} else {
-				elem.removeClass("valid");
-			}
-		}
-		
 		$(document).ready(function () {
 			$('.dropdown-button').dropdown({
 			  inDuration: 300,
@@ -176,8 +161,9 @@
 							if (rep.message == "user_added") {
 								var url = "{{ path('login_check') }}"
 								var form = $('<form action="' + url + '" method="post">' +
-								  '<input id="_username" type="text" value="' + mail1 + '">' +
-								  '<input id="_password" type="password" value="' + pass1 + '">' +
+								  '<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />' +
+								  '<input id="_username" name="_username" type="text" value="' + mail1 + '">' +
+								  '<input id="_password" name="_password" type="password" value="' + pass1 + '">' +
 								  '</form>');
 								$('body').append(form);
 								form.submit();

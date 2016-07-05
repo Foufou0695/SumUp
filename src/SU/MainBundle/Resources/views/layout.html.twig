@@ -152,6 +152,22 @@
 				$('.lean-overlay').first().remove();
 			}
 		}
+		//Pour les formulaires
+		function becomesValid(elem) {
+			if (!elem.hasClass("valid")) {
+				elem.removeClass("invalid").addClass("valid");
+			} else {
+				elem.removeClass("invalid");
+			}
+		}
+		function becomesInvalid(elem) {
+			if (!elem.hasClass("invalid")) {
+				elem.removeClass("valid").addClass("invalid");
+			} else {
+				elem.removeClass("valid");
+			}
+		}
+		
 		$(document).ready(function () {
 			$('.dropdown-button').dropdown({
 			  inDuration: 300,

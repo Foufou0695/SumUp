@@ -31,6 +31,15 @@
 			<div id="main" class="card col s12 m8 l6 offset-m2 offset-l3" style="border: 1px solid #711d2a; z-index: 9; padding-bottom: 10px;">
 				<form id="login_form" action="{{ path('login_check') }}" method="POST">
 					<h4 id="title_connexion_form" class="center-align col s10 offset-s1 animated divider-new" style="height: 3rem; animation-delay: 0s;">Connexion</h4>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+					{% if error %}
+						{% if error.message == "Bad credentials." %}
+						<br>
+						<div class="row col s12 center-align">
+							<div style="background-color: #ffdde2; border-radius: 5px; padding: 5px; color: black; border: 1px solid #983f4d; color: red;"><b><big><i class="fa fa-warning"></i> Erreur :</big></b> Combinaison login / mot de passe incorrecte.</div>
+						</div>
+						{% endif %}
+					{% endif %}
 					<div class="input-field col l6 offset-l3 s12 animated" style="animation-delay: 0.2s;">
 						<i class="material-icons prefix">account_circle</i>
 						<input id="_username" placeholder="Thomas887" type="text" class="validate" name="_username">

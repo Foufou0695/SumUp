@@ -13,7 +13,19 @@ use SU\UserBundle\Entity\User;
 class UserController extends Controller
 {
     public function loginPageAction() {
-        return $this->render('SUUserBundle:User:login.html.twig');
+		
+		if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+		  return $this->redirectToRoute('su_account_homepage');
+		}
+		
+		$authenticationUtils = $this->get('security.authentication_utils');
+		
+		$csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
+		
+        return $this->render('SUUserBundle:User:login.html.twig',
+			array("csrf_token" => $csrfToken,
+				  "error" => $authenticationUtils->getLastAuthenticationError()
+		));
     }
 	
 	public function paramAction() {
@@ -25,6 +37,7 @@ class UserController extends Controller
 	}
 	
 	public function sendRegistrationAction(Request $request) {
+		
 		if ($request->isXmlHttpRequest() and $request->isMethod("POST")) {
 			
 			$em = $this->getDoctrine()->getManager();

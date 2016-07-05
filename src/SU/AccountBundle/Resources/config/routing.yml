@@ -21,3 +21,7 @@ su_account_mobile_account:
 su_account_new_account:
     path:     /home/newAccount
     defaults: { _controller: SUAccountBundle:Account:newAccount }
+
+su_account_send_new_account:
+    path:     /home/sendNewAccount
+    defaults: { _controller: SUAccountBundle:Account:sendNewAccount }

@@ -3,6 +3,11 @@
 namespace SU\AccountBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+use SU\AccountBundle\Entity\Account;
 
 class AccountController extends Controller
 {
@@ -35,5 +40,27 @@ class AccountController extends Controller
 	
 	public function newAccountAction() {
 		return $this->render('SUAccountBundle:Account:newAccount.html.twig');
+	}
+	
+	public function sendNewAccountAction(Request $request) {
+		
+		if ($request->isMethod("POST")) {
+			
+			$em = $this->getDoctrine()->getManager();
+			$user = $this->getUser();
+			
+			$account = new Account();
+			$account->setName($request->request->get('name'));
+			$account->setFirstAmount($request->request->get('first_amount'));
+			$account->setAcPriority($request->request->get('ac_priority'));
+			$account->setUser($user);
+			
+			$em->persist($account);
+			$em->flush();
+			
+			return $this->redirectToRoute('su_account_homepage');
+		} else {
+			return $this->createNotFoundException();
+		}
 	}
 }
