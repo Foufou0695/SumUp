@@ -17,8 +17,8 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_e886dca31551b6d43056f0351ab6911e6b4c92a0d21f2f8b1f53a8b3510e7954 = $this->env->getExtension("native_profiler");
-        $__internal_e886dca31551b6d43056f0351ab6911e6b4c92a0d21f2f8b1f53a8b3510e7954->enter($__internal_e886dca31551b6d43056f0351ab6911e6b4c92a0d21f2f8b1f53a8b3510e7954_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUUserBundle:User:register.html.twig"));
+        $__internal_db1fcf9ff81306df0ed834a976993addb25f76339b8e2b45141bd7a7eb7f0eca = $this->env->getExtension("native_profiler");
+        $__internal_db1fcf9ff81306df0ed834a976993addb25f76339b8e2b45141bd7a7eb7f0eca->enter($__internal_db1fcf9ff81306df0ed834a976993addb25f76339b8e2b45141bd7a7eb7f0eca_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "SUUserBundle:User:register.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -85,7 +85,7 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
         // line 60
         echo $this->env->getExtension('routing')->getPath("su_user_login");
         echo "\" class=\"btn waves-effect waves-light cardinal-button\"><i class=\"fa fa-angle-left left\"></i>Retour</a>
-\t\t\t\t\t\t<button id=\"send_user_update\" type=\"submit\" class=\"btn waves-effect waves-light link-hover\"><i class=\"fa fa-send left\"></i>Ok</button>
+\t\t\t\t\t\t<button id=\"send_form\" type=\"submit\" class=\"btn waves-effect waves-light link-hover\"><i class=\"fa fa-send left\"></i>Ok</button>
 \t\t\t\t\t</div>
 \t\t\t\t</form>
 \t\t\t</div>
@@ -97,19 +97,19 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 \t";
         // line 70
         $this->displayBlock('javascript', $context, $blocks);
-        // line 109
+        // line 203
         echo "  </body>
 </html>";
         
-        $__internal_e886dca31551b6d43056f0351ab6911e6b4c92a0d21f2f8b1f53a8b3510e7954->leave($__internal_e886dca31551b6d43056f0351ab6911e6b4c92a0d21f2f8b1f53a8b3510e7954_prof);
+        $__internal_db1fcf9ff81306df0ed834a976993addb25f76339b8e2b45141bd7a7eb7f0eca->leave($__internal_db1fcf9ff81306df0ed834a976993addb25f76339b8e2b45141bd7a7eb7f0eca_prof);
 
     }
 
     // line 11
     public function block_stylesheet($context, array $blocks = array())
     {
-        $__internal_fbe65618bdb0fd5692805c3fb16855b41fa0d493ccc9043729cd23f4ba07cb1b = $this->env->getExtension("native_profiler");
-        $__internal_fbe65618bdb0fd5692805c3fb16855b41fa0d493ccc9043729cd23f4ba07cb1b->enter($__internal_fbe65618bdb0fd5692805c3fb16855b41fa0d493ccc9043729cd23f4ba07cb1b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
+        $__internal_0b25f783b633d426cfabd9b70b62a8ed444a15307ed978081d88ab703c338407 = $this->env->getExtension("native_profiler");
+        $__internal_0b25f783b633d426cfabd9b70b62a8ed444a15307ed978081d88ab703c338407->enter($__internal_0b25f783b633d426cfabd9b70b62a8ed444a15307ed978081d88ab703c338407_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "stylesheet"));
 
         // line 12
         echo "\t<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
@@ -133,15 +133,15 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
         echo "\" type=\"text/css\" rel=\"stylesheet\"/>
 \t";
         
-        $__internal_fbe65618bdb0fd5692805c3fb16855b41fa0d493ccc9043729cd23f4ba07cb1b->leave($__internal_fbe65618bdb0fd5692805c3fb16855b41fa0d493ccc9043729cd23f4ba07cb1b_prof);
+        $__internal_0b25f783b633d426cfabd9b70b62a8ed444a15307ed978081d88ab703c338407->leave($__internal_0b25f783b633d426cfabd9b70b62a8ed444a15307ed978081d88ab703c338407_prof);
 
     }
 
     // line 70
     public function block_javascript($context, array $blocks = array())
     {
-        $__internal_363566c589b8928a8e9c8057fe677859526b65a2bfb0f1c12c92d0fb46030b29 = $this->env->getExtension("native_profiler");
-        $__internal_363566c589b8928a8e9c8057fe677859526b65a2bfb0f1c12c92d0fb46030b29->enter($__internal_363566c589b8928a8e9c8057fe677859526b65a2bfb0f1c12c92d0fb46030b29_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
+        $__internal_2412d36d40ac51be0244aeb84ae2af712404bc7624a89196424858ae31f27ffa = $this->env->getExtension("native_profiler");
+        $__internal_2412d36d40ac51be0244aeb84ae2af712404bc7624a89196424858ae31f27ffa->enter($__internal_2412d36d40ac51be0244aeb84ae2af712404bc7624a89196424858ae31f27ffa_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascript"));
 
         // line 71
         echo "\t<!--  Scripts-->
@@ -172,6 +172,21 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 \t\t\t\$('#main').css({'padding-top': picture_height/2 - 20});
 \t\t}
 \t\t
+\t\tfunction becomesValid(elem) {
+\t\t\tif (!elem.hasClass(\"valid\")) {
+\t\t\t\telem.removeClass(\"invalid\").addClass(\"valid\");
+\t\t\t} else {
+\t\t\t\telem.removeClass(\"invalid\");
+\t\t\t}
+\t\t}
+\t\tfunction becomesInvalid(elem) {
+\t\t\tif (!elem.hasClass(\"invalid\")) {
+\t\t\t\telem.removeClass(\"valid\").addClass(\"invalid\");
+\t\t\t} else {
+\t\t\t\telem.removeClass(\"valid\");
+\t\t\t}
+\t\t}
+\t\t
 \t\t\$(document).ready(function () {
 \t\t\t\$('.dropdown-button').dropdown({
 \t\t\t  inDuration: 300,
@@ -184,6 +199,91 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 \t\t\treplace_main();
 \t\t\tlogo_resize();
 \t\t\t
+\t\t\t//Vérification & envoie du formulaire utilisateur ------------------------------------------
+\t\t\t\$('#first_name, #last_name, #mail1').keyup(function () {
+\t\t\t\tvar valeur = \$(this).val();
+\t\t\t\tif ((valeur != \"\") && (valeur.length >= 3)) {
+\t\t\t\t\tbecomesValid(\$(this));
+\t\t\t\t} else {
+\t\t\t\t\tbecomesInvalid(\$(this));
+\t\t\t\t}
+\t\t\t});
+\t\t\t
+\t\t\t\$('#pass1').keyup(function () {
+\t\t\t\tvar valeur = \$(this).val();
+\t\t\t\tif ((valeur != \"\") && (valeur.length >= 6)) {
+\t\t\t\t\tbecomesValid(\$(this));
+\t\t\t\t} else {
+\t\t\t\t\tbecomesInvalid(\$(this));
+\t\t\t\t}
+\t\t\t});
+\t\t\t
+\t\t\t\$('#pass2').keyup(function () {
+\t\t\t\tvar pass1 = \$('#pass1').val();
+\t\t\t\tvar pass2 = \$(this).val();
+\t\t\t\tif ((pass1 == pass2) && (pass1.length >= 6)) {
+\t\t\t\t\tbecomesValid(\$(this));
+\t\t\t\t} else {
+\t\t\t\t\tbecomesInvalid(\$(this));
+\t\t\t\t}
+\t\t\t});
+\t\t\t
+\t\t\t\$('#mail2').keyup(function () {
+\t\t\t\tvar mail1 = \$('#mail1').val();
+\t\t\t\tvar mail2 = \$(this).val();
+\t\t\t\tif (mail1 == mail2) {
+\t\t\t\t\tbecomesValid(\$(this));
+\t\t\t\t} else {
+\t\t\t\t\tbecomesInvalid(\$(this));
+\t\t\t\t}
+\t\t\t});
+\t\t\t
+\t\t\t\$('#register_form').submit(function (e) {
+\t\t\t\te.preventDefault();
+\t\t\t\tvar firstName = \$('#first_name').val();
+\t\t\t\tvar lastName = \$('#last_name').val();
+\t\t\t\tvar pass1 = \$('#pass1').val();
+\t\t\t\tvar pass2 = \$('#pass2').val();
+\t\t\t\tvar mail1 = \$('#mail1').val();
+\t\t\t\tvar mail2 = \$('#mail2').val();
+\t\t\t\tif ((firstName != \"\") && (lastName != \"\") && (pass1 == pass2) && (pass1 != \"\") && (mail1 == mail2) && (mail1 != \"\")) {
+\t\t\t\t\t\$('#send_form').addClass('disabled');
+\t\t\t\t\t\$.post(
+\t\t\t\t\t\t'";
+        // line 167
+        echo $this->env->getExtension('routing')->getPath("su_user_send_registration");
+        echo "',
+\t\t\t\t\t\t{
+\t\t\t\t\t\t\tfirstName: firstName,
+\t\t\t\t\t\t\tlastName: lastName,
+\t\t\t\t\t\t\tpass: pass1,
+\t\t\t\t\t\t\temail: mail1
+\t\t\t\t\t\t},
+\t\t\t\t\t\tfunction (rep) {
+\t\t\t\t\t\t\t\$('#send_user_update').removeClass('disabled');
+\t\t\t\t\t\t\tif (rep.message == \"user_added\") {
+\t\t\t\t\t\t\t\tvar url = \"";
+        // line 177
+        echo $this->env->getExtension('routing')->getPath("login_check");
+        echo "\"
+\t\t\t\t\t\t\t\tvar form = \$('<form action=\"' + url + '\" method=\"post\">' +
+\t\t\t\t\t\t\t\t  '<input id=\"_username\" type=\"text\" value=\"' + mail1 + '\">' +
+\t\t\t\t\t\t\t\t  '<input id=\"_password\" type=\"password\" value=\"' + pass1 + '\">' +
+\t\t\t\t\t\t\t\t  '</form>');
+\t\t\t\t\t\t\t\t\$('body').append(form);
+\t\t\t\t\t\t\t\tform.submit();
+\t\t\t\t\t\t\t} else {
+\t\t\t\t\t\t\t\tMaterialize.toast(\"Ooops, le formulaire n'a pas été accepté ... êtes vous sûr(e) de l'adresse mail?\", 6000);
+\t\t\t\t\t\t\t\tconsole.log(rep);
+\t\t\t\t\t\t\t}
+\t\t\t\t\t\t}
+\t\t\t\t\t);
+\t\t\t\t} else {
+\t\t\t\t\tMaterialize.toast(\"Formulaire non valide\", 5000);
+\t\t\t\t}
+\t\t\t});
+\t\t\t//------------------------------------------------------------------------------
+\t\t\t
 \t\t\t\$(window).resize(function () {
 \t\t\t\treplace_main();
 \t\t\t\tlogo_resize();
@@ -192,7 +292,7 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 \t</script>
 \t";
         
-        $__internal_363566c589b8928a8e9c8057fe677859526b65a2bfb0f1c12c92d0fb46030b29->leave($__internal_363566c589b8928a8e9c8057fe677859526b65a2bfb0f1c12c92d0fb46030b29_prof);
+        $__internal_2412d36d40ac51be0244aeb84ae2af712404bc7624a89196424858ae31f27ffa->leave($__internal_2412d36d40ac51be0244aeb84ae2af712404bc7624a89196424858ae31f27ffa_prof);
 
     }
 
@@ -208,7 +308,7 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 
     public function getDebugInfo()
     {
-        return array (  158 => 74,  154 => 73,  150 => 72,  147 => 71,  141 => 70,  132 => 18,  128 => 17,  124 => 16,  120 => 15,  115 => 12,  109 => 11,  101 => 109,  99 => 70,  86 => 60,  51 => 28,  41 => 20,  39 => 11,  33 => 8,  24 => 1,);
+        return array (  267 => 177,  254 => 167,  158 => 74,  154 => 73,  150 => 72,  147 => 71,  141 => 70,  132 => 18,  128 => 17,  124 => 16,  120 => 15,  115 => 12,  109 => 11,  101 => 203,  99 => 70,  86 => 60,  51 => 28,  41 => 20,  39 => 11,  33 => 8,  24 => 1,);
     }
 }
 /* <!DOCTYPE html>*/
@@ -271,7 +371,7 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 /* 					<br>*/
 /* 					<div class="col s12 center-align">*/
 /* 						<a href="{{ path('su_user_login') }}" class="btn waves-effect waves-light cardinal-button"><i class="fa fa-angle-left left"></i>Retour</a>*/
-/* 						<button id="send_user_update" type="submit" class="btn waves-effect waves-light link-hover"><i class="fa fa-send left"></i>Ok</button>*/
+/* 						<button id="send_form" type="submit" class="btn waves-effect waves-light link-hover"><i class="fa fa-send left"></i>Ok</button>*/
 /* 					</div>*/
 /* 				</form>*/
 /* 			</div>*/
@@ -300,6 +400,21 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 /* 			$('#main').css({'padding-top': picture_height/2 - 20});*/
 /* 		}*/
 /* 		*/
+/* 		function becomesValid(elem) {*/
+/* 			if (!elem.hasClass("valid")) {*/
+/* 				elem.removeClass("invalid").addClass("valid");*/
+/* 			} else {*/
+/* 				elem.removeClass("invalid");*/
+/* 			}*/
+/* 		}*/
+/* 		function becomesInvalid(elem) {*/
+/* 			if (!elem.hasClass("invalid")) {*/
+/* 				elem.removeClass("valid").addClass("invalid");*/
+/* 			} else {*/
+/* 				elem.removeClass("valid");*/
+/* 			}*/
+/* 		}*/
+/* 		*/
 /* 		$(document).ready(function () {*/
 /* 			$('.dropdown-button').dropdown({*/
 /* 			  inDuration: 300,*/
@@ -311,6 +426,85 @@ class __TwigTemplate_6d03d7912696ec36af10196d6e5c83079a2abd7c44eeaa923367d97f22e
 /* 			*/
 /* 			replace_main();*/
 /* 			logo_resize();*/
+/* 			*/
+/* 			//Vérification & envoie du formulaire utilisateur ------------------------------------------*/
+/* 			$('#first_name, #last_name, #mail1').keyup(function () {*/
+/* 				var valeur = $(this).val();*/
+/* 				if ((valeur != "") && (valeur.length >= 3)) {*/
+/* 					becomesValid($(this));*/
+/* 				} else {*/
+/* 					becomesInvalid($(this));*/
+/* 				}*/
+/* 			});*/
+/* 			*/
+/* 			$('#pass1').keyup(function () {*/
+/* 				var valeur = $(this).val();*/
+/* 				if ((valeur != "") && (valeur.length >= 6)) {*/
+/* 					becomesValid($(this));*/
+/* 				} else {*/
+/* 					becomesInvalid($(this));*/
+/* 				}*/
+/* 			});*/
+/* 			*/
+/* 			$('#pass2').keyup(function () {*/
+/* 				var pass1 = $('#pass1').val();*/
+/* 				var pass2 = $(this).val();*/
+/* 				if ((pass1 == pass2) && (pass1.length >= 6)) {*/
+/* 					becomesValid($(this));*/
+/* 				} else {*/
+/* 					becomesInvalid($(this));*/
+/* 				}*/
+/* 			});*/
+/* 			*/
+/* 			$('#mail2').keyup(function () {*/
+/* 				var mail1 = $('#mail1').val();*/
+/* 				var mail2 = $(this).val();*/
+/* 				if (mail1 == mail2) {*/
+/* 					becomesValid($(this));*/
+/* 				} else {*/
+/* 					becomesInvalid($(this));*/
+/* 				}*/
+/* 			});*/
+/* 			*/
+/* 			$('#register_form').submit(function (e) {*/
+/* 				e.preventDefault();*/
+/* 				var firstName = $('#first_name').val();*/
+/* 				var lastName = $('#last_name').val();*/
+/* 				var pass1 = $('#pass1').val();*/
+/* 				var pass2 = $('#pass2').val();*/
+/* 				var mail1 = $('#mail1').val();*/
+/* 				var mail2 = $('#mail2').val();*/
+/* 				if ((firstName != "") && (lastName != "") && (pass1 == pass2) && (pass1 != "") && (mail1 == mail2) && (mail1 != "")) {*/
+/* 					$('#send_form').addClass('disabled');*/
+/* 					$.post(*/
+/* 						'{{ path("su_user_send_registration") }}',*/
+/* 						{*/
+/* 							firstName: firstName,*/
+/* 							lastName: lastName,*/
+/* 							pass: pass1,*/
+/* 							email: mail1*/
+/* 						},*/
+/* 						function (rep) {*/
+/* 							$('#send_user_update').removeClass('disabled');*/
+/* 							if (rep.message == "user_added") {*/
+/* 								var url = "{{ path('login_check') }}"*/
+/* 								var form = $('<form action="' + url + '" method="post">' +*/
+/* 								  '<input id="_username" type="text" value="' + mail1 + '">' +*/
+/* 								  '<input id="_password" type="password" value="' + pass1 + '">' +*/
+/* 								  '</form>');*/
+/* 								$('body').append(form);*/
+/* 								form.submit();*/
+/* 							} else {*/
+/* 								Materialize.toast("Ooops, le formulaire n'a pas été accepté ... êtes vous sûr(e) de l'adresse mail?", 6000);*/
+/* 								console.log(rep);*/
+/* 							}*/
+/* 						}*/
+/* 					);*/
+/* 				} else {*/
+/* 					Materialize.toast("Formulaire non valide", 5000);*/
+/* 				}*/
+/* 			});*/
+/* 			//------------------------------------------------------------------------------*/
 /* 			*/
 /* 			$(window).resize(function () {*/
 /* 				replace_main();*/

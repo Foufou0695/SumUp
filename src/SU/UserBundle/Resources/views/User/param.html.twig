@@ -256,7 +256,7 @@
 						},
 						function (rep) {
 							$('#send_user_update').removeClass('disabled');
-							if (rep.message == "user_updated") {
+							if (rep.message == "user_added") {
 								Materialize.toast("Votre compte a été mis à jour", 5000);
 							} else {
 								Materialize.toast("Ooops, le formulaire n'a pas été accepté ... êtes vous sûr(e) de l'adresse mail?", 6000);

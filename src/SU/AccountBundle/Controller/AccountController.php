@@ -6,7 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AccountController extends Controller
 {
-    public function indexAction() {
+    public function homeAction() {
+		
+		$user = $this->getUser();
+		
+		if (count($user->getAccounts()) == 0) {
+			return $this->redirectToRoute('su_account_new_account');
+		}
+		
         return $this->render('SUAccountBundle:Account:index.html.twig');
     }
 	

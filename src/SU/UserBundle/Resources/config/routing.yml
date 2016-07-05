@@ -6,6 +6,10 @@ su_user_register:
     path:     /register
     defaults: { _controller: SUUserBundle:User:register }
 
+su_user_send_registration:
+    path:     /sendRegistration
+    defaults: { _controller: SUUserBundle:User:sendRegistration }
+
 su_user_param:
-    path:     /param
+    path:     /user/param
     defaults: { _controller: SUUserBundle:User:param }

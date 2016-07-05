@@ -20,6 +20,17 @@ class Category
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\Entry", mappedBy="category", cascade={"persist"})
+	 */
+	private $entries;
+	
+	/**
+	 * @ORM\ManyToOne(targetEntity="SU\AccountBundle\Entity\Categories", inversedBy="categories")
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $categories;
 
     /**
      * @var string
@@ -62,5 +73,70 @@ class Category
     {
         return $this->name;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->entries = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add entry
+     *
+     * @param \SU\AccountBundle\Entity\Entry $entry
+     *
+     * @return Category
+     */
+    public function addEntry(\SU\AccountBundle\Entity\Entry $entry)
+    {
+        $this->entries[] = $entry;
+		$entry->setCategory($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove entry
+     *
+     * @param \SU\AccountBundle\Entity\Entry $entry
+     */
+    public function removeEntry(\SU\AccountBundle\Entity\Entry $entry)
+    {
+        $this->entries->removeElement($entry);
+    }
+
+    /**
+     * Get entries
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEntries()
+    {
+        return $this->entries;
+    }
+
+    /**
+     * Set categories
+     *
+     * @param \SU\AccountBundle\Entity\Categories $categories
+     *
+     * @return Category
+     */
+    public function setCategories(\SU\AccountBundle\Entity\Categories $categories)
+    {
+        $this->categories = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \SU\AccountBundle\Entity\Categories
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+}

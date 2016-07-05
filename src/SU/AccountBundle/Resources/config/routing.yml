@@ -1,23 +1,23 @@
 su_account_homepage:
     path:     /home
-    defaults: { _controller: SUAccountBundle:Account:index }
+    defaults: { _controller: SUAccountBundle:Account:home }
 
 su_account_mobile_immediate:
-    path:     /mimmediate
+    path:     /home/mimmediate
     defaults: { _controller: SUAccountBundle:Account:mimmediate }
 
 su_account_mobile_differed:
-    path:     /mdiffered
+    path:     /home/mdiffered
     defaults: { _controller: SUAccountBundle:Account:mdiffered }
 
 su_account_mobile_systematic:
-    path:     /msystematic
+    path:     /home/msystematic
     defaults: { _controller: SUAccountBundle:Account:msystematic }
 
 su_account_mobile_account:
-    path:     /maccount
+    path:     /home/maccount
     defaults: { _controller: SUAccountBundle:Account:maccount }
 
 su_account_new_account:
-    path:     /newAccount
+    path:     /home/newAccount
     defaults: { _controller: SUAccountBundle:Account:newAccount }

@@ -3,6 +3,8 @@
 namespace SU\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="SU\UserBundle\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -19,45 +21,69 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
+    protected $id;
+	
+	/**
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255)
      */
     private $firstName;
-
-    /**
+	
+	/**
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=255)
      */
     private $lastName;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\Account", mappedBy="user", cascade={"persist"})
+	 */
+	private $accounts;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
+     * Constructor
      */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
-     */
-    private $email;
-
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+		parent::__construct();
+    }
+
+    /**
+     * Add account
+     *
+     * @param \SU\AccountBundle\Entity\Account $account
+     *
+     * @return User
+     */
+    public function addAccount(\SU\AccountBundle\Entity\Account $account)
+    {
+        $this->accounts[] = $account;
+		$account->setUser($this);
+    
+        return $this;
+    }
+
+    /**
+     * Remove account
+     *
+     * @param \SU\AccountBundle\Entity\Account $account
+     */
+    public function removeAccount(\SU\AccountBundle\Entity\Account $account)
+    {
+        $this->accounts->removeElement($account);
+    }
+
+    /**
+     * Get accounts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAccounts()
+    {
+        return $this->accounts;
     }
 
     /**
@@ -70,7 +96,7 @@ class User
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
-
+    
         return $this;
     }
 
@@ -94,7 +120,7 @@ class User
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
-
+    
         return $this;
     }
 
@@ -107,53 +133,4 @@ class User
     {
         return $this->lastName;
     }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
 }
-
