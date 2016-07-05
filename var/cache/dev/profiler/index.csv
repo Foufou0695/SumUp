@@ -27,3 +27,6 @@ c2af38,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467740713,,200
 a63209,::1,POST,http://localhost/SumUp/web/app_dev.php/sendRegistration,1467740783,,200
 97ae54,::1,POST,http://localhost/SumUp/web/app_dev.php/login_check,1467740784,,302
 db926c,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467740784,,200
+03a078,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467741155,,200
+32b3f2,::1,GET,http://localhost/SumUp/web/app_dev.php/home,1467741164,,302
+db3043,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467741164,,200
