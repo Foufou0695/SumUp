@@ -30,3 +30,8 @@ db926c,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467740784,,200
 03a078,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467741155,,200
 32b3f2,::1,GET,http://localhost/SumUp/web/app_dev.php/home,1467741164,,302
 db3043,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467741164,,200
+37859d,::1,POST,http://localhost/SumUp/web/app_dev.php/login_check,1467741878,,302
+1c71ca,::1,GET,http://localhost/SumUp/web/app_dev.php/home,1467741891,,302
+53a9d4,::1,GET,http://localhost/SumUp/web/app_dev.php/home/newAccount,1467741904,,200
+9f3d7d,::1,GET,http://localhost/SumUp/web/app_dev.php/home/home,1467741938,abc564,200
+abc564,::1,GET,http://localhost/SumUp/web/app_dev.php/home/home,1467741939,,404
