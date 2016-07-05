@@ -19,3 +19,11 @@ a28036,::1,POST,http://localhost/SumUp/web/app_dev.php/login_check,1467740296,,3
 0d8c98,::1,GET,http://localhost/SumUp/web/app_dev.php/,1467740297,,302
 fe4738,::1,GET,http://localhost/SumUp/web/app_dev.php/home,1467740297,,302
 7b151a,::1,GET,http://localhost/SumUp/web/app_dev.php/home/newAccount,1467740298,,200
+cf34e6,::1,GET,http://localhost/SumUp/web/app_dev.php/home/newAccount,1467740705,,200
+c7ad06,::1,GET,http://localhost/SumUp/web/app_dev.php/logout,1467740712,,302
+814cce,::1,GET,http://localhost/SumUp/web/app_dev.php/,1467740712,,302
+c2af38,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467740713,,200
+83cf92,::1,GET,http://localhost/SumUp/web/app_dev.php/register,1467740767,,200
+a63209,::1,POST,http://localhost/SumUp/web/app_dev.php/sendRegistration,1467740783,,200
+97ae54,::1,POST,http://localhost/SumUp/web/app_dev.php/login_check,1467740784,,302
+db926c,::1,GET,http://localhost/SumUp/web/app_dev.php/login,1467740784,,200
