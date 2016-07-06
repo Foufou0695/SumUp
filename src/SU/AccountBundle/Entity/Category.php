@@ -27,10 +27,10 @@ class Category
 	private $entries;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="SU\AccountBundle\Entity\Categories", inversedBy="categoryList")
+	 * @ORM\ManyToOne(targetEntity="SU\UserBundle\Entity\User", inversedBy="categories")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
-	private $categories;
+	private $user;
 
     /**
      * @var string
@@ -117,26 +117,26 @@ class Category
     }
 
     /**
-     * Set categories
+     * Set user
      *
-     * @param \SU\AccountBundle\Entity\Categories $categories
+     * @param \SU\UserBundle\Entity\User $user
      *
      * @return Category
      */
-    public function setCategories(\SU\AccountBundle\Entity\Categories $categories)
+    public function setUser(\SU\UserBundle\Entity\User $user)
     {
-        $this->categories = $categories;
-    
+        $this->user = $user;
+
         return $this;
     }
 
     /**
-     * Get categories
+     * Get user
      *
-     * @return \SU\AccountBundle\Entity\Categories
+     * @return \SU\UserBundle\Entity\User
      */
-    public function getCategories()
+    public function getUser()
     {
-        return $this->categories;
+        return $this->user;
     }
 }

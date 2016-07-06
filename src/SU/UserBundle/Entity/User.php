@@ -44,7 +44,7 @@ class User extends BaseUser
 	private $accounts;
 	
 	/**
-	 * @ORM\OneToOne(targetEntity="SU\AccountBundle\Entity\Categories", inversedBy="user", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\Category", mappedBy="user", cascade={"persist"})
 	 */
 	private $categories;
 
@@ -54,7 +54,6 @@ class User extends BaseUser
     public function __construct()
     {
         $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->categories = new Categories();
 		parent::__construct();
     }
 
@@ -142,24 +141,34 @@ class User extends BaseUser
     }
 
     /**
-     * Set categories
+     * Add category
      *
-     * @param \SU\AccountBundle\Entity\Categories $categories
+     * @param \SU\AccountBundle\Entity\Category $category
      *
      * @return User
      */
-    public function setCategories(\SU\AccountBundle\Entity\Categories $categories = null)
+    public function addCategory(\SU\AccountBundle\Entity\Category $category)
     {
-        $this->categories = $categories;
-		$categories->setUser($this);
-    
+        $this->categories[] = $category;
+		$category->setUser($this);
+
         return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \SU\AccountBundle\Entity\Category $category
+     */
+    public function removeCategory(\SU\AccountBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
     }
 
     /**
      * Get categories
      *
-     * @return \SU\AccountBundle\Entity\Categories
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories()
     {

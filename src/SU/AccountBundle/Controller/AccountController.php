@@ -79,7 +79,19 @@ class AccountController extends Controller
 			$em->flush();
 			
 			if($request->isXmlHttpRequest()) {
-				return new JsonResponse(array("notif" => "account_added"));
+				$tableHtml = '<tr class="ligne">
+								<td>'.$account->getName().'</td>
+								<td class="ac_priority">'.$account->getAcPriority().'</td>
+								<td>
+									<a data-id="'.$account->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-ac"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+								</td>
+							</tr>';
+				if ($account->getAcPriority() == "Principal") {
+					$selectHtml = '<option value="'.$account->getName().'" selected>'.$account->getName().'</option>';
+				} else {
+					$selectHtml = '<option value="'.$account->getName().'">'.$account->getName().'</option>';
+				}
+				return new JsonResponse(array("notif" => "account_added", "tableHtml" => $tableHtml, "selectHtml" => $selectHtml));
 			} else {
 				return $this->redirectToRoute('su_account_homepage');
 			}
@@ -104,12 +116,11 @@ class AccountController extends Controller
 		if ($request->isMethod("POST")) {
 			$em = $this->getDoctrine()->getManager();
 			$user = $this->getUser();
-			$categories = $user->getCategories();
 			
 			$category = new Category();
 			$category->setName($request->request->get("new_category"));
 			
-			$categories->addCategoryList($category);
+			$user->addCategory($category);
 			$em->flush();
 			return new JsonResponse(array("notif" => "category_added", "html" => '<tr><td>'.$category->getName().'</td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a></td></tr>'));
 		} else {
@@ -118,18 +129,18 @@ class AccountController extends Controller
 	}
 	
 	public function deleteCategoryAction(Request $request) {
-		if($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
 			$em = $this->getDoctrine()->getManager();
 			$categoryRepository = $em->getRepository("SUAccountBundle:Category");
 			
 			$id = $request->request->get("category_id");
 			$category = $categoryRepository->find($id);
 			
-			if($category) {
+			if ($category) {
 				$user = $this->getUser();
-				$categories = $user->getCategories();
 				
-				if ($category->getCategories()->getUser()->getId() == $user->getId()) {
+				if ($category->getUser()->getId() == $user->getId()) {
+					$user->removeCategory($category);
 					$em->remove($category);
 					$em->flush();
 					return new JsonResponse(array("notif" => "category_deleted"));
@@ -138,6 +149,49 @@ class AccountController extends Controller
 				}
 			} else {
 				return new JsonResponse(array("notif" => "category_not_deleted", "message" => "Aucune catégorie trouvée ..."));
+			}
+		} else {
+			return $this->createNotFoundException();
+		}
+	}
+	
+	public function updateAcPriorityAction(Request $request) {
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$user = $this->getUser();
+			$principal_ac = $request->request->get("principal_ac");
+			
+			if ($principal_ac != "") {
+				foreach($user->getAccounts() as $account) {
+					if ($account->getName() == $principal_ac) {
+						$account->setAcPriority("Principal");
+					} else {
+						$account->setAcPriority("Secondaire");
+					}
+				}
+				$em->flush();
+				return new JsonResponse(array("notif" => "principal_ac_updated"));
+			} else {
+				return new JsonResponse(array("notif" => "principal_ac_not_updated", "message" => "Le compte indiqué n'existe pas."));
+			}
+		}
+	}
+	
+	public function deleteAccountAction(Request $request) {
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$user = $this->getUser();
+			$accountRepository = $em->getRepository("SUAccountBundle:Account");
+			
+			$account = $accountRepository->find($request->request->get("account_id"));
+			
+			if (($account) && ($account->getUser()->getId() == $user->getId())) {
+				$user->removeAccount($account);
+				$em->remove($account);
+				$em->flush();
+				return new JsonResponse(array("notif" => "account_deleted"));
+			} else {
+				return new JsonResponse(array("notif" => "no_account_deleted", "message" => "Le compte demandé n'existe pas ou n'est pas le votre."));
 			}
 		} else {
 			return $this->createNotFoundException();

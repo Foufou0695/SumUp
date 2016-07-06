@@ -94,21 +94,21 @@
 						<div class="row">
 							<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
 								<i class="material-icons prefix">mode_edit</i>
-								<input placeholder="Livret A" id="6" class="description_field validate" type="text">
-								<label for="6">Nom du compte</label>
+								<input placeholder="Livret A" id="name" class="description_field validate" type="text" name="name">
+								<label for="name">Nom du compte</label>
 							</div>
 							<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
 								<i class="material-icons prefix">euro_symbol</i>
-								<input placeholder="0" id="4" type="number" class="validate montant_field">
-								<label for="4">Montant de départ du compte</label>
+								<input placeholder="0" id="first_amount" type="number" class="validate montant_field" name="first_amount">
+								<label for="first_amount">Montant de départ du compte</label>
 							</div>
 						<div class="row">
 							<div class="col s12 m10 l6 offset-m1 offset-l3">
 								<label>Type de compte</label>
-								<select class="browser-default">
-									<option value="" disabled selected>Type de compte</option>
-									<option value="credit-card">Principal (compte par défaut)</option>
-									<option value="credit-card">Secondaire</option>
+								<select class="browser-default" name="add_ac_priority_select" id="add_ac_priority_select">
+									<option value="default" disabled selected>Type de compte</option>
+									<option value="Principal">Principal (compte par défaut)</option>
+									<option value="Secondaire">Secondaire</option>
 								</select>
 							</div>
 						</div>
@@ -119,7 +119,7 @@
 			</section>
 		</div>
 		<div id="new_account_footer" class="modal-footer">
-			<a id="add_new_account" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>
+			<a id="add_new_account" href="#" class="btn modal-action waves-effect waves-light green animated" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>
 			<a id="return_from_new_account" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
 		</div>
 	</div>

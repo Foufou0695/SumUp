@@ -44,7 +44,7 @@ class User extends BaseUser
 	private $accounts;
 	
 	/**
-	 * @ORM\OneToOne(targetEntity="SU\AccountBundle\Entity\Categories", mappedBy="user", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\Category", mappedBy="user", cascade={"persist"})
 	 */
 	private $categories;
 
@@ -139,30 +139,5 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
-    }
-
-    /**
-     * Set categories
-     *
-     * @param \SU\AccountBundle\Entity\Categories $categories
-     *
-     * @return User
-     */
-    public function setCategories(\SU\AccountBundle\Entity\Categories $categories = null)
-    {
-        $this->categories = $categories;
-		$categories.setUser($this);
-    
-        return $this;
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \SU\AccountBundle\Entity\Categories
-     */
-    public function getCategories()
-    {
-        return $this->categories;
     }
 }

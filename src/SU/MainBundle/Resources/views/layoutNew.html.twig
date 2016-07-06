@@ -25,6 +25,9 @@
 		<nav class="cardinal">
 			<div class="nav-wrapper">
 				<a class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
+				<ul class="left small-only">
+					<li id="param_link" {% if menu_selected == 'param' %}class="active" {% endif %} ><a href="{{ path('su_user_param') }}" class="waves-effect waves-light link-hover"><span class="hide-on-small-only">Paramètres <i class="fa fa-edit left"></i></span><span class="hide-on-med-and-up"><i class="fa fa-edit fa-2x" style="padding-top: 10px;"></i></span></a></li>					
+				</ul>
 				<ul class="right" id="navbar_right">
 					<li id="disconnect_link"><a href="{{ path('logout') }}" class="waves-effect waves-light"><span class="hide-on-small-only">Se déconnecter <i class="fa fa-sign-out right"></i></span><span class="hide-on-med-and-up"><i class="fa fa-sign-out fa-2x" style="padding-top: 10px;"></i></span></a></a></li>
 				</ul>

@@ -37,3 +37,11 @@ su_account_new_account:
 su_account_send_new_account:
     path:     /home/sendNewAccount
     defaults: { _controller: SUAccountBundle:Account:sendNewAccount }
+
+su_account_update_principal_ac:
+    path:     /home/updateAcPriority
+    defaults: { _controller: SUAccountBundle:Account:updateAcPriority }
+
+su_account_delete_account:
+    path:     /home/deleteAccount
+    defaults: { _controller: SUAccountBundle:Account:deleteAccount }

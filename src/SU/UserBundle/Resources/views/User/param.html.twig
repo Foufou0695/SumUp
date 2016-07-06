@@ -35,7 +35,7 @@
 				<div class="col s12">
 					<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-book"></i> Vos comptes</small></h5>
 					<p class="saisie">
-						Dans cette section vous pouvez gérer vos comptes, en ajouter de nouveaux ou en supprimer.
+						Dans cette section vous pouvez gérer vos comptes, en ajouter de nouveaux ou en supprimer. Donner à un compte le type "Principal" fait de lui le compte par défaut qui sera sélectionné à la connexion au site. C'est en générale le compte courant, celui avec lequel vous ferez le plus d'opérations.
 						</br>
 					</p>
 					<table class="striped highlight centered">
@@ -47,13 +47,20 @@
 							</tr>
 						</thead>
 						
-						<tbody>
+						<tbody id="account_table">
+							{% if app.user.getAccounts()|length == 0 %}
+								<tr class="ligne">
+									<td><em>Vide</em></td>
+									<td><em>Vide</em></td>
+									<td><em>Vide</em></td>
+								</tr>
+							{% endif %}
 							{% for account in app.user.getAccounts() %}
 								<tr class="ligne">
 									<td>{{ account.name }}</td>
-									<td>{{ account.acPriority }}</td>
+									<td class="ac_priority">{{ account.acPriority }}</td>
 									<td>
-										<a data-id="{{ account.id }}" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+										<a data-id="{{ account.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-ac"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
 									</td>
 								</tr>
 							{% endfor %}
@@ -62,6 +69,25 @@
 					<br>
 					<div class="center-align">
 						<a id="new_account_button" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Nouveau compte</a>
+					</div>
+					<br><br>
+					<p class="center-align">Pour changer le compte principal sélectionné par défaut quand vous vous connectez, il vous suffit de cliquer sur "Changer le compte principal".</p>
+					<div class="center-align">
+						<form id="select_ac_priority">
+							<div class="col s12 m10 l6 offset-m1 offset-l3">
+								<label>Compte principal</label>
+								<select class="browser-default" name="ac_priority" id="ac_priority">
+									<option value="default" disabled selected>Choisissez le compte principal</option>
+									{% for account in app.user.getAccounts() %}
+										<option value="{{ account.name }}">{{ account.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="col s12" style="margin-bottom: 20px;">
+								<br>
+								<button type="submit" id="principal_ac_button" class="btn waves-effect waves-light link-hover cardinal-button truncate"><i class="fa fa-refresh left"></i>Changer le compte principal</a>
+							</div>
+						</form>
 					</div>
 				</div>
 				<div class="col s12">
@@ -79,13 +105,13 @@
 						</thead>
 						
 						<tbody id="category_table">
-						{% if app.user.getCategories().getCategoryList()|length == 0 %}
-							<tr class="lign">
+						{% if app.user.getCategories()|length == 0 %}
+							<tr class="ligne">
 								<td><em>Vide</em></td>
 								<td><em>Vide</em></td>
 							</tr>
 						{% endif %}
-						{% for category in app.user.getCategories().getCategoryList() %}
+						{% for category in app.user.getCategories() %}
 							<tr class="ligne">
 								<td>{{ category.name }}</td>
 								<td>
@@ -97,15 +123,15 @@
 					</table>
 					<br>
 					<div class="center-align">
-					<form id="new_category_form">
-						<div class="input-field col s12 l6 offset-l3">
-							<input placeholder="Catégorie" id="new_category" type="text" class="" name="new_category">
-							<label for="new_category">Nouvelle catégorie</label>
-						</div>
-						<div class="col s12">
-							<button type="submit" id="add_new_category" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Ajouter</a>
-						</div>
-					</form>
+						<form id="new_category_form">
+							<div class="input-field col s12 l6 offset-l3">
+								<input placeholder="Catégorie" id="new_category" type="text" class="" name="new_category">
+								<label for="new_category">Nouvelle catégorie</label>
+							</div>
+							<div class="col s12">
+								<button type="submit" id="add_new_category" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Ajouter</a>
+							</div>
+						</form>
 					</div>
 				</div>
 				<div class="col s12">
@@ -175,7 +201,8 @@
 				elem.removeClass("valid");
 			}
 		}
-		function prepare_deletion() {
+		
+		function prepare_cat_deletion() {
 			$('.delete-category').off('click');
 			$('.delete-category').click(function() {
 				$cat_id = $(this).attr('data-id');
@@ -194,9 +221,47 @@
 							if ($('#category_table').children().length == 0) {
 								$('#category_table').append("<tr><td><em>Vide</em></td><td><em>Vide</em></td></tr>");
 							}
-							Materialize.toast("Catégorie supprimée", 4000);
+							Materialize.toast("Catégorie supprimée", 5000);
 						} else {
-							Materialize.toast('Ooops ... une erreur est survenue ...', 4000);
+							Materialize.toast('Ooops ... une erreur est survenue ...', 5000);
+							console.log(rep.message);
+						}
+					}
+				);
+			});
+		}
+		
+		function prepare_ac_deletion() {
+			$('.delete-ac').off('click');
+			$('.delete-ac').click(function() {
+				var account_id = $(this).attr('data-id');
+				$.post(
+					'{{ path("su_account_delete_account") }}',
+					{
+						account_id: account_id
+					},
+					function(rep) {
+						if (rep.notif == 'account_deleted') {
+							var to_delete = "";
+							$('#account_table').children().find('a').each(function() {
+								if ($(this).attr('data-id') == account_id) {
+									to_delete = $(this).parent().prev().prev().html();
+									$(this).parent().parent().remove();
+								}
+							});
+							$('#ac_priority').children().each(function() {
+								if ($(this).html() == to_delete) {
+									$('#ac_priority').children().first().attr('selected', "");
+									$('#ac_priority').val("default");
+									$(this).remove();
+								}
+							});
+							if ($('#account_table').children().length == 0) {
+								$('#account_table').append("<tr><td><em>Vide</em></td><td><em>Vide</em></td><td><em>Vide</em></td></tr>");
+							}
+							Materialize.toast("Compte supprimé", 5000);
+						} else {
+							Materialize.toast('Ooops ... une erreur est survenue ...', 5000);
 							console.log(rep.message);
 						}
 					}
@@ -281,22 +346,8 @@
 			});
 			//------------------------------------------------------------------------------
 			
-			$('#new_account_button').click(function() {
-				if ($(window).width() >= 992) {
-					$('#new_account_modal').openModal({
-						dismissible: true,
-						opacity: 0.5,
-						in_duration: 250,
-						out_duration: 250,
-						complete: clean_overlay
-					});
-				} else {
-					$(location).attr('href',"{{ path('su_account_mobile_account') }}");
-				}
-			});
-			
 			//Gestion des catégories -----------------------------------------------------------------------------------
-			prepare_deletion();
+			prepare_cat_deletion();
 			
 			$('#new_category_form').submit(function(e) {
 				e.preventDefault();
@@ -314,15 +365,142 @@
 								}
 								$('#category_table').append(rep.html);
 								$('#new_category').val("");
-								Materialize.toast("Catégorie ajoutée", 4000);
-								prepare_deletion();
+								Materialize.toast("Catégorie ajoutée", 5000);
+								prepare_cat_deletion();
 							} else {
-								Materialize.toast('Ooops ... une erreur est survenue ...', 4000);
+								Materialize.toast('Ooops ... une erreur est survenue ...', 5000);
 							}
 						}
 					);
 				} else {
-					Materialize.toast("Le nom de la catégorie ne peut pas être vide", 4000);
+					Materialize.toast("Le nom de la catégorie ne peut pas être vide", 5000);
+				}
+			});
+			//----------------------------------------------------------------------------------------------------------
+			
+			//Gestion des priorité de compte ---------------------------------------------------------------------------
+			var previous_principal_ac = $('#ac_priority').val();
+			$('#select_ac_priority').submit(function(e) {
+				e.preventDefault();
+				var principal_ac = $('#ac_priority').val();
+				if ((principal_ac != "") && (principal_ac != previous_principal_ac)) {
+					$('#principal_ac_button').addClass("disabled");
+					$.post(
+						"{{ path('su_account_update_principal_ac') }}",
+						{
+							principal_ac: principal_ac
+						},
+						function(rep) {
+							$('#principal_ac_button').removeClass("disabled");
+							if (rep.notif == "principal_ac_updated") {
+								Materialize.toast("Compte principal mis à jour", 5000);
+								$('.ac_priority').each(function() {
+									if ($(this).prev().html() == principal_ac) {
+										$(this).html("Principal");
+									} else {
+										$(this).html("Secondaire");
+									}
+									previous_principal_ac = principal_ac;
+								});
+							} else {
+								Materialize.toast("Ooops ... une erreur est survenue ...", 5000);
+								console.log(rep.message);
+							}
+						}
+					);
+				} else {
+					if (!principal_ac) {
+						Materialize.toast("Aucun compte sélectionné.", 5000);
+					} else {
+						Materialize.toast("Ce compte est déjà le compte principal.", 5000);
+					}
+				}
+			});
+			//----------------------------------------------------------------------------------------------------------
+			
+			//Suppression de compte ------------------------------------------------------------------------------
+			prepare_ac_deletion();
+			
+			$('#new_account_button').click(function() {
+				if ($(window).width() >= 992) {
+					$('#new_account_modal').openModal({
+						dismissible: true,
+						opacity: 0.5,
+						in_duration: 250,
+						out_duration: 250,
+						ready: function() {
+							$('#name').off('keyup');
+							$('#name').keyup(function () {
+								var valeur = $(this).val();
+								if ((valeur != "") && (valeur.length >= 3)) {
+									becomesValid($(this));
+								} else {
+									becomesInvalid($(this));
+								}
+							});
+							
+							$('#first_amount').off('keyup');
+							$('#first_amount').keyup(function() {
+								var valeur = parseInt($(this).val());
+								if (valeur >= 0) {
+									becomesValid($(this));
+								} else {
+									becomesInvalid($(this));
+								}
+							});
+							
+							$('#add_new_account').off('click');
+							$('#add_new_account').click(function() {
+								var name = $('#name').val();
+								var first_amount = parseInt($('#first_amount').val());
+								var ac_priority = $('#add_ac_priority_select').val();
+								
+								if ((name != "") && (name.length >= 3) && (first_amount >= 0) && (ac_priority != null)) {
+									$(this).addClass("disabled");
+									$.post(
+										"{{ path('su_account_send_new_account') }}",
+										{
+											name: name,
+											first_amount: first_amount,
+											ac_priority: ac_priority
+										},
+										function(rep) {
+											$('#add_new_account').removeClass("disabled");
+											if (rep.notif == "account_added") {
+												Materialize.toast("Nouveau compte ajouté", 5000);
+												if ($('#account_table').children().first().children().last().html() == "<em>Vide</em>") {
+													$('#account_table').html("");
+												}
+												if (ac_priority == "Principal") {
+													$('.ac_priority').each(function() {
+														$(this).html("Secondaire");
+													});
+												}
+												$('#account_table').append(rep.tableHtml);
+												$('#ac_priority').append(rep.selectHtml);
+												$('#return_from_new_account').trigger('click');
+												prepare_ac_deletion();
+											} else {
+												if (rep.message == "name_already_exists") {
+													becomesInvalid($('#name'));
+													Materialize.toast("Vous possédez déjà un compte de ce nom", 5000);
+												} else {
+													Materialize.toast("Oops ... une erreur est survenue ...", 5000);
+													console.log(rep.message);
+												}
+											}
+										}
+									);
+									$('#new_account_form').submit();
+								} else {
+									Materialize.toast('Formulaire non valide', 5000);
+								}
+							});
+						},
+						complete: clean_overlay
+					});
+				} else {
+					$(location).attr('href',"{{ path('su_account_mobile_account') }}");
 				}
 			});
 			//----------------------------------------------------------------------------------------------------------
