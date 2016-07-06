@@ -24,7 +24,12 @@ class Categories
 	/**
 	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\Category", mappedBy="categories", cascade={"persist"})
 	 */
-	private $categories;
+	private $categoryList;
+	
+	/**
+	 * @ORM\OneToOne(targetEntity="SU\UserBundle\Entity\User", mappedBy="categories", cascade={"persist"})
+	 */
+	private $user;
 
     /**
      * Get id
@@ -35,46 +40,70 @@ class Categories
     {
         return $this->id;
     }
+
+    /**
+     * Set user
+     *
+     * @param \SU\UserBundle\Entity\User $user
+     *
+     * @return Categories
+     */
+    public function setUser(\SU\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \SU\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categoryList = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add category
+     * Add categoryList
      *
-     * @param \SU\AccountBundle\Entity\Category $category
+     * @param \SU\AccountBundle\Entity\Category $categoryList
      *
      * @return Categories
      */
-    public function addCategory(\SU\AccountBundle\Entity\Category $category)
+    public function addCategoryList(\SU\AccountBundle\Entity\Category $category)
     {
-        $this->categories[] = $category;
+        $this->categoryList[] = $category;
 		$category->setCategories($this);
     
         return $this;
     }
 
     /**
-     * Remove category
+     * Remove categoryList
      *
-     * @param \SU\AccountBundle\Entity\Category $category
+     * @param \SU\AccountBundle\Entity\Category $categoryList
      */
-    public function removeCategory(\SU\AccountBundle\Entity\Category $category)
+    public function removeCategoryList(\SU\AccountBundle\Entity\Category $categoryList)
     {
-        $this->categories->removeElement($category);
+        $this->categoryList->removeElement($categoryList);
     }
 
     /**
-     * Get categories
+     * Get categoryList
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategories()
+    public function getCategoryList()
     {
-        return $this->categories;
+        return $this->categoryList;
     }
 }

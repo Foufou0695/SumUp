@@ -27,7 +27,7 @@ class Category
 	private $entries;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="SU\AccountBundle\Entity\Categories", inversedBy="categories")
+	 * @ORM\ManyToOne(targetEntity="SU\AccountBundle\Entity\Categories", inversedBy="categoryList")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $categories;

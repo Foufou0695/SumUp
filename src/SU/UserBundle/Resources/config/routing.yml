@@ -13,3 +13,7 @@ su_user_send_registration:
 su_user_param:
     path:     /user/param
     defaults: { _controller: SUUserBundle:User:param }
+
+su_user_update:
+    path:     /user/update
+    defaults: { _controller: SUUserBundle:User:update }

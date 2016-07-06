@@ -19,13 +19,13 @@
 					<div class="col s12 m8 verticalcenter">
 						<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-info-circle"></i> Informations</small></h5>
 						<p class="saisie center-align">
-							<span><b><big>Guillaume Fournier</big></b></span>
+							<span><b><big>{{ app.user.firstName }} {{ app.user.lastName }}</big></b></span>
 							</br>
-							Nombre de comptes : <span></span>
+							Nombre de comptes : <span>{{ app.user.getAccounts()|length }}</span>
 							</br>
-							<i class="fa fa-calendar"></i> Dernière connexion : <span></span>
+							<i class="fa fa-calendar"></i> Dernière connexion : <span>{{ app.user.lastLogin|date("d-m-Y") }}</span>
 							</br>
-							<i class="fa fa-envelope"></i> Email : <span></span>
+							<i class="fa fa-envelope"></i> Email : <span>{{ app.user.email }}</span>
 						</p>
 					</div>
 					<div class="col s8 offset-s2 m3 offset-m1 l3 offset-l1">
@@ -48,32 +48,15 @@
 						</thead>
 						
 						<tbody>
-							<tr class="ligne">
-								<td>Livret A</td>
-								<td>
-									<select class="browser-default">
-										<option value="" disabled>Type de compte</option>
-										<option value="Principal">Principal</option>
-										<option value="Secondaire" selected>Secondaire</option>
-									</select>
-								</td>
-								<td>
-									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
-								</td>
-							</tr>
-							<tr class="ligne">
-								<td>Compte courant</td>
-								<td>
-									<select class="browser-default">
-										<option value="" disabled>Type de compte</option>
-										<option value="Principal" selected>Principal</option>
-										<option value="Secondaire" class="active">Secondaire</option>
-									</select>
-								</td>
-								<td>
-									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
-								</td>
-							</tr>
+							{% for account in app.user.getAccounts() %}
+								<tr class="ligne">
+									<td>{{ account.name }}</td>
+									<td>{{ account.acPriority }}</td>
+									<td>
+										<a data-id="{{ account.id }}" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+									</td>
+								</tr>
+							{% endfor %}
 						</tbody>
 					</table>
 					<br>
@@ -95,36 +78,34 @@
 							</tr>
 						</thead>
 						
-						<tbody>
+						<tbody id="category_table">
+						{% if app.user.getCategories().getCategoryList()|length == 0 %}
+							<tr class="lign">
+								<td><em>Vide</em></td>
+								<td><em>Vide</em></td>
+							</tr>
+						{% endif %}
+						{% for category in app.user.getCategories().getCategoryList() %}
 							<tr class="ligne">
-								<td>Courses</td>
+								<td>{{ category.name }}</td>
 								<td>
-									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+									<a data-id="{{ category.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
 								</td>
 							</tr>
-							<tr class="ligne">
-								<td>Loyer</td>
-								<td>
-									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
-								</td>
-							</tr>
-							<tr class="ligne">
-								<td>Vêtements</td>
-								<td>
-									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
-								</td>
-							</tr>
-							<tr class="ligne">
-								<td>Transports</td>
-								<td>
-									<a class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
-								</td>
-							</tr>
+						{% endfor %}
 						</tbody>
 					</table>
 					<br>
 					<div class="center-align">
-						<a id="add_new_category" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Nouvelle catégorie</a>
+					<form id="new_category_form">
+						<div class="input-field col s12 l6 offset-l3">
+							<input placeholder="Catégorie" id="new_category" type="text" class="" name="new_category">
+							<label for="new_category">Nouvelle catégorie</label>
+						</div>
+						<div class="col s12">
+							<button type="submit" id="add_new_category" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Ajouter</a>
+						</div>
+					</form>
 					</div>
 				</div>
 				<div class="col s12">
@@ -132,11 +113,11 @@
 					<p class="saisie">
 						<form id="user_update_form">
 							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="Thomas" id="first_name" type="text" class="">
+								<input placeholder="{{ app.user.firstName }}" id="first_name" type="text" class="">
 								<label for="first_name">Prénom</label>
 							</div>
 							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="Dupont" id="last_name" type="text" class="">
+								<input placeholder="{{ app.user.lastName }}" id="last_name" type="text" class="">
 								<label for="last_name">Nom</label>
 							</div>
 							<div class="input-field col s12 l6 offset-l3">
@@ -148,11 +129,11 @@
 								<label for="pass2">Mot de passe (confirmation)</label>
 							</div>
 							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="thomas@dupont.fr" id="mail1" type="email" class="">
+								<input placeholder="{{ app.user.email }}" id="mail1" type="email" class="">
 								<label for="mail1">Adresse mail:</label>
 							</div>
 							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="thomas@dupont.fr" id="mail2" type="email" class="">
+								<input placeholder="{{ app.user.email }}" id="mail2" type="email" class="">
 								<label for="mail2">Adresse mail (confirmation):</label>
 							</div>
 							<div class="col s12 center-align">
@@ -194,6 +175,35 @@
 				elem.removeClass("valid");
 			}
 		}
+		function prepare_deletion() {
+			$('.delete-category').off('click');
+			$('.delete-category').click(function() {
+				$cat_id = $(this).attr('data-id');
+				$.post(
+					'{{ path("su_account_delete_category") }}',
+					{
+						category_id: $cat_id
+					},
+					function(rep) {
+						if (rep.notif == 'category_deleted') {
+							$('#category_table').children().find('a').each(function() {
+								if ($(this).attr('data-id') == $cat_id) {
+									$(this).parent().parent().remove();
+								}
+							});
+							if ($('#category_table').children().length == 0) {
+								$('#category_table').append("<tr><td><em>Vide</em></td><td><em>Vide</em></td></tr>");
+							}
+							Materialize.toast("Catégorie supprimée", 4000);
+						} else {
+							Materialize.toast('Ooops ... une erreur est survenue ...', 4000);
+							console.log(rep.message);
+						}
+					}
+				);
+			});
+		}
+		
 		$(document).ready(function() {
 			param_init();
 			
@@ -226,7 +236,7 @@
 				}
 			});
 			
-			$('#mail2').keyup(function () {
+			$('#mail2').bind("change keyup", function () {
 				var mail1 = $('#mail1').val();
 				var mail2 = $(this).val();
 				if (mail1 == mail2) {
@@ -247,7 +257,7 @@
 				if ((firstName != "") && (lastName != "") && (pass1 == pass2) && (pass1 != "") && (mail1 == mail2) && (mail1 != "")) {
 					$('#send_user_update').addClass('disabled');
 					$.post(
-						'php.php',
+						'{{ path("su_user_update") }}',
 						{
 							firstName: firstName,
 							lastName: lastName,
@@ -256,8 +266,9 @@
 						},
 						function (rep) {
 							$('#send_user_update').removeClass('disabled');
-							if (rep.message == "user_added") {
+							if (rep.notif == "account_updated") {
 								Materialize.toast("Votre compte a été mis à jour", 5000);
+								$(location).attr('href', '{{ path("su_user_param") }}');
 							} else {
 								Materialize.toast("Ooops, le formulaire n'a pas été accepté ... êtes vous sûr(e) de l'adresse mail?", 6000);
 								console.log(rep);
@@ -283,6 +294,38 @@
 					$(location).attr('href',"{{ path('su_account_mobile_account') }}");
 				}
 			});
+			
+			//Gestion des catégories -----------------------------------------------------------------------------------
+			prepare_deletion();
+			
+			$('#new_category_form').submit(function(e) {
+				e.preventDefault();
+				var category_name = $('#new_category').val();
+				if (category_name != "") {
+					$.post(
+						"{{ path('su_account_send_category') }}",
+						{
+							new_category: category_name
+						},
+						function(rep) {
+							if (rep.notif == "category_added") {
+								if ($('#category_table').children().first().children().last().html() == "<em>Vide</em>") {
+									$('#category_table').html("");
+								}
+								$('#category_table').append(rep.html);
+								$('#new_category').val("");
+								Materialize.toast("Catégorie ajoutée", 4000);
+								prepare_deletion();
+							} else {
+								Materialize.toast('Ooops ... une erreur est survenue ...', 4000);
+							}
+						}
+					);
+				} else {
+					Materialize.toast("Le nom de la catégorie ne peut pas être vide", 4000);
+				}
+			});
+			//----------------------------------------------------------------------------------------------------------
 			
 			$(window).resize(function () {
 				param_init();

@@ -38,6 +38,11 @@
 						<div class="row col s12 center-align">
 							<div style="background-color: #ffdde2; border-radius: 5px; padding: 5px; color: black; border: 1px solid #983f4d; color: red;"><b><big><i class="fa fa-warning"></i> Erreur :</big></b> Combinaison login / mot de passe incorrecte.</div>
 						</div>
+						{% else %}
+						<br>
+						<div class="row col s12 center-align">
+							<div style="background-color: #ffdde2; border-radius: 5px; padding: 5px; color: black; border: 1px solid #983f4d; color: red;"><b><big><i class="fa fa-warning"></i> Erreur :</big></b> {{ error.message }} </div>
+						</div>
 						{% endif %}
 					{% endif %}
 					<div class="input-field col l6 offset-l3 s12 animated" style="animation-delay: 0.2s;">

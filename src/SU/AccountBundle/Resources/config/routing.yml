@@ -2,9 +2,21 @@ su_account_homepage:
     path:     /home
     defaults: { _controller: SUAccountBundle:Account:home }
 
+su_account_send_category:
+    path:     /home/sendCategory
+    defaults: { _controller: SUAccountBundle:Account:sendCategory }
+
+su_account_delete_category:
+    path:     /home/deleteCategory
+    defaults: { _controller: SUAccountBundle:Account:deleteCategory }
+
 su_account_mobile_immediate:
     path:     /home/mimmediate
     defaults: { _controller: SUAccountBundle:Account:mimmediate }
+
+su_account_send_immediate:
+    path:     /home/sendImmediate
+    defaults: { _controller: SUAccountBundle:Account:sendImmediate }
 
 su_account_mobile_differed:
     path:     /home/mdiffered

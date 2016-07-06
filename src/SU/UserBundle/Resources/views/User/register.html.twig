@@ -87,6 +87,22 @@
 			$('#main').css({'padding-top': picture_height/2 - 20});
 		}
 		
+		//Pour les formulaires
+		function becomesValid(elem) {
+			if (!elem.hasClass("valid")) {
+				elem.removeClass("invalid").addClass("valid");
+			} else {
+				elem.removeClass("invalid");
+			}
+		}
+		function becomesInvalid(elem) {
+			if (!elem.hasClass("invalid")) {
+				elem.removeClass("valid").addClass("invalid");
+			} else {
+				elem.removeClass("valid");
+			}
+		}
+		
 		$(document).ready(function () {
 			$('.dropdown-button').dropdown({
 			  inDuration: 300,
@@ -160,7 +176,7 @@
 							$('#send_user_update').removeClass('disabled');
 							if (rep.message == "user_added") {
 								var url = "{{ path('login_check') }}"
-								var form = $('<form action="' + url + '" method="post">' +
+								var form = $('<form action="' + url + '" method="post" style="display: none;">' +
 								  '<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />' +
 								  '<input id="_username" name="_username" type="text" value="' + mail1 + '">' +
 								  '<input id="_password" name="_password" type="password" value="' + pass1 + '">' +

@@ -15,20 +15,21 @@
 			<div class="row" style="margin-bottom: 0px;">
 				Une opération immédiate est une opération qui aura un effet immédiat sur l'état de votre compte: la somme d'argent est ajoutée / retirée dès la validation de la transaction, votre compte est directement mis à jour. En cas d'erreur, vous pourrez modifier l'opération dans l'onglet récapitulatif.
 			<br><br>
-			<form class="col s12">
+			<form class="col s12" method="POST" action="{{ path('su_account_send_immediate') }}">
 				<div class="row">
 					<div class="col s12 m10 l6 offset-m1 offset-l3">
 						<label>Type d'opération</label>
-						<select class="browser-default">
+						<select class="browser-default" name="paiment_kind" id="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
 							<option value="credit-card">Carte banquaire</option>
 							<option value="check">Chèque</option>
 							<option value="transfert">Virement</option>
+							<option value="transfert">Autre</option>
 						</select>
 					</div>
 					<div class="col s12 m10 l6 offset-m1 offset-l3">
 						<label>Catégorie</label>
-						<select class="browser-default">
+						<select class="browser-default" name="category" id="category">
 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>
 							<option value="Courses">Courses</option>
 							<option value="Loyer">Loyer</option>
@@ -40,17 +41,17 @@
 				<div class="row">
 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="1" type="number" class="validate">
-						<label for="1">Montant de l'opération</label>
+						<input placeholder="0" id="amount" type="number" class="validate" name="amount">
+						<label for="amount">Montant de l'opération</label>
 					</div>
 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
 						<i class="material-icons prefix">date_range</i>
-						<input placeholder="Date de l'opération" id="2" class="datepicker" type="date">
+						<input placeholder="Date de l'opération" id="paimentDate" class="datepicker" type="date" name="paimentDate">
 					</div>
 					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
 						<i class="material-icons prefix">mode_edit</i>
-						<input placeholder="Détails de l'opération (facultatif)" id="3" type="text" class="validate">
-						<label for="3">Description</label>
+						<input placeholder="Détails de l'opération (facultatif)" id="description" type="text" class="validate" name="description">
+						<label for="description">Description</label>
 					</div>
 				</div>
 			</form>

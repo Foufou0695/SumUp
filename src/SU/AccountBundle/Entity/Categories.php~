@@ -24,7 +24,12 @@ class Categories
 	/**
 	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\Category", mappedBy="categories", cascade={"persist"})
 	 */
-	private $categories;
+	private $categoryList;
+	
+	/**
+	 * @ORM\OneToOne(targetEntity="SU\UserBundle\Entity\User", mappedBy="categories", cascade={"persist"})
+	 */
+	private $user;
 
     /**
      * Get id
@@ -35,5 +40,28 @@ class Categories
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \SU\UserBundle\Entity\User $user
+     *
+     * @return Categories
+     */
+    public function setUser(\SU\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \SU\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

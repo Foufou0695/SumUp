@@ -33,7 +33,9 @@ class UserController extends Controller
 	}
 	
 	public function registerAction() {
-		return $this->render('SUUserBundle:User:register.html.twig');
+		$csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
+		
+		return $this->render('SUUserBundle:User:register.html.twig', array("csrf_token" => $csrfToken));
 	}
 	
 	public function sendRegistrationAction(Request $request) {
@@ -60,6 +62,30 @@ class UserController extends Controller
 			return new JsonResponse(array("message" => "user_added"));
 		} else {
 			throw $this->createNotFoundException();
+		}
+	}
+	
+	public function updateAction(Request $request) {
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+			$firstName = $request->request->get("firstName");
+			$lastName = $request->request->get("lastName");
+			$password = $request->request->get("pass");
+			$email = $request->request->get("mail");
+			
+			$user = $this->getUser();
+			$em = $this->getDoctrine()->getManager();
+			
+			$user->setFirstName($request->request->get("firstName"));
+			$user->setLastName($request->request->get("lastName"));
+			$user->setPlainPassword($request->request->get("pass"));
+			$user->setEmail($request->request->get("mail"));
+			$user->setUsername($request->request->get("mail"));
+			
+			$em->flush();
+			
+			return new JsonResponse(array("notif" => "account_updated"));
+		} else {
+			return $this->createNotFoundException();
 		}
 	}
 }

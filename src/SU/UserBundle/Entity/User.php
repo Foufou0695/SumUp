@@ -5,6 +5,7 @@ namespace SU\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
+use SU\AccountBundle\Entity\Categories;
 
 /**
  * User
@@ -41,6 +42,11 @@ class User extends BaseUser
 	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\Account", mappedBy="user", cascade={"persist"})
 	 */
 	private $accounts;
+	
+	/**
+	 * @ORM\OneToOne(targetEntity="SU\AccountBundle\Entity\Categories", inversedBy="user", cascade={"persist"})
+	 */
+	private $categories;
 
     /**
      * Constructor
@@ -48,6 +54,7 @@ class User extends BaseUser
     public function __construct()
     {
         $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->categories = new Categories();
 		parent::__construct();
     }
 
@@ -132,5 +139,30 @@ class User extends BaseUser
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set categories
+     *
+     * @param \SU\AccountBundle\Entity\Categories $categories
+     *
+     * @return User
+     */
+    public function setCategories(\SU\AccountBundle\Entity\Categories $categories = null)
+    {
+        $this->categories = $categories;
+		$categories->setUser($this);
+    
+        return $this;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \SU\AccountBundle\Entity\Categories
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

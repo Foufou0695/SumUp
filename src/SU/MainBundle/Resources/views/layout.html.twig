@@ -26,10 +26,9 @@
 			<div class="nav-wrapper">
 				<a href="{{ path('su_account_homepage') }}" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
 				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">
-					{% block accounts %}
-					<li><a class="waves-effect waves-light link-hover">Livret A <i class="fa fa-book left hide-on-small-only"></i></a></li>
-					<li><a class="waves-effect waves-light link-hover active-account">Compte Courant <i class="fa fa-book left hide-on-small-only"></i></a></li>
-					{% endblock %}
+					{% for account in app.user.getAccounts() %}
+						<li><a class="waves-effect waves-light link-hover">{{ account.name }} <i class="fa fa-book left hide-on-small-only"></i></a></li>
+					{% endfor %}
 					<li><a href="{{ path('su_user_param') }}" class="waves-effect waves-light link-hover">Nouveau <i class="fa fa-plus left"></i></a></li>
 				</ul>
 				<ul class="left small-only">
