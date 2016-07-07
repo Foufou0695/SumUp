@@ -45,3 +45,7 @@ su_account_update_principal_ac:
 su_account_delete_account:
     path:     /home/deleteAccount
     defaults: { _controller: SUAccountBundle:Account:deleteAccount }
+
+su_account_send_operation:
+    path:     /home/sendOperation
+    defaults: { _controller: SUAccountBundle:Account:sendOperation }

@@ -1,4 +1,7 @@
 services:
-#    su_account.example:
-#        class: SU\AccountBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    su_account.categoryService:
+        class: SU\AccountBundle\CategoryService\SUCategoryService
+        arguments: ['@service_container']
+    su_account.accountService:
+        class: SU\AccountBundle\AccountService\SUAccountService
+        arguments: ['@service_container']

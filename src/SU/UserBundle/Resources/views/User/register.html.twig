@@ -116,7 +116,7 @@
 			logo_resize();
 			
 			//Vérification & envoie du formulaire utilisateur ------------------------------------------
-			$('#first_name, #last_name, #mail1').keyup(function () {
+			$('#first_name, #last_name, #mail1').bind("keyup focusout", function () {
 				var valeur = $(this).val();
 				if ((valeur != "") && (valeur.length >= 3)) {
 					becomesValid($(this));
@@ -144,7 +144,7 @@
 				}
 			});
 			
-			$('#mail2').keyup(function () {
+			$('#mail2').bind("keyup focusout", function () {
 				var mail1 = $('#mail1').val();
 				var mail2 = $(this).val();
 				if (mail1 == mail2) {

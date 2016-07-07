@@ -8246,7 +8246,7 @@ button.btn-floating {
 }
 
 .dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
-  background-color: #eee;
+  background-color: #ffc1cb;
 }
 
 .dropdown-content li.active.selected {
@@ -8402,7 +8402,7 @@ a.waves-effect .waves-ripple {
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 70%;
+  max-height: 80%;
   width: 55%;
   margin: auto;
   overflow-y: auto;
@@ -8457,7 +8457,7 @@ a.waves-effect .waves-ripple {
 
 .modal.modal-fixed-footer {
   padding: 0;
-  height: 70%;
+  height: 80%;
 }
 
 .modal.modal-fixed-footer .modal-content {

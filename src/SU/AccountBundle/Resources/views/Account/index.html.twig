@@ -278,53 +278,52 @@
 			<div class="row" style="margin-bottom: 0px;">
 				Une opération immédiate est une opération qui aura un effet immédiat sur l'état de votre compte: la somme d'argent est ajoutée / retirée dès la validation de la transaction, votre compte est directement mis à jour. En cas d'erreur, vous pourrez modifier l'opération dans l'onglet récapitulatif.
 			<br><br>
-			<form class="col s12">
+			<form class="col s12" id="immediate_form" data-effective="immediate">
 				<div class="row">
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Type d'opération</label>
-						<select class="browser-default">
+						<select class="browser-default" id="immediate_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
 							<option value="credit-card">Carte banquaire</option>
 							<option value="check">Chèque</option>
 							<option value="transfert">Virement</option>
 						</select>
 					</div>
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Catégorie</label>
-						<select class="browser-default">
+						<select class="browser-default" id="immediate_category" name="category">
 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>
-							<option value="Courses">Courses</option>
-							<option value="Loyer">Loyer</option>
-							<option value="Vêtements">Vêtements</option>
-							<option value="Transports">Transports</option>
+							{% for category in app.user.getCategories() %}
+								<option value="{{ category.name }}">{{ category.name }}</option>
+							{% endfor %}
 						</select>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="1" type="number" class="validate">
-						<label for="1">Montant de l'opération</label>
+						<input placeholder="0" id="immediate_amount" type="number" class="validate" name="amount">
+						<label for="immediate_amount">Montant de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">date_range</i>
-						<input placeholder="cliquer pour choisir" id="2" class="datepicker" type="number">
-						<label for="2">Date de l'opération</label>
+						<input placeholder="cliquer pour choisir" id="immediate_date" class="datepicker validate" type="number">
+						<label for="immediate_date">Date de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">mode_edit</i>
-						<input placeholder="Détails de l'opération (facultatif)" id="3" type="text" class="validate">
-						<label for="3">Description</label>
+						<input placeholder="Détails de l'opération (facultatif)" id="immediate_description" type="text" class="validate" name="description">
+						<label for="immediate_description">Description</label>
 					</div>
 				</div>
-			</form>
 			</div>
 		</section>
 	</div>
 	<div id="immediate_operation_modal_footer" class="modal-footer">
-		<a id="add_immediate_operation" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>
+		<button id="add_immediate_operation" type="submit" class="btn modal-action waves-effect waves-light green animated add-button" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</button>
 		<a id="return_from_immediate_operation" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
 	</div>
+	</form>
 </div>
 <!-- /.Modal Immediate operation -->
 
@@ -340,53 +339,52 @@
 			<div class="row" style="margin-bottom: 0px;">
 				Une opération différée est une opération dont l'effet sur le compte n'aura lieu qu'à la date demandée. Avant cette date, l'opération sera rangée dans les opérations en attente.
 			<br><br>
-			<form class="col s12">
+			<form class="col s12" id="differed_form" data-effective="differed">
 				<div class="row">
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Type d'opération</label>
-						<select class="browser-default">
+						<select class="browser-default" id="differed_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
 							<option value="credit-card">Carte banquaire</option>
 							<option value="check">Chèque</option>
 							<option value="transfert">Virement</option>
 						</select>
 					</div>
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Catégorie</label>
-						<select class="browser-default">
+						<select class="browser-default" id="differed_category" name="category">
 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>
-							<option value="Courses">Courses</option>
-							<option value="Loyer">Loyer</option>
-							<option value="Vêtements">Vêtements</option>
-							<option value="Transports">Transports</option>
+							{% for category in app.user.getCategories() %}
+								<option value="{{ category.name }}">{{ category.name }}</option>
+							{% endfor %}
 						</select>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="4" type="number" class="validate montant_field">
-						<label for="4">Montant de l'opération</label>
+						<input placeholder="0" id="differed_amount" type="number" class="validate" name="amount">
+						<label for="differed_amount">Montant de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">date_range</i>
-						<input placeholder="cliquer pour choisir" id="5" class="datepicker" type="number">
-						<label for="5">Date de l'opération</label>
+						<input placeholder="cliquer pour choisir" id="differed_date" class="datepicker validate" type="number">
+						<label for="differed_date">Date de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">mode_edit</i>
-						<input placeholder="Détails de l'opération (facultatif)" id="6" class="description_field validate" type="text">
-						<label for="6">Description</label>
+						<input placeholder="Détails de l'opération (facultatif)" id="differed_description" type="text" class="validate" name="description">
+						<label for="differed_description">Description</label>
 					</div>
 				</div>
-			</form>
 			</div>
 		</section>
 	</div>
 	<div id="differed_operation_modal_footer" class="modal-footer">
-		<a id="add_differed_operation" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>
+		<button id="add_differed_operation" type="submit" class="btn modal-action waves-effect waves-light green animated add-button" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</button>
 		<a id="return_from_differed_operation" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
 	</div>
+	</form>
 </div>
 <!-- /.Modal Differed operation -->
 
@@ -402,53 +400,52 @@
 			<div class="row" style="margin-bottom: 0px;">
 				Une opération mensuel vous permet d'automatiser la sortie ou l'entrée de montants fixes sur votre compte (ex: loyer, ... ). L'opération sera effectuée tous les mois à partir de la date donnée.
 			<br><br>
-			<form class="col s12">
+			<form class="col s12" id="systematic_form" data-effective="systematic">
 				<div class="row">
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Type d'opération</label>
-						<select class="browser-default">
+						<select class="browser-default" id="systematic_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
 							<option value="credit-card">Carte banquaire</option>
 							<option value="check">Chèque</option>
 							<option value="transfert">Virement</option>
 						</select>
 					</div>
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Catégorie</label>
-						<select class="browser-default">
+						<select class="browser-default" id="systematic_category" name="category">
 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>
-							<option value="Courses">Courses</option>
-							<option value="Loyer">Loyer</option>
-							<option value="Vêtements">Vêtements</option>
-							<option value="Transports">Transports</option>
+							{% for category in app.user.getCategories() %}
+								<option value="{{ category.name }}">{{ category.name }}</option>
+							{% endfor %}
 						</select>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="7" type="number" class="validate montant_field">
-						<label for="7">Montant de l'opération</label>
+						<input placeholder="0" id="systematic_amount" type="number" class="validate" name="amount">
+						<label for="systematic_amount">Montant de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">date_range</i>
-						<input placeholder="cliquer pour choisir" id="8" class="datepicker" type="number">
-						<label for="8">Date de l'opération</label>
+						<input placeholder="cliquer pour choisir" id="systematic_date" class="datepicker validate" type="number">
+						<label for="systematic_date">Date de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">mode_edit</i>
-						<input placeholder="Détails de l'opération (facultatif)" id="9" class="description_field validate" type="text">
-						<label for="9">Description</label>
+						<input placeholder="Détails de l'opération (facultatif)" id="systematic_description" type="text" class="validate" name="description">
+						<label for="systematic_description">Description</label>
 					</div>
 				</div>
-			</form>
 			</div>
 		</section>
 	</div>
 	<div id="systematic_operation_modal_footer" class="modal-footer">
-		<a id="add_systematic_operation" href="#" class="btn modal-action waves-effect waves-light green animated disabled" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</a>
+		<button id="add_systematic_operation" type="submit" class="btn modal-action waves-effect waves-light green animated add-button" style="margin-right: 20px;"><i class="fa fa-check left"></i>Ajouter</button>
 		<a id="return_from_systematic_operation" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
 	</div>
+	</form>
 </div>
 <!-- /.Modal Systematic operation -->
 
@@ -704,6 +701,78 @@
 		});
 	}
 	
+	function calendrier(modal) {
+		input = modal.find('.datepicker').pickadate({
+			labelMonthNext: 'Mois suivant',
+			labelMonthPrev: 'Mois précédent',
+			labelMonthSelect: 'Choisissez un mois',
+			labelYearSelect: 'Choisissez une année',
+			monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
+			monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
+			weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+			weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+			weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+			today: 'Ajd',
+			clear: 'Effacer',
+			close: 'Fermer'
+		});
+		picker = input.pickadate('picker');
+		picker.off('close');
+		picker.on('close', function() {
+			$('.datepicker').removeClass("invalid").addClass("valid");
+		});
+	}
+	
+	function prepare_operation_modals() {
+		$('#immediate_form, #differed_form, #systematic_form').find('input').off("keyup focusout change");
+		$('#immediate_form, #differed_form, #systematic_form').find('input').bind("keyup focusout change", function() {
+			var valeur = $(this).val();
+			if ((valeur != "") && (valeur.length >= 0)) {
+				becomesValid($(this));
+			} else {
+				becomesInvalid($(this));
+			}
+		});
+		
+		$('#immediate_form, #differed_form, #systematic_form').off('submit');
+		$('#immediate_form, #differed_form, #systematic_form').submit(function(e) {
+			e.preventDefault();
+			var effective = $(this).attr('data-effective');
+			var paimentKind = $(this).find('.browser-default').first().val();
+			var category = $(this).find('.browser-default').last().val();
+			var amount = $(this).find('input').first().val();
+			var date = picker.get('select').year + "-" + picker.get('select').month + "-" + picker.get('select').date + " 00:00:00";
+			var description = $(this).find('input').last().val();
+			
+			if ((paimentKind != null) && (category != null) && (amount != "") && (date != "") && (!$('.add-button').hasClass("disabled"))) {
+				$(".add-button").addClass("disabled");
+				$.post(
+					'{{ path("su_account_send_operation") }}',
+					{
+						effective: effective,
+						paimentKind: paimentKind,
+						category: category,
+						amount: amount,
+						date: date,
+						description: description
+					},
+					function(rep) {
+						if (rep.notif == "operation_added") {
+							Materialize.toast("Opération ajoutée.", 4000);
+							$('.modal-close').trigger('click');
+							$(".add-button").removeClass("disabled");
+						} else {
+							Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+							console.log(rep.message);
+						}
+					}
+				);
+			} else {
+				Materialize.toast("Formulaire incorrect.", 4000);
+			}
+		});
+	}
+	
 	$(document).ready(function () {
 		
 		//Boutons ajout opération ----------------------------------------------------------
@@ -714,26 +783,12 @@
 					opacity: 0.5,
 					in_duration: 250,
 					out_duration: 250,
+					ready: function() {
+						prepare_operation_modals();
+						calendrier($('#immediate_operation_modal'));
+					},
 					complete: clean_overlay
 				});
-				
-				var input = $('.datepicker').pickadate({
-					labelMonthNext: 'Mois suivant',
-					labelMonthPrev: 'Mois précédent',
-					labelMonthSelect: 'Choisissez un mois',
-					labelYearSelect: 'Choisissez une année',
-					monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
-					monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
-					weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-					weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
-					weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
-					today: 'Ajd',
-					clear: 'Effacer',
-					close: 'Fermer'
-				});
-				picker = input.pickadate('picker');
-				
-				picker.set('select', new Date());
 			} else {
 				$(location).attr('href',"{{ path('su_account_mobile_immediate') }}");
 			}
@@ -746,25 +801,12 @@
 					opacity: 0.5,
 					in_duration: 250,
 					out_duration: 250,
+					ready: function() {
+						prepare_operation_modals();
+						calendrier($('#differed_operation_modal'));
+					},
 					complete: clean_overlay
 				});
-				
-				
-				var input = $('.datepicker').pickadate({
-					labelMonthNext: 'Mois suivant',
-					labelMonthPrev: 'Mois précédent',
-					labelMonthSelect: 'Choisissez un mois',
-					labelYearSelect: 'Choisissez une année',
-					monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
-					monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
-					weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-					weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
-					weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
-					today: 'Ajd',
-					clear: 'Effacer',
-					close: 'Fermer'
-				});
-				picker = input.pickadate('picker');
 			} else {
 				$(location).attr('href',"{{ path('su_account_mobile_differed') }}");
 			}
@@ -777,24 +819,12 @@
 					opacity: 0.5,
 					in_duration: 250,
 					out_duration: 250,
+					ready: function() {
+						prepare_operation_modals();
+						calendrier($('#systematic_operation_modal'));
+					},
 					complete: clean_overlay
 				});
-				
-				var input = $('.datepicker').pickadate({
-					labelMonthNext: 'Mois suivant',
-					labelMonthPrev: 'Mois précédent',
-					labelMonthSelect: 'Choisissez un mois',
-					labelYearSelect: 'Choisissez une année',
-					monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre' ],
-					monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
-					weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
-					weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
-					weekdaysLetter: [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
-					today: 'Ajd',
-					clear: 'Effacer',
-					close: 'Fermer'
-				});
-				picker = input.pickadate('picker');
 			} else {
 				$(location).attr('href',"{{ path('su_account_mobile_systematic') }}");
 			}

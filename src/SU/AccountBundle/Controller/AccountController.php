@@ -11,15 +11,34 @@ use Doctrine\Common\Collections\ArrayCollection;
 use SU\AccountBundle\Entity\Account;
 use SU\AccountBundle\Entity\Category;
 use SU\AccountBundle\Entity\Categories;
+use SU\AccountBundle\Entity\Entry;
 
 class AccountController extends Controller
 {
-    public function homeAction() {
+    public function homeAction(Request $request) {
 		
 		$user = $this->getUser();
+		$session = $request->getSession();
 		
 		if (count($user->getAccounts()) == 0) {
 			return $this->redirectToRoute('su_account_new_account');
+		} else {
+			if ($session->get("currentAccount") == "") {
+				$accountService = $this->container->get("su_account.accountService");
+				$session->set("currentAccount", $accountService->getPrincipalAccount($user));
+			}
+		}
+		
+		if ($request->isMethod("POST")) {
+			$accountName = $request->request->get("accountName");
+			$accountService = $this->container->get("su_account.accountService");
+			$account = $accountService->getAccountByName($user, $accountName);
+			if ($account) {
+				$session->set("currentAccount", $account);
+				return new JsonResponse(array("notif" => "account_changed"));
+			} else {
+				return new JsonResponse(array("notif" => "account_unchanged", "message" => "Ce compte n'existe pas ou ne vous appartient pas ...."));
+			}
 		}
 		
         return $this->render('SUAccountBundle:Account:index.html.twig');
@@ -91,7 +110,8 @@ class AccountController extends Controller
 				} else {
 					$selectHtml = '<option value="'.$account->getName().'">'.$account->getName().'</option>';
 				}
-				return new JsonResponse(array("notif" => "account_added", "tableHtml" => $tableHtml, "selectHtml" => $selectHtml));
+				$menuHtml = '<li><a class="waves-effect waves-light link-hover"><span>'.$account->getName().'</span> <i class="fa fa-book left hide-on-small-only"></i></a></li>';
+				return new JsonResponse(array("notif" => "account_added", "tableHtml" => $tableHtml, "selectHtml" => $selectHtml, "menuHtml" => $menuHtml));
 			} else {
 				return $this->redirectToRoute('su_account_homepage');
 			}
@@ -193,6 +213,39 @@ class AccountController extends Controller
 			} else {
 				return new JsonResponse(array("notif" => "no_account_deleted", "message" => "Le compte demandé n'existe pas ou n'est pas le votre."));
 			}
+		} else {
+			return $this->createNotFoundException();
+		}
+	}
+	
+	public function sendOperationAction(Request $request) {
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$user = $this->getUser();
+			$session = $request->getSession();
+			$categoryService = $this->container->get("su_account.categoryService");
+			$accountService = $this->container->get("su_account.accountService");
+			
+			$category = $categoryService->getCategoryByName($user, $request->request->get("category"));
+			
+			if ($category) {
+				$entry = new Entry();
+				$entry->setAmount($request->request->get("amount"));
+				$entry->setPaimentKind($request->request->get("paimentKind"));
+				$entry->setEffective($request->request->get("effective"));
+				$entry->setPaimentDate(new \DateTime ($request->request->get("date")));
+				$entry->setDescription($request->request->get("description"));
+				$entry->setCategory($category);
+				
+				$accountService->getPrincipalAccount($user)->addEntry($entry);
+				$em->flush();
+				
+				return new JsonResponse(array("notif" => "operation_added"));
+			} else {
+				return new JsonResponse(array("notif" => "nothing_added", "error" => "category", "message" => "La catégorie demandée n'existe pas -> ".$request->request->get("name")));
+			}
+			
+			
 		} else {
 			return $this->createNotFoundException();
 		}

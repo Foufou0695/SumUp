@@ -256,6 +256,11 @@
 									$(this).remove();
 								}
 							});
+							$('#drop_accounts').find('span').each(function() {
+								if ($(this).html() == to_delete) {
+									$(this).parent().parent().remove();
+								}
+							});
 							if ($('#account_table').children().length == 0) {
 								$('#account_table').append("<tr><td><em>Vide</em></td><td><em>Vide</em></td><td><em>Vide</em></td></tr>");
 							}
@@ -273,7 +278,7 @@
 			param_init();
 			
 			//Vérification & envoie du formulaire utilisateur ------------------------------------------
-			$('#first_name, #last_name, #mail1').keyup(function () {
+			$('#first_name, #last_name, #mail1').bind("keyup focusout", function () {
 				var valeur = $(this).val();
 				if ((valeur != "") && (valeur.length >= 3)) {
 					becomesValid($(this));
@@ -301,7 +306,7 @@
 				}
 			});
 			
-			$('#mail2').bind("change keyup", function () {
+			$('#mail2').bind("keyup focusout", function () {
 				var mail1 = $('#mail1').val();
 				var mail2 = $(this).val();
 				if (mail1 == mail2) {
@@ -478,6 +483,7 @@
 												}
 												$('#account_table').append(rep.tableHtml);
 												$('#ac_priority').append(rep.selectHtml);
+												$('#drop_accounts').prepend(rep.menuHtml);
 												$('#return_from_new_account').trigger('click');
 												prepare_ac_deletion();
 											} else {
