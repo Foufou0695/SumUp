@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use SU\AccountBundle\Entity\Account;
 use SU\AccountBundle\Entity\Category;
-use SU\AccountBundle\Entity\Categories;
 use SU\AccountBundle\Entity\Entry;
 
 class AccountController extends Controller
@@ -234,6 +233,11 @@ class AccountController extends Controller
 				$entry->setPaimentKind($request->request->get("paimentKind"));
 				$entry->setEffective($request->request->get("effective"));
 				$entry->setPaimentDate(new \DateTime ($request->request->get("date")));
+				
+				if (($entry->getEffective() == "immediate") and ($entry->getPaimentDate()->getTimestamp() > (new \Datetime())->getTimestamp())) {
+					$entry->setEffective("differed");
+				}
+				
 				$entry->setDescription($request->request->get("description"));
 				$entry->setCategory($category);
 				
@@ -249,5 +253,45 @@ class AccountController extends Controller
 		} else {
 			return $this->createNotFoundException();
 		}
+	}
+	
+	public function updateFirstAmountAction(Request $request) {
+		if ($request->isMethod("POST") and $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$user = $this->getUser();
+			$session = $request->getSession();
+			$firstAmount = $request->request->get("firstAmount");
+			$accountService = $this->container->get("su_account.accountService");
+			
+			if ($firstAmount) {
+				$account = $accountService->getAccountByName($user, $session->get("currentAccount")->getName());
+				$account->setFirstAmount($firstAmount);
+				$session->set("currentAccount", $account);
+				$em->flush();
+				return new JsonResponse(array("notif" => "first_amount_updated"));
+			} else {
+				return new JsonResponse(array("notif" => "nothing_updated", "message" => "Le montant indiqué est vide ..."));
+			}
+		} else {
+			return $this->createNotFoundException();
+		}
+	}
+	
+	public function getMonthOperationsAction(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$session = $request->getSession();
+		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+		$monthOperations = $entryRepository->findOperationsByMonth($session->get("currentAccount"));
+		$accountService = $this->container->get("su_account.accountService");
+		
+		$totalMonthOperations = $accountService->sumEntries($monthOperations);
+		$totalInBank = $session->get('currentAccount')->getFirstAmount() - $totalMonthOperations;
+		
+		return $this->render("SUAccountBundle:Account:currentOperations.html.twig",
+							array("monthOperations" => $monthOperations,
+								"currentAccount" => $session->get("currentAccount"),
+								"totalMonthOperations" => $totalMonthOperations,
+								"totalInBank" => $totalInBank
+							));
 	}
 }

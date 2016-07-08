@@ -42,6 +42,10 @@ su_account_update_principal_ac:
     path:     /home/updateAcPriority
     defaults: { _controller: SUAccountBundle:Account:updateAcPriority }
 
+su_account_update_first_amount:
+    path:     /home/updateFirstAmount
+    defaults: { _controller: SUAccountBundle:Account:updateFirstAmount }
+
 su_account_delete_account:
     path:     /home/deleteAccount
     defaults: { _controller: SUAccountBundle:Account:deleteAccount }
@@ -49,3 +53,7 @@ su_account_delete_account:
 su_account_send_operation:
     path:     /home/sendOperation
     defaults: { _controller: SUAccountBundle:Account:sendOperation }
+
+su_account_month_operations:
+    path:     /home/monthOperations
+    defaults: { _controller: SUAccountBundle:Account:getMonthOperations }

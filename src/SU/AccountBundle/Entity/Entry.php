@@ -34,9 +34,9 @@ class Entry
 	private $category;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="amount", type="integer")
+     * @ORM\Column(name="amount", type="float")
      */
     private $amount;
 
@@ -82,7 +82,7 @@ class Entry
     /**
      * Set amount
      *
-     * @param integer $amount
+     * @param float $amount
      *
      * @return Entry
      */
@@ -96,7 +96,7 @@ class Entry
     /**
      * Get amount
      *
-     * @return int
+     * @return float
      */
     public function getAmount()
     {

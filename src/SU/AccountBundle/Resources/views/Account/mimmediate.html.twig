@@ -15,49 +15,48 @@
 			<div class="row" style="margin-bottom: 0px;">
 				Une opération immédiate est une opération qui aura un effet immédiat sur l'état de votre compte: la somme d'argent est ajoutée / retirée dès la validation de la transaction, votre compte est directement mis à jour. En cas d'erreur, vous pourrez modifier l'opération dans l'onglet récapitulatif.
 			<br><br>
-			<form class="col s12" method="POST" action="{{ path('su_account_send_immediate') }}">
+			<form class="col s12" id="immediate_form" data-effective="immediate">
 				<div class="row">
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Type d'opération</label>
-						<select class="browser-default" name="paiment_kind" id="paiment_kind">
+						<select class="browser-default" id="immediate_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
-							<option value="credit-card">Carte banquaire</option>
-							<option value="check">Chèque</option>
-							<option value="transfert">Virement</option>
-							<option value="transfert">Autre</option>
+							<option value="Carte banquaire">Carte banquaire</option>
+							<option value="Chèque">Chèque</option>
+							<option value="Virement">Virement</option>
+							<option value="Autre">Autre</option>
 						</select>
 					</div>
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Catégorie</label>
-						<select class="browser-default" name="category" id="category">
+						<select class="browser-default" id="immediate_category" name="category">
 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>
-							<option value="Courses">Courses</option>
-							<option value="Loyer">Loyer</option>
-							<option value="Vêtements">Vêtements</option>
-							<option value="Transports">Transports</option>
+							{% for category in app.user.getCategories() %}
+								<option value="{{ category.name }}">{{ category.name }}</option>
+							{% endfor %}
 						</select>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="amount" type="number" class="validate" name="amount">
-						<label for="amount">Montant de l'opération</label>
+						<input placeholder="0" id="immediate_amount" type="number" step="0.01" class="validate" name="amount">
+						<label for="immediate_amount">Montant de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">date_range</i>
-						<input placeholder="Date de l'opération" id="paimentDate" class="datepicker" type="date" name="paimentDate">
+						<input placeholder="cliquer pour choisir" id="immediate_date" class="datepicker validate" type="date">
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">mode_edit</i>
-						<input placeholder="Détails de l'opération (facultatif)" id="description" type="text" class="validate" name="description">
-						<label for="description">Description</label>
+						<input placeholder="Détails de l'opération (facultatif)" id="immediate_description" type="text" class="validate" name="description">
+						<label for="immediate_description">Description</label>
 					</div>
 				</div>
-			</form>
 			</div>
-		<a id="ok" href="#" class="btn modal-action waves-effect waves-light right green animated disabled"><i class="fa fa-check left"></i>OK</a>
-		<a id="return" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-right: 5px;"><i class="fa fa-angle-left left"></i>Retour</a>
+			<button id="ok" type="submit" class="btn modal-action waves-effect waves-light right green animated add-button"><i class="fa fa-check left"></i>OK</button>
+			<a id="return" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-right: 5px;"><i class="fa fa-angle-left left"></i>Retour</a>
+			</form>
 		</section>
 	</div>
 </div>
@@ -68,10 +67,53 @@
 	{{ parent() }}
 	
 	<script>
+	
 	$(document).ready(function() {
 		
-		$('#ok').click(function() {
-			$(location).attr('href', "{{ path('su_account_homepage') }}" );
+		$('#immediate_form').find('input').bind("keyup focusout change", function() {
+			var valeur = $(this).val();
+			if ((valeur != "") && (valeur.length >= 0)) {
+				becomesValid($(this));
+			} else {
+				becomesInvalid($(this));
+			}
+		});
+		
+		$('#immediate_form').submit(function(e) {
+			e.preventDefault();
+			var effective = $(this).attr('data-effective');
+			var paimentKind = $(this).find('.browser-default').first().val();
+			var category = $(this).find('.browser-default').last().val();
+			var amount = $(this).find('input').first().val();
+			var date = $('.datepicker').val() + " 00:00:00";
+			var description = $(this).find('input').last().val();
+			
+			if ((paimentKind != null) && (category != null) && (amount != "") && (date != " 00:00:00") && (!$('.add-button').hasClass("disabled"))) {
+				$(".add-button").addClass("disabled");
+				$.post(
+					'{{ path("su_account_send_operation") }}',
+					{
+						effective: effective,
+						paimentKind: paimentKind,
+						category: category,
+						amount: amount,
+						date: date,
+						description: description
+					},
+					function(rep) {
+						if (rep.notif == "operation_added") {
+							Materialize.toast("Opération ajoutée.", 4000);
+							$('#return').trigger('click');
+							$(".add-button").removeClass("disabled");
+						} else {
+							Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+							console.log(rep.message);
+						}
+					}
+				);
+			} else {
+				Materialize.toast("Formulaire incorrect.", 4000);
+			}
 		});
 		
 		$('#return').click(function() {

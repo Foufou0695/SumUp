@@ -1,6 +1,6 @@
 .loader {
-	width: 100px;
-	height: 100px;
+	width: 70px;
+	height: 70px;
 	display: inline-block;
 	position: relative;
 }
@@ -12,8 +12,8 @@
 /* Triple cercles */
 
 .loader-triple, .loader-triple-grey {
-	border-radius: 100px;
-	border: 3px solid transparent;
+	border-radius: 70px;
+	border: 2px solid transparent;
 	border-top-color: #FFF;
 	border-bottom-color: #FFF;
 	-webkit-animation: spin 3s linear infinite;
@@ -32,8 +32,8 @@
 	left: 2px;
 	bottom: 2px;
 	right: 2px;
-	border-radius: 100px;
-	border: 3px solid transparent;
+	border-radius: 70px;
+	border: 2px solid transparent;
 	border-top-color: #FFF;
 	border-bottom-color: #FFF;
 	opacity: 0.6;
@@ -53,8 +53,8 @@
 	left: 7.5px;
 	bottom: 7.5px;
 	right: 7.5px;
-	border-radius: 100px;
-	border: 3px solid transparent;
+	border-radius: 70px;
+	border: 2px solid transparent;
 	border-top-color: #FFF;
 	border-bottom-color: #FFF;
 	opacity: 0.4;

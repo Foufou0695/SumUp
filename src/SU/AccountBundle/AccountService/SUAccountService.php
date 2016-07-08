@@ -5,6 +5,10 @@ namespace SU\AccountBundle\AccountService;
 
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
+use SU\AccountBundle\Entity\Account;
+use SU\AccountBundle\Entity\Category;
+use SU\AccountBundle\Entity\Entry;
+
 class SUAccountService {
 	
 	private $container;
@@ -29,5 +33,13 @@ class SUAccountService {
 			}
 		}
 		return null;
+	}
+	
+	public function sumEntries($entries) {
+		$res = 0;
+		foreach($entries as $entry) {
+			$res += $entry->getAmount();
+		}
+		return $res;
 	}
 }

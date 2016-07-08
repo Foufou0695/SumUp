@@ -26,17 +26,16 @@
 				<section id="export_body" class="col s12">
 					<div class="col s12 center-align" style="padding-bottom: 20px;">
 						<div class="row center-align">
-							<h2 style="font-size: 3rem;"><i class="fa fa-book hide-on-small-only"></i> Compte courant</h2>
-							<span class="col s8 offset-s2"><h5 class="col s12 m4 l4 offset-m4 offset-l4 hide-on-med-and-down"><i class="fa fa-chevron-left left link-hover"></i>06/16<i class="fa fa-chevron-right right link-hover"></i></h5></span>
-							<h5 class="col s12 m4 l4 offset-m4 offset-l4 hide-on-large-only"><i class="fa fa-chevron-left left link-hover"></i>06/16<i class="fa fa-chevron-right right link-hover"></i></h5>
+							<h2 style="font-size: 3rem;"><span class="hide-on-small-only"><i class="fa fa-book"></i> </span>Compte courant</h2>
+							<h5 class="col s12 center-align">06/16</h5>
 						</div>
-						<br>
 						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Etat du compte le 01/06/16</h2>
 						<table class="striped highlight centered">
 							<tbody>
-								<tr>
+								<tr class="ligne_ac_amount">
 									<td><b>Total</b></td>
-									<td><b>4 000 923 €</b></td>
+									<td class="montant_option"><b><span>{{ app.session.get("currentAccount").getFirstAmount()|number_format(2, ',', ' ') }}</span> €</b></td>
+									<td id="ac_edition_col" class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover first-ac-amount-pencil"></i></big></big></span></td>
 								</tr>
 							</tbody>
 						</table>
@@ -53,65 +52,14 @@
 								</tr>
 							</thead>
 							
-							<tbody>
-								<tr class="ligne">
-									<td class="type_option">Carte banquaire</td>
-									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr class="ligne">
-									<td class="type_option">Chèque</td>
-									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr class="ligne">
-									<td class="type_option">Virement</td>
-									<td class="category_option"><span>Loyer</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr class="ligne">
-									<td class="type_option">Carte banquaire</td>
-									<td class="category_option"><span>Vêtements</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr class="ligne monthly-operation">
-									<td class="type_option">Carte banquaire</td>
-									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr class="ligne">
-									<td class="type_option">Carte banquaire</td>
-									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td><b>Total des opérations</b></td>
-									<td></td>
-									<td><b>400 000 €</b></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td><b>Total en banque (au 26/06/16)</b></td>
-									<td></td>
-									<td><b>3 609 223 €</b></td>
-									<td></td>
-								</tr>
+							<tbody id="month_operations_tbody">
 							</tbody>
 						</table>
+						<div id="month_operations_loader" class="row center-align" style="margin-top: 10px; margin-bottom: 100px;">
+							<span class="loader loader-triple-grey"></span>
+							<br>
+							<em>Chargement ...</em>
+						</div>
 						<br>
 						<h2 class="divider-new-right"><i class="fa fa-hourglass-2 left hide-on-small-only"></i>Opérations en attente</h2>
 						<table class="striped highlight centered responsive-table">
@@ -121,6 +69,7 @@
 									<th>Catégorie</th>
 									<th>Aura lieu le</th>
 									<th>Montant</th>
+									<th>Edition</th>
 								</tr>
 							</thead>
 							
@@ -130,14 +79,14 @@
 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
 									<td class="date_option">07/06/16</td>
 									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil fa-pencil-ligne link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
 								</tr>
 								<tr class="ligne">
 									<td class="type_option">Carte banquaire</td>
 									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
 									<td class="date_option">07/06/16</td>
 									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
+									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil fa-pencil-ligne link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
 								</tr>
 								<tr>
 									<td></td>
@@ -284,9 +233,10 @@
 						<label>Type d'opération</label>
 						<select class="browser-default" id="immediate_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
-							<option value="credit-card">Carte banquaire</option>
-							<option value="check">Chèque</option>
-							<option value="transfert">Virement</option>
+							<option value="Carte banquaire">Carte banquaire</option>
+							<option value="Chèque">Chèque</option>
+							<option value="Virement">Virement</option>
+							<option value="Autre">Autre</option>
 						</select>
 					</div>
 					<div class="col s12 m10 offset-m1">
@@ -302,7 +252,7 @@
 				<div class="row">
 					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="immediate_amount" type="number" class="validate" name="amount">
+						<input placeholder="0" id="immediate_amount" type="number" class="validate" name="amount" step="0.01">
 						<label for="immediate_amount">Montant de l'opération</label>
 					</div>
 					<div class="input-field col s12 m10 offset-m1">
@@ -345,9 +295,10 @@
 						<label>Type d'opération</label>
 						<select class="browser-default" id="differed_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
-							<option value="credit-card">Carte banquaire</option>
-							<option value="check">Chèque</option>
-							<option value="transfert">Virement</option>
+							<option value="Carte banquaire">Carte banquaire</option>
+							<option value="Chèque">Chèque</option>
+							<option value="Virement">Virement</option>
+							<option value="Autre">Autre</option>
 						</select>
 					</div>
 					<div class="col s12 m10 offset-m1">
@@ -363,7 +314,7 @@
 				<div class="row">
 					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="differed_amount" type="number" class="validate" name="amount">
+						<input placeholder="0" id="differed_amount" type="number" class="validate" name="amount" step="0.01">
 						<label for="differed_amount">Montant de l'opération</label>
 					</div>
 					<div class="input-field col s12 m10 offset-m1">
@@ -406,9 +357,10 @@
 						<label>Type d'opération</label>
 						<select class="browser-default" id="systematic_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
-							<option value="credit-card">Carte banquaire</option>
-							<option value="check">Chèque</option>
-							<option value="transfert">Virement</option>
+							<option value="Carte banquaire">Carte banquaire</option>
+							<option value="Chèque">Chèque</option>
+							<option value="Virement">Virement</option>
+							<option value="Autre">Autre</option>
 						</select>
 					</div>
 					<div class="col s12 m10 offset-m1">
@@ -424,7 +376,7 @@
 				<div class="row">
 					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="systematic_amount" type="number" class="validate" name="amount">
+						<input placeholder="0" id="systematic_amount" type="number" class="validate" name="amount" step="0.01">
 						<label for="systematic_amount">Montant de l'opération</label>
 					</div>
 					<div class="input-field col s12 m10 offset-m1">
@@ -593,9 +545,36 @@
 		});
 	}
 	
+	function set_ac_lignes() {
+		$('.tooltipped').tooltip({delay: 50});
+		$('.ligne_ac_amount').off('dblclick');
+		$('.ligne_ac_amount').dblclick(function(){
+			set_first_amount_ligne();
+		});
+		
+		$('.first-ac-amount-pencil').off('click');
+		$('.first-ac-amount-pencil').click(function() {
+			set_first_amount_ligne();
+		});
+	}
+	
 	function set_lignes() {
-		$('.fa-pencil').off('click');
-		$('.fa-pencil').click(function() {
+		$('.tooltipped').tooltip({delay: 50});
+		$('.ligne').off('mouseenter mouseover mouseleave');
+		$('.ligne').on({
+			mouseenter: function() {
+				$(this).children().last().children().addClass('edition-active');
+			},
+			mouseover: function() {
+				$(this).children().last().children().addClass('edition-active');
+			},
+			mouseleave: function() {
+				$(this).children().last().children().removeClass('edition-active');
+			}
+		});
+		
+		$('.fa-pencil-ligne').off('click');
+		$('.fa-pencil-ligne').click(function() {
 			set_lignes_aux($(this).parent().parent().parent().parent().parent());
 		});
 		
@@ -604,6 +583,7 @@
 			set_lignes_aux($(this));
 		});
 		
+		$('.suppression-icon').off('click');
 		$('.suppression-icon').click(function() {
 			$('#suppression_modal').openModal({
 				dismissible: true,
@@ -633,14 +613,14 @@
 		var type_option = '<select class="browser-default"><option value="" disabled selected>Type de paiement</option><option value="Carte banquaire">Carte banquaire</option><option value="Chèque">Chèque</option><option value="Virement">Virement</option></select>';
 		var category_option = '<select class="browser-default"><option value="" disabled selected>Catégorie</option><option value="Course">Course</option><option value="Loyer">Loyer</option><option value="Vêtements">Vêtements</option><option value="Transports">Transports</option></select>';
 		var date_option = '<input type="date" class="datepicker center-align">';
-		var montant_option = '<input type="number" class="center-align">';
+		var montant_option = '<input type="number" class="center-align" step="0.01">';
 		var edition_option = '<span class="edition"><big><big><i class="fa fa-check link-hover green-edition-text modification-validation"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>';
 		
 		var type = ligne.find('.type_option').html();
 		var category = ligne.find('.category_option').children().first().html();
 		var category_sav = ligne.find('.category_option').html();
 		var datepicker_val = ligne.find('.date_option').html();
-		var montant = ligne.find('.montant_option').children().first().html();
+		var montant = parseFloat(ligne.find('.montant_option').children().first().html().replace(' ', '').replace(',', '.'));
 		var montant_sav = ligne.find('.montant_option').html();
 		var edition_sav = ligne.find('.edition_option').html();
 		
@@ -701,6 +681,69 @@
 		});
 	}
 	
+	function set_first_amount_ligne() {
+		var ligne = $('.ligne_ac_amount');
+		if ($('.green-edition-text').size() >= 1) {
+			$('.green-edition-text').parent().find('.delete-hover').trigger('click');
+		}
+		var montant_option = '<input type="number" class="center-align" step="0.01">';
+		var montant_sav = ligne.find('.montant_option').html();
+		var montant = parseFloat(ligne.find('.montant_option').children().children().html().replace(' ', '').replace(',', '.'));
+		var edition_sav = ligne.find('.edition_option').html();
+		var edition_option = '<span class="edition"><big><big><i class="fa fa-check link-hover green-edition-text modification-validation"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>';
+		ligne.find('.montant_option').html(montant_option);
+		ligne.find('.montant_option input').val(montant);
+		ligne.addClass('edited-ligne');
+		ligne.find('.edition_option').html(edition_option);
+		
+		ligne.find('.delete-hover').click(function() {
+			ligne.find('.montant_option').html(montant_sav);
+			ligne.find('.edition_option').html(edition_sav);
+			
+			$('.tooltipped').tooltip({delay: 50});
+			
+			ligne.removeClass('edited-ligne');
+			
+			set_lignes();
+		});
+		
+		ligne.find('.modification-validation').click(function() {
+			var firstAmount = ligne.find('.montant_option input').val();
+			if (firstAmount != "") {
+				$.post(
+					"{{ path('su_account_update_first_amount') }}",
+					{
+						firstAmount: firstAmount
+					},
+					function(rep) {
+						if (rep.notif == "first_amount_updated") {
+							ligne.find('.delete-hover').trigger('click');
+							ligne.find('.montant_option').children().children().html(firstAmount);
+							Materialize.toast('Montant modifié. Mise à jour ...', 4000);
+							month_operation_update();
+						} else {
+							Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+							console.log(rep.message);
+						}
+					}
+				);
+			}
+		});
+	}
+	
+	function month_operation_update() {
+		$('#month_operations_tbody').html("");
+		$('#month_operations_loader').show();
+		$.get(
+			"{{ path('su_account_month_operations') }}",
+			function(rep) {
+				$('#month_operations_loader').hide();
+				$('#month_operations_tbody').html(rep);
+				set_lignes();
+			}
+		);
+	}
+	
 	function calendrier(modal) {
 		input = modal.find('.datepicker').pickadate({
 			labelMonthNext: 'Mois suivant',
@@ -741,7 +784,7 @@
 			var paimentKind = $(this).find('.browser-default').first().val();
 			var category = $(this).find('.browser-default').last().val();
 			var amount = $(this).find('input').first().val();
-			var date = picker.get('select').year + "-" + picker.get('select').month + "-" + picker.get('select').date + " 00:00:00";
+			var date = picker.get('select').year + "-" + (parseInt(picker.get('select').month)+1).toString() + "-" + picker.get('select').date + " 00:00:00";
 			var description = $(this).find('input').last().val();
 			
 			if ((paimentKind != null) && (category != null) && (amount != "") && (date != "") && (!$('.add-button').hasClass("disabled"))) {
@@ -759,6 +802,7 @@
 					function(rep) {
 						if (rep.notif == "operation_added") {
 							Materialize.toast("Opération ajoutée.", 4000);
+							console.log(rep.message);
 							$('.modal-close').trigger('click');
 							$(".add-button").removeClass("disabled");
 						} else {
@@ -774,7 +818,6 @@
 	}
 	
 	$(document).ready(function () {
-		
 		//Boutons ajout opération ----------------------------------------------------------
 		$('#immediate_operation_button').click(function() {
 			if ($(window).width() >= 992) {
@@ -831,6 +874,8 @@
 		});
 		//----------------------------------------------------------------------------------
 		
+		$('#ac_edition_col').hide();
+		
 		$('#recap_tab_button').click(function () {
 			setTimeout(function () {
 				plot_graph()
@@ -839,21 +884,28 @@
 					plot_graph();
 				});
 				
-				$('.ligne').on({
+				$('.ligne_ac_amount').on({
 					mouseenter: function() {
+						$(this).find('.edition_option').show();
+						set_ac_lignes();
 						$(this).children().last().children().addClass('edition-active');
 					},
 					mouseover: function() {
 						$(this).children().last().children().addClass('edition-active');
 					},
 					mouseleave: function() {
+						$(this).find('.edition_option').hide();
 						$(this).children().last().children().removeClass('edition-active');
 					}
 				});
+				
+				month_operation_update();
+				
 			}, 500);
 		});
 		
 		set_lignes();
+		set_ac_lignes();
 	});
 	</script>
 {% endblock %}

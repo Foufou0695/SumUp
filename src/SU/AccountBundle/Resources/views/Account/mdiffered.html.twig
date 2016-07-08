@@ -15,48 +15,48 @@
 			<div class="row" style="margin-bottom: 0px;">
 				Une opération différée est une opération dont l'effet sur le compte n'aura lieu qu'à la date demandée. Avant cette date, l'opération sera rangée dans les opérations en attente.
 			<br><br>
-			<form class="col s12">
+			<form class="col s12" id="differed_form" data-effective="differed">
 				<div class="row">
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Type d'opération</label>
-						<select class="browser-default">
+						<select class="browser-default" id="immediate_paiment_kind" name="paiment_kind">
 							<option value="" disabled selected>Choisissez le moyen de paiement</option>
-							<option value="credit-card">Carte banquaire</option>
-							<option value="check">Chèque</option>
-							<option value="transfert">Virement</option>
+							<option value="Carte banquaire">Carte banquaire</option>
+							<option value="Chèque">Chèque</option>
+							<option value="Virement">Virement</option>
+							<option value="Autre">Autre</option>
 						</select>
 					</div>
-					<div class="col s12 m10 l6 offset-m1 offset-l3">
+					<div class="col s12 m10 offset-m1">
 						<label>Catégorie</label>
-						<select class="browser-default">
+						<select class="browser-default" id="immediate_category" name="category">
 							<option value="" disabled selected>Choisissez la catégorie de l'opération</option>
-							<option value="Courses">Courses</option>
-							<option value="Loyer">Loyer</option>
-							<option value="Vêtements">Vêtements</option>
-							<option value="Transports">Transports</option>
+							{% for category in app.user.getCategories() %}
+								<option value="{{ category.name }}">{{ category.name }}</option>
+							{% endfor %}
 						</select>
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">euro_symbol</i>
-						<input placeholder="0" id="4" type="number" class="validate montant_field">
-						<label for="4">Montant de l'opération</label>
+						<input placeholder="0" id="immediate_amount" type="number" step="0.01" class="validate" name="amount">
+						<label for="immediate_amount">Montant de l'opération</label>
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">date_range</i>
-						<input placeholder="Date de l'opération" id="2" class="datepicker" type="date">
+						<input placeholder="cliquer pour choisir" id="immediate_date" class="datepicker validate" type="date">
 					</div>
-					<div class="input-field col s12 m10 l6 offset-m1 offset-l3">
+					<div class="input-field col s12 m10 offset-m1">
 						<i class="material-icons prefix">mode_edit</i>
-						<input placeholder="Détails de l'opération (facultatif)" id="6" class="description_field validate" type="text">
-						<label for="6">Description</label>
+						<input placeholder="Détails de l'opération (facultatif)" id="immediate_description" type="text" class="validate" name="description">
+						<label for="immediate_description">Description</label>
 					</div>
 				</div>
-			</form>
 			</div>
-			<a id="ok" href="{{ path('su_account_homepage') }}" class="btn modal-action waves-effect waves-light right green animated disabled"><i class="fa fa-check left"></i>OK</a>
+			<button id="ok" type="submit" class="btn modal-action waves-effect waves-light right green animated add-button"><i class="fa fa-check left"></i>OK</button>
 			<a id="return" href="#" class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-right: 5px;"><i class="fa fa-angle-left left"></i>Retour</a>
+			</form>
 		</section>
 	</div>
 </div>
@@ -65,4 +65,61 @@
 
 {% block javascript %}
 	{{ parent() }}
+	
+	<script>
+	
+	$(document).ready(function() {
+		
+		$('#differed_form').find('input').bind("keyup focusout change", function() {
+			var valeur = $(this).val();
+			if ((valeur != "") && (valeur.length >= 0)) {
+				becomesValid($(this));
+			} else {
+				becomesInvalid($(this));
+			}
+		});
+		
+		$('#differed_form').submit(function(e) {
+			e.preventDefault();
+			var effective = $(this).attr('data-effective');
+			var paimentKind = $(this).find('.browser-default').first().val();
+			var category = $(this).find('.browser-default').last().val();
+			var amount = $(this).find('input').first().val();
+			var date = $('.datepicker').val() + " 00:00:00";
+			var description = $(this).find('input').last().val();
+			
+			if ((paimentKind != null) && (category != null) && (amount != "") && (date != " 00:00:00") && (!$('.add-button').hasClass("disabled"))) {
+				$(".add-button").addClass("disabled");
+				$.post(
+					'{{ path("su_account_send_operation") }}',
+					{
+						effective: effective,
+						paimentKind: paimentKind,
+						category: category,
+						amount: amount,
+						date: date,
+						description: description
+					},
+					function(rep) {
+						if (rep.notif == "operation_added") {
+							Materialize.toast("Opération ajoutée.", 4000);
+							$('#return').trigger('click');
+							$(".add-button").removeClass("disabled");
+						} else {
+							Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+							console.log(rep.message);
+						}
+					}
+				);
+			} else {
+				Materialize.toast("Formulaire incorrect.", 4000);
+			}
+		});
+		
+		$('#return').click(function() {
+			$(location).attr('href', "{{ path('su_account_homepage') }}" );
+		});
+	});
+	</script>
+	
 {% endblock %}

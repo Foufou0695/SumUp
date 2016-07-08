@@ -151,10 +151,20 @@ body {
 }
 
 .monthly-operation {
-	background-color: #e4f2ff !important;
+	background-color: #d3eaff !important;
+	
 }
 
 .monthly-operation:hover {
+	background-color: #ffdee3 !important;
+}
+
+.differed-operation {
+	background-color: #fff9d3 !important;
+	
+}
+
+.differed-operation:hover {
 	background-color: #ffdee3 !important;
 }
 

@@ -10,4 +10,20 @@ namespace SU\AccountBundle\Repository;
  */
 class EntryRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function findOperationsByMonth($account) {
+		$qb = $this->createQueryBuilder('e');
+		$qb->leftjoin("e.category", "c");
+		$qb->addSelect("c");
+		$qb->leftjoin("e.account", "a");
+		$qb->addSelect("a");
+		
+		$qb->where("e.paimentDate BETWEEN :start AND :end");
+		$qb->setParameter("start", new \DateTime((new \DateTime())->format("Y-m")."-01"));
+		$qb->setParameter("end", new \DateTime());
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		return $qb->getQuery()->getResult();
+	}
 }

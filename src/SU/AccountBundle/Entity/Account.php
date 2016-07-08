@@ -41,9 +41,9 @@ class Account
     private $acPriority;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(name="firstAmount", type="integer")
+     * @ORM\Column(name="firstAmount", type="float")
      */
     private $firstAmount;
 
@@ -68,7 +68,7 @@ class Account
     /**
      * Set firstAmount
      *
-     * @param integer $firstAmount
+     * @param float $firstAmount
      *
      * @return Account
      */
@@ -82,7 +82,7 @@ class Account
     /**
      * Get firstAmount
      *
-     * @return int
+     * @return float
      */
     public function getFirstAmount()
     {
