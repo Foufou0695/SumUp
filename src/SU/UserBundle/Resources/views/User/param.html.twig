@@ -30,7 +30,7 @@
 							</p>
 						</div>
 						<div class="col s8 offset-s2 m3 offset-m1 l3 offset-l1">
-							<img id="param_img" src="{{ asset('img/design/logo-min.png') }}" class="responsive-img"></img>
+							<img id="param_img" src="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-min.png') }}" class="responsive-img"></img>
 						</div>
 					</div>
 					<div class="col s12">
@@ -104,7 +104,8 @@
 							<thead>
 								<tr>
 									<th>Catégorie</th>
-									<th>Action</th>
+									<th>Edition</th>
+									<th>Suppression</th>
 								</tr>
 							</thead>
 							
@@ -116,10 +117,13 @@
 								</tr>
 							{% endif %}
 							{% for category in app.user.getCategories() %}
-								<tr class="ligne">
+								<tr class="ligne ligne-category" data-id="{{ category.getId() }}">
 									<td>{{ category.name }}</td>
 									<td>
-										<a data-id="{{ category.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+										<a data-id="{{ category.id }}" class="btn waves-effect waves-light link-hover cardinal-button edit-category truncate"><i class="fa fa-edit left hide-on-small-only"></i>Renommer</a>
+									</td>
+									<td>
+										<a data-id="{{ category.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-category truncate"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
 									</td>
 								</tr>
 							{% endfor %}
@@ -277,6 +281,23 @@
 					}
 				);
 			});
+		}
+		
+		function prepare_cat_ligne() {
+			$(".ligne-category").off("dblclick");
+			$(".ligne-category").dblclick(function() {
+				prepare_cat_ligne_aux($(this));
+			});
+			
+			$(".edit-category").off("click");
+			$(".edit-category").click(function() {
+				prepare_cat_ligne_aux($(this).parent().parent());
+			});
+		}
+		
+		function prepare_cat_ligne_aux(ligne) {
+			var categoryId = ligne.attr('data-id');
+			
 		}
 		
 		$(document).ready(function() {
@@ -518,6 +539,8 @@
 				}
 			});
 			//----------------------------------------------------------------------------------------------------------
+			
+			prepare_cat_ligne();
 			
 			$(window).resize(function () {
 				param_init();

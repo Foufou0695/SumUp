@@ -71,3 +71,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: SU\UserBundle\Entity\User
+
+knp_snappy:  
+    pdf:
+        enabled:    true
+        binary:     "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
+        options:
+            - { name: 'viewport-size', value: ‘1980x1080’ }
+            - { name: 'page-size', value: 'A4' }

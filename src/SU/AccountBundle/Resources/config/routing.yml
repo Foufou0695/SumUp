@@ -77,3 +77,7 @@ su_account_delete_operation:
 su_account_category_details:
     path:     /home/categoryDetails
     defaults: { _controller: SUAccountBundle:Account:categoryDetails }
+
+su_account_pdf:
+    path:     /home/pdf
+    defaults: { _controller: SUAccountBundle:Account:pdf }

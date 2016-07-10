@@ -5,17 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 	<title>SumUp</title>
 	<meta name="theme-color" content="#711d2a">
-	<link rel="icon" href="{{ asset('img/design/logo-icon-min.png') }}">
+	<link rel="icon" href="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-icon-min.png') }}">
 
 	<!-- CSS  -->
 	{% block stylesheet %}
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	
-	<link href="{{ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" >
-	<link href="{{ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
-	<link href="{{ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
-	<link href="{{ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
-	<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" >
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
 	{% endblock %}
 </head>
 <body>
@@ -24,7 +24,7 @@
 	<div class="navbar-fixed" id="navbar_wrapper">
 		<nav class="cardinal">
 			<div class="nav-wrapper">
-				<a href="{{ path('su_account_homepage') }}" class="brand-logo center"><img id="logo_navbar" src="{{ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
+				<a href="{{ path('su_account_homepage') }}" class="brand-logo center"><img id="logo_navbar" src="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-icon-min.png') }}" class="responsive-img" style="height: 50px;"></img></a>
 				<ul id="drop_accounts" class="dropdown-content z-depth-3" style="border: 1px solid #711d2a;">
 					{% for account in app.user.getAccounts() %}
 						<li data="{{ account.name }}" class=" account-li {% if app.session.get('currentAccount').getName() == account.name %} active {% endif %}"><a class="waves-effect waves-light link-hover"><span>{{ account.name }}</span> <i class="fa fa-book left hide-on-small-only"></i></a></li>
@@ -128,9 +128,9 @@
 
 	{% block javascript %}
 	<!--  Scripts-->
-	<script src="{{ asset('js/jquery-2.2.2.js') }}"></script>
-	<script src="{{ asset('js/materialize.js') }}"></script>
-	<script src="{{ asset('js/scroll-to.js') }}"></script>
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery-2.2.2.js') }}"></script>
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/materialize.js') }}"></script>
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/scroll-to.js') }}"></script>
 	{% endblock %}
 	<script>
 		function logo_resize () {
