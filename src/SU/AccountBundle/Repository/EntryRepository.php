@@ -24,6 +24,81 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		$qb->andWhere("a.id = :accountId");
 		$qb->setParameter("accountId", $account->getId());
 		
+		$qb->orderBy("e.paimentDate", "ASC");
+		
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function findFutureOperations($account) {
+		$qb = $this->createQueryBuilder('e');
+		$qb->leftjoin("e.category", "c");
+		$qb->addSelect("c");
+		$qb->leftjoin("e.account", "a");
+		$qb->addSelect();
+		
+		$qb->where("e.paimentDate BETWEEN :start AND :end");
+		$qb->setParameter("start", new \DateTime());
+		$datetime =  new \DateTime((new \DateTime())->format("Y-m")."-01");
+		$datetime->modify("+2 Year");
+		$qb->setParameter("end", $datetime);
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		$qb->orderBy("e.paimentDate", "ASC");
+		
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function getOutOperationsByCategory($category, $account) {
+		$qb = $this->createQueryBuilder("e");
+		$qb->leftjoin("e.category", "c");
+		$qb->addSelect("c");
+		$qb->leftjoin("e.account", "a");
+		$qb->addSelect();
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		$qb->andWhere("c.name = :categoryName");
+		$qb->setParameter("categoryName", $category->getName());
+		
+		$qb->andWhere("e.amount > 0");
+		
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function getInOperationsByCategory($category, $account) {
+		$qb = $this->createQueryBuilder("e");
+		$qb->leftjoin("e.category", "c");
+		$qb->addSelect("c");
+		$qb->leftjoin("e.account", "a");
+		$qb->addSelect();
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		$qb->andWhere("c.name = :categoryName");
+		$qb->setParameter("categoryName", $category->getName());
+		
+		$qb->andWhere("e.amount <= 0");
+		
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function getOperationsByCategory($category, $account) {
+		$qb = $this->createQueryBuilder("e");
+		$qb->leftjoin("e.category", "c");
+		$qb->addSelect("c");
+		$qb->leftjoin("e.account", "a");
+		$qb->addSelect();
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		$qb->andWhere("c.name = :categoryName");
+		$qb->setParameter("categoryName", $category->getName());
+		
 		return $qb->getQuery()->getResult();
 	}
 }

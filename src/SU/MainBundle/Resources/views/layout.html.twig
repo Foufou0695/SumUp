@@ -10,8 +10,8 @@
 	<!-- CSS  -->
 	{% block stylesheet %}
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 	
+	<link href="{{ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" >
 	<link href="{{ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
 	<link href="{{ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
 	<link href="{{ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
@@ -167,8 +167,8 @@
 			}
 		}
 		
-		$(document).ready(function () {
-			
+		function setup_menu() {
+			$('.account-li').off('click');
 			$('.account-li').click(function() {
 				$.post(
 					'{{ path("su_account_homepage") }}',
@@ -185,6 +185,11 @@
 					}
 				);
 			});
+		}
+		
+		$(document).ready(function () {
+			
+			setup_menu();
 			
 			$('.dropdown-button').dropdown({
 			  inDuration: 300,

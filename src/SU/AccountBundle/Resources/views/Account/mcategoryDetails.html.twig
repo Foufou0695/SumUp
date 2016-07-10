@@ -1,0 +1,52 @@
+{% extends 'SUMainBundle::layout.html.twig' %}
+
+{% set menu_selected = '' %}
+
+{% block body %}
+
+<div style="background-color: white; padding:20px; margin-top: 21px;">
+	<div class="modal-content" style="overflow: hidden;">
+		<section id="category_details_top">
+			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">
+				<h5 style="margin-top: 0;"><i class="fa fa-calendar left"></i>Détails <span id="category_field">{{ app.session.get('categoryDetails').getName() }}</span></h5>
+			</div>
+		</section>
+		<section id="category_details_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">
+			<div class="row" style="margin-bottom: 0px;">
+				<table class="striped highlight centered responsive-table">
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>Catégorie</th>
+							<th>Date</th>
+							<th>Montant</th>
+						</tr>
+					</thead>
+					
+					<tbody id="category_operations_tbody">
+					{% for operation in categoryOperations %}
+							<tr data-id="{{ operation.id }}" class="ligne {% if operation.effective == 'systematic'%}monthly-operation{% endif %}{% if operation.effective == 'differed' %}differed-operation{% endif %}">
+								<td class="type_option">{{ operation.paimentKind }}</td>
+								<td class="category_option"><span>{{ operation.getCategory().name }}</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="{% if operation.description == ""%}Vide{% else %}{{operation.description}}{% endif %}"></i></td>
+								<td class="date_option">{{ operation.paimentDate|date("d/m/y") }}</td>
+								<td class="montant_option"><span>{{ operation.amount|number_format(2, ',', ' ') }}</span><span> €</span></td>
+							</tr>
+						{% endfor %}
+						<tr>
+							<td></td>
+							<td><b>Total des opérations</b></td>
+							<td></td>
+							<td><b>{{ totalCategoryOperations|number_format(2, ',', ' ') }} €</b></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<a href="{{ path('su_account_homepage') }}" class="btn waves-effect waves-light left modal-close cardinal-button left" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
+		
+		</section>
+	</div>
+</div>
+
+{% endblock %}

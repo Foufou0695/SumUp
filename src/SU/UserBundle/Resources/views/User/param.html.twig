@@ -3,172 +3,177 @@
 {% set menu_selected = 'param' %}
 
 {% block body %}
-<div class="row">
-	<div class="col l8 offset-l2 m10 offset-m1 s12" style="margin-top: 10px;">
-		<div class="col s12 card" style="padding: 0px; border: 1px solid #75828E;">
-			<section id="history_header" class="kj-grey" style="border-radius: 2px;">
-				<div class="row" style="margin-bottom: 0px;">
-					<div class="col s12 white-text">
-						<h5 class="col s12"><i class="fa fa-gears left"></i>Paramètres</span>
-						</h5>
+<div class="container">
+	<div class="row">
+		<div class="col l8 offset-l2 m10 offset-m1 s12" style="margin-top: 10px; padding-righ">
+			<div class="col s12 card" style="padding: 0px; border: 1px solid #75828E;">
+				<section id="history_header" class="kj-grey" style="border-radius: 2px;">
+					<div class="row" style="margin-bottom: 0px;">
+						<div class="col s12 white-text">
+							<h5 class="col s12"><i class="fa fa-gears left"></i>Paramètres</span>
+							</h5>
+						</div>
 					</div>
-				</div>
-			</section>
-			<section class="col s12" style="padding: 30px;">
-				<div id="param_info" class="row">
-					<div class="col s12 m8 verticalcenter">
-						<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-info-circle"></i> Informations</small></h5>
-						<p class="saisie center-align">
-							<span><b><big>{{ app.user.firstName }} {{ app.user.lastName }}</big></b></span>
+				</section>
+				<section class="col s12" style="padding: 30px;">
+					<div id="param_info" class="row">
+						<div class="col s12 m8 verticalcenter">
+							<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-info-circle"></i> Informations</small></h5>
+							<p class="saisie center-align">
+								<span><b><big>{{ app.user.firstName }} {{ app.user.lastName }}</big></b></span>
+								</br>
+								Nombre de comptes : <span>{{ app.user.getAccounts()|length }}</span>
+								</br>
+								<i class="fa fa-calendar"></i> Dernière connexion : <span>{{ app.user.lastLogin|date("d-m-Y") }}</span>
+								</br>
+								<i class="fa fa-envelope"></i> Email : <span>{{ app.user.email }}</span>
+							</p>
+						</div>
+						<div class="col s8 offset-s2 m3 offset-m1 l3 offset-l1">
+							<img id="param_img" src="{{ asset('img/design/logo-min.png') }}" class="responsive-img"></img>
+						</div>
+					</div>
+					<div class="col s12">
+						<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-book"></i> Vos comptes</small></h5>
+						<p class="saisie">
+							Dans cette section vous pouvez gérer vos comptes, en ajouter de nouveaux ou en supprimer. Donner à un compte le type "Principal" fait de lui le compte par défaut qui sera sélectionné à la connexion au site. C'est en générale le compte courant, celui avec lequel vous ferez le plus d'opérations.
 							</br>
-							Nombre de comptes : <span>{{ app.user.getAccounts()|length }}</span>
-							</br>
-							<i class="fa fa-calendar"></i> Dernière connexion : <span>{{ app.user.lastLogin|date("d-m-Y") }}</span>
-							</br>
-							<i class="fa fa-envelope"></i> Email : <span>{{ app.user.email }}</span>
 						</p>
+						<table class="striped highlight centered">
+							<thead>
+								<tr>
+									<th>Nom du compte</th>
+									<th>Type</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							
+							<tbody id="account_table">
+								{% if app.user.getAccounts()|length == 0 %}
+									<tr class="ligne">
+										<td><em>Vide</em></td>
+										<td><em>Vide</em></td>
+										<td><em>Vide</em></td>
+									</tr>
+								{% endif %}
+								{% for account in app.user.getAccounts() %}
+									<tr class="ligne">
+										<td>{{ account.name }}</td>
+										<td class="ac_priority">{{ account.acPriority }}</td>
+										<td>
+											<a data-id="{{ account.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-ac"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<br>
+						<div class="center-align">
+							<a id="new_account_button" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Nouveau compte</a>
+						</div>
+						<br><br>
+						<div class="center-align" style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Pour changer le compte principal sélectionné par défaut quand vous vous connectez, il vous suffit de cliquer sur "Changer le compte principal".</div>
+						<br>
+						<div class="center-align">
+							<form id="select_ac_priority">
+								<div class="col s12 m10 l6 offset-m1 offset-l3">
+									<label>Compte principal</label>
+									<select class="browser-default" name="ac_priority" id="ac_priority">
+										<option value="default" disabled selected>Choisissez le compte principal</option>
+										{% for account in app.user.getAccounts() %}
+											<option value="{{ account.name }}">{{ account.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<div class="col s12" style="margin-bottom: 20px;">
+									<br>
+									<button type="submit" id="principal_ac_button" class="btn waves-effect waves-light link-hover cardinal-button truncate"><i class="fa fa-refresh left"></i>Changer le compte principal</a>
+								</div>
+							</form>
+						</div>
 					</div>
-					<div class="col s8 offset-s2 m3 offset-m1 l3 offset-l1">
-						<img id="param_img" src="{{ asset('img/design/logo-min.png') }}" class="responsive-img"></img>
-					</div>
-				</div>
-				<div class="col s12">
-					<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-book"></i> Vos comptes</small></h5>
-					<p class="saisie">
-						Dans cette section vous pouvez gérer vos comptes, en ajouter de nouveaux ou en supprimer. Donner à un compte le type "Principal" fait de lui le compte par défaut qui sera sélectionné à la connexion au site. C'est en générale le compte courant, celui avec lequel vous ferez le plus d'opérations.
-						</br>
-					</p>
-					<table class="striped highlight centered">
-						<thead>
-							<tr>
-								<th>Nom du compte</th>
-								<th>Type</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						
-						<tbody id="account_table">
-							{% if app.user.getAccounts()|length == 0 %}
+					<div class="col s12">
+						<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-list-ul"></i> Catégories</small></h5>
+						<p class="saisie">
+							Les catégories vous permettent de grouper vos dépenses ou vos sources de revenues pour les ajouter plus facilement et avoir des graphes de synthèse plus clairs. Vous pouvez ajouter autant de catégories que vous le voulez. Les catégories peuvent être utilisées avec tous vos comptes.
+							</br>
+						</p>
+						<div class="center-align" style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> ATTENTION :</big></b> Supprimer une catégorie provoque la supression de toutes les opérations qui sont liées à cette catégorie, sur tous vos comptes à la fois !!</div>
+						<br>
+						<table class="striped highlight centered">
+							<thead>
+								<tr>
+									<th>Catégorie</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							
+							<tbody id="category_table">
+							{% if app.user.getCategories()|length == 0 %}
 								<tr class="ligne">
-									<td><em>Vide</em></td>
 									<td><em>Vide</em></td>
 									<td><em>Vide</em></td>
 								</tr>
 							{% endif %}
-							{% for account in app.user.getAccounts() %}
+							{% for category in app.user.getCategories() %}
 								<tr class="ligne">
-									<td>{{ account.name }}</td>
-									<td class="ac_priority">{{ account.acPriority }}</td>
+									<td>{{ category.name }}</td>
 									<td>
-										<a data-id="{{ account.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-ac"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
+										<a data-id="{{ category.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
 									</td>
 								</tr>
 							{% endfor %}
-						</tbody>
-					</table>
-					<br>
-					<div class="center-align">
-						<a id="new_account_button" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Nouveau compte</a>
+							</tbody>
+						</table>
+						<br>
+						<div class="center-align">
+							<form id="new_category_form">
+								<div class="input-field col s12 l6 offset-l3">
+									<input placeholder="Catégorie" id="new_category" type="text" class="" name="new_category">
+									<label for="new_category">Nouvelle catégorie</label>
+								</div>
+								<div class="col s12">
+									<button type="submit" id="add_new_category" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Ajouter</a>
+								</div>
+							</form>
+						</div>
 					</div>
-					<br><br>
-					<p class="center-align">Pour changer le compte principal sélectionné par défaut quand vous vous connectez, il vous suffit de cliquer sur "Changer le compte principal".</p>
-					<div class="center-align">
-						<form id="select_ac_priority">
-							<div class="col s12 m10 l6 offset-m1 offset-l3">
-								<label>Compte principal</label>
-								<select class="browser-default" name="ac_priority" id="ac_priority">
-									<option value="default" disabled selected>Choisissez le compte principal</option>
-									{% for account in app.user.getAccounts() %}
-										<option value="{{ account.name }}">{{ account.name }}</option>
-									{% endfor %}
-								</select>
-							</div>
-							<div class="col s12" style="margin-bottom: 20px;">
-								<br>
-								<button type="submit" id="principal_ac_button" class="btn waves-effect waves-light link-hover cardinal-button truncate"><i class="fa fa-refresh left"></i>Changer le compte principal</a>
-							</div>
-						</form>
+					<div class="col s12">
+						<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-gears"></i> Paramètres utilisateur</small></h5>
+						<p class="saisie">
+							<form id="user_update_form">
+								<div class="input-field col s12 l6 offset-l3">
+									<input placeholder="{{ app.user.firstName }}" id="first_name" type="text" class="">
+									<label for="first_name">Prénom</label>
+								</div>
+								<div class="input-field col s12 l6 offset-l3">
+									<input placeholder="{{ app.user.lastName }}" id="last_name" type="text" class="">
+									<label for="last_name">Nom</label>
+								</div>
+								<div class="input-field col s12 l6 offset-l3">
+									<input placeholder="****" id="pass1" type="password" class="">
+									<label for="pass1">Mot de passe</label>
+								</div>
+								<div class="input-field col s12 l6 offset-l3">
+									<input placeholder="****" id="pass2" type="password" class="">
+									<label for="pass2">Mot de passe (confirmation)</label>
+								</div>
+								<div class="input-field col s12 l6 offset-l3">
+									<input placeholder="{{ app.user.email }}" id="mail1" type="email" class="">
+									<label for="mail1">Adresse mail:</label>
+								</div>
+								<div class="input-field col s12 l6 offset-l3">
+									<input placeholder="{{ app.user.email }}" id="mail2" type="email" class="">
+									<label for="mail2">Adresse mail (confirmation):</label>
+								</div>
+								<div class="col s12 center-align">
+									<button id="send_user_update" type="submit" class="btn-large btn-body waves-effect waves-light link-hover cardinal-button"><i class="fa fa-send left"></i>Envoyer</button>
+								</div>
+							</form>
+						</p>
 					</div>
-				</div>
-				<div class="col s12">
-					<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-list-ul"></i> Catégories</small></h5>
-					<p class="saisie">
-						Les catégories vous permettent de grouper vos dépenses ou vos sources de revenues pour les ajouter plus facilement et avoir des graphes de synthèse plus clairs. Vous pouvez ajouter autant de catégories que vous le voulez. Les catégories peuvent être utilisées avec tous vos comptes.
-						</br>
-					</p>
-					<table class="striped highlight centered">
-						<thead>
-							<tr>
-								<th>Catégorie</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						
-						<tbody id="category_table">
-						{% if app.user.getCategories()|length == 0 %}
-							<tr class="ligne">
-								<td><em>Vide</em></td>
-								<td><em>Vide</em></td>
-							</tr>
-						{% endif %}
-						{% for category in app.user.getCategories() %}
-							<tr class="ligne">
-								<td>{{ category.name }}</td>
-								<td>
-									<a data-id="{{ category.id }}" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a>
-								</td>
-							</tr>
-						{% endfor %}
-						</tbody>
-					</table>
-					<br>
-					<div class="center-align">
-						<form id="new_category_form">
-							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="Catégorie" id="new_category" type="text" class="" name="new_category">
-								<label for="new_category">Nouvelle catégorie</label>
-							</div>
-							<div class="col s12">
-								<button type="submit" id="add_new_category" class="btn waves-effect waves-light link-hover cardinal-button"><i class="fa fa-plus left"></i>Ajouter</a>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div class="col s12">
-					<h5 style="border-bottom: 1px solid #75828E;"><small><i class="fa fa-gears"></i> Paramètres utilisateur</small></h5>
-					<p class="saisie">
-						<form id="user_update_form">
-							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="{{ app.user.firstName }}" id="first_name" type="text" class="">
-								<label for="first_name">Prénom</label>
-							</div>
-							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="{{ app.user.lastName }}" id="last_name" type="text" class="">
-								<label for="last_name">Nom</label>
-							</div>
-							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="****" id="pass1" type="password" class="">
-								<label for="pass1">Mot de passe</label>
-							</div>
-							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="****" id="pass2" type="password" class="">
-								<label for="pass2">Mot de passe (confirmation)</label>
-							</div>
-							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="{{ app.user.email }}" id="mail1" type="email" class="">
-								<label for="mail1">Adresse mail:</label>
-							</div>
-							<div class="input-field col s12 l6 offset-l3">
-								<input placeholder="{{ app.user.email }}" id="mail2" type="email" class="">
-								<label for="mail2">Adresse mail (confirmation):</label>
-							</div>
-							<div class="col s12 center-align">
-								<button id="send_user_update" type="submit" class="btn-large btn-body waves-effect waves-light link-hover cardinal-button"><i class="fa fa-send left"></i>Envoyer</button>
-							</div>
-						</form>
-					</p>
-				</div>
-			</section>
+				</section>
+			</div>
 		</div>
 	</div>
 </div>
@@ -372,6 +377,8 @@
 								$('#new_category').val("");
 								Materialize.toast("Catégorie ajoutée", 5000);
 								prepare_cat_deletion();
+							} else if (rep.error == "category") {
+								Materialize.toast('Vous possédez déjà une catégorie de ce nom!', 5000);
 							} else {
 								Materialize.toast('Ooops ... une erreur est survenue ...', 5000);
 							}
@@ -484,6 +491,7 @@
 												$('#account_table').append(rep.tableHtml);
 												$('#ac_priority').append(rep.selectHtml);
 												$('#drop_accounts').prepend(rep.menuHtml);
+												setup_menu();
 												$('#return_from_new_account').trigger('click');
 												prepare_ac_deletion();
 											} else {

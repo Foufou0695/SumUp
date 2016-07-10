@@ -34,6 +34,7 @@ class AccountController extends Controller
 			$account = $accountService->getAccountByName($user, $accountName);
 			if ($account) {
 				$session->set("currentAccount", $account);
+				$session->save();
 				return new JsonResponse(array("notif" => "account_changed"));
 			} else {
 				return new JsonResponse(array("notif" => "account_unchanged", "message" => "Ce compte n'existe pas ou ne vous appartient pas ...."));
@@ -109,25 +110,13 @@ class AccountController extends Controller
 				} else {
 					$selectHtml = '<option value="'.$account->getName().'">'.$account->getName().'</option>';
 				}
-				$menuHtml = '<li><a class="waves-effect waves-light link-hover"><span>'.$account->getName().'</span> <i class="fa fa-book left hide-on-small-only"></i></a></li>';
+				$menuHtml = '<li data="'.$account->getName().'" class="account-li"><a class="waves-effect waves-light link-hover"><span>'.$account->getName().'</span> <i class="fa fa-book left hide-on-small-only"></i></a></li>';
 				return new JsonResponse(array("notif" => "account_added", "tableHtml" => $tableHtml, "selectHtml" => $selectHtml, "menuHtml" => $menuHtml));
 			} else {
 				return $this->redirectToRoute('su_account_homepage');
 			}
 		} else {
-			return $this->createNotFoundException();
-		}
-	}
-	
-	public function sendImmediateAction(Request $request) {
-		if ($request->isMethod("POST")) {
-			
-			$em = $this->getDoctrine()->getManager();
-			$user = $this->getUser();
-			
-			return new Response('En attente de création des catégories ...');
-		} else {
-			return $this->createNotFoundException();
+			throw $this->createNotFoundException();
 		}
 	}
 	
@@ -135,15 +124,23 @@ class AccountController extends Controller
 		if ($request->isMethod("POST")) {
 			$em = $this->getDoctrine()->getManager();
 			$user = $this->getUser();
+			$newCatName = $request->request->get("new_category");
+			$categoryService = $this->container->get("su_account.categoryService");
 			
-			$category = new Category();
-			$category->setName($request->request->get("new_category"));
+			$verifCategory = $categoryService->getCategoryByName($user, $newCatName);
 			
-			$user->addCategory($category);
-			$em->flush();
-			return new JsonResponse(array("notif" => "category_added", "html" => '<tr><td>'.$category->getName().'</td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a></td></tr>'));
+			if ($verifCategory) {
+				return new JsonResponse(array("notif" => "nothing_added", "error" => "category", "message" => "Une catégorie de ce nom existe déjà ..."));
+			} else {
+				$category = new Category();
+				$category->setName($newCatName);
+				
+				$user->addCategory($category);
+				$em->flush();
+				return new JsonResponse(array("notif" => "category_added", "html" => '<tr><td>'.$category->getName().'</td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a></td></tr>'));
+			}
 		} else {
-			return $this->createNotFoundException();
+			throw $this->createNotFoundException();
 		}
 	}
 	
@@ -151,6 +148,8 @@ class AccountController extends Controller
 		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
 			$em = $this->getDoctrine()->getManager();
 			$categoryRepository = $em->getRepository("SUAccountBundle:Category");
+			$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+			$session = $request->getSession();
 			
 			$id = $request->request->get("category_id");
 			$category = $categoryRepository->find($id);
@@ -159,6 +158,15 @@ class AccountController extends Controller
 				$user = $this->getUser();
 				
 				if ($category->getUser()->getId() == $user->getId()) {
+					
+					foreach($user->getAccounts() as $account) {
+						$entries = $entryRepository->findBy(array("account" => $account, "category" => $category));
+						foreach($entries as $entry) {
+							$account->removeEntry($entry);
+							$em->remove($entry);
+						}
+					}
+					
 					$user->removeCategory($category);
 					$em->remove($category);
 					$em->flush();
@@ -170,7 +178,7 @@ class AccountController extends Controller
 				return new JsonResponse(array("notif" => "category_not_deleted", "message" => "Aucune catégorie trouvée ..."));
 			}
 		} else {
-			return $this->createNotFoundException();
+			throw $this->createNotFoundException();
 		}
 	}
 	
@@ -213,7 +221,7 @@ class AccountController extends Controller
 				return new JsonResponse(array("notif" => "no_account_deleted", "message" => "Le compte demandé n'existe pas ou n'est pas le votre."));
 			}
 		} else {
-			return $this->createNotFoundException();
+			throw $this->createNotFoundException();
 		}
 	}
 	
@@ -222,6 +230,7 @@ class AccountController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$user = $this->getUser();
 			$session = $request->getSession();
+			$currentAccount = $session->get("currentAccount");
 			$categoryService = $this->container->get("su_account.categoryService");
 			$accountService = $this->container->get("su_account.accountService");
 			
@@ -241,7 +250,7 @@ class AccountController extends Controller
 				$entry->setDescription($request->request->get("description"));
 				$entry->setCategory($category);
 				
-				$accountService->getPrincipalAccount($user)->addEntry($entry);
+				$accountService->getAccountByName($user, $currentAccount->getName())->addEntry($entry);
 				$em->flush();
 				
 				return new JsonResponse(array("notif" => "operation_added"));
@@ -251,7 +260,7 @@ class AccountController extends Controller
 			
 			
 		} else {
-			return $this->createNotFoundException();
+			throw $this->createNotFoundException();
 		}
 	}
 	
@@ -273,7 +282,7 @@ class AccountController extends Controller
 				return new JsonResponse(array("notif" => "nothing_updated", "message" => "Le montant indiqué est vide ..."));
 			}
 		} else {
-			return $this->createNotFoundException();
+			throw $this->createNotFoundException();
 		}
 	}
 	
@@ -289,9 +298,229 @@ class AccountController extends Controller
 		
 		return $this->render("SUAccountBundle:Account:currentOperations.html.twig",
 							array("monthOperations" => $monthOperations,
-								"currentAccount" => $session->get("currentAccount"),
 								"totalMonthOperations" => $totalMonthOperations,
 								"totalInBank" => $totalInBank
 							));
+	}
+	
+	public function getFutureOperationsAction(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$session = $request->getSession();
+		$currentAccount = $session->get("currentAccount");
+		$firstAmountCurrentAccount = $currentAccount->getFirstAmount();
+		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+		$futureOperations = $entryRepository->findFutureOperations($currentAccount);
+		$monthOperations = $entryRepository->findOperationsByMonth($currentAccount);
+		$accountService = $this->container->get("su_account.accountService");
+		
+		$totalMonthOperations = $accountService->sumEntries($monthOperations);
+		$totalInBank = $firstAmountCurrentAccount - $totalMonthOperations;
+		
+		$totalFutureOperations = $accountService->sumEntries($futureOperations);
+		$totalInFuture = $totalInBank - $totalFutureOperations;
+		
+		return $this->render("SUAccountBundle:Account:futureOperations.html.twig",
+							array("futureOperations" => $futureOperations,
+								"totalFutureOperations" => $totalFutureOperations,
+								"totalInFuture" => $totalInFuture
+							));
+	}
+	
+	public function getGraphDataAction(Request $request) {
+		if ($request->isMethod("GET") and $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$session = $request->getSession();
+			$user = $this->getUser();
+			$currentAccount = $session->get("currentAccount");
+			$accountService = $this->container->get("su_account.accountService");
+			$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+			
+			$dataOut = [];
+			$dataIn = [];
+			$totalOut = 0;
+			$totalIn = 0;
+			$accountLevelGraph = array(1 => -intval($currentAccount->getFirstAmount()));
+			//$trace = "";
+			
+			foreach($user->getCategories() as $category) {
+				$allOutOperationsInCategory = $entryRepository->getOutOperationsByCategory($category, $currentAccount);
+				$totalCategory = $accountService->sumEntries($allOutOperationsInCategory);
+				if ($totalCategory > 0) {
+					$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allOutOperationsInCategory, "totalCategoryOperations" => $totalCategory));
+				} else {
+					$html = '';
+				}
+				$tempOut = array("name" => $category->getName(), "html" => $html, "totalCategory" => $totalCategory, "percent" => 0);
+				$totalOut = $totalOut + $tempOut["totalCategory"];
+				$dataOut[] = $tempOut;
+				
+				$allInOperationsInCategory = $entryRepository->getInOperationsByCategory($category, $currentAccount);
+				$totalCategory = $accountService->sumEntries($allInOperationsInCategory);
+				if ($totalCategory < 0) {
+					$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allInOperationsInCategory, "totalCategoryOperations" => $totalCategory));
+				} else {
+					$html = '';
+				}
+				$tempIn = array("name" => $category->getName(), "html" => $html, "totalCategory" => $totalCategory, "percent" => 0);
+				$totalIn = $totalIn + abs($tempIn["totalCategory"]);
+				$dataIn[] = $tempIn;
+				
+				foreach($allInOperationsInCategory as $operation) {
+					if ($operation->getPaimentDate()->format("y-m") == (new \DateTime())->format("y-m")) {
+						$day = $operation->getPaimentDate()->format("d");
+						if (array_key_exists(intval($day), $accountLevelGraph)) {
+							$accountLevelGraph[intval($day)] = $accountLevelGraph[intval($day)] + $operation->getAmount();
+						} else {
+							$accountLevelGraph[intval($day)] = $operation->getAmount();
+						}
+						//$trace = $trace . "\n" . $operation->getAmount() . " - " . $operation->getPaimentDate()->format("y-m-d") . " category " . $operation->getCategory()->getName() . " ----->>>> " . $day;
+					}
+				}
+				
+				foreach($allOutOperationsInCategory as $operation) {
+					if ($operation->getPaimentDate()->format("y-m") == (new \DateTime())->format("y-m")) {
+						$day = $operation->getPaimentDate()->format("d");
+						if (array_key_exists(intval($day), $accountLevelGraph)) {
+							$accountLevelGraph[intval($day)] = $accountLevelGraph[intval($day)] + $operation->getAmount();
+						} else {
+							$accountLevelGraph[intval($day)] = $operation->getAmount();
+						}
+						//$trace = $trace . "\n" . $operation->getAmount() . " - " . $operation->getPaimentDate()->format("y-m-d") . " category " . $operation->getCategory()->getName() . " ----->>>> " . $day;
+					}
+				}
+				$lastKey = key( array_slice( $accountLevelGraph, -1, 1, TRUE ) );
+			}
+			
+			ksort($accountLevelGraph);
+			$amountTemp = 0;
+			//$trace2 = "";
+			foreach($accountLevelGraph as $key => $amount) {
+				//$trace2 = $trace2 . "lastKey " . $key . " / " . $accountLevelGraph[$key] . " -> ";
+				$accountLevelGraph[$key] = $amountTemp - $amount;
+				$amountTemp = $accountLevelGraph[$key];
+				//$trace2 = $trace2 . $accountLevelGraph[$key] . "\n";
+			}
+			
+			if ($totalOut > 0) {
+				foreach($dataOut as $key => $category) {
+					$dataOut[$key]["percent"] = abs($category["totalCategory"]/$totalOut);
+				}
+			}
+			
+			if ($totalIn > 0) {
+				foreach($dataIn as $key => $category) {
+					$dataIn[$key]["percent"] = abs($category["totalCategory"]/$totalIn);
+				}
+			}
+			
+			return new JsonResponse(array("dataOut" => $dataOut, "dataIn" => $dataIn, "accountLevelGraph" => $accountLevelGraph, "totalIn" => $totalIn, "totalOut" => $totalOut));
+			
+		} else {
+			return new $this->createNotFoundException();
+		}
+	}
+		
+	public function updateOperationAction(Request $request) {
+		if ($request->isMethod("POST") and $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$session = $request->getSession();
+			$user = $this->getUser();
+			
+			$currentAccount = $session->get("currentAccount");
+			$operationId = $request->request->get("operationId");
+			$newType = $request->request->get("newType");
+			$newCategory = $request->request->get("newCategory");
+			$newDate = $request->request->get("newDate");
+			$newAmount = $request->request->get("newAmount");
+			
+			$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+			$entry = $entryRepository->find($operationId);
+			
+			$categoryService = $this->container->get("su_account.categoryService");
+			$category = $categoryService->getCategoryByName($user, $newCategory);
+			
+			if ($entry) {
+				if ($entry->getAccount()->getId() == $currentAccount->getId()) {
+					if ($category) {
+						$entry->setAmount($newAmount);
+						$entry->setPaimentKind($newType);
+						$entry->setPaimentDate(new \DateTime ($newDate));
+						$entry->setCategory($category);
+						$em->flush();
+						return new JsonResponse(array("notif" => "operation_updated", "message" => $entry->getAmount()));
+					} else {
+						return new JsonResponse(array("notif" => "nothing_updated", "message" => "La catégorie demandée n'est pas dans votre liste de catégories ..."));
+					}
+				} else {
+					return new JsonResponse(array("notif" => "nothing_updated", "message" => "L'opération modifée ne correspond pas au compte en cours ..."));
+				}
+			} else {
+				return new JsonResponse(array("notif" => "nothing_updated", "message" => "L'opération indiquée n'existe pas ..."));
+			}
+		} else {
+			throw $this->createNotFoundException();
+		}
+	}
+	
+	public function deleteOperationAction(Request $request) {
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$session = $request->getSession();
+			$user = $this->getUser();
+			$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+			$currentAccount = $session->get("currentAccount");
+			$accountService = $this->container->get("su_account.accountService");
+			
+			$operationId = $request->request->get("operationId");
+			$operation = $entryRepository->find($operationId);
+			
+			if ($operation) {
+				if ($operation->getAccount()->getId() == $currentAccount->getId()) {
+					$account = $accountService->getAccountByName($user, $currentAccount->getName());
+					$account->removeEntry($operation);
+					$em->remove($operation);
+					$em->flush();
+					return new JsonResponse(array("notif" => "operation_deleted"));
+				} else {
+					return new JsonResponse(array("notif" => "nothing_deleted", "message" => "L'opération ne correspond au compte en cours ..."));
+				}
+			} else {
+				return new JsonResponse(array("notif" => "nothing_deleted", "message" => "L'opération indiquée n'existe pas ..."));
+			}
+		} else {
+			throw $this->createNotFoundException();
+		}
+	}
+	
+	public function categoryDetailsAction(Request $request) {
+		$session = $request->getSession();
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$user = $this->getUser();
+			$categoryDetails = $request->request->get("categoryDetails");
+			$categoryService = $this->container->get("su_account.categoryService");
+			
+			$category = $categoryService->getCategoryByName($user, $categoryDetails);
+			
+			if ($category) {
+				$session->set("categoryDetails", $category);
+				return new JsonResponse(array("notif" => "category_details_changed"));
+			} else {
+				return new JsonResponse(array("notif" => "nothing_changed", "message" => "Aucun catégorie trouvée associée à votre compte ..."));
+			}
+		} else if ($session->get("categoryDetails") != "") {
+			$em = $this->getDoctrine()->getManager();
+			$session = $request->getSession();
+			$currentAccount = $session->get("currentAccount");
+			$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+			$accountService = $this->container->get("su_account.accountService");
+			
+			$allOperationsInCategory = $entryRepository->getOperationsByCategory($session->get("categoryDetails"), $currentAccount);
+			$totalCategory = $accountService->sumEntries($allOperationsInCategory);
+			
+			return $this->render("SUAccountBundle:Account:mcategoryDetails.html.twig", array("categoryOperations" => $allOperationsInCategory, "totalCategoryOperations" => $totalCategory));
+		} else {
+			throw $this->createNotFoundException();
+		}
 	}
 }

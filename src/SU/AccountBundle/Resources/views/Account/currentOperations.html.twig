@@ -1,7 +1,7 @@
 {% for operation in monthOperations %}
-	<tr class="ligne {% if operation.effective == 'systematic'%}monthly-operation{% endif %}{% if operation.effective == 'differed' %}differed-operation{% endif %}">
+	<tr data-id="{{ operation.id }}" class="ligne {% if operation.effective == 'systematic'%}monthly-operation{% endif %}{% if operation.effective == 'differed' %}differed-operation{% endif %}">
 		<td class="type_option">{{ operation.paimentKind }}</td>
-		<td class="category_option"><span>{{ operation.getCategory().name }}</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
+		<td class="category_option"><span>{{ operation.getCategory().name }}</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="{% if operation.description == ""%}Vide{% else %}{{operation.description}}{% endif %}"></i></td>
 		<td class="date_option">{{ operation.paimentDate|date("d/m/y") }}</td>
 		<td class="montant_option"><span>{{ operation.amount|number_format(2, ',', ' ') }}</span><span> €</span></td>
 		<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil fa-pencil-ligne link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
@@ -16,7 +16,7 @@
 </tr>
 <tr>
 	<td></td>
-	<td><b>Total en banque (au 26/06/16)</b></td>
+	<td><b>Total en banque (au {{ "now"|date("d/m/Y") }})</b></td>
 	<td></td>
 	<td><b>{{ totalInBank|number_format(2, ',', ' ') }} €</b></td>
 	<td></td>

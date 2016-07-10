@@ -27,9 +27,9 @@
 					<div class="col s12 center-align" style="padding-bottom: 20px;">
 						<div class="row center-align">
 							<h2 style="font-size: 3rem;"><span class="hide-on-small-only"><i class="fa fa-book"></i> </span>Compte courant</h2>
-							<h5 class="col s12 center-align">06/16</h5>
+							<h5 class="col s12 center-align">{{ "now"|date("m/Y") }}</h5>
 						</div>
-						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Etat du compte le 01/06/16</h2>
+						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Etat du compte le 01/{{ "now"|date("m/Y") }}</h2>
 						<table class="striped highlight centered">
 							<tbody>
 								<tr class="ligne_ac_amount">
@@ -40,7 +40,7 @@
 							</tbody>
 						</table>
 						<br>
-						<h2 class="divider-new-right"><i class="fa fa-list-ul left hide-on-small-only"></i>Opérations depuis le 01/06/16</h2>
+						<h2 class="divider-new-right"><i class="fa fa-list-ul left hide-on-small-only"></i>Opérations depuis le 01/{{ "now"|date("m/Y") }}</h2>
 						<table class="striped highlight centered responsive-table">
 							<thead>
 								<tr>
@@ -73,60 +73,45 @@
 								</tr>
 							</thead>
 							
-							<tbody>
-								<tr class="ligne">
-									<td class="type_option">Carte banquaire</td>
-									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil fa-pencil-ligne link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr class="ligne">
-									<td class="type_option">Carte banquaire</td>
-									<td class="category_option"><span>Course</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="Plein chez Carrefour"></i></td>
-									<td class="date_option">07/06/16</td>
-									<td class="montant_option"><span>-140</span><span> €</span></td>
-									<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil fa-pencil-ligne link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td><b>Total des opérations</b></td>
-									<td></td>
-									<td><b>100 000 €</b></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td><b>Total après opérations en attente</b></td>
-									<td></td>
-									<td><b>3 500 223 €</b></td>
-									<td></td>
-								</tr>
+							<tbody id="future_operations_tbody">
 							</tbody>
 						</table>
+						<div id="future_operations_loader" class="row center-align" style="margin-top: 10px; margin-bottom: 100px;">
+							<span class="loader loader-triple-grey"></span>
+							<br>
+							<em>Chargement ...</em>
+						</div>
 						<br>
 						<h2 class="divider-new-right"><i class="fa fa-area-chart left hide-on-small-only"></i>Synthèse</h2>
+						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Les graphes suivants vous aiderons à visualiser plus facilement vos entrées et sorties d'argent, ainsi que l'état de votre compte tout au long du mois. Notez que les dépenses prévisionnelles sont prises en compte pour les 3 graphes, mais seules les dépenses prévisionnelles du mois en cours sont représentées sur la courbe. Les dépenses prévisionnelles qui auront lieux dans les prochains mois ne sont prises en compte que sur les deux disques.</div>
+						<br>
 						<div class="col s12 l6">
-							<p>Synthèse des dépenses</p>
 							<br>
 							<div id="placeholder_wrapper_depenses" class="row">
 								<div id="placeholder_depenses" style="height: 300px; width: 300px;"></div>
+								<div class='flot-x-axis flot-x1-axis'>
+									<p>Synthèse des dépenses (avec opérations en attente)<br>Dépenses totales: <b><span id="out_total"></span> €</b></p>
+								</div>
 							</div>
 						</div>
 						<div class="col s12 l6">
-							<p>Synthèse des entrées d'argent</p>
 							<br>
 							<div id="placeholder_wrapper_entrees" class="row">
 								<div id="placeholder_entrees" style="height: 300px; width: 300px;"></div>
+								<div class='flot-x-axis flot-x1-axis'>
+									<p>Synthèse des entrées d'argent (avec opérations en attente)<br>Entrées totales: <b><span id="in_total"></span> €</b></p>
+								</div>
 							</div>
 						</div>
 						<div class="col s12">
 							<br>
 							<br>
-							<p>Evolution de votre compte banquaire pendant le mois.</p>
 							<br>
 							<div id="placeholder_wrapper_account" class="row">
 								<div id="placeholder_account" style="height: 300px; width: 300px;"></div>
+								<div class='flot-x-axis flot-x1-axis'>
+									<p>Montant du compte (€) pour le mois {{ "now"|date("m/y") }}</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -401,6 +386,39 @@
 </div>
 <!-- /.Modal Systematic operation -->
 
+<!-- Modal Details category -->
+<div id="category_details_modal" class="modal modal-fixed-footer">
+	<div class="modal-content" style="overflow: hidden;">
+		<section id="category_details_top">
+			<div class="col s12" style="border-bottom: 1px solid #ddd; padding: 0px;">
+				<h5 style="margin-top: 0;"><i class="fa fa-calendar left"></i>Détails <span id="category_field"></span></h5>
+			</div>
+		</section>
+		<section id="category_details_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">
+			<div class="row" style="margin-bottom: 0px;">
+				<table class="striped highlight centered responsive-table">
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>Catégorie</th>
+							<th>Date</th>
+							<th>Montant</th>
+						</tr>
+					</thead>
+					
+					<tbody id="category_operations_tbody">
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+	<div id="category_details_modal_footer" class="modal-footer">
+		<a class="btn waves-effect waves-light left modal-close cardinal-button" style="margin-left: 20px;"><i class="fa fa-angle-left left"></i>Retour</a>
+	</div>
+	</form>
+</div>
+<!-- /.Modal Details category -->
+
 <!-- Modal Confirmation -->
 <div id="suppression_modal" class="modal modal-fixed-footer" style="height: 250px; width: 400px;">
 	<div class="modal-content" style="overflow-x: hidden;">
@@ -426,15 +444,10 @@
 	<script src="{{ asset('js/jquery.flot.js') }}"></script>
 	<script src="{{ asset('js/jquery.flot.pie.js') }}"></script>
 	<script>
-	var data = [],
-		series = Math.floor(Math.random() * 6) + 3;
-
-	for (var i = 0; i < series; i++) {
-		data[i] = {
-			label: "Series" + (i + 1),
-			data: Math.floor(Math.random() * 100) + 1
-		}
-	}
+	dataOut = [];
+	dataIn = [];
+	accountLevelGraph = [];
+	rawData = [];
 	
 	var sin = [],
 		cos = [];
@@ -443,14 +456,108 @@
 		cos.push([i+1, Math.cos(i)]);
 	}
 	
+	function prepare_data() {
+		dataOut = [];
+		dataIn = [];
+		accountLevelGraph = [];
+		$.get(
+			"{{ path('su_account_graph_data') }}",
+			function(rep) {
+				rawData = rep;
+				$('#in_total').html(rep.totalIn);
+				$('#out_total').html(rep.totalOut);
+				for (var key in rep.accountLevelGraph) {
+					accountLevelGraph.push([parseInt(key),rep.accountLevelGraph[key]]);
+				}
+				for (var category in rep.dataOut) {
+					dataOut[category] = {
+						label: rep.dataOut[category].name,
+						data: rep.dataOut[category].percent
+					};
+					dataIn[category] = {
+						label: rep.dataIn[category].name,
+						data: rep.dataIn[category].percent
+					}
+				}
+				plot_graph();
+			}
+		);
+	}
+	
 	function labelFormatter(label, series) {
-		return "<div style='font-size:1rem; text-align:center; padding:2px; color: black;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+		return "<div class='category-click link-hover' data-cat='" + label + "'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+	}
+	
+	function prepare_legend() {
+		$('.category-click').off('click');
+		$('.category-click').click(function() {
+			var category = $(this).attr("data-cat");
+			if ($(window).width() >= 992) {
+				if ($(this).parent().parent().parent().attr('id') == "placeholder_wrapper_depenses") {
+					for (var key in rawData.dataOut) {
+						if (rawData.dataOut[key].name == category) {
+							var html_data = rawData.dataOut[key].html;
+							var percent = rawData.dataOut[key].percent;
+							$('#category_details_modal').openModal({
+								dismissible: true,
+								opacity: 0.5,
+								in_duration: 250,
+								out_duration: 250,
+								ready: function() {
+									$('#category_field').html(category);
+									$('#category_operations_tbody').html(html_data);
+									$('#category_operations_tbody').append('<tr><td></td><td><b>Part de la catégorie</b></td><td></td><td><b>' + Math.floor(percent*100) + '%</b></td><td></td></tr>');
+								},
+								complete: clean_overlay
+							});
+						}
+					}
+				} else {
+					for (var key in rawData.dataIn) {
+						if (rawData.dataIn[key].name == category) {
+							var html_data = rawData.dataIn[key].html;
+							var percent = rawData.dataIn[key].percent;
+							$('#category_details_modal').openModal({
+								dismissible: true,
+								opacity: 0.5,
+								in_duration: 250,
+								out_duration: 250,
+								ready: function() {
+									$('#category_field').html(category);
+									$('#category_operations_tbody').html(html_data);
+									$('#category_operations_tbody').append('<tr><td></td><td><b>Part de la catégorie</b></td><td></td><td><b>' + Math.floor(percent*100) + '%</b></td><td></td></tr>');
+								},
+								complete: clean_overlay
+							});
+						}
+					}
+				}
+			} else {
+				
+				{% if 0 == 1 %}
+				$.post(
+					'{{ path("su_account_category_details") }}',
+					{
+						categoryDetails: category
+					},
+					function(rep) {
+						if (rep.notif = "category_details_changed") {
+							$(location).attr('href', '{{ path("su_account_category_details") }}');
+						} else {
+							Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+							console.log(rep.message);
+						}
+					}
+				);
+				{% endif %}
+			}
+		});
 	}
 	
 	function plot_graph() {
 		var available_width = $('#placeholder_wrapper_depenses').width();
 		$('#placeholder_depenses').width(available_width);
-		$.plot('#placeholder_depenses', data, {
+		$.plot('#placeholder_depenses', dataOut, {
 			series: {
 				pie: {
 					show: true,
@@ -474,7 +581,7 @@
 		
 		var available_width = $('#placeholder_wrapper_entrees').width();
 		$('#placeholder_entrees').width(available_width);
-		$.plot('#placeholder_entrees', data, {
+		$.plot('#placeholder_entrees', dataIn, {
 			series: {
 				pie: {
 					show: true,
@@ -497,9 +604,10 @@
 		});
 
 		var available_width = $('#placeholder_wrapper_account').width();
+		$.plot("#placeholder_account", [], {} );
 		$('#placeholder_account').width(available_width);
-		var plot = $.plot("#placeholder_account", [
-			{ data: cos, label: "cos(x)"}
+		plot = $.plot("#placeholder_account", [
+			{ data: accountLevelGraph, label: "Montant du compte"}
 		], {
 			series: {
 				lines: {
@@ -513,9 +621,11 @@
 				hoverable: true,
 				clickable: true
 			},
-			yaxis: {
-				min: -1.2,
-				max: 1.2
+			xaxis: {
+				label: "Ta maman",
+				tickSize: 1,
+				tickDecimals: 0,
+				min: 1
 			},
 			legend: {
 				show: false
@@ -543,6 +653,8 @@
 				$("#tooltip").hide();
 			}
 		});
+		
+		prepare_legend();
 	}
 	
 	function set_ac_lignes() {
@@ -593,25 +705,45 @@
 				complete: clean_overlay
 			});
 			
+			ligne = $(this).parent().parent().parent().parent().parent();
+			
 			$('#suppression_modal_confirm').off('click');
 			$('#suppression_modal_confirm').click(function() {
+				var operationId = ligne.attr('data-id');
+				$.post(
+					"{{ path('su_account_delete_operation') }}",
+					{
+						operationId: operationId
+					},
+					function(rep) {
+						if (rep.notif == "operation_deleted") {
+							Materialize.toast('Opération supprimée. Mise à jour ...', 4000);
+							if (ligne.parent().attr('id') == "month_operations_tbody") {
+								month_operation_update();
+							} else {
+								future_opertation_update();
+							}
+						} else {
+							Materialize.toast('Oops ... une erreur est survenue ...', 4000);
+							console.log(rep.message);
+						}
+					}
+				);
 				$('#suppression_modal_cancel').trigger('click');
-				Materialize.toast('Opération supprimée', 4000);
-				setTimeout(function() {
-					Materialize.toast('Mise à jour ...', 4000);
-				}, 500);
 			})
 		});
 	}
 	
 	function set_lignes_aux(ligne) {
 		
+		var operationId = ligne.attr('data-id');
+		
 		if ($('.green-edition-text').size() >= 1) {
 			$('.green-edition-text').parent().find('.delete-hover').trigger('click');
 		}
 		
-		var type_option = '<select class="browser-default"><option value="" disabled selected>Type de paiement</option><option value="Carte banquaire">Carte banquaire</option><option value="Chèque">Chèque</option><option value="Virement">Virement</option></select>';
-		var category_option = '<select class="browser-default"><option value="" disabled selected>Catégorie</option><option value="Course">Course</option><option value="Loyer">Loyer</option><option value="Vêtements">Vêtements</option><option value="Transports">Transports</option></select>';
+		var type_option = '<select class="browser-default"><option value="" disabled selected>Type de paiement</option><option value="Carte banquaire">Carte banquaire</option><option value="Chèque">Chèque</option><option value="Virement">Virement</option><option value="Autre">Autre</option></select>';
+		var category_option = '<select class="browser-default"><option value="" disabled selected>Catégorie</option>{% for category in app.user.getCategories() %}<option value="{{ category.name }}">{{ category.name }}</option>{% endfor %}</select>';
 		var date_option = '<input type="date" class="datepicker center-align">';
 		var montant_option = '<input type="number" class="center-align" step="0.01">';
 		var edition_option = '<span class="edition"><big><big><i class="fa fa-check link-hover green-edition-text modification-validation"></i><i class="fa fa-times link-hover delete-hover" style="margin-left: 15px;"></i></big></big></span>';
@@ -654,10 +786,11 @@
 		});
 		picker = input.pickadate('picker');
 		
-		picker.set('select', new Date( datepicker_val.replace( /(\d{1})\/(\d{2})\/(\d{2})/, "$2/$1/$3") ));
+		picker.set('select', new Date( datepicker_val.replace( /(\d{2})\/(\d{2})\/(\d{2})/, "$2/$1/$3") ));
 		
 		ligne.addClass('edited-ligne');
 		
+		ligne.find('.delete-hover').off('click');
 		ligne.find('.delete-hover').click(function() {
 			ligne.find('.type_option').html(type);
 			ligne.find('.category_option').html(category_sav);
@@ -672,12 +805,41 @@
 			set_lignes();
 		});
 		
+		ligne.find('.modification-validation').off('click');
 		ligne.find('.modification-validation').click(function() {
-			ligne.find('.delete-hover').trigger('click');
-			Materialize.toast('Opération modifiée', 4000);
-			setTimeout(function() {
-				Materialize.toast('Mise à jour ...', 4000);
-			}, 500);
+			var newType = ligne.find('.type_option select').val();
+			var newCategory = ligne.find('.category_option select').val();
+			var newDate = picker.get('select').year + "-" + (parseInt(picker.get('select').month)+1).toString() + "-" + picker.get('select').date + " 00:00:00";
+			var newAmount = ligne.find('.montant_option input').val();
+			
+			if ((newType != "") && (newCategory != "") && (newDate != " 00:00:00") && (newAmount != 0)) {
+				$.post(
+					"{{ path('su_account_operation_update') }}",
+					{
+						operationId: operationId,
+						newType: newType,
+						newCategory: newCategory,
+						newDate: newDate,
+						newAmount: newAmount
+					},
+					function(rep) {
+						if (rep.notif == "operation_updated") {
+							if (ligne.parent().attr('id') == "month_operations_tbody") {
+								month_operation_update();
+							} else {
+								future_opertation_update();
+							}
+							Materialize.toast('Opération modifiée. Mise à jour du tableau ...', 4000);
+						} else {
+							Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+							ligne.find('.delete-hover').trigger('click');
+							console.log(rep.message);
+						}
+					}
+				);
+			} else {
+				Materialize.toast("Champs incorrects", 4000);
+			}
 		});
 	}
 	
@@ -739,7 +901,21 @@
 			function(rep) {
 				$('#month_operations_loader').hide();
 				$('#month_operations_tbody').html(rep);
+				future_opertation_update();
+			}
+		);
+	}
+	
+	function future_opertation_update() {
+		$('#future_operations_tbody').html("");
+		$('#future_operations_loader').show();
+		$.get(
+			"{{ path('su_account_future_operations') }}",
+			function(rep) {
+				$('#future_operations_loader').hide();
+				$('#future_operations_tbody').html(rep);
 				set_lignes();
+				prepare_data();
 			}
 		);
 	}
@@ -802,7 +978,6 @@
 					function(rep) {
 						if (rep.notif == "operation_added") {
 							Materialize.toast("Opération ajoutée.", 4000);
-							console.log(rep.message);
 							$('.modal-close').trigger('click');
 							$(".add-button").removeClass("disabled");
 						} else {
@@ -878,7 +1053,6 @@
 		
 		$('#recap_tab_button').click(function () {
 			setTimeout(function () {
-				plot_graph()
 				
 				$(window).resize(function () {
 					plot_graph();

@@ -85,7 +85,7 @@ class UserController extends Controller
 			
 			return new JsonResponse(array("notif" => "account_updated"));
 		} else {
-			return $this->createNotFoundException();
+			throw $this->createNotFoundException();
 		}
 	}
 }

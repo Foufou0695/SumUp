@@ -57,3 +57,23 @@ su_account_send_operation:
 su_account_month_operations:
     path:     /home/monthOperations
     defaults: { _controller: SUAccountBundle:Account:getMonthOperations }
+
+su_account_future_operations:
+    path:     /home/futureOperations
+    defaults: { _controller: SUAccountBundle:Account:getFutureOperations }
+
+su_account_graph_data:
+    path:     /home/graphData
+    defaults: { _controller: SUAccountBundle:Account:getGraphData }
+
+su_account_operation_update:
+    path:     /home/updateOperation
+    defaults: { _controller: SUAccountBundle:Account:updateOperation }
+
+su_account_delete_operation:
+    path:     /home/deleteOperation
+    defaults: { _controller: SUAccountBundle:Account:deleteOperation }
+
+su_account_category_details:
+    path:     /home/categoryDetails
+    defaults: { _controller: SUAccountBundle:Account:categoryDetails }

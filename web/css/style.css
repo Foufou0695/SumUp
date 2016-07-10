@@ -193,6 +193,19 @@ body {
 	background-color: #b7f2b7 !important;
 }
 
+.category-click {
+	font-size:1rem;
+	text-align:center;
+	padding:2px;
+	color: black;
+	border-radius: 5px;
+}
+
+.category-click:hover {
+	background-color: #e0e0e0;
+	border: 1px solid #711d2a;
+}
+
 /* Scrollbar */
 
 ::-webkit-scrollbar {
