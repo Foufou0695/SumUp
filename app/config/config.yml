@@ -77,5 +77,6 @@ knp_snappy:
         enabled:    true
         binary:     "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
         options:
-            - { name: 'viewport-size', value: ‘1980x1080’ }
-            - { name: 'page-size', value: 'A4' }
+            viewport-size: '1980x1080'
+            page-size: 'A4'
+            footer-right: '[page]/[toPage]'

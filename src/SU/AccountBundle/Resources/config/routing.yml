@@ -79,5 +79,12 @@ su_account_category_details:
     defaults: { _controller: SUAccountBundle:Account:categoryDetails }
 
 su_account_pdf:
-    path:     /home/pdf
+    path:     /home/pdf/{year}/{month}
     defaults: { _controller: SUAccountBundle:Account:pdf }
+    requirements:
+        year: \d{4}
+        month: \d{2}
+
+su_account_account_template:
+    path:     /home/accountTemplate
+    defaults: { _controller: SUAccountBundle:Account:accountTemplate }

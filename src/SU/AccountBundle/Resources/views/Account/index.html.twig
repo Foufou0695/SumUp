@@ -164,9 +164,12 @@
 					<div class="col s12 center-align" style="padding-bottom: 20px;">
 						<h2 class="divider-new-right"><i class="fa fa-file-pdf-o left hide-on-small-only"></i>Exporter les opérations en cours</h2>
 						<p class="left-align">Vous pouvez exporter les tableaux et graphes de l'onglet "Récapitulatif" au format pdf. A la fin de chaque mois, tous les tableaux sont automatiquement sauvegardés sous ce format (voir l'historique ci-dessous).</p>
-						<a class="btn waves-effect waves-light animated fadeIn cardinal-button" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - Livret A - Comptes de 06/16.pdf</a>
-						<br>
-						<br>
+						<a data-year="{{ 'now'|date('Y') }}" data-month="{{ 'now'|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button account-file" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - Livret A - Comptes de 06/16.pdf</a>
+						<div id="file_loader" class="row center-align" style="display: none; margin-top: 10px;">
+							<span class="loader loader-triple-grey"></span>
+							<br>
+							<em><span id="file_loader_notif">Chargement</span> ...</em>
+						</div>
 						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Historique de votre comtpe</h2>
 						<p class="left-align">Voici le récapitulatif de vos comptes depuis votre inscription sur le site.</p>
 						<div class="col s12 m10 l8 offset-m1 offset-l2">
@@ -993,6 +996,75 @@
 	}
 	
 	$(document).ready(function () {
+		//Gestion lancement téléchargement & génération pdf --------------------------------
+		$('.account-file').click(function(){
+			$('#file_loader_notif').html("Chargement");
+			if (!$(this).hasClass('disabled')) {
+				$(this).addClass('disabled');
+				var year = $(this).attr('data-year');
+				var month = $(this).attr('data-month');
+				var url = "{{ path('su_account_homepage') }}/pdf/" + year + "/" + month;
+				$('#file_loader').slideDown();
+				
+				$.get(
+					url,
+					{
+						status: "request"
+					},
+					function(rep) {
+						switch(rep.notif) {
+							case "request_generation_process":
+								$('#file_loader_notif').html("Créaction du fichier");
+								$.get(
+									url,
+									{
+										status: "generate"
+									},
+									function (rep) {
+										switch(rep.notif) {
+											case "ready":
+												$('#file_loader_notif').html("Lancement du téléchargement");
+												setTimeout(function() {
+													$('#file_loader').slideUp();
+													$('.account-file').removeClass('disabled');
+												}, 1000);
+												$(location).attr('href', url);
+												break;
+											default:
+												Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+												$('.account-file').removeClass('disabled');
+												console.log(rep.notif);
+										}
+									}
+								);
+								break;
+							case "ready":
+								$('#file_loader_notif').html("Lancement du téléchargement");
+								setTimeout(function() {
+									$('#file_loader').slideUp();
+									$('.account-file').removeClass('disabled');
+								}, 1000);
+								$(location).attr('href', url);
+								break;
+							case "unknown_request":
+								Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+								$(this).removeClass('disabled');
+								console.log(rep);
+								console.log('coucou');
+								break;
+							default:
+								Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+								$(this).removeClass('disabled');
+								console.log(rep.notif);
+								console.log(rep);
+								console.log('coucou2');
+						}
+					}
+				);
+			}
+		});
+		//----------------------------------------------------------------------------------
+		
 		//Boutons ajout opération ----------------------------------------------------------
 		$('#immediate_operation_button').click(function() {
 			if ($(window).width() >= 992) {

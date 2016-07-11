@@ -524,19 +524,62 @@ class AccountController extends Controller
 		}
 	}
 	
-	public function pdfAction()
-    {
-        $html = $this->renderView('SUUserBundle:User:param.html.twig');
-
-        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
-
-        return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            200,
-            [
-                'Content-Type'        => 'application/pdf',
-                'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
-            ]
-        );
+	public function pdfAction($year, $month, Request $request) {
+		$user = $this->getUser();
+		$session = $request->getSession();
+		$currentAccount = $session->get('currentAccount');
+		$filepath = 'pdf/'.$user->getId().'/';
+		$filename = 'SumUp - '.$currentAccount->getName().' - Comptes du '.(new \DateTime())->format('m-y').'.pdf';
+		
+		if ($request->isMethod("GET") && $request->isXmlHttpRequest()) {
+			switch ($request->query->get("status")) {
+				case "request":
+					if (is_file($filepath.$filename)) {
+						return new JsonResponse(array("notif" => "ready"));
+					} else {
+						return new JsonResponse(array("notif" => "request_generation_process"));
+					}
+					break;
+				case "generate":
+					if (!is_file($filepath.$filename)) {
+						$accountService = $this->container->get("su_account.accountService");
+						$html = $accountService->createMonthPdf($currentAccount, $this);
+						$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename);
+					}
+					return new JsonResponse(array("notif" => "ready"));
+					break;
+				default:
+					return new JsonResponse(array("notif" => "unknown_request"));
+					break;
+			}
+		}
+		
+		if (is_file($filepath.$filename)) {
+			return new Response(
+				file_get_contents($filepath.$filename),
+				200,
+				[
+					'Content-Type' => 'application/pdf',
+					'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+				]
+			);
+		} else {
+			$accountService = $this->container->get("su_account.accountService");
+			$html = $accountService->createMonthPdf($currentAccount, $this);
+			$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename);
+			
+			return new Response(
+				file_get_contents($filepath.$filename),
+				200,
+				[
+					'Content-Type' => 'application/pdf',
+					'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
+				]
+			);
+		}
     }
+	
+	public function accountTemplateAction() {
+		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig");
+	}
 }
