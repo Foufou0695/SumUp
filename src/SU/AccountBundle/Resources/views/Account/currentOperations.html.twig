@@ -4,7 +4,7 @@
 		<td class="category_option"><span>{{ operation.getCategory().name }}</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="{% if operation.description == ""%}Vide{% else %}{{operation.description}}{% endif %}"></i></td>
 		<td class="date_option">{{ operation.paimentDate|date("d/m/y") }}</td>
 		<td class="montant_option"><span>{{ operation.amount|number_format(2, ',', ' ') }}</span><span> €</span></td>
-		<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil fa-pencil-ligne link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>
+		{% if pdf == 0 %}<td class="edition_option" style="color: #be5f6e;"><span class="edition"><big><big><i class="fa fa-pencil fa-pencil-ligne link-hover edit-hover"></i><i class="fa fa-times link-hover delete-hover suppression-icon" style="margin-left: 15px;"></i></big></big></span></td>{% endif %}
 	</tr>
 {% endfor %}
 <tr>
@@ -12,12 +12,12 @@
 	<td><b>Total des opérations</b></td>
 	<td></td>
 	<td><b>{{ totalMonthOperations|number_format(2, ',', ' ') }} €</b></td>
-	<td></td>
+	{% if pdf == 0 %}<td></td>{% endif %}
 </tr>
 <tr>
 	<td></td>
 	<td><b>Total en banque (au {{ "now"|date("d/m/Y") }})</b></td>
 	<td></td>
 	<td><b>{{ totalInBank|number_format(2, ',', ' ') }} €</b></td>
-	<td></td>
+	{% if pdf == 0 %}<td></td>{% endif %}
 </tr>

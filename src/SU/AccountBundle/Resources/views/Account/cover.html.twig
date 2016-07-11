@@ -1,0 +1,41 @@
+{% set pdf = true %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>SumUp</title>
+	<meta name="theme-color" content="#711d2a">
+	<link rel="icon" href="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-icon-min.png') }}">
+
+	<!-- CSS  -->
+	{% block stylesheet %}
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" >
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
+	{% endblock %}
+</head>
+<body style="background-color: white;">
+	
+	<div id="main_wrapper">
+		<div class="container">
+			<div class="container">
+				<div class="container">
+					<img id="param_img" src="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-min.png') }}" class="responsive-img"></img>
+					<div class="row center-align">
+						<h1>SumUp</h1>
+						<h2 style="font-size: 3rem;"><span class="hide-on-small-only"><i class="fa fa-book"></i> </span>Compte courant</h2>
+						<h5 class="col s12 center-align">{{ "now"|date("m/Y") }}</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  </body>
+</html>

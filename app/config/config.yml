@@ -80,3 +80,4 @@ knp_snappy:
             viewport-size: '1980x1080'
             page-size: 'A4'
             footer-right: '[page]/[toPage]'
+            footer-line: true

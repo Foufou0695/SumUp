@@ -44,6 +44,8 @@ class SUAccountService {
 	}
 	
 	public function createMonthPdf($account, $controller) {
-		return $this->container->get("templating")->render("SUAccountBundle:Account:accountTemplate.html.twig");
+		$cover = $this->container->get("templating")->render("SUAccountBundle:Account:cover.html.twig");
+		$html = $this->container->get("templating")->render("SUAccountBundle:Account:accountTemplate.html.twig");
+		return array($cover, $html);
 	}
 }

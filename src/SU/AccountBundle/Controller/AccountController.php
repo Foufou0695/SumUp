@@ -286,7 +286,7 @@ class AccountController extends Controller
 		}
 	}
 	
-	public function getMonthOperationsAction(Request $request) {
+	public function getMonthOperationsAction($pdf, Request $request) {
 		$em = $this->getDoctrine()->getManager();
 		$session = $request->getSession();
 		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
@@ -299,11 +299,12 @@ class AccountController extends Controller
 		return $this->render("SUAccountBundle:Account:currentOperations.html.twig",
 							array("monthOperations" => $monthOperations,
 								"totalMonthOperations" => $totalMonthOperations,
-								"totalInBank" => $totalInBank
+								"totalInBank" => $totalInBank,
+								"pdf" => $pdf
 							));
 	}
 	
-	public function getFutureOperationsAction(Request $request) {
+	public function getFutureOperationsAction($pdf, Request $request) {
 		$em = $this->getDoctrine()->getManager();
 		$session = $request->getSession();
 		$currentAccount = $session->get("currentAccount");
@@ -322,7 +323,8 @@ class AccountController extends Controller
 		return $this->render("SUAccountBundle:Account:futureOperations.html.twig",
 							array("futureOperations" => $futureOperations,
 								"totalFutureOperations" => $totalFutureOperations,
-								"totalInFuture" => $totalInFuture
+								"totalInFuture" => $totalInFuture,
+								"pdf" => $pdf
 							));
 	}
 	
@@ -544,7 +546,7 @@ class AccountController extends Controller
 					if (!is_file($filepath.$filename)) {
 						$accountService = $this->container->get("su_account.accountService");
 						$html = $accountService->createMonthPdf($currentAccount, $this);
-						$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename);
+						$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".(new \DateTime())->format('m/y')));
 					}
 					return new JsonResponse(array("notif" => "ready"));
 					break;
@@ -566,7 +568,7 @@ class AccountController extends Controller
 		} else {
 			$accountService = $this->container->get("su_account.accountService");
 			$html = $accountService->createMonthPdf($currentAccount, $this);
-			$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename);
+			$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("header-left" => $currentAccount->getName() . " - ".(new \DateTime())->format('m/y')));
 			
 			return new Response(
 				file_get_contents($filepath.$filename),
@@ -579,7 +581,98 @@ class AccountController extends Controller
 		}
     }
 	
-	public function accountTemplateAction() {
-		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig");
+	public function accountTemplateAction(Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$session = $request->getSession();
+		$user = $this->getUser();
+		$currentAccount = $session->get("currentAccount");
+		$accountService = $this->container->get("su_account.accountService");
+		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+		
+		$dataOut = [];
+		$dataIn = [];
+		$totalOut = 0;
+		$totalIn = 0;
+		$accountLevelGraph = array(1 => -intval($currentAccount->getFirstAmount()));
+		//$trace = "";
+		
+		foreach($user->getCategories() as $category) {
+			$allOutOperationsInCategory = $entryRepository->getOutOperationsByCategory($category, $currentAccount);
+			$totalCategory = $accountService->sumEntries($allOutOperationsInCategory);
+			if ($totalCategory > 0) {
+				$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allOutOperationsInCategory, "totalCategoryOperations" => $totalCategory));
+			} else {
+				$html = '';
+			}
+			$tempOut = array("name" => $category->getName(), "html" => $html, "totalCategory" => $totalCategory, "percent" => 0);
+			$totalOut = $totalOut + $tempOut["totalCategory"];
+			$dataOut[] = $tempOut;
+			
+			$allInOperationsInCategory = $entryRepository->getInOperationsByCategory($category, $currentAccount);
+			$totalCategory = $accountService->sumEntries($allInOperationsInCategory);
+			if ($totalCategory < 0) {
+				$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allInOperationsInCategory, "totalCategoryOperations" => $totalCategory));
+			} else {
+				$html = '';
+			}
+			$tempIn = array("name" => $category->getName(), "html" => $html, "totalCategory" => $totalCategory, "percent" => 0);
+			$totalIn = $totalIn + abs($tempIn["totalCategory"]);
+			$dataIn[] = $tempIn;
+			
+			foreach($allInOperationsInCategory as $operation) {
+				if ($operation->getPaimentDate()->format("y-m") == (new \DateTime())->format("y-m")) {
+					$day = $operation->getPaimentDate()->format("d");
+					if (array_key_exists(intval($day), $accountLevelGraph)) {
+						$accountLevelGraph[intval($day)] = $accountLevelGraph[intval($day)] + $operation->getAmount();
+					} else {
+						$accountLevelGraph[intval($day)] = $operation->getAmount();
+					}
+					//$trace = $trace . "\n" . $operation->getAmount() . " - " . $operation->getPaimentDate()->format("y-m-d") . " category " . $operation->getCategory()->getName() . " ----->>>> " . $day;
+				}
+			}
+			
+			foreach($allOutOperationsInCategory as $operation) {
+				if ($operation->getPaimentDate()->format("y-m") == (new \DateTime())->format("y-m")) {
+					$day = $operation->getPaimentDate()->format("d");
+					if (array_key_exists(intval($day), $accountLevelGraph)) {
+						$accountLevelGraph[intval($day)] = $accountLevelGraph[intval($day)] + $operation->getAmount();
+					} else {
+						$accountLevelGraph[intval($day)] = $operation->getAmount();
+					}
+					//$trace = $trace . "\n" . $operation->getAmount() . " - " . $operation->getPaimentDate()->format("y-m-d") . " category " . $operation->getCategory()->getName() . " ----->>>> " . $day;
+				}
+			}
+			$lastKey = key( array_slice( $accountLevelGraph, -1, 1, TRUE ) );
+		}
+		
+		ksort($accountLevelGraph);
+		$amountTemp = 0;
+		//$trace2 = "";
+		foreach($accountLevelGraph as $key => $amount) {
+			//$trace2 = $trace2 . "lastKey " . $key . " / " . $accountLevelGraph[$key] . " -> ";
+			$accountLevelGraph[$key] = $amountTemp - $amount;
+			$amountTemp = $accountLevelGraph[$key];
+			//$trace2 = $trace2 . $accountLevelGraph[$key] . "\n";
+		}
+		
+		if ($totalOut > 0) {
+			foreach($dataOut as $key => $category) {
+				$dataOut[$key]["percent"] = abs($category["totalCategory"]/$totalOut);
+			}
+		}
+		
+		if ($totalIn > 0) {
+			foreach($dataIn as $key => $category) {
+				$dataIn[$key]["percent"] = abs($category["totalCategory"]/$totalIn);
+			}
+		}
+		
+		$rawData = array("dataOut" => $dataOut, "dataIn" => $dataIn, "accountLevelGraph" => $accountLevelGraph, "totalIn" => $totalIn, "totalOut" => $totalOut);
+		
+		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig", array("rawData" => $rawData));
+	}
+	
+	public function coverAction(Request $request) {
+		return $this->render("SUAccountBundle:Account:cover.html.twig");
 	}
 }
