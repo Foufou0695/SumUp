@@ -81,3 +81,4 @@ knp_snappy:
             page-size: 'A4'
             footer-right: '[page]/[toPage]'
             footer-line: true
+            dpi: 600

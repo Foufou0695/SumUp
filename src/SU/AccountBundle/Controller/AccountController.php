@@ -672,7 +672,8 @@ class AccountController extends Controller
 	}
 		
 	public function accountTemplateAction(Request $request) {
-		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig");
+		$rawData = $this->getRawData($request);
+		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig", array("rawData" => $rawData));
 	}
 	
 	public function graphTemplateAction(Request $request) {

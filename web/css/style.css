@@ -288,3 +288,9 @@ nav .brand-logo {
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
+
+@media print {
+#break {
+      page-break-after: always;
+    }
+}
