@@ -43,9 +43,10 @@ class SUAccountService {
 		return $res;
 	}
 	
-	public function createMonthPdf($account, $controller) {
+	public function createMonthPdf($rawData) {
 		$cover = $this->container->get("templating")->render("SUAccountBundle:Account:cover.html.twig");
 		$html = $this->container->get("templating")->render("SUAccountBundle:Account:accountTemplate.html.twig");
-		return array($cover, $html);
+		$graph = $this->container->get("templating")->render("SUAccountBundle:Account:graphTemplate.html.twig", array("rawData" => $rawData));
+		return array($cover, $html, $graph);
 	}
 }

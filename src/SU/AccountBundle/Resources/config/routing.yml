@@ -96,3 +96,7 @@ su_account_cover:
 su_account_account_template:
     path:     /home/accountTemplate
     defaults: { _controller: SUAccountBundle:Account:accountTemplate }
+
+su_account_graph_template:
+    path:     /home/graphTemplate
+    defaults: { _controller: SUAccountBundle:Account:graphTemplate }

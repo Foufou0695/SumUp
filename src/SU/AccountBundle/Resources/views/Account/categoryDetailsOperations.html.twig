@@ -1,7 +1,7 @@
 {% for operation in categoryOperations %}
 	<tr data-id="{{ operation.id }}" class="ligne {% if operation.effective == 'systematic'%}monthly-operation{% endif %}{% if operation.effective == 'differed' %}differed-operation{% endif %}">
 		<td class="type_option">{{ operation.paimentKind }}</td>
-		<td class="category_option"><span>{{ operation.getCategory().name }}</span> <i class="fa fa-info-circle tooltipped link-hover" data-position="bottom" data-delay="50" data-tooltip="{% if operation.description == ""%}Vide{% else %}{{operation.description}}{% endif %}"></i></td>
+		<td class="description_option">{% if operation.description == ""%}<em>Vide</em>{% else %}{{operation.description}}{% endif %}</td>
 		<td class="date_option">{{ operation.paimentDate|date("d/m/y") }}</td>
 		<td class="montant_option"><span>{{ operation.amount|number_format(2, ',', ' ') }}</span><span> €</span></td>
 	</tr>

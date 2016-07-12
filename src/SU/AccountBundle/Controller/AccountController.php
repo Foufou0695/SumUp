@@ -545,7 +545,7 @@ class AccountController extends Controller
 				case "generate":
 					if (!is_file($filepath.$filename)) {
 						$accountService = $this->container->get("su_account.accountService");
-						$html = $accountService->createMonthPdf($currentAccount, $this);
+						$html = $accountService->createMonthPdf($this->getRawData($request));
 						$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".(new \DateTime())->format('m/y')));
 					}
 					return new JsonResponse(array("notif" => "ready"));
@@ -581,7 +581,7 @@ class AccountController extends Controller
 		}
     }
 	
-	public function accountTemplateAction(Request $request) {
+	public function getRawData(Request $request) {
 		$em = $this->getDoctrine()->getManager();
 		$session = $request->getSession();
 		$user = $this->getUser();
@@ -668,8 +668,16 @@ class AccountController extends Controller
 		}
 		
 		$rawData = array("dataOut" => $dataOut, "dataIn" => $dataIn, "accountLevelGraph" => $accountLevelGraph, "totalIn" => $totalIn, "totalOut" => $totalOut);
+		return $rawData;
+	}
 		
-		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig", array("rawData" => $rawData));
+	public function accountTemplateAction(Request $request) {
+		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig");
+	}
+	
+	public function graphTemplateAction(Request $request) {
+		$rawData = $this->getRawData($request);
+		return $this->render("SUAccountBundle:Account:graphTemplate.html.twig", array("rawData" => $rawData));
 	}
 	
 	public function coverAction(Request $request) {

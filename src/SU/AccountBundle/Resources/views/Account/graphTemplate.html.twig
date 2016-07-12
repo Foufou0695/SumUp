@@ -1,0 +1,292 @@
+{% set pdf = true %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<title>SumUp</title>
+	<meta name="theme-color" content="#711d2a">
+	<link rel="icon" href="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-icon-min.png') }}">
+
+	<!-- CSS  -->
+	{% block stylesheet %}
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" >
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/loader.css') }}" type="text/css" rel="stylesheet"/>
+	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/style.css') }}" type="text/css" rel="stylesheet"/>
+	{% endblock %}
+</head>
+<body>
+	
+	<div id="main_wrapper">
+		<div class="col s12" style="padding: 0px; top: 0px; position: absolute; margin-top: 0px; border: none; background-color: white;">
+			<section id="export_body" class="col s12">
+				<div class="col s12 center-align" style="padding-bottom: 20px;">
+					<br>
+					<h2 class="divider-new-right left"><i class="fa fa-area-chart left hide-on-small-only"></i>Synthèse</h2>
+					<br>
+					<br>
+					<br>
+					<br>
+					<div class="row">
+						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Les graphes suivants vous aiderons à visualiser plus facilement vos entrées et sorties d'argent, ainsi que l'état de votre compte tout au long du mois. Notez que les dépenses prévisionnelles sont prises en compte pour les 3 graphes, mais seules les dépenses prévisionnelles du mois en cours sont représentées sur la courbe. Les dépenses prévisionnelles qui auront lieux dans les prochains mois ne sont prises en compte que sur les deux disques.</div>
+					</div>
+					<br>
+					<div class="col s12 l6">
+						<br>
+						<div id="placeholder_wrapper_depenses" class="row">
+							<div id="placeholder_depenses" style="height: 300px; width: 1920px;"></div>
+							<div class='flot-x-axis flot-x1-axis'>
+								<p>Synthèse des dépenses (avec opérations en attente)<br>Dépenses totales: <b><span id="out_total"></span> €</b></p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 l6">
+						<br>
+						<div id="placeholder_wrapper_entrees" class="row">
+							<div id="placeholder_entrees" style="height: 300px; width: 1920px;"></div>
+							<div class='flot-x-axis flot-x1-axis'>
+								<p>Synthèse des entrées d'argent (avec opérations en attente)<br>Entrées totales: <b><span id="in_total"></span> €</b></p>
+							</div>
+						</div>
+					</div>
+					<div class="col s12">
+						<br>
+						<br>
+						<br>
+						<div id="placeholder_wrapper_account" class="row">
+							<div id="placeholder_account" style="height: 300px; width: 1920px;"></div>
+							<div class='flot-x-axis flot-x1-axis'>
+								<p>Montant du compte (€) pour le mois {{ "now"|date("m/y") }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	{% block javascript %}
+	<!--  Scripts-->
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery-2.2.2.js') }}"></script>
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/materialize.js') }}"></script>
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/scroll-to.js') }}"></script>
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery.flot.js') }}"></script>
+	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery.flot.pie.js') }}"></script>
+	{% endblock %}
+	<script>
+	
+		dataOut = [];
+		dataIn = [];
+		accountLevelGraph = [];
+		
+		function prepare_data() {
+			
+			dataOut = [];
+			dataIn = [];
+			accountLevelGraph = [];
+			
+			$('#in_total').html({{ rawData.totalIn }});
+			$('#out_total').html({{ rawData.totalOut }});
+			
+			{% for key,value in rawData.accountLevelGraph %}
+				accountLevelGraph.push([parseInt({{ key }}), parseFloat({{ value }})]);
+			{% endfor %}
+			{% for key,category in rawData.dataOut %}
+				dataOut[{{ key }}] = {
+					label: "{{ category.name }}",
+					data: {{ category.percent }}
+				};
+			{% endfor %}
+			{% for key,category in rawData.dataIn %}
+				dataIn[{{ key }}] = {
+					label: "{{ category.name }}",
+					data: {{ category.percent }}
+				};
+			{% endfor %}
+			plot_graph();
+		}
+		
+		function labelFormatter(label, series) {
+			return "<div class='category-click link-hover' data-cat='" + label + "'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+		}
+		
+		function prepare_legend() {
+			$('.category-click').off('click');
+			$('.category-click').click(function() {
+				var category = $(this).attr("data-cat");
+				if ($(window).width() >= 992) {
+					if ($(this).parent().parent().parent().attr('id') == "placeholder_wrapper_depenses") {
+						for (var key in rawData.dataOut) {
+							if (rawData.dataOut[key].name == category) {
+								var html_data = rawData.dataOut[key].html;
+								var percent = rawData.dataOut[key].percent;
+								$('#category_details_modal').openModal({
+									dismissible: true,
+									opacity: 0.5,
+									in_duration: 250,
+									out_duration: 250,
+									ready: function() {
+										$('#category_field').html(category);
+										$('#category_operations_tbody').html(html_data);
+										$('#category_operations_tbody').append('<tr><td></td><td><b>Part de la catégorie</b></td><td></td><td><b>' + Math.floor(percent*100) + '%</b></td><td></td></tr>');
+									},
+									complete: clean_overlay
+								});
+							}
+						}
+					} else {
+						for (var key in rawData.dataIn) {
+							if (rawData.dataIn[key].name == category) {
+								var html_data = rawData.dataIn[key].html;
+								var percent = rawData.dataIn[key].percent;
+								$('#category_details_modal').openModal({
+									dismissible: true,
+									opacity: 0.5,
+									in_duration: 250,
+									out_duration: 250,
+									ready: function() {
+										$('#category_field').html(category);
+										$('#category_operations_tbody').html(html_data);
+										$('#category_operations_tbody').append('<tr><td></td><td><b>Part de la catégorie</b></td><td></td><td><b>' + Math.floor(percent*100) + '%</b></td><td></td></tr>');
+									},
+									complete: clean_overlay
+								});
+							}
+						}
+					}
+				} else {
+					
+					{% if 0 == 1 %}
+					$.post(
+						'{{ absolute_url(path("su_account_category_details")) }}',
+						{
+							categoryDetails: category
+						},
+						function(rep) {
+							if (rep.notif = "category_details_changed") {
+								$(location).attr('href', '{{ path("su_account_category_details") }}');
+							} else {
+								Materialize.toast("Oops ... une erreur est survenue ...", 4000);
+								console.log(rep.message);
+							}
+						}
+					);
+					{% endif %}
+				}
+			});
+		}
+		
+		function plot_graph() {
+			var available_width = $('#placeholder_wrapper_depenses').width();
+			$('#placeholder_depenses').width(available_width);
+			$.plot('#placeholder_depenses', dataOut, {
+				series: {
+					pie: {
+						show: true,
+						radius: 1,
+						innerRadius: 0.5,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.5,
+								color: '#FFF'
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+			
+			var available_width = $('#placeholder_wrapper_entrees').width();
+			$('#placeholder_entrees').width(available_width);
+			$.plot('#placeholder_entrees', dataIn, {
+				series: {
+					pie: {
+						show: true,
+						radius: 1,
+						innerRadius: 0.5,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.5,
+								color: '#FFF'
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}
+			});
+
+			var available_width = $('#placeholder_wrapper_account').width();
+			$.plot("#placeholder_account", [], {} );
+			$('#placeholder_account').width(available_width);
+			plot = $.plot("#placeholder_account", [
+				{ data: accountLevelGraph, label: "Montant du compte"}
+			], {
+				series: {
+					lines: {
+						show: true
+					},
+					points: {
+						show: true
+					}
+				},
+				grid: {
+					hoverable: true,
+					clickable: true
+				},
+				xaxis: {
+					label: "Ta maman",
+					tickSize: 1,
+					tickDecimals: 0,
+					min: 1
+				},
+				legend: {
+					show: false
+				}
+			});
+			
+			$("<div id='tooltip'></div>").css({
+				position: "absolute",
+				display: "none",
+				border: "1px solid #fdd",
+				padding: "2px",
+				"background-color": "#fee",
+				opacity: 0.80
+			}).appendTo("body");
+			
+			$("#placeholder_account").bind("plothover", function (event, pos, item) {
+				if (item) {
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					$("#tooltip").html(y + " €")
+						.css({top: item.pageY+5, left: item.pageX+5})
+						.fadeIn(200);
+				} else {
+					$("#tooltip").hide();
+				}
+			});
+			
+			prepare_legend();
+		}
+		
+		$(document).ready(function () {
+			
+			prepare_data();
+			
+		});
+	</script>
+  </body>
+</html>

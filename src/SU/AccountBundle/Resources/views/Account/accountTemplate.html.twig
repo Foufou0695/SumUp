@@ -11,8 +11,6 @@
 
 	<!-- CSS  -->
 	{% block stylesheet %}
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
 	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" >
 	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/materialize.css') }}" type="text/css" rel="stylesheet"/>
 	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/animate.css') }}" type="text/css" rel="stylesheet"/>
@@ -120,43 +118,12 @@
 	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery-2.2.2.js') }}"></script>
 	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/materialize.js') }}"></script>
 	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/scroll-to.js') }}"></script>
-	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery.flot.js') }}"></script>
-	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery.flot.pie.js') }}"></script>
 	{% endblock %}
 	<script>
 	
 		dataOut = [];
 		dataIn = [];
 		accountLevelGraph = [];
-		rawData = [];
-		
-		function prepare_data() {
-			dataOut = [];
-			dataIn = [];
-			accountLevelGraph = [];
-			$.get(
-				"{{ absolute_url(path('su_account_graph_data')) }}",
-				function(rep) {
-					rawData = rep;
-					$('#in_total').html(rep.totalIn);
-					$('#out_total').html(rep.totalOut);
-					for (var key in rep.accountLevelGraph) {
-						accountLevelGraph.push([parseInt(key),rep.accountLevelGraph[key]]);
-					}
-					for (var category in rep.dataOut) {
-						dataOut[category] = {
-							label: rep.dataOut[category].name,
-							data: rep.dataOut[category].percent
-						};
-						dataIn[category] = {
-							label: rep.dataIn[category].name,
-							data: rep.dataIn[category].percent
-						}
-					}
-					plot_graph();
-				}
-			);
-		}
 		
 		function labelFormatter(label, series) {
 			return "<div class='category-click link-hover' data-cat='" + label + "'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";

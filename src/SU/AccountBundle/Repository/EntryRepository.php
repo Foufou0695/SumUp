@@ -99,6 +99,8 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		$qb->andWhere("c.name = :categoryName");
 		$qb->setParameter("categoryName", $category->getName());
 		
+		$qb->orderBy("e.amount", "ASC");
+		
 		return $qb->getQuery()->getResult();
 	}
 }
