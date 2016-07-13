@@ -531,19 +531,22 @@ class AccountController extends Controller
 		$session = $request->getSession();
 		$currentAccount = $session->get('currentAccount');
 		$filepath = 'pdf/'.$user->getId().'/';
-		$filename = 'SumUp - '.$currentAccount->getName().' - Comptes du '.(new \DateTime())->format('m-y').'.pdf';
+		$filename = 'SumUp - '.$currentAccount->getName().' - Comptes du '.$month.'-'.$year.'.pdf';
 		
 		if ($request->isMethod("GET") && $request->isXmlHttpRequest()) {
 			switch ($request->query->get("status")) {
 				case "request":
-					if (is_file($filepath.$filename)) {
+					if (is_file($filepath.$filename) and ((new \DateTime())->format('m-Y') != $month.'-'.$year)) {
 						return new JsonResponse(array("notif" => "ready"));
 					} else {
 						return new JsonResponse(array("notif" => "request_generation_process"));
 					}
 					break;
 				case "generate":
-					if (!is_file($filepath.$filename)) {
+					if (!is_file($filepath.$filename) or ((new \DateTime())->format('m-Y') == $month.'-'.$year)) {
+						if (is_file($filepath.$filename)) {
+							unlink($filepath.$filename);
+						}
 						$accountService = $this->container->get("su_account.accountService");
 						$html = $accountService->createMonthPdf($this->getRawData($request));
 						$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".(new \DateTime())->format('m/y')));
@@ -566,8 +569,11 @@ class AccountController extends Controller
 				]
 			);
 		} else {
+			if (is_file($filepath.$filename)) {
+				unlink($filepath.$filename);
+			}
 			$accountService = $this->container->get("su_account.accountService");
-			$html = $accountService->createMonthPdf($currentAccount, $this);
+			$html = $accountService->createMonthPdf($this->getRawData($request));
 			$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("header-left" => $currentAccount->getName() . " - ".(new \DateTime())->format('m/y')));
 			
 			return new Response(
