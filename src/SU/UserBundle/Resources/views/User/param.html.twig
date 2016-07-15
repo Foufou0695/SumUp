@@ -114,11 +114,12 @@
 								<tr class="ligne">
 									<td><em>Vide</em></td>
 									<td><em>Vide</em></td>
+									<td><em>Vide</em></td>
 								</tr>
 							{% endif %}
 							{% for category in app.user.getCategories() %}
 								<tr class="ligne ligne-category" data-id="{{ category.getId() }}">
-									<td>{{ category.name }}</td>
+									<td class="category-name">{{ category.name }}</td>
 									<td>
 										<a data-id="{{ category.id }}" class="btn waves-effect waves-light link-hover cardinal-button edit-category truncate"><i class="fa fa-edit left hide-on-small-only"></i>Renommer</a>
 									</td>
@@ -228,7 +229,7 @@
 								}
 							});
 							if ($('#category_table').children().length == 0) {
-								$('#category_table').append("<tr><td><em>Vide</em></td><td><em>Vide</em></td></tr>");
+								$('#category_table').append("<tr><td><em>Vide</em></td><td><em>Vide</em></td><td><em>Vide</em></td></tr>");
 							}
 							Materialize.toast("Catégorie supprimée", 5000);
 						} else {
@@ -296,8 +297,59 @@
 		}
 		
 		function prepare_cat_ligne_aux(ligne) {
+			if ($('.edited-ligne').size() >= 1) {
+				$('.edited-ligne').find('.cancel-category').trigger('click');
+			}
+			ligne.addClass('edited-ligne');
 			var categoryId = ligne.attr('data-id');
+			var categoryName = ligne.find('.category-name').html();
+			var ligne_sav_edit = ligne.find('.edit-category');
 			
+			ligne.find('.category-name').html('<input type="text" class="center-align name-input" value="'+categoryName+'">');
+			ligne.find('.edit-category').parent().html('<a data-id="'+categoryId+'" class="btn waves-effect waves-light link-hover green-button ok-category truncate"><i class="fa fa-check"></i></a><a data-id="'+categoryId+'" class="btn waves-effect waves-light link-hover cardinal-button cancel-category truncate"><i class="fa fa-times"></i></a>');
+			
+			ligne.find('.ok-category').click(function() {
+				var newName = ligne.find('.name-input').val();
+				if ((newName != "") && (!$(this).hasClass('disabled'))) {
+					$(this).addClass('disabled');
+					$.post(
+						"{{ path('su_account_rename_category') }}",
+						{
+							categoryId: categoryId,
+							newName: newName
+						},
+						function(rep) {
+							if (rep.notif == "category_updated") {
+								Materialize.toast("Catégorie renommée", 4000);
+								ligne.find('.category-name').html(newName);
+								ligne.removeClass('edited-ligne');
+								ligne.find('.ok-category').parent().html(ligne_sav_edit);
+								prepare_cat_ligne();
+							} else {
+								if (rep.notif == "name_in_use") {
+									Materialize.toast("Une de vos catégorie a déjà ce nom", 4000);
+									console.log(rep.message);
+								} else {
+									Materialize.toast("Oops ... Une erreur est survenue ...", 4000);
+									console.log(rep.message);
+								}
+								ligne.find('.cancel-category').trigger('click');
+							}
+						}
+					);
+				} else {
+					if (newName == "") {
+						Materialize.toast("Le nom de la catégorie ne peut pas être vide", 4000);
+					}
+				}
+			});
+			
+			ligne.find('.cancel-category').click(function() {
+				ligne.removeClass('edited-ligne');
+				ligne.find('.category-name').html(categoryName);
+				ligne.find('.ok-category').parent().html(ligne_sav_edit);
+				prepare_cat_ligne();
+			});
 		}
 		
 		$(document).ready(function() {

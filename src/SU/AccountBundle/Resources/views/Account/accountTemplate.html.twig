@@ -26,9 +26,9 @@
 				<div class="col s12 center-align" style="padding-bottom: 20px;">
 					<div class="row center-align">
 						<h2 style="font-size: 3rem;"><span class="hide-on-small-only"><i class="fa fa-book"></i> </span>Compte courant</h2>
-						<h5 class="col s12 center-align">{{ "now"|date("m/Y") }}</h5>
+						<h5 class="col s12 center-align">{{ dateTemp|date("m/Y") }}</h5>
 					</div>
-					<h2 class="divider-new-right left"><i class="fa fa-history left hide-on-small-only"></i>Etat du compte le 01/{{ "now"|date("m/Y") }}</h2>
+					<h2 class="divider-new-right left"><i class="fa fa-history left hide-on-small-only"></i>Etat du compte le 01/{{ dateTemp|date("m/Y") }}</h2>
 					<table class="striped highlight centered" style="width: 100%;">
 						<tbody>
 							<tr class="ligne_ac_amount">
@@ -38,7 +38,7 @@
 						</tbody>
 					</table>
 					<br>
-					<h2 class="divider-new-right left"><i class="fa fa-list-ul left hide-on-small-only"></i>Opérations depuis le 01/{{ "now"|date("m/Y") }}</h2>
+					<h2 class="divider-new-right left"><i class="fa fa-list-ul left hide-on-small-only"></i>Opérations depuis le 01/{{ dateTemp|date("m/Y") }}</h2>
 					<table class="striped highlight centered responsive-table">
 						<thead>
 							<tr>

@@ -2,6 +2,11 @@
 
 namespace SU\AccountBundle\Repository;
 
+use SU\AccountBundle\Entity\Account;
+use SU\AccountBundle\Entity\Category;
+use SU\AccountBundle\Entity\Entry;
+use SU\AccountBundle\Entity\History;
+
 /**
  * EntryRepository
  *
@@ -140,6 +145,27 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		$qb->setParameter("end", $datetime);
 		
 		$qb->orderBy("e.amount", "ASC");
+		
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function getSystematicOperationsByMonth(Account $account, \DateTime $date) {
+		$qb = $this->createQueryBuilder("e");
+		$qb->leftjoin("e.account", "a");
+		$qb->addSelect();
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		$qb->andWhere("e.effective = :effective");
+		$qb->setParameter("effective", "systematic");
+		
+		$qb->andWhere("e.paimentDate BETWEEN :start AND :end");
+		$qb->setParameter("start", new \DateTime($date->format("Y-m")."-01"));
+		$datetime =  new \DateTime($date->format("Y-m")."-01");
+		$datetime->modify("+1 Month");
+		$datetime->modify("-1 Day");
+		$qb->setParameter("end", $datetime);
 		
 		return $qb->getQuery()->getResult();
 	}

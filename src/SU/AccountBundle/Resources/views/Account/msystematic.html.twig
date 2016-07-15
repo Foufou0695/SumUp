@@ -13,7 +13,7 @@
 		</section>
 		<section id="systematic_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">
 			<div class="row" style="margin-bottom: 0px;">
-				Une opération mensuel vous permet d'automatiser la sortie ou l'entrée de montants fixes sur votre compte (ex: loyer, ... ). L'opération sera effectuée tous les mois à partir de la date donnée.
+				<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Une opération mensuel vous permet d'automatiser la sortie ou l'entrée de montants fixes sur votre compte (ex: loyer, ... ). L'opération sera effectuée tous les mois à partir de la date donnée.</div>
 			<br><br>
 			<form class="col s12" id="systematic_form" data-effective="systematic">
 				<div class="row">
@@ -35,6 +35,7 @@
 								<option value="{{ category.name }}">{{ category.name }}</option>
 							{% endfor %}
 						</select>
+						<em>Pour ajouter une catégorie, <a href="{{ path('su_user_param') }}" class="deep-red-text link-hover">c'est par ici !</a></em>
 					</div>
 				</div>
 				<div class="row">

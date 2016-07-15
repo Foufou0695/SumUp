@@ -45,9 +45,9 @@ class SUAccountService {
 	}
 	
 	public function createMonthPdf($rawData, $dateTemp) {
-		$cover = $this->container->get("templating")->render("SUAccountBundle:Account:cover.html.twig");
+		$cover = $this->container->get("templating")->render("SUAccountBundle:Account:cover.html.twig", array("dateTemp" => $dateTemp));
 		$html = $this->container->get("templating")->render("SUAccountBundle:Account:accountTemplate.html.twig", array("dateTemp" => $dateTemp));
-		$graph = $this->container->get("templating")->render("SUAccountBundle:Account:graphTemplate.html.twig", array("rawData" => $rawData));
+		$graph = $this->container->get("templating")->render("SUAccountBundle:Account:graphTemplate.html.twig", array("rawData" => $rawData, "dateTemp" => $dateTemp));
 		return array($cover, $html, $graph);
 	}
 	
@@ -65,5 +65,22 @@ class SUAccountService {
 		$history = new History();
 		$history->setAmount(100000000000000);
 		return $history;
+	}
+	
+	public function addSystematicOperations(Account $account, $systematicOperations) {
+		foreach($systematicOperations as $operation) {
+			$entry = new Entry();
+			$paimentDate = new \DateTime($operation->getPaimentDate()->format('Y-m-d'));
+			$paimentDate->modify("+1 Month");
+			
+			$entry->setAmount($operation->getAmount());
+			$entry->setPaimentKind($operation->getPaimentKind());
+			$entry->setEffective($operation->getEffective());
+			$entry->setPaimentDate($paimentDate);
+			$entry->setDescription($operation->getDescription());
+			$entry->setCategory($operation->getCategory());
+			
+			$account->addEntry($entry);
+		}
 	}
 }

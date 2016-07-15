@@ -164,11 +164,13 @@
 					<div class="col s12 center-align" style="padding-bottom: 20px;">
 						<h2 class="divider-new-right"><i class="fa fa-file-pdf-o left hide-on-small-only"></i>Exporter les opérations en cours</h2>
 						<p class="left-align">Vous pouvez exporter les tableaux et graphes de l'onglet "Récapitulatif" au format pdf. A la fin de chaque mois, tous les tableaux sont automatiquement sauvegardés sous ce format (voir l'historique ci-dessous).</p>
-						<a data-year="{{ 'now'|date('Y') }}" data-month="{{ 'now'|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button account-file" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - {{ app.session.get('currentAccount').getName() }} - Comptes de {{ 'now'|date('m-Y') }}.pdf</a>
-						<div id="file_loader" class="row center-align" style="display: none; margin-top: 10px;">
-							<span class="loader loader-triple-grey"></span>
-							<br>
-							<em><span id="file_loader_notif">Chargement</span> ...</em>
+						<a data-type="main" data-generate="1" data-year="{{ 'now'|date('Y') }}" data-month="{{ 'now'|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button account-file" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - {{ app.session.get('currentAccount').getName() }} - Comptes de {{ 'now'|date('m-Y') }}.pdf</a>
+						<div id="main_loader">
+							<div class="file_loader row center-align" style="display: none; margin-top: 10px;">
+								<span class="loader loader-triple-grey"></span>
+								<br>
+								<em><span class="file_loader_notif">Chargement</span> ...</em>
+							</div>
 						</div>
 						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Historique de votre comtpe</h2>
 						<p class="left-align">Voici le récapitulatif de vos comptes depuis votre inscription sur le site.</p>
@@ -185,16 +187,22 @@
 									</tr>
 								</thead>
 
-								<tbody>
-									{% for accountFile in app.session.get('currentAccount').getStories() %}
-										<tr>
-											<td>SumUp - {{ app.session.get('currentAccount').getName() }} - Comptes de {{ accountFile.getAmountDate()|date('m-Y') }}</td>
-											<td><a data-year="{{ accountFile.getAmountDate()|date('Y') }}" data-month="{{ accountFile.getAmountDate()|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button truncate account-file" style="animation-delay: 0.2s;"><i class="fa fa-download hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-download left"></i>Télécharger</span></a></td>
-											<td><a data-year="{{ accountFile.getAmountDate()|date('Y') }}" data-month="{{ accountFile.getAmountDate()|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button truncate account-file" style="animation-delay: 0.2s;"><i class="fa fa-refresh hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-refresh left"></i>Re-créer</span></a></td>
-										</tr>
-									{% endfor %}
+								<tbody id="previous_months_tbody">
 								</tbody>
 							</table>
+							<div id="other_loader">
+								<div class="file_loader row center-align" style="display: none; margin-top: 10px;">
+									<span class="loader loader-triple-grey"></span>
+									<br>
+									<em><span class="file_loader_notif">Chargement</span> ...</em>
+								</div>
+							</div>
+
+							<div id="previous_months_loader" class="row center-align" style="margin-top: 10px; margin-bottom: 100px;">
+								<span class="loader loader-triple-grey"></span>
+								<br>
+								<em>Chargement ...</em>
+							</div>
 						</div>
 						<br>
 					</div>
@@ -216,7 +224,7 @@
 		</section>
 		<section id="immediate_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto;padding-top: 10px; padding-bottom: 20px;">
 			<div class="row" style="margin-bottom: 0px;">
-				Une opération immédiate est une opération qui aura un effet immédiat sur l'état de votre compte: la somme d'argent est ajoutée / retirée dès la validation de la transaction, votre compte est directement mis à jour. En cas d'erreur, vous pourrez modifier l'opération dans l'onglet récapitulatif.
+				<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Une opération immédiate est une opération qui aura un effet immédiat sur l'état de votre compte: la somme d'argent est ajoutée / retirée dès la validation de la transaction, votre compte est directement mis à jour. En cas d'erreur, vous pourrez modifier l'opération dans l'onglet récapitulatif.</div>
 			<br><br>
 			<form class="col s12" id="immediate_form" data-effective="immediate">
 				<div class="row">
@@ -238,6 +246,7 @@
 								<option value="{{ category.name }}">{{ category.name }}</option>
 							{% endfor %}
 						</select>
+						<em>Pour ajouter une catégorie, <a href="{{ path('su_user_param') }}" class="deep-red-text link-hover">c'est par ici !</a></em>
 					</div>
 				</div>
 				<div class="row">
@@ -278,7 +287,7 @@
 		</section>
 		<section id="differed_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">
 			<div class="row" style="margin-bottom: 0px;">
-				Une opération différée est une opération dont l'effet sur le compte n'aura lieu qu'à la date demandée. Avant cette date, l'opération sera rangée dans les opérations en attente.
+				<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Une opération différée est une opération dont l'effet sur le compte n'aura lieu qu'à la date demandée. Avant cette date, l'opération sera rangée dans les opérations en attente.</div>
 			<br><br>
 			<form class="col s12" id="differed_form" data-effective="differed">
 				<div class="row">
@@ -300,6 +309,7 @@
 								<option value="{{ category.name }}">{{ category.name }}</option>
 							{% endfor %}
 						</select>
+						<em>Pour ajouter une catégorie, <a href="{{ path('su_user_param') }}" class="deep-red-text link-hover">c'est par ici !</a></em>
 					</div>
 				</div>
 				<div class="row">
@@ -340,7 +350,7 @@
 		</section>
 		<section id="systematic_operation_content" style="height: 100%; margin-bottom: 0px; overflow-x: hidden; overflow-y: auto; padding-top: 10px; padding-bottom: 20px;">
 			<div class="row" style="margin-bottom: 0px;">
-				Une opération mensuel vous permet d'automatiser la sortie ou l'entrée de montants fixes sur votre compte (ex: loyer, ... ). L'opération sera effectuée tous les mois à partir de la date donnée.
+				<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Une opération mensuel vous permet d'automatiser la sortie ou l'entrée de montants fixes sur votre compte (ex: loyer, ... ). L'opération sera effectuée tous les mois à partir de la date donnée.</div>
 			<br><br>
 			<form class="col s12" id="systematic_form" data-effective="systematic">
 				<div class="row">
@@ -362,6 +372,7 @@
 								<option value="{{ category.name }}">{{ category.name }}</option>
 							{% endfor %}
 						</select>
+						<em>Pour ajouter une catégorie, <a href="{{ path('su_user_param') }}" class="deep-red-text link-hover">c'est par ici !</a></em>
 					</div>
 				</div>
 				<div class="row">
@@ -1006,42 +1017,46 @@
 		);
 	}
 	
-	$(document).ready(function () {
-		
-		//Lancement de l'update du compte (si on change de mois il faut faire "avancer" le compte & générer les pdfs) ------
-		refresh_account();
-		//------------------------------------------------------------------------------------------------------------------
-		
-		//Gestion lancement téléchargement & génération pdf --------------------------------
+	function prepare_pdf() {
+		$('.account-file').off('click');
 		$('.account-file').click(function(){
-			$('#file_loader_notif').html("Chargement");
+			if ($(this).attr('data-type') == "main") {
+				$elem = $('#main_loader');
+			} else {
+				$elem = $("#other_loader");
+			}
+			$elem.find('.file_loader_notif').html("Chargement");
+			console.log($elem.find('.file_loader'));
 			if (!$(this).hasClass('disabled')) {
 				$(this).addClass('disabled');
 				var year = $(this).attr('data-year');
 				var month = $(this).attr('data-month');
+				var generate = $(this).attr('data-generate');
 				var url = "{{ path('su_account_homepage') }}/pdf/" + year + "/" + month;
-				$('#file_loader').slideDown();
+				$elem.find('.file_loader').slideDown();
 				
 				$.get(
 					url,
 					{
-						status: "request"
+						status: "request",
+						generate: generate
 					},
 					function(rep) {
 						switch(rep.notif) {
 							case "request_generation_process":
-								$('#file_loader_notif').html("Créaction du fichier");
+								$elem.find('.file_loader_notif').html("Création du fichier");
 								$.get(
 									url,
 									{
-										status: "generate"
+										status: "generate",
+										generate: generate
 									},
 									function (rep) {
 										switch(rep.notif) {
 											case "ready":
-												$('#file_loader_notif').html("Lancement du téléchargement");
+												$elem.find('.file_loader_notif').html("Lancement du téléchargement");
 												setTimeout(function() {
-													$('#file_loader').slideUp();
+													$elem.find('.file_loader').slideUp();
 													$('.account-file').removeClass('disabled');
 												}, 1000);
 												$(location).attr('href', url);
@@ -1055,9 +1070,9 @@
 								);
 								break;
 							case "ready":
-								$('#file_loader_notif').html("Lancement du téléchargement");
+								$elem.find('.file_loader_notif').html("Lancement du téléchargement");
 								setTimeout(function() {
-									$('#file_loader').slideUp();
+									$elem.find('.file_loader').slideUp();
 									$('.account-file').removeClass('disabled');
 								}, 1000);
 								$(location).attr('href', url);
@@ -1079,6 +1094,16 @@
 				);
 			}
 		});
+	}
+	
+	$(document).ready(function () {
+		
+		//Lancement de l'update du compte (si on change de mois il faut faire "avancer" le compte & générer les pdfs) ------
+		refresh_account();
+		//------------------------------------------------------------------------------------------------------------------
+		
+		//Gestion lancement téléchargement & génération pdf --------------------------------
+		prepare_pdf();
 		//----------------------------------------------------------------------------------
 		
 		//Boutons ajout opération ----------------------------------------------------------
@@ -1142,6 +1167,7 @@
 		$('#recap_tab_button').click(function () {
 			setTimeout(function () {
 				
+				$(window).off('resize');
 				$(window).resize(function () {
 					plot_graph();
 				});
@@ -1163,6 +1189,26 @@
 				
 				month_operation_update();
 				
+			}, 500);
+		});
+		
+		$('#export_tab_button').click(function() {
+			setTimeout(function() {
+				$('#previous_months_tbody').html("");
+				$('#previous_months_loader').show();
+				$.get(
+					"{{ path('su_account_previous_months') }}",
+					function(rep) {
+						if (rep.notif == "ready") {
+							$('#previous_months_loader').hide();
+							$('#previous_months_tbody').html(rep.html);
+							prepare_pdf();
+						} else {
+							Materialize.toast("Oops ... Une erreur est survenue ...", 4000);
+							console.log(rep);
+						}
+					}
+				);
 			}, 500);
 		});
 		

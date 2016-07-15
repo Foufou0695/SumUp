@@ -106,3 +106,11 @@ su_account_graph_template:
 su_account_refresh_account:
     path:     /home/refresh
     defaults: { _controller: SUAccountBundle:Account:refreshAccount }
+
+su_account_previous_months:
+    path:     /home/previousMonths
+    defaults: { _controller: SUAccountBundle:Account:previousMonths }
+
+su_account_rename_category:
+    path:     /home/renameCategory
+    defaults: { _controller: SUAccountBundle:Account:renameCategory }

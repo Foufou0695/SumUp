@@ -139,7 +139,7 @@ class AccountController extends Controller
 				
 				$user->addCategory($category);
 				$em->flush();
-				return new JsonResponse(array("notif" => "category_added", "html" => '<tr><td>'.$category->getName().'</td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a></td></tr>'));
+				return new JsonResponse(array("notif" => "category_added", "html" => '<tr><td>'.$category->getName().'</td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button edit-category truncate"><i class="fa fa-edit left hide-on-small-only"></i>Renommer</a></td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a></td></tr>'));
 			}
 		} else {
 			throw $this->createNotFoundException();
@@ -306,7 +306,8 @@ class AccountController extends Controller
 								array("monthOperations" => $monthOperations,
 									"totalMonthOperations" => $totalMonthOperations,
 									"totalInBank" => $totalInBank,
-									"pdf" => $pdf
+									"pdf" => $pdf,
+									"date" => "-1"
 								));
 		} else {
 			$dateObject = new \DateTime(substr($date, 0, 4)."-".substr($date, 4, 2)."-01");
@@ -315,11 +316,14 @@ class AccountController extends Controller
 			$totalMonthOperations = $accountService->sumEntries($monthOperations);
 			$totalInBank = $accountService->getHistoryByDate($dateObject, $accountService->getAccountByName($user, $currentAccount->getName()))->getAmount() - $totalMonthOperations;
 			
+			$dateObject->modify("+1 Month");
+			$dateObject->modify("-1 Day");
 			return $this->render("SUAccountBundle:Account:currentOperations.html.twig",
 								array("monthOperations" => $monthOperations,
 									"totalMonthOperations" => $totalMonthOperations,
 									"totalInBank" => $totalInBank,
-									"pdf" => $pdf
+									"pdf" => $pdf,
+									"date" => $dateObject
 								));
 		}
 	}
@@ -554,6 +558,7 @@ class AccountController extends Controller
 	public function pdfAction($year, $month, Request $request) {
 		$user = $this->getUser();
 		$session = $request->getSession();
+		$generate = $request->query->get("generate");
 		$currentAccount = $session->get('currentAccount');
 		$filepath = 'pdf/'.$user->getId().'/';
 		$filename = 'SumUp - '.$currentAccount->getName().' - Comptes du '.$month.'-'.$year.'.pdf';
@@ -562,13 +567,17 @@ class AccountController extends Controller
 			switch ($request->query->get("status")) {
 				case "request":
 					if (is_file($filepath.$filename) and ((new \DateTime())->format('m-Y') != $month.'-'.$year)) {
-						return new JsonResponse(array("notif" => "ready"));
+						if ($generate == "0") {
+							return new JsonResponse(array("notif" => "ready"));
+						} else {
+							return new JsonResponse(array("notif" => "request_generation_process"));
+						}
 					} else {
 						return new JsonResponse(array("notif" => "request_generation_process"));
 					}
 					break;
 				case "generate":
-					if (!is_file($filepath.$filename) or ((new \DateTime())->format('m-Y') == $month.'-'.$year)) {
+					if (!is_file($filepath.$filename) or ((new \DateTime())->format('m-Y') == $month.'-'.$year) or ($generate == "1")) {
 						if (is_file($filepath.$filename)) {
 							unlink($filepath.$filename);
 						}
@@ -739,11 +748,15 @@ class AccountController extends Controller
 			$trace = "";
 			
 			while ($datetime->format('m-Y') != $now) {
+				$currentDate = new \DateTime($currentAccount->getFirstAmountDate()->format("Y-m")."-01");
 				$history = new History();
 				$history->setAmount($currentAccount->getFirstAmount());
 				$history->setAmountDate(new \DateTime($currentAccount->getFirstAmountDate()->format('Y-m-d')));
 				
+				$systematicOperations = $entryRepository->getSystematicOperationsByMonth($currentAccount, $currentDate);
 				$emAccount = $accountService->getAccountByName($user, $currentAccount->getName());
+				$accountService->addSystematicOperations($emAccount, $systematicOperations);
+				
 				$emAccount->addStory($history);
 				$em->flush();
 				
@@ -759,7 +772,7 @@ class AccountController extends Controller
 				$filename = 'SumUp - '.$currentAccount->getName().' - Comptes du '.$currentAccount->getFirstAmountDate()->format('m-Y').'.pdf';
 				$dateTemp = new \DateTime($currentAccount->getFirstAmountDate()->format('Y-m').'-01');
 				$html = $accountService->createMonthPdf($this->getRawData($request, $dateTemp), $dateTemp);
-				$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".$month.'-'.$year));
+				$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".$dateTemp->format("m-Y")));
 				
 				$currentAccount->setFirstAmount($newAccount);
 				$datetime->modify("+1 Month");
@@ -777,6 +790,49 @@ class AccountController extends Controller
 			
 		} else {
 			return new JsonResponse(array("notif" => "nothing_to_do", "message" => $this->getRawData($request, new \DateTime('2016-07-01'))));
+		}
+	}
+	
+	public function previousMonthsAction(Request $request) {
+		if ($request->isMethod("GET") && $request->isXmlHttpRequest()) {
+			$accountService = $this->get('su_account.accountService');
+			$user = $this->getUser();
+			$account = $accountService->getAccountByName($user, $request->getSession()->get("currentAccount")->getName());
+			return new JsonResponse(array("notif" => "ready", "html" => $this->renderView("SUAccountBundle:Account:previousMonths.html.twig", array("stories" => $account->getStories()))));
+		} else {
+			throw $this->createNotFoundException();
+		}
+	}
+	
+	public function renameCategoryAction(Request $request) {
+		if ($request->isMethod("POST") && $request->isXmlHttpRequest()) {
+			$em = $this->getDoctrine()->getManager();
+			$user = $this->getUser();
+			$categoryRepository = $em->getRepository("SUAccountBundle:Category");
+			$categoryService = $this->get("su_account.categoryService");
+			$categoryId = $request->request->get("categoryId");
+			$newName = $request->request->get("newName");
+			
+			$category = $categoryRepository->find($categoryId);
+			
+			if ($category) {
+				if (($newName != "") && ($category->getUser()->getId() == $user->getId())) {
+					$verifCat = $categoryService->getCategoryByName($user, $newName);
+					if ($verifCat) {
+						return new JsonResponse(array("notif" => "name_in_use", "message" => "Une catégorie présente déjà ce nom."));
+					} else {
+						$category->setName($newName);
+						$em->flush();
+						return new JsonResponse(array("notif" => "category_updated"));
+					}
+				} else {
+					return new JsonResponse(array("notif" => "nothing_changed", "message" => "Cette catégorie ne vous appartient pas, ou le nouveau nom n'est pas correct."));
+				}
+			} else {
+				return new JsonResponse(array("notif" => "nothing_changed", "message" => "Catégorie non trouvée."));
+			}
+		} else {
+			throw $this->createNotFoundException();
 		}
 	}
 }

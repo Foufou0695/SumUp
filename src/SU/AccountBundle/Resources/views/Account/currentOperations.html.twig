@@ -16,7 +16,11 @@
 </tr>
 <tr>
 	<td></td>
-	<td><b>Total en banque (au {{ "now"|date("d/m/Y") }})</b></td>
+	{% if date == "-1" %}
+		<td><b>Total en banque (au {{ "now"|date("d/m/Y") }})</b></td>
+	{% else %}
+		<td><b>Total en banque (au {{ date|date("d/m/Y") }})</b></td>
+	{% endif %}
 	<td></td>
 	<td><b>{{ totalInBank|number_format(2, ',', ' ') }} €</b></td>
 	{% if pdf == 0 %}<td></td>{% endif %}

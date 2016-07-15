@@ -27,8 +27,8 @@
 					<img id="param_img" src="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-min.png') }}" class="responsive-img"></img>
 					<div class="row center-align">
 						<h1>SumUp</h1>
-						<h2 style="font-size: 3rem;"><span class="hide-on-small-only"><i class="fa">&#xf02d;</i> </span>Compte courant</h2>
-						<h5 class="col s12 center-align">{{ "now"|date("m/Y") }}</h5>
+						<h2 style="font-size: 3rem;"><span class="hide-on-small-only"><i class="fa">&#xf02d;</i> </span>{{ app.session.get("currentAccount").getName() }}</h2>
+						<h5 class="col s12 center-align">{{ dateTemp|date("m/Y") }}</h5>
 					</div>
 				</div>
 			</div>

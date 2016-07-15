@@ -1,0 +1,7 @@
+{% for history in stories %}
+	<tr>
+		<td>SumUp - {{ app.session.get('currentAccount').getName() }} - Comptes de {{ history.getAmountDate()|date('m-Y') }}</td>
+		<td><a data-type="others" data-generate="0" data-year="{{ history.getAmountDate()|date('Y') }}" data-month="{{ history.getAmountDate()|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button truncate account-file" style="animation-delay: 0.2s;"><i class="fa fa-download hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-download left"></i>Télécharger</span></a></td>
+		<td><a data-type="others" data-generate="1" data-year="{{ history.getAmountDate()|date('Y') }}" data-month="{{ history.getAmountDate()|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button truncate account-file" style="animation-delay: 0.2s;"><i class="fa fa-refresh hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-refresh left"></i>Re-créer</span></a></td>
+	</tr>
+{% endfor %}
