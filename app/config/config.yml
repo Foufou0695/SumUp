@@ -82,3 +82,4 @@ knp_snappy:
             footer-right: '[page]/[toPage]'
             footer-line: true
             dpi: 600
+            javascript-delay: 5000

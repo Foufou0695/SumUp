@@ -8,7 +8,7 @@
 	<title>SumUp</title>
 	<meta name="theme-color" content="#711d2a">
 	<link rel="icon" href="{{ app.request.getSchemeAndHttpHost() ~ asset('img/design/logo-icon-min.png') }}">
-
+	
 	<!-- CSS  -->
 	{% block stylesheet %}
 	<link href="{{ app.request.getSchemeAndHttpHost() ~ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" >
@@ -50,7 +50,7 @@
 						</thead>
 						
 						<tbody id="month_operations_tbody">
-						{{ render(controller("SUAccountBundle:Account:getMonthOperations", {"pdf": 1})) }}
+						{{ render(controller("SUAccountBundle:Account:getMonthOperations", {"pdf": 1, "date": dateTemp|date('Ym') })) }}
 						</tbody>
 					</table>
 					<br>
@@ -66,7 +66,7 @@
 						</thead>
 						
 						<tbody id="future_operations_tbody">
-							{{ render(controller("SUAccountBundle:Account:getFutureOperations", {"pdf": 1})) }}
+							{{ render(controller("SUAccountBundle:Account:getFutureOperations", {"pdf": 1, "date": dateTemp|date('Ym') })) }}
 						</tbody>
 					</table>
 					<br>
@@ -76,7 +76,6 @@
 	</div>
 
 	{% block javascript %}
-	<!--  Scripts-->
 	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/jquery-2.2.2.js') }}"></script>
 	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/materialize.js') }}"></script>
 	<script src="{{ app.request.getSchemeAndHttpHost() ~ asset('js/scroll-to.js') }}"></script>
@@ -85,115 +84,6 @@
 	{% endblock %}
 	<script>
 	
-		dataOut = [];
-		dataIn = [];
-		accountLevelGraph = [];
-		
-		function labelFormatter(label, series) {
-			return "<div class='category-click link-hover' data-cat='" + label + "'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
-		}
-		
-		
-		function plot_graph() {
-			var available_width = $('#placeholder_wrapper_depenses').width();
-			$('#placeholder_depenses').width(available_width);
-			$.plot('#placeholder_depenses', dataOut, {
-				series: {
-					pie: {
-						show: true,
-						radius: 1,
-						innerRadius: 0.5,
-						label: {
-							show: true,
-							radius: 3/4,
-							formatter: labelFormatter,
-							background: {
-								opacity: 0.5,
-								color: '#FFF'
-							}
-						}
-					}
-				},
-				legend: {
-					show: false
-				}
-			});
-			
-			var available_width = $('#placeholder_wrapper_entrees').width();
-			$('#placeholder_entrees').width(available_width);
-			$.plot('#placeholder_entrees', dataIn, {
-				series: {
-					pie: {
-						show: true,
-						radius: 1,
-						innerRadius: 0.5,
-						label: {
-							show: true,
-							radius: 3/4,
-							formatter: labelFormatter,
-							background: {
-								opacity: 0.5,
-								color: '#FFF'
-							}
-						}
-					}
-				},
-				legend: {
-					show: false
-				}
-			});
-
-			var available_width = $('#placeholder_wrapper_account').width();
-			$.plot("#placeholder_account", [], {} );
-			$('#placeholder_account').width(available_width);
-			plot = $.plot("#placeholder_account", [
-				{ data: accountLevelGraph, label: "Montant du compte"}
-			], {
-				series: {
-					lines: {
-						show: true
-					},
-					points: {
-						show: true
-					}
-				},
-				grid: {
-					hoverable: true,
-					clickable: true
-				},
-				xaxis: {
-					label: "Ta maman",
-					tickSize: 1,
-					tickDecimals: 0,
-					min: 1
-				},
-				legend: {
-					show: false
-				}
-			});
-			
-			$("<div id='tooltip'></div>").css({
-				position: "absolute",
-				display: "none",
-				border: "1px solid #fdd",
-				padding: "2px",
-				"background-color": "#fee",
-				opacity: 0.80
-			}).appendTo("body");
-			
-			$("#placeholder_account").bind("plothover", function (event, pos, item) {
-				if (item) {
-					var x = item.datapoint[0].toFixed(2),
-						y = item.datapoint[1].toFixed(2);
-
-					$("#tooltip").html(y + " €")
-						.css({top: item.pageY+5, left: item.pageX+5})
-						.fadeIn(200);
-				} else {
-					$("#tooltip").hide();
-				}
-			});
-		}
 		function logo_resize () {
 			if ($(window).width() <= 600) {
 				$('#logo_navbar').height('50px')

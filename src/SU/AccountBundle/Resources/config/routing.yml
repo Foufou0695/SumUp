@@ -55,16 +55,18 @@ su_account_send_operation:
     defaults: { _controller: SUAccountBundle:Account:sendOperation }
 
 su_account_month_operations:
-    path:     /home/monthOperations/{pdf}
+    path:     /home/monthOperations/{pdf}/{date}
     defaults:
         _controller: SUAccountBundle:Account:getMonthOperations
         pdf: 0
+        date: "-1"
 
 su_account_future_operations:
-    path:     /home/futureOperations/{pdf}
+    path:     /home/futureOperations/{pdf}/{date}
     defaults:
         _controller: SUAccountBundle:Account:getFutureOperations
         pdf: 0
+        date: "-1"
 
 su_account_graph_data:
     path:     /home/graphData
@@ -100,3 +102,7 @@ su_account_account_template:
 su_account_graph_template:
     path:     /home/graphTemplate
     defaults: { _controller: SUAccountBundle:Account:graphTemplate }
+
+su_account_refresh_account:
+    path:     /home/refresh
+    defaults: { _controller: SUAccountBundle:Account:refreshAccount }

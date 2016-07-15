@@ -10,7 +10,7 @@ namespace SU\AccountBundle\Repository;
  */
 class EntryRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function findOperationsByMonth($account) {
+	public function findThisMonthOperations($account) {
 		$qb = $this->createQueryBuilder('e');
 		$qb->leftjoin("e.category", "c");
 		$qb->addSelect("c");
@@ -34,7 +34,7 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		$qb->leftjoin("e.category", "c");
 		$qb->addSelect("c");
 		$qb->leftjoin("e.account", "a");
-		$qb->addSelect();
+		$qb->addSelect("a");
 		
 		$qb->where("e.paimentDate BETWEEN :start AND :end");
 		$qb->setParameter("start", new \DateTime());
@@ -50,7 +50,27 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		return $qb->getQuery()->getResult();
 	}
 	
-	public function getOutOperationsByCategory($category, $account) {
+	public function getOperationsByMonth($date, $account) {
+		$qb = $this->createQueryBuilder("e");
+		$qb->leftjoin("e.account", "a");
+		$qb->addSelect("a");
+		
+		$qb->where("e.paimentDate BETWEEN :start AND :end");
+		$qb->setParameter("start", new \DateTime($date->format("Y-m")."-01"));
+		$datetime =  new \DateTime($date->format("Y-m")."-01");
+		$datetime->modify("+1 Month");
+		$datetime->modify("-1 Day");
+		$qb->setParameter("end", $datetime);
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		$qb->orderBy("e.paimentDate", "ASC");
+		
+		return $qb->getQuery()->getResult();
+	}
+	
+	public function getOutOperationsByCategory($category, $account, $date) {
 		$qb = $this->createQueryBuilder("e");
 		$qb->leftjoin("e.category", "c");
 		$qb->addSelect("c");
@@ -62,13 +82,20 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		
 		$qb->andWhere("c.name = :categoryName");
 		$qb->setParameter("categoryName", $category->getName());
+		
+		$qb->andWhere("e.paimentDate BETWEEN :start AND :end");
+		$qb->setParameter("start", new \DateTime($date->format("Y-m")."-01"));
+		$datetime =  new \DateTime($date->format("Y-m")."-01");
+		$datetime->modify("+1 Month");
+		$datetime->modify("-1 Day");
+		$qb->setParameter("end", $datetime);
 		
 		$qb->andWhere("e.amount > 0");
 		
 		return $qb->getQuery()->getResult();
 	}
 	
-	public function getInOperationsByCategory($category, $account) {
+	public function getInOperationsByCategory($category, $account, $date) {
 		$qb = $this->createQueryBuilder("e");
 		$qb->leftjoin("e.category", "c");
 		$qb->addSelect("c");
@@ -80,13 +107,20 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		
 		$qb->andWhere("c.name = :categoryName");
 		$qb->setParameter("categoryName", $category->getName());
+		
+		$qb->andWhere("e.paimentDate BETWEEN :start AND :end");
+		$qb->setParameter("start", new \DateTime($date->format("Y-m")."-01"));
+		$datetime =  new \DateTime($date->format("Y-m")."-01");
+		$datetime->modify("+1 Month");
+		$datetime->modify("-1 Day");
+		$qb->setParameter("end", $datetime);
 		
 		$qb->andWhere("e.amount <= 0");
 		
 		return $qb->getQuery()->getResult();
 	}
 	
-	public function getOperationsByCategory($category, $account) {
+	public function getOperationsByCategory($category, $account, $date) {
 		$qb = $this->createQueryBuilder("e");
 		$qb->leftjoin("e.category", "c");
 		$qb->addSelect("c");
@@ -98,6 +132,12 @@ class EntryRepository extends \Doctrine\ORM\EntityRepository
 		
 		$qb->andWhere("c.name = :categoryName");
 		$qb->setParameter("categoryName", $category->getName());
+		
+		$qb->andWhere("e.paimentDate BETWEEN :start AND :end");
+		$qb->setParameter("start", new \DateTime($date->format("Y-m")."-01"));
+		$datetime =  new \DateTime($date->format("Y-m")."-01");
+		$datetime->modify("+2 Year");
+		$qb->setParameter("end", $datetime);
 		
 		$qb->orderBy("e.amount", "ASC");
 		

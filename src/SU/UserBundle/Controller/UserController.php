@@ -12,10 +12,16 @@ use SU\UserBundle\Entity\User;
 
 class UserController extends Controller
 {
-    public function loginPageAction() {
+    public function loginPageAction(Request $request) {
 		
 		if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-		  return $this->redirectToRoute('su_account_homepage');
+			$user = $this->getUser();
+			$session = $request->getSession();
+			if ($session->get("currentAccount") == "") {
+				$accountService = $this->container->get("su_account.accountService");
+				$session->set("currentAccount", $accountService->getPrincipalAccount($user));
+			}
+			return $this->redirectToRoute('su_account_homepage');
 		}
 		
 		$authenticationUtils = $this->get('security.authentication_utils');
@@ -28,7 +34,13 @@ class UserController extends Controller
 		));
     }
 	
-	public function paramAction() {
+	public function paramAction(Request $request) {
+		$user = $this->getUser();
+		$session = $request->getSession();
+		if ($session->get("currentAccount") == "") {
+				$accountService = $this->container->get("su_account.accountService");
+				$session->set("currentAccount", $accountService->getPrincipalAccount($user));
+		}
 		return $this->render('SUUserBundle:User:param.html.twig');
 	}
 	

@@ -46,6 +46,18 @@ class Account
      * @ORM\Column(name="firstAmount", type="float")
      */
     private $firstAmount;
+	
+	/**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="firstAmountDate", type="datetime")
+     */
+    private $firstAmountDate;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="SU\AccountBundle\Entity\History", mappedBy="account", cascade={"persist"})
+	 */
+    private $stories;
 
     /**
      * @var string
@@ -201,5 +213,64 @@ class Account
     public function getAcPriority()
     {
         return $this->acPriority;
+    }
+
+    /**
+     * Add story
+     *
+     * @param \SU\AccountBundle\Entity\History $story
+     *
+     * @return Account
+     */
+    public function addStory(\SU\AccountBundle\Entity\History $story)
+    {
+		$story->setAccount($this);
+        $this->stories[] = $story;
+
+        return $this;
+    }
+
+    /**
+     * Remove story
+     *
+     * @param \SU\AccountBundle\Entity\History $story
+     */
+    public function removeStory(\SU\AccountBundle\Entity\History $story)
+    {
+        $this->stories->removeElement($story);
+    }
+
+    /**
+     * Get stories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStories()
+    {
+        return $this->stories;
+    }
+
+    /**
+     * Set firstAmountDate
+     *
+     * @param \DateTime $firstAmountDate
+     *
+     * @return Account
+     */
+    public function setFirstAmountDate($firstAmountDate)
+    {
+        $this->firstAmountDate = $firstAmountDate;
+
+        return $this;
+    }
+
+    /**
+     * Get firstAmountDate
+     *
+     * @return \DateTime
+     */
+    public function getFirstAmountDate()
+    {
+        return $this->firstAmountDate;
     }
 }

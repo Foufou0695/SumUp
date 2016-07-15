@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use SU\AccountBundle\Entity\Account;
 use SU\AccountBundle\Entity\Category;
 use SU\AccountBundle\Entity\Entry;
+use SU\AccountBundle\Entity\History;
 
 class AccountController extends Controller
 {
@@ -78,6 +79,7 @@ class AccountController extends Controller
 			$account = new Account();
 			$account->setName($request->request->get('name'));
 			$account->setFirstAmount($request->request->get('first_amount'));
+			$account->setFirstAmountDate(new \DateTime());
 			$account->setAcPriority($request->request->get('ac_priority'));
 			$account->setUser($user);
 				
@@ -286,46 +288,69 @@ class AccountController extends Controller
 		}
 	}
 	
-	public function getMonthOperationsAction($pdf, Request $request) {
+	public function getMonthOperationsAction($pdf, $date, Request $request) {
 		$em = $this->getDoctrine()->getManager();
+		$user = $this->getUser();
 		$session = $request->getSession();
 		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
-		$monthOperations = $entryRepository->findOperationsByMonth($session->get("currentAccount"));
 		$accountService = $this->container->get("su_account.accountService");
+		$currentAccount = $session->get("currentAccount");
 		
-		$totalMonthOperations = $accountService->sumEntries($monthOperations);
-		$totalInBank = $session->get('currentAccount')->getFirstAmount() - $totalMonthOperations;
-		
-		return $this->render("SUAccountBundle:Account:currentOperations.html.twig",
-							array("monthOperations" => $monthOperations,
-								"totalMonthOperations" => $totalMonthOperations,
-								"totalInBank" => $totalInBank,
-								"pdf" => $pdf
-							));
+		if (($date == "-1") or ($date == (new \DateTime())->format("Ym"))) {
+			$monthOperations = $entryRepository->findThisMonthOperations($currentAccount);
+			
+			$totalMonthOperations = $accountService->sumEntries($monthOperations);
+			$totalInBank = $currentAccount->getFirstAmount() - $totalMonthOperations;
+			
+			return $this->render("SUAccountBundle:Account:currentOperations.html.twig",
+								array("monthOperations" => $monthOperations,
+									"totalMonthOperations" => $totalMonthOperations,
+									"totalInBank" => $totalInBank,
+									"pdf" => $pdf
+								));
+		} else {
+			$dateObject = new \DateTime(substr($date, 0, 4)."-".substr($date, 4, 2)."-01");
+			$monthOperations = $entryRepository->getOperationsByMonth($dateObject, $currentAccount);
+			
+			$totalMonthOperations = $accountService->sumEntries($monthOperations);
+			$totalInBank = $accountService->getHistoryByDate($dateObject, $accountService->getAccountByName($user, $currentAccount->getName()))->getAmount() - $totalMonthOperations;
+			
+			return $this->render("SUAccountBundle:Account:currentOperations.html.twig",
+								array("monthOperations" => $monthOperations,
+									"totalMonthOperations" => $totalMonthOperations,
+									"totalInBank" => $totalInBank,
+									"pdf" => $pdf
+								));
+		}
 	}
 	
-	public function getFutureOperationsAction($pdf, Request $request) {
+	public function getFutureOperationsAction($pdf, $date, Request $request) {
 		$em = $this->getDoctrine()->getManager();
 		$session = $request->getSession();
 		$currentAccount = $session->get("currentAccount");
-		$firstAmountCurrentAccount = $currentAccount->getFirstAmount();
 		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
-		$futureOperations = $entryRepository->findFutureOperations($currentAccount);
-		$monthOperations = $entryRepository->findOperationsByMonth($currentAccount);
 		$accountService = $this->container->get("su_account.accountService");
 		
-		$totalMonthOperations = $accountService->sumEntries($monthOperations);
-		$totalInBank = $firstAmountCurrentAccount - $totalMonthOperations;
-		
-		$totalFutureOperations = $accountService->sumEntries($futureOperations);
-		$totalInFuture = $totalInBank - $totalFutureOperations;
-		
-		return $this->render("SUAccountBundle:Account:futureOperations.html.twig",
-							array("futureOperations" => $futureOperations,
-								"totalFutureOperations" => $totalFutureOperations,
-								"totalInFuture" => $totalInFuture,
-								"pdf" => $pdf
-							));
+		if (($date == "-1") or ($date == (new \DateTime())->format("Ym"))) {
+			$firstAmountCurrentAccount = $currentAccount->getFirstAmount();
+			$futureOperations = $entryRepository->findFutureOperations($currentAccount);
+			$monthOperations = $entryRepository->findThisMonthOperations($currentAccount);
+			
+			$totalMonthOperations = $accountService->sumEntries($monthOperations);
+			$totalInBank = $firstAmountCurrentAccount - $totalMonthOperations;
+			
+			$totalFutureOperations = $accountService->sumEntries($futureOperations);
+			$totalInFuture = $totalInBank - $totalFutureOperations;
+			
+			return $this->render("SUAccountBundle:Account:futureOperations.html.twig",
+								array("futureOperations" => $futureOperations,
+									"totalFutureOperations" => $totalFutureOperations,
+									"totalInFuture" => $totalInFuture,
+									"pdf" => $pdf
+								));
+		} else {
+			return new Response("");
+		}
 	}
 	
 	public function getGraphDataAction(Request $request) {
@@ -345,7 +370,7 @@ class AccountController extends Controller
 			//$trace = "";
 			
 			foreach($user->getCategories() as $category) {
-				$allOutOperationsInCategory = $entryRepository->getOutOperationsByCategory($category, $currentAccount);
+				$allOutOperationsInCategory = $entryRepository->getOutOperationsByCategory($category, $currentAccount, new \DateTime());
 				$totalCategory = $accountService->sumEntries($allOutOperationsInCategory);
 				if ($totalCategory > 0) {
 					$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allOutOperationsInCategory, "totalCategoryOperations" => $totalCategory));
@@ -356,7 +381,7 @@ class AccountController extends Controller
 				$totalOut = $totalOut + $tempOut["totalCategory"];
 				$dataOut[] = $tempOut;
 				
-				$allInOperationsInCategory = $entryRepository->getInOperationsByCategory($category, $currentAccount);
+				$allInOperationsInCategory = $entryRepository->getInOperationsByCategory($category, $currentAccount, new \DateTime());
 				$totalCategory = $accountService->sumEntries($allInOperationsInCategory);
 				if ($totalCategory < 0) {
 					$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allInOperationsInCategory, "totalCategoryOperations" => $totalCategory));
@@ -517,7 +542,7 @@ class AccountController extends Controller
 			$entryRepository = $em->getRepository("SUAccountBundle:Entry");
 			$accountService = $this->container->get("su_account.accountService");
 			
-			$allOperationsInCategory = $entryRepository->getOperationsByCategory($session->get("categoryDetails"), $currentAccount);
+			$allOperationsInCategory = $entryRepository->getOperationsByCategory($session->get("categoryDetails"), $currentAccount, new \DateTime());
 			$totalCategory = $accountService->sumEntries($allOperationsInCategory);
 			
 			return $this->render("SUAccountBundle:Account:mcategoryDetails.html.twig", array("categoryOperations" => $allOperationsInCategory, "totalCategoryOperations" => $totalCategory));
@@ -548,8 +573,9 @@ class AccountController extends Controller
 							unlink($filepath.$filename);
 						}
 						$accountService = $this->container->get("su_account.accountService");
-						$html = $accountService->createMonthPdf($this->getRawData($request));
-						$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".(new \DateTime())->format('m/y')));
+						$dateTemp = new \DateTime($year.'-'.$month.'-01');
+						$html = $accountService->createMonthPdf($this->getRawData($request, $dateTemp), $dateTemp);
+						$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".$month.'-'.$year));
 					}
 					return new JsonResponse(array("notif" => "ready"));
 					break;
@@ -573,8 +599,9 @@ class AccountController extends Controller
 				unlink($filepath.$filename);
 			}
 			$accountService = $this->container->get("su_account.accountService");
-			$html = $accountService->createMonthPdf($this->getRawData($request));
-			$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("header-left" => $currentAccount->getName() . " - ".(new \DateTime())->format('m/y')));
+			$dateTemp = new \DateTime($year.'-'.$month.'-01');
+			$html = $accountService->createMonthPdf($this->getRawData($request, $dateTemp), $dateTemp);
+			$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".$month.'-'.$year));
 			
 			return new Response(
 				file_get_contents($filepath.$filename),
@@ -587,7 +614,7 @@ class AccountController extends Controller
 		}
     }
 	
-	public function getRawData(Request $request) {
+	public function getRawData(Request $request, $date) {
 		$em = $this->getDoctrine()->getManager();
 		$session = $request->getSession();
 		$user = $this->getUser();
@@ -595,15 +622,21 @@ class AccountController extends Controller
 		$accountService = $this->container->get("su_account.accountService");
 		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
 		
+		if ($date->format('Y-m') == (new \DateTime())->format('Y-m')) {
+			$firstAmount = $currentAccount->getFirstAmount();
+		} else {
+			$firstAmount = $accountService->getHistoryByDate($date, $accountService->getAccountByName($user, $currentAccount->getName()))->getAmount();
+		}
+		
 		$dataOut = [];
 		$dataIn = [];
 		$totalOut = 0;
 		$totalIn = 0;
-		$accountLevelGraph = array(1 => -intval($currentAccount->getFirstAmount()));
+		$accountLevelGraph = array(1 => -$firstAmount);
 		//$trace = "";
 		
 		foreach($user->getCategories() as $category) {
-			$allOutOperationsInCategory = $entryRepository->getOutOperationsByCategory($category, $currentAccount);
+			$allOutOperationsInCategory = $entryRepository->getOutOperationsByCategory($category, $currentAccount, $date);
 			$totalCategory = $accountService->sumEntries($allOutOperationsInCategory);
 			if ($totalCategory > 0) {
 				$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allOutOperationsInCategory, "totalCategoryOperations" => $totalCategory));
@@ -614,7 +647,7 @@ class AccountController extends Controller
 			$totalOut = $totalOut + $tempOut["totalCategory"];
 			$dataOut[] = $tempOut;
 			
-			$allInOperationsInCategory = $entryRepository->getInOperationsByCategory($category, $currentAccount);
+			$allInOperationsInCategory = $entryRepository->getInOperationsByCategory($category, $currentAccount, $date);
 			$totalCategory = $accountService->sumEntries($allInOperationsInCategory);
 			if ($totalCategory < 0) {
 				$html = $this->renderView("SUAccountBundle:Account:categoryDetailsOperations.html.twig", array("categoryOperations" => $allInOperationsInCategory, "totalCategoryOperations" => $totalCategory));
@@ -626,7 +659,7 @@ class AccountController extends Controller
 			$dataIn[] = $tempIn;
 			
 			foreach($allInOperationsInCategory as $operation) {
-				if ($operation->getPaimentDate()->format("y-m") == (new \DateTime())->format("y-m")) {
+				if ($operation->getPaimentDate()->format("y-m") == $date->format("y-m")) {
 					$day = $operation->getPaimentDate()->format("d");
 					if (array_key_exists(intval($day), $accountLevelGraph)) {
 						$accountLevelGraph[intval($day)] = $accountLevelGraph[intval($day)] + $operation->getAmount();
@@ -638,7 +671,7 @@ class AccountController extends Controller
 			}
 			
 			foreach($allOutOperationsInCategory as $operation) {
-				if ($operation->getPaimentDate()->format("y-m") == (new \DateTime())->format("y-m")) {
+				if ($operation->getPaimentDate()->format("y-m") == $date->format("y-m")) {
 					$day = $operation->getPaimentDate()->format("d");
 					if (array_key_exists(intval($day), $accountLevelGraph)) {
 						$accountLevelGraph[intval($day)] = $accountLevelGraph[intval($day)] + $operation->getAmount();
@@ -648,7 +681,7 @@ class AccountController extends Controller
 					//$trace = $trace . "\n" . $operation->getAmount() . " - " . $operation->getPaimentDate()->format("y-m-d") . " category " . $operation->getCategory()->getName() . " ----->>>> " . $day;
 				}
 			}
-			$lastKey = key( array_slice( $accountLevelGraph, -1, 1, TRUE ) );
+			//$lastKey = key( array_slice( $accountLevelGraph, -1, 1, TRUE ) );
 		}
 		
 		ksort($accountLevelGraph);
@@ -678,16 +711,72 @@ class AccountController extends Controller
 	}
 		
 	public function accountTemplateAction(Request $request) {
-		$rawData = $this->getRawData($request);
-		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig", array("rawData" => $rawData));
+		$rawData = $this->getRawData($request, new \DateTime());
+		return $this->render("SUAccountBundle:Account:accountTemplate.html.twig", array("rawData" => $rawData, "dateTemp" => new \DateTime()));
 	}
 	
 	public function graphTemplateAction(Request $request) {
-		$rawData = $this->getRawData($request);
-		return $this->render("SUAccountBundle:Account:graphTemplate.html.twig", array("rawData" => $rawData));
+		$rawData = $this->getRawData($request, new \DateTime());
+		return $this->render("SUAccountBundle:Account:graphTemplate.html.twig", array("rawData" => $rawData, "dateTemp" => new \DateTime()));
 	}
 	
 	public function coverAction(Request $request) {
 		return $this->render("SUAccountBundle:Account:cover.html.twig");
+	}
+	
+	public function refreshAccountAction(Request $request) {
+		$user = $this->getUser();
+		$session = $request->getSession();
+		$currentAccount = $session->get('currentAccount');
+		$em = $this->getDoctrine()->getManager();
+		$accountService = $this->container->get("su_account.accountService");
+		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+		$now = (new \DateTime())->format('m-Y');
+		
+		if ($now != $currentAccount->getFirstAmountDate()->format('m-Y')) {
+			$datetime = $currentAccount->getFirstAmountDate();
+			$newAccount = 0;
+			$trace = "";
+			
+			while ($datetime->format('m-Y') != $now) {
+				$history = new History();
+				$history->setAmount($currentAccount->getFirstAmount());
+				$history->setAmountDate(new \DateTime($currentAccount->getFirstAmountDate()->format('Y-m-d')));
+				
+				$emAccount = $accountService->getAccountByName($user, $currentAccount->getName());
+				$emAccount->addStory($history);
+				$em->flush();
+				
+				//Calcul du nouveau montant
+				$entriesToCount = $entryRepository->getOperationsByMonth($currentAccount->getFirstAmountDate(), $currentAccount);
+				$newAccount = $currentAccount->getFirstAmount();
+				foreach($entriesToCount as $entry) {
+					$newAccount = $newAccount - $entry->getAmount();
+				}
+				
+				//Création du pdf du mois
+				$filepath = 'pdf/'.$user->getId().'/';
+				$filename = 'SumUp - '.$currentAccount->getName().' - Comptes du '.$currentAccount->getFirstAmountDate()->format('m-Y').'.pdf';
+				$dateTemp = new \DateTime($currentAccount->getFirstAmountDate()->format('Y-m').'-01');
+				$html = $accountService->createMonthPdf($this->getRawData($request, $dateTemp), $dateTemp);
+				$this->get('knp_snappy.pdf')->generateFromHtml($html, $filepath.$filename, array("footer-left" => $currentAccount->getName() . " - ".$month.'-'.$year));
+				
+				$currentAccount->setFirstAmount($newAccount);
+				$datetime->modify("+1 Month");
+				$currentAccount->setFirstAmountDate($datetime);
+				$trace = $trace . $history->getAmountDate()->format('y-m-d').' Two\n';
+				
+			}
+			$emAccount->setFirstAmount($newAccount);
+			$emAccount->setFirstAmountDate(new \DateTime((new \DateTime())->format('Y-m')."-01"));
+			$em->flush();
+			
+			$session->set("currentAccount", $emAccount);
+			
+			return new JsonResponse(array("notif" => "account_refreshed", "message" => "all good :)"));
+			
+		} else {
+			return new JsonResponse(array("notif" => "nothing_to_do", "message" => $this->getRawData($request, new \DateTime('2016-07-01'))));
+		}
 	}
 }

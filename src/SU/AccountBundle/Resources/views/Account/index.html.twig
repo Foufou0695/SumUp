@@ -83,7 +83,7 @@
 						</div>
 						<br>
 						<h2 class="divider-new-right"><i class="fa fa-area-chart left hide-on-small-only"></i>Synthèse</h2>
-						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Les graphes suivants vous aiderons à visualiser plus facilement vos entrées et sorties d'argent, ainsi que l'état de votre compte tout au long du mois. Notez que les dépenses prévisionnelles sont prises en compte pour les 3 graphes, mais seules les dépenses prévisionnelles du mois en cours sont représentées sur la courbe. Les dépenses prévisionnelles qui auront lieux dans les prochains mois ne sont prises en compte que sur les deux disques.</div>
+						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Les graphes suivants vous aiderons à visualiser plus facilement vos entrées et sorties d'argent, ainsi que l'état de votre compte tout au long du mois. Notez que les dépenses prévisionnelles sont prises en compte pour les 3 graphes, mais seules les dépenses prévisionnelles du mois en cours sont représentées.</div>
 						<br>
 						<div class="col s12 l6">
 							<br>
@@ -164,7 +164,7 @@
 					<div class="col s12 center-align" style="padding-bottom: 20px;">
 						<h2 class="divider-new-right"><i class="fa fa-file-pdf-o left hide-on-small-only"></i>Exporter les opérations en cours</h2>
 						<p class="left-align">Vous pouvez exporter les tableaux et graphes de l'onglet "Récapitulatif" au format pdf. A la fin de chaque mois, tous les tableaux sont automatiquement sauvegardés sous ce format (voir l'historique ci-dessous).</p>
-						<a data-year="{{ 'now'|date('Y') }}" data-month="{{ 'now'|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button account-file" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - Livret A - Comptes de 06/16.pdf</a>
+						<a data-year="{{ 'now'|date('Y') }}" data-month="{{ 'now'|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button account-file" style="animation-delay: 0.2s;"><i class="fa fa-file-pdf-o left"></i>SumUp - {{ app.session.get('currentAccount').getName() }} - Comptes de {{ 'now'|date('m-Y') }}.pdf</a>
 						<div id="file_loader" class="row center-align" style="display: none; margin-top: 10px;">
 							<span class="loader loader-triple-grey"></span>
 							<br>
@@ -172,24 +172,27 @@
 						</div>
 						<h2 class="divider-new-right"><i class="fa fa-history left hide-on-small-only"></i>Historique de votre comtpe</h2>
 						<p class="left-align">Voici le récapitulatif de vos comptes depuis votre inscription sur le site.</p>
+						<div style="background-color: #f0f0f0; border-radius: 5px; padding: 5px; color: black; border: 1px solid #d0d0d0"><b><big><i class="fa fa-warning"></i> Aide :</big></b> Si un document s'affiche mal, ou si vous avez modifié un montant après la création du pdf, il faudra le re-générer pour que la modification soit prise en compte (Pour le mois en cours, le fichier est recréé à chaque fois).</div>
+						<br>
+						<br>
 						<div class="col s12 m10 l8 offset-m1 offset-l2">
-							<table>
+							<table class="striped highlight centered responsive-table">
 								<thead>
 									<tr>
 										<th data-field="id">Nom</th>
 										<th data-field="name">Lien de téléchargement</th>
+										<th>Recréer le fichier</th>
 									</tr>
 								</thead>
 
 								<tbody>
-									<tr>
-										<td>SumUp - Livret A - Comptes de 05/16</td>
-										<td><a class="btn waves-effect waves-light animated fadeIn cardinal-button truncate" style="animation-delay: 0.2s;"><i class="fa fa-download hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-download left"></i>Télécharger</span></a></td>
-									</tr>
-									<tr>
-										<td>SumUp - Livret A - Comptes de 04/16</td>
-										<td><a class="btn waves-effect waves-light animated fadeIn cardinal-button truncate" style="animation-delay: 0.4s;"><i class="fa fa-download hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-download left"></i>Télécharger</span></a></td>
-									</tr>
+									{% for accountFile in app.session.get('currentAccount').getStories() %}
+										<tr>
+											<td>SumUp - {{ app.session.get('currentAccount').getName() }} - Comptes de {{ accountFile.getAmountDate()|date('m-Y') }}</td>
+											<td><a data-year="{{ accountFile.getAmountDate()|date('Y') }}" data-month="{{ accountFile.getAmountDate()|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button truncate account-file" style="animation-delay: 0.2s;"><i class="fa fa-download hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-download left"></i>Télécharger</span></a></td>
+											<td><a data-year="{{ accountFile.getAmountDate()|date('Y') }}" data-month="{{ accountFile.getAmountDate()|date('m') }}" class="btn waves-effect waves-light animated fadeIn cardinal-button truncate account-file" style="animation-delay: 0.2s;"><i class="fa fa-refresh hide-on-med-and-up"></i><span class="hide-on-small-only"><i class="fa fa-refresh left"></i>Re-créer</span></a></td>
+										</tr>
+									{% endfor %}
 								</tbody>
 							</table>
 						</div>
@@ -988,7 +991,27 @@
 		});
 	}
 	
+	function refresh_account() {
+		Materialize.toast("Mise à jour <i class='fa fa-spin fa-circle-o-notch right'></i>");
+		$.get(
+			"{{ path('su_account_refresh_account') }}",
+			function(rep) {
+				console.log(rep.notif);
+				console.log(rep.message);
+				$('.toast').slideUp(function() {
+					$(this).remove();
+				});
+			}
+		
+		);
+	}
+	
 	$(document).ready(function () {
+		
+		//Lancement de l'update du compte (si on change de mois il faut faire "avancer" le compte & générer les pdfs) ------
+		refresh_account();
+		//------------------------------------------------------------------------------------------------------------------
+		
 		//Gestion lancement téléchargement & génération pdf --------------------------------
 		$('.account-file').click(function(){
 			$('#file_loader_notif').html("Chargement");
