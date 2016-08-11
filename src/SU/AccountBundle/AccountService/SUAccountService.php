@@ -46,7 +46,7 @@ class SUAccountService {
 	
 	public function createMonthPdf($rawData, $dateTemp) {
 		$cover = $this->container->get("templating")->render("SUAccountBundle:Account:cover.html.twig", array("dateTemp" => $dateTemp));
-		$html = $this->container->get("templating")->render("SUAccountBundle:Account:accountTemplate.html.twig", array("dateTemp" => $dateTemp));
+		$html = $this->container->get("templating")->render("SUAccountBundle:Account:accountTemplate.html.twig", array("dateTemp" => $dateTemp, "monthStartingAmount" => $rawData["monthStartingAmount"]));
 		$graph = $this->container->get("templating")->render("SUAccountBundle:Account:graphTemplate.html.twig", array("rawData" => $rawData, "dateTemp" => $dateTemp));
 		return array($cover, $html, $graph);
 	}

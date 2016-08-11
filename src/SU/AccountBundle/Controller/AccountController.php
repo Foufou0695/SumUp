@@ -630,6 +630,7 @@ class AccountController extends Controller
 		$currentAccount = $session->get("currentAccount");
 		$accountService = $this->container->get("su_account.accountService");
 		$entryRepository = $em->getRepository("SUAccountBundle:Entry");
+		$storyRepository = $em->getRepository("SUAccountBundle:History");
 		
 		if ($date->format('Y-m') == (new \DateTime())->format('Y-m')) {
 			$firstAmount = $currentAccount->getFirstAmount();
@@ -715,7 +716,19 @@ class AccountController extends Controller
 			}
 		}
 		
-		$rawData = array("dataOut" => $dataOut, "dataIn" => $dataIn, "accountLevelGraph" => $accountLevelGraph, "totalIn" => $totalIn, "totalOut" => $totalOut);
+		$monthStartingAmount = 0;
+		if ((new \DateTime($date->format("Y-m")."-01"))->format("y-m") == (new \DateTime())->format("y-m")) {
+			$monthStartingAmount = $currentAccount->getFirstAmount();
+		} else {
+			$storyTemp = $storyRepository->getStoryByDate($date, $currentAccount);
+			if ($storyTemp != null) {
+				$monthStartingAmount = $storyTemp[0]->getAmount();
+			} else {
+				$monthStartingAmount = 999;
+			}
+		}
+		
+		$rawData = array("dataOut" => $dataOut, "dataIn" => $dataIn, "accountLevelGraph" => $accountLevelGraph, "totalIn" => $totalIn, "totalOut" => $totalOut, "monthStartingAmount" => $monthStartingAmount);
 		return $rawData;
 	}
 		

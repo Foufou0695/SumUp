@@ -75,11 +75,12 @@ fos_user:
 knp_snappy:  
     pdf:
         enabled:    true
-        binary:     "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
+        #binary:     wkhtmltopdf
+        binary:    "\"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe\""
         options:
             viewport-size: '1980x1080'
             page-size: 'A4'
             footer-right: '[page]/[toPage]'
             footer-line: true
             dpi: 600
-            javascript-delay: 3000
+            javascript-delay: 5000

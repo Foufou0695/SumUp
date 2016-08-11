@@ -2,6 +2,8 @@
 
 namespace SU\AccountBundle\Repository;
 
+use SU\AccountBundle\Entity\Account;
+
 /**
  * HistoryRepository
  *
@@ -10,4 +12,21 @@ namespace SU\AccountBundle\Repository;
  */
 class HistoryRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getStoryByDate(\Datetime $date, Account $account) {
+		$qb = $this->createQueryBuilder('h');
+		$qb->leftjoin("h.account", "a");
+		$qb->addSelect("a");
+		
+		$qb->where("h.amountDate BETWEEN :start AND :end");
+		$datetime =  new \DateTime($date->format("Y-m")."-01");
+		$datetime->modify("-1 Day");
+		$qb->setParameter("start", new \DateTime($datetime->format("Y-m-d")));
+		$datetime->modify("+1 Month");
+		$qb->setParameter("end", $datetime);
+		
+		$qb->andWhere("a.id = :accountId");
+		$qb->setParameter("accountId", $account->getId());
+		
+		return $qb->getQuery()->getResult();
+	}
 }
