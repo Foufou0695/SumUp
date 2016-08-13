@@ -450,6 +450,7 @@
 								$('#new_category').val("");
 								Materialize.toast("Catégorie ajoutée", 5000);
 								prepare_cat_deletion();
+								prepare_cat_ligne();
 							} else if (rep.error == "category") {
 								Materialize.toast('Vous possédez déjà une catégorie de ce nom!', 5000);
 							} else {

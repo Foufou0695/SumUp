@@ -139,7 +139,7 @@ class AccountController extends Controller
 				
 				$user->addCategory($category);
 				$em->flush();
-				return new JsonResponse(array("notif" => "category_added", "html" => '<tr><td>'.$category->getName().'</td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button edit-category truncate"><i class="fa fa-edit left hide-on-small-only"></i>Renommer</a></td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a></td></tr>'));
+				return new JsonResponse(array("notif" => "category_added", "html" => '<tr class="ligne ligne-category"><td class="category-name">'.$category->getName().'</td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button edit-category truncate"><i class="fa fa-edit left hide-on-small-only"></i>Renommer</a></td><td><a data-id="'.$category->getId().'" class="btn waves-effect waves-light link-hover cardinal-button delete-category"><i class="fa fa-times left hide-on-small-only"></i>Supprimer</a></td></tr>'));
 			}
 		} else {
 			throw $this->createNotFoundException();
